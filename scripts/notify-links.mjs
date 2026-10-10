@@ -23,14 +23,73 @@ export function validateLinks(value) {
 }
 
 export async function checkLinks(links) {
-  await Promise.all(links.map(async ({ url }) => {
-    const response = await fetch(url, {
-      redirect: 'follow',
-      signal: AbortSignal.timeout(15_000),
-    });
-    if (!response.ok) throw new Error(`Live-link check failed: HTTP ${response.status} ${url}`);
-    await response.body?.cancel();
-  }));
+  for (const { url } of links) {
+    const parsed = new URL(url);
+    const prefix = '/IEvangelist/inside-aspire/blob/main/';
+    const filePath = parsed.hostname === 'github.com' && parsed.pathname.startsWith(prefix) &&
+      !parsed.search && !parsed.hash ? parsed.pathname.slice(prefix.length) : null;
+    const target = filePath === null ? url :
+      `https://api.github.com/repos/IEvangelist/inside-aspire/contents/${filePath}?ref=main`;
+    const headers = {
+      'User-Agent': 'InsideAspire-LinkVerification/1.0',
+      Accept: filePath === null ? 'text/html' : 'application/vnd.github+json',
+    };
+    if (filePath !== null) {
+      headers['X-GitHub-Api-Version'] = '2022-11-28';
+      if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+    }
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      let response;
+      let waitMs = 1000 * attempt;
+      try {
+        response = await fetch(target, {
+          redirect: filePath === null ? 'follow' : 'error',
+          headers,
+          signal: AbortSignal.timeout(15_000),
+        });
+      } catch (error) {
+        const transient = error?.name === 'TimeoutError' || error?.name === 'AbortError' ||
+          (error instanceof TypeError && error.message === 'fetch failed');
+        if (!transient) throw error;
+        if (attempt === 3) {
+          throw new Error(`Live-link check failed after 3 attempts: ${url}`, { cause: error });
+        }
+        console.warn(`Live-link check had a transient network failure; retry ${attempt + 1}/3: ${url}`);
+      }
+      if (response) {
+        try {
+          if (response.ok) {
+            if (filePath !== null) {
+              if (!response.body) throw new Error(`Empty GitHub contents response: ${url}`);
+              const decoder = new TextDecoder();
+              let content = '';
+              for await (const chunk of response.body) content += decoder.decode(chunk, { stream: true });
+              const file = JSON.parse(content + decoder.decode());
+              if (response.status !== 200 || file?.type !== 'file' || file.html_url !== url) {
+                throw new Error(`Authoritative GitHub file check did not match the supplied link: ${url}`);
+              }
+            }
+            break;
+          }
+          const transient = response.status === 429 || (response.status >= 500 && response.status < 600);
+          if (!transient || attempt === 3) {
+            throw new Error(`Live-link check failed: HTTP ${response.status} ${url} (attempt ${attempt}/3)`);
+          }
+          const retryAfter = response.headers.get('retry-after');
+          if (retryAfter) {
+            const requested = /^\d+$/.test(retryAfter)
+              ? Number(retryAfter) * 1000
+              : Date.parse(retryAfter) - Date.now();
+            if (Number.isFinite(requested)) waitMs = Math.min(5000, Math.max(0, requested));
+          }
+          console.warn(`Live-link check returned HTTP ${response.status}; retry ${attempt + 1}/3: ${url}`);
+        } finally {
+          await response.body?.cancel();
+        }
+      }
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
+    }
+  }
 }
 
 export function notificationBody(links) {
