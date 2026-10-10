@@ -1,0 +1,11 @@
+{
+  "name": "native-weather-browser-verification",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "node browser.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}

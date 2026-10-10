@@ -1,0 +1,83 @@
+name: NativeAOT artifact gates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'demo/**'
+      - 'scripts/Install-Aspire.ps1'
+      - 'scripts/Publish-Native.ps1'
+      - 'scripts/Start-Demo.ps1'
+      - 'scripts/Test-Native.ps1'
+      - 'global.json'
+      - '.github/workflows/native.yml'
+  pull_request:
+    paths:
+      - 'demo/**'
+      - 'scripts/Install-Aspire.ps1'
+      - 'scripts/Publish-Native.ps1'
+      - 'scripts/Start-Demo.ps1'
+      - 'scripts/Test-Native.ps1'
+      - 'global.json'
+      - '.github/workflows/native.yml'
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+          - os: ubuntu-latest
+            rid: linux-x64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/demo/.artifacts/browsers
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Ensure native Linux compiler prerequisites
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          if ! command -v clang >/dev/null || ! dpkg-query -W -f='${Status}' zlib1g-dev 2>/dev/null | grep -q 'install ok installed'; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends clang zlib1g-dev
+          fi
+      - name: Prepare public isolated CLI
+        shell: pwsh
+        run: ./scripts/Install-Aspire.ps1
+      - name: Compile the actual native artifacts with warnings as errors
+        shell: pwsh
+        run: ./scripts/Publish-Native.ps1 -RuntimeIdentifier '${{ matrix.rid }}'
+      - name: Prepare Linux browser dependencies on the ephemeral runner
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          npm ci --prefix demo/verification --registry=https://registry.npmjs.org --no-fund --no-audit
+          node demo/verification/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Verify native format, parity, OpenAPI, Scalar, browser, and OTLP
+        shell: pwsh
+        run: ./scripts/Test-Native.ps1 -RuntimeIdentifier '${{ matrix.rid }}'
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: native-proof-${{ matrix.rid }}
+          path: |
+            demo/.artifacts/verification/*-summary.json
+            demo/.artifacts/verification/browser-proof.json
+            demo/.artifacts/verification/managed-parity.trx
+            demo/.artifacts/verification/*.png
+          if-no-files-found: error
+          retention-days: 14
