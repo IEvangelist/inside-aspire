@@ -15,7 +15,7 @@ type DiagramNode = {
 type DiagramEdge = {
   from: string;
   to: string;
-  path: string;
+  path: string | ((source: DiagramNode, target: DiagramNode) => string);
   step: number;
   label?: string;
   x?: number;
@@ -31,6 +31,27 @@ type Diagram = {
   edges: DiagramEdge[];
 };
 
+const centerX = (node: DiagramNode) => node.x + node.w / 2;
+const centerY = (node: DiagramNode) => node.y + node.h / 2;
+
+function centerline(source: DiagramNode, target: DiagramNode): string {
+  if (centerY(source) !== centerY(target)) throw new Error(`Unaligned row: ${source.id} -> ${target.id}`);
+  const rightward = source.x < target.x;
+  return `M${rightward ? source.x + source.w : source.x} ${centerY(source)} H${rightward ? target.x : target.x + target.w}`;
+}
+
+function fanIn(source: DiagramNode, target: DiagramNode): string {
+  const portY = centerY(target) + (centerY(source) < centerY(target) ? -1 : 1) * target.h / 4;
+  const elbowX = (source.x + source.w + target.x) / 2;
+  return `M${source.x + source.w} ${centerY(source)} H${elbowX} V${portY} H${target.x}`;
+}
+
+const innerResults: DiagramNode = { id: 'results', title: 'Observed result', detail: ['Logs, traces, metrics'], icon: 'graph', x: 555, y: 410, w: 320, h: 100, step: 3 };
+const runtimeVite: DiagramNode = { id: 'vite', title: 'Vite dev server', detail: ['Node + hot reload'], icon: 'package', x: 350, y: 220, w: 275, h: 105, step: 2 };
+const apiXml: DiagramNode = { id: 'xml', title: 'XML docs', detail: ['Member docs'], icon: 'file', x: 25, y: 150, w: 220, h: 96, step: 0 };
+const apiModelHeight = 110;
+const apiModelTop = centerY(apiXml) - apiModelHeight / 2;
+
 const diagrams: Record<string, Diagram> = {
   inner: {
     title: 'The CLI is the inner-loop enabler',
@@ -41,17 +62,17 @@ const diagrams: Record<string, Diagram> = {
       { id: 'cli', title: 'Native Aspire CLI', detail: ['Current docs + exact APIs', 'Model, endpoints, readiness', 'Targeted actions + JSON'], icon: 'terminal', x: 460, y: 130, w: 345, h: 190, step: 0, kind: 'hub' },
       { id: 'apphost', title: 'C# AppHost', detail: ['Managed app model'], icon: 'code', x: 930, y: 45, w: 310, h: 105, step: 2 },
       { id: 'resources', title: 'Healthy native app', detail: ['API, React, public providers'], icon: 'cpu', x: 930, y: 235, w: 310, h: 105, step: 2 },
-      { id: 'results', title: 'Observed result', detail: ['Logs, traces, metrics'], icon: 'graph', x: 555, y: 410, w: 320, h: 100, step: 3 },
-      { id: 'decision', title: 'Next precise decision', detail: ['Use facts instead of guesses'], icon: 'check', x: 40, y: 395, w: 345, h: 110, step: 4 },
+      innerResults,
+      { id: 'decision', title: 'Next precise decision', detail: ['Use facts instead of guesses'], icon: 'check', x: 40, y: centerY(innerResults) - 110 / 2, w: 345, h: 110, step: 4 },
     ],
     edges: [
       { from: 'agent', to: 'cli', path: 'M335 98 H390 Q420 98 420 130 V182 H460', step: 1, label: 'invoke', x: 374, y: 78 },
-      { from: 'cli', to: 'apphost', path: 'M805 177 H865 Q895 177 895 145 V98 H930', step: 2, label: 'describe, wait, start', x: 936, y: 188 },
+      { from: 'cli', to: 'apphost', path: 'M805 177 H865 Q895 177 895 145 V98 H930', step: 2, label: 'describe, wait, start', x: 936, y: 208 },
       { from: 'apphost', to: 'resources', path: 'M1085 150 V235', step: 2 },
-      { from: 'resources', to: 'results', path: 'M1085 340 V438 Q1085 460 1058 460 H875', step: 3, label: 'OTLP + response', x: 1000, y: 399, kind: 'telemetry' },
+      { from: 'resources', to: 'results', path: 'M1085 340 V438 Q1085 460 1058 460 H875', step: 3, label: 'OTLP + response', x: 980, y: 399, kind: 'telemetry' },
       { from: 'results', to: 'cli', path: 'M695 410 V320', step: 3, label: 'otel', x: 737, y: 368, kind: 'telemetry' },
-      { from: 'results', to: 'decision', path: 'M555 460 H385', step: 4, label: 'evidence', x: 469, y: 441 },
-      { from: 'decision', to: 'agent', path: 'M187 395 V150', step: 5, label: 'next action', x: 111, y: 280, kind: 'return' },
+      { from: 'results', to: 'decision', path: centerline, step: 4, label: 'evidence', x: 469, y: 441 },
+      { from: 'decision', to: 'agent', path: (source, target) => `M${centerX(target)} ${source.y} V${target.y + target.h}`, step: 5, label: 'next action', x: 111, y: 280, kind: 'return' },
     ],
   },
   runtime: {
@@ -63,21 +84,21 @@ const diagrams: Record<string, Diagram> = {
       { id: 'host', title: 'C# AppHost', detail: ['Managed .NET model'], icon: 'code', x: 350, y: 35, w: 275, h: 100, step: 1 },
       { id: 'dcp', title: 'DCP helper', detail: ['Process launch'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
       { id: 'dashboard', title: 'Dashboard', detail: ['Aspire telemetry UI'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
-      { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: 260, w: 265, h: 105, step: 2 },
-      { id: 'vite', title: 'Vite dev server', detail: ['Node + hot reload'], icon: 'package', x: 350, y: 220, w: 275, h: 105, step: 2 },
-      { id: 'api', title: 'Weather API', detail: ['NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: 220, w: 280, h: 125, step: 2, kind: 'hub' },
+      { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: runtimeVite.y, w: 265, h: runtimeVite.h, step: 2 },
+      runtimeVite,
+      { id: 'api', title: 'Weather API', detail: ['NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: centerY(runtimeVite) - 125 / 2, w: 280, h: 125, step: 2, kind: 'hub' },
       { id: 'providers', title: 'Public providers', detail: ['Open-Meteo APIs', 'BigDataCloud'], icon: 'cloud', x: 1005, y: 380, w: 255, h: 120, step: 2 },
     ],
     edges: [
       { from: 'cli', to: 'host', path: 'M285 85 H350', step: 1 },
       { from: 'host', to: 'dcp', path: 'M625 85 H725', step: 1 },
-      { from: 'dcp', to: 'api', path: 'M845 135 V220', step: 2, label: 'launch', x: 892, y: 188 },
-      { from: 'dcp', to: 'vite', path: 'M760 135 V165 H487 V220', step: 2 },
-      { from: 'browser', to: 'vite', path: 'M285 288 H350', step: 2, label: 'dev', x: 315, y: 268 },
-      { from: 'vite', to: 'api', path: 'M625 274 H725', step: 2, label: '/api', x: 671, y: 252 },
-      { from: 'browser', to: 'api', path: 'M152 365 V415 H680 Q700 415 700 391 V320 H725', step: 2, label: 'published: static + /api', x: 436, y: 444 },
-      { from: 'api', to: 'providers', path: 'M865 345 V432 H1005', step: 2, label: 'HTTP', x: 930, y: 411 },
-      { from: 'api', to: 'dashboard', path: 'M1005 269 H1132 V135', step: 3, label: 'OTLP', x: 1177, y: 200, kind: 'telemetry' },
+      { from: 'dcp', to: 'api', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V${target.y}`, step: 2, label: 'launch', x: 892, y: 188 },
+      { from: 'dcp', to: 'vite', path: (source, target) => `M${source.x + 35} ${source.y + source.h} V165 H${centerX(target)} V${target.y}`, step: 2 },
+      { from: 'browser', to: 'vite', path: centerline, step: 2, label: 'dev', x: 315, y: centerY(runtimeVite) - 20 },
+      { from: 'vite', to: 'api', path: centerline, step: 2, label: '/api', x: 671, y: centerY(runtimeVite) - 20 },
+      { from: 'browser', to: 'api', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V415 H680 Q700 415 700 391 V${target.y + target.h * 4 / 5} H${target.x}`, step: 2, label: 'published: static + /api', x: 436, y: 444 },
+      { from: 'api', to: 'providers', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V${centerY(target)} H${target.x}`, step: 2, label: 'HTTP', x: 930, y: 411 },
+      { from: 'api', to: 'dashboard', path: (source, target) => `M${source.x + source.w} ${source.y + source.h * 2 / 5} H${centerX(target)} V${target.y + target.h}`, step: 3, label: 'OTLP', x: 1177, y: 200, kind: 'telemetry' },
     ],
   },
   outer: {
@@ -113,22 +134,22 @@ const diagrams: Record<string, Diagram> = {
     width: 1280, height: 470,
     nodes: [
       { id: 'dll', title: 'DLL', detail: ['Assembly API'], icon: 'package', x: 25, y: 20, w: 220, h: 96, step: 0 },
-      { id: 'xml', title: 'XML docs', detail: ['Member docs'], icon: 'file', x: 25, y: 150, w: 220, h: 96, step: 0 },
+      apiXml,
       { id: 'pdb', title: 'PDB', detail: ['Source locations'], icon: 'code', x: 25, y: 280, w: 220, h: 96, step: 0 },
-      { id: 'roslyn', title: 'Roslyn model', detail: ['Typed canonical API'], icon: 'code', x: 350, y: 150, w: 260, h: 110, step: 1 },
-      { id: 'json', title: 'API JSON', detail: ['Canonical schema'], icon: 'database', x: 680, y: 150, w: 245, h: 110, step: 2 },
-      { id: 'markdown', title: 'C# Markdown', detail: ['Published reference'], icon: 'book', x: 995, y: 150, w: 260, h: 110, step: 3 },
+      { id: 'roslyn', title: 'Roslyn model', detail: ['Typed canonical API'], icon: 'code', x: 350, y: apiModelTop, w: 260, h: apiModelHeight, step: 1 },
+      { id: 'json', title: 'API JSON', detail: ['Canonical schema'], icon: 'database', x: 680, y: apiModelTop, w: 245, h: apiModelHeight, step: 2 },
+      { id: 'markdown', title: 'C# Markdown', detail: ['Published reference'], icon: 'book', x: 995, y: apiModelTop, w: 260, h: apiModelHeight, step: 3 },
       { id: 'sitemap', title: 'API sitemap', detail: ['Discover pages'], icon: 'graph', x: 995, y: 345, w: 260, h: 95, step: 3 },
       { id: 'index', title: 'CLI API index', detail: ['search -> ID -> get'], icon: 'terminal', x: 630, y: 345, w: 305, h: 95, step: 4, kind: 'hub' },
     ],
     edges: [
-      { from: 'dll', to: 'roslyn', path: 'M245 62 H298 V186 H350', step: 1 },
-      { from: 'xml', to: 'roslyn', path: 'M245 192 H350', step: 1 },
-      { from: 'pdb', to: 'roslyn', path: 'M245 322 H298 V230 H350', step: 1 },
-      { from: 'roslyn', to: 'json', path: 'M610 205 H680', step: 2 },
-      { from: 'json', to: 'markdown', path: 'M925 205 H995', step: 3 },
-      { from: 'markdown', to: 'sitemap', path: 'M1125 260 V345', step: 3, kind: 'context' },
-      { from: 'sitemap', to: 'index', path: 'M995 392 H935', step: 4, kind: 'context' },
+      { from: 'dll', to: 'roslyn', path: fanIn, step: 1 },
+      { from: 'xml', to: 'roslyn', path: centerline, step: 1 },
+      { from: 'pdb', to: 'roslyn', path: fanIn, step: 1 },
+      { from: 'roslyn', to: 'json', path: centerline, step: 2 },
+      { from: 'json', to: 'markdown', path: centerline, step: 3 },
+      { from: 'markdown', to: 'sitemap', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V${target.y}`, step: 3, kind: 'context' },
+      { from: 'sitemap', to: 'index', path: centerline, step: 4, kind: 'context' },
     ],
   },
 };
@@ -149,7 +170,11 @@ export function renderDiagrams() {
       const source = nodesById.get(edge.from);
       const target = nodesById.get(edge.to);
       if (!source || !target) throw new Error(`Missing endpoint for ${key}: ${edge.from} -> ${edge.to}`);
-      return { ...edge, step: Math.max(edge.step, source.step, target.step) };
+      return {
+        ...edge,
+        path: typeof edge.path === 'function' ? edge.path(source, target) : edge.path,
+        step: Math.max(edge.step, source.step, target.step),
+      };
     });
     const steps = Math.max(...diagram.nodes.map((node) => node.step), ...connections.map((edge) => edge.step));
     const stages = Array.from({ length: steps + 1 }, (_, step) => {
