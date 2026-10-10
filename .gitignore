@@ -1,0 +1,24 @@
+# Local tools, private configuration, and rehearsal output.
+.tools/
+.artifacts/
+SESSION-PRIVATE/
+.aspire/
+
+# .NET and frontend build output.
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+
+# Browser and test output.
+**/playwright-report/
+**/test-results/
+TestResults/
+
+# Local secrets and editor state.
+.env
+.env.local
+.env.*.local
+.vs/
+.idea/
+*.user

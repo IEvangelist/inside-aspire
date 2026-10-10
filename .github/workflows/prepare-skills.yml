@@ -1,0 +1,43 @@
+name: Prepare official Aspire skills
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Generate complete CLI-supplied skills in the runner's real profile
+        shell: pwsh
+        run: |
+          $cli = & ./scripts/Install-Aspire.ps1
+          & $cli agent init --workspace-root . --skill-locations github --mcp=false --non-interactive
+          if ($LASTEXITCODE -ne 0) { throw 'Official skill generation failed.' }
+          $skills = @(Get-ChildItem .github/skills -Directory)
+          if ($skills.Count -ne 7) { throw "Expected seven skills, got $($skills.Count)." }
+          foreach ($skill in $skills) {
+            if (-not (Test-Path (Join-Path $skill.FullName 'SKILL.md'))) {
+              throw "Incomplete skill: $($skill.Name)"
+            }
+          }
+          Get-ChildItem .github/skills -Recurse -File |
+            ForEach-Object {
+              $relative = [IO.Path]::GetRelativePath((Get-Location).Path, $_.FullName).Replace('\', '/')
+              "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant())  $relative"
+            } | Sort-Object | Set-Content skill-sha256.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: official-aspire-skills-13.6.1
+          path: |
+            .github/skills/
+            skill-sha256.txt
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
