@@ -61,11 +61,11 @@ const diagrams: Record<string, Diagram> = {
     nodes: [
       { id: 'cli', title: 'Aspire CLI', detail: ['NativeAOT executable'], icon: 'terminal', x: 20, y: 35, w: 265, h: 100, step: 0, kind: 'hub' },
       { id: 'host', title: 'C# AppHost', detail: ['Managed .NET model'], icon: 'code', x: 350, y: 35, w: 275, h: 100, step: 1 },
-      { id: 'dcp', title: 'DCP helper', detail: ['Launches processes'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
+      { id: 'dcp', title: 'DCP helper', detail: ['Process launch'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
       { id: 'dashboard', title: 'Dashboard', detail: ['Aspire telemetry UI'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
       { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: 260, w: 265, h: 105, step: 2 },
       { id: 'vite', title: 'Vite dev server', detail: ['Node + hot reload'], icon: 'package', x: 350, y: 220, w: 275, h: 105, step: 2 },
-      { id: 'api', title: 'Weather API', detail: ['Actual NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: 220, w: 280, h: 125, step: 2, kind: 'hub' },
+      { id: 'api', title: 'Weather API', detail: ['NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: 220, w: 280, h: 125, step: 2, kind: 'hub' },
       { id: 'providers', title: 'Public providers', detail: ['Open-Meteo APIs', 'BigDataCloud'], icon: 'cloud', x: 1005, y: 380, w: 255, h: 120, step: 2 },
     ],
     edges: [
@@ -91,7 +91,7 @@ const diagrams: Record<string, Diagram> = {
       { id: 'review', title: 'Human review + merge', detail: ['A proposal is not publication'], icon: 'review', x: 905, y: 220, w: 340, h: 100, step: 2, kind: 'gate' },
       { id: 'deploy', title: 'Build + publish docs', detail: ['Markdown + llms-full.txt'], icon: 'cloud', x: 470, y: 220, w: 335, h: 100, step: 2, kind: 'gate' },
       { id: 'index', title: 'Parse + cache + index', detail: ['C# / ETag / lexical ranking'], icon: 'database', x: 35, y: 220, w: 335, h: 100, step: 3 },
-      { id: 'lookup', title: 'CLI docs + API lookup', detail: ['Current prose, exact member'], icon: 'terminal', x: 35, y: 415, w: 335, h: 100, step: 3, kind: 'hub' },
+      { id: 'lookup', title: 'CLI docs + API lookup', detail: ['Docs + exact members'], icon: 'terminal', x: 35, y: 415, w: 335, h: 100, step: 3, kind: 'hub' },
       { id: 'skills', title: 'Shipped AI skills', detail: ['Guidance for the inner loop'], icon: 'book', x: 470, y: 415, w: 335, h: 100, step: 4 },
       { id: 'next', title: 'Next code change', detail: ['Review the resulting PR'], icon: 'code', x: 905, y: 415, w: 340, h: 100, step: 4 },
     ],
@@ -118,7 +118,7 @@ const diagrams: Record<string, Diagram> = {
       { id: 'roslyn', title: 'Roslyn model', detail: ['Typed canonical API'], icon: 'code', x: 350, y: 150, w: 260, h: 110, step: 1 },
       { id: 'json', title: 'API JSON', detail: ['Canonical schema'], icon: 'database', x: 680, y: 150, w: 245, h: 110, step: 2 },
       { id: 'markdown', title: 'C# Markdown', detail: ['Published reference'], icon: 'book', x: 995, y: 150, w: 260, h: 110, step: 3 },
-      { id: 'sitemap', title: 'API sitemap', detail: ['Discover actual pages'], icon: 'graph', x: 995, y: 345, w: 260, h: 95, step: 3 },
+      { id: 'sitemap', title: 'API sitemap', detail: ['Discover pages'], icon: 'graph', x: 995, y: 345, w: 260, h: 95, step: 3 },
       { id: 'index', title: 'CLI API index', detail: ['search -> ID -> get'], icon: 'terminal', x: 630, y: 345, w: 305, h: 95, step: 4, kind: 'hub' },
     ],
     edges: [

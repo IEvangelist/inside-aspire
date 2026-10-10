@@ -128,7 +128,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .reveal a { color: var(--accent); }
 .reveal code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.9em; }
 .reveal p code { overflow-wrap: anywhere; }
-.reveal :not(pre) > code:not(.hljs) { padding: 0.1em 0.32em; border-radius: 6px; background: var(--inline-code); color: var(--ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.reveal :not(pre) > code:not(.hljs) { display: inline-block; max-width: 100%; overflow-wrap: anywhere; padding: 0.1em 0.32em; border-radius: 6px; background: var(--inline-code); color: var(--ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .reveal pre {
   width: 100%;
   margin: 0;
@@ -229,7 +229,7 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .reveal table thead th { font-size: 23px; color: var(--secondary); font-weight: 500; }
 .reveal table tbody th { width: 28%; font-weight: 500; }
 .skills-list { display: grid; grid-template-columns: 1.15fr 1fr; gap: 70px; }
-.skills-list code { display: table; margin: 13px 0; font-size: 25px; max-width: 100%; overflow-wrap: anywhere; }
+.skills-list code { display: block; width: fit-content; margin: 13px 0; font-size: 25px; max-width: 100%; overflow-wrap: anywhere; }
 .skills-list h3 { display: flex; align-items: center; gap: 14px; }
 .contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 42px; }
 .contrast > div { padding-top: 20px; border-top: 1px solid var(--line); }

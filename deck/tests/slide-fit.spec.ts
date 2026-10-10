@@ -122,7 +122,11 @@ for (const theme of ['light', 'dark'] as const) {
                 const left = label.classList.contains('node-title') ? iconRight + 10 : rect.x + 18;
                 if (box.x < left - 1 || box.x + box.width > rect.x + rect.width - 18 + 1 ||
                     box.y < rect.y + 12 - 1 || box.y + box.height > rect.y + rect.height - 12 + 1) {
-                  issues.push(`SVG label exceeds padded node ${node.dataset.node}: ${label.textContent}`);
+                  issues.push(`SVG label exceeds padded node ${node.dataset.node}: ${label.textContent} ` +
+                    JSON.stringify({
+                      label: { x: box.x, y: box.y, width: box.width, height: box.height },
+                      paddedNode: { left, right: rect.x + rect.width - 18, top: rect.y + 12, bottom: rect.y + rect.height - 12 },
+                    }));
                 }
                 if (box.y < previousBottom + 3 - 1) issues.push(`SVG subtitle overlaps another line: ${label.textContent}`);
                 previousBottom = box.y + box.height;
@@ -178,6 +182,40 @@ for (const theme of ['light', 'dark'] as const) {
       expect(geometry.text).toBe('ASPIRE_CLI_START_TIMEOUT');
     });
   }
+}
+
+for (const theme of ['light', 'dark'] as const) {
+  test(`padded inline code fits with a wider platform monospace font in ${theme}`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit font/theme regression runs once.');
+    for (const width of [320, 390, 790]) {
+      await openDeck(page, theme, width, 844, 'read');
+      await page.addStyleTag({ content: '.reveal :not(pre) > code:not(.hljs) { font-family: monospace; }' });
+      await page.evaluate(() => document.fonts.ready);
+      for (const id of ['skills', 'timeout']) {
+        await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
+        await expect(page.locator(`#${id} h2`)).toBeInViewport();
+        const results = await page.locator(`#${id} code:not(.hljs)`).evaluateAll((codes) => codes.map((code) => {
+          const container = code.parentElement!;
+          const bounds = container.getBoundingClientRect();
+          const range = document.createRange();
+          range.selectNodeContents(code);
+          return {
+            text: code.textContent,
+            containerOverflow: container.scrollWidth - container.clientWidth,
+            codeOverflow: code.scrollWidth - code.clientWidth,
+            fits: [...code.getClientRects(), ...range.getClientRects()].every((rect) =>
+              rect.left >= bounds.left - 0.5 && rect.right <= bounds.right + 0.5),
+          };
+        }));
+        expect(results.length).toBeGreaterThan(0);
+        for (const result of results) {
+          expect(result.containerOverflow, result.text ?? '').toBe(0);
+          expect(result.codeOverflow, result.text ?? '').toBe(0);
+          expect(result.fits, `${id} ${width}px: ${result.text}`).toBe(true);
+        }
+      }
+    }
+  });
 }
 
 test('every graph edge waits for both rendered endpoints through all forward and back states', async ({ page }, testInfo) => {
