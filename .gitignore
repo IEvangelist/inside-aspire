@@ -3,6 +3,8 @@
 .artifacts/
 SESSION-PRIVATE/
 .aspire/
+.github/aw/
+.impeccable/
 
 # .NET and frontend build output.
 **/bin/

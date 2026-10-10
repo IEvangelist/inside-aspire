@@ -1,0 +1,35 @@
+name: Notify verified live links
+
+on:
+  workflow_dispatch:
+    inputs:
+      links:
+        description: 'Verified HTTPS links: JSON array of objects with name and url'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-live-link-notification
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: github.ref == 'refs/heads/main' && github.actor == 'IEvangelist'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+      - name: Validate public live links and notify through the Actions bot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LINKS_JSON: ${{ inputs.links }}
+        run: node scripts/notify-links.mjs
