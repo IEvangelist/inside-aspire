@@ -121,9 +121,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .octicon path { fill: currentColor; color: inherit; }
 :root[data-reading='true'] .reveal section { scroll-margin-top: var(--toolbar-height); }
 .reveal h1, .reveal h2, .reveal h3 { font-family: inherit; color: var(--ink); font-weight: 600; text-transform: none; }
-.reveal h1 { margin: 0 0 22px; font-size: 84px; line-height: 1.08; letter-spacing: -0.035em; }
-.reveal h2 { margin: 0 0 28px; font-size: 58px; line-height: 1.12; letter-spacing: -0.025em; }
-.reveal h3 { margin: 0 0 20px; font-size: 30px; line-height: 1.2; }
+.reveal h1 { margin: 0 0 22px; font-size: 84px; line-height: 1.25; letter-spacing: -0.035em; }
+.reveal h2 { margin: 0 0 28px; font-size: 58px; line-height: 1.25; letter-spacing: -0.025em; }
+.reveal h3 { margin: 0 0 20px; font-size: 30px; line-height: 1.3; }
 .reveal p { margin: 20px 0; line-height: 1.5; max-width: 68ch; }
 .reveal a { color: var(--accent); }
 .reveal code { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; font-size: 0.9em; }
@@ -190,7 +190,7 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .route-list { display: flex; flex-wrap: wrap; gap: 20px 34px; margin-top: 36px; color: var(--secondary); }
 .thesis-path { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 28px; align-items: start; margin: 55px 0 40px; }
 .thesis-path > div { padding-top: 20px; }
-.thesis-path strong { display: block; font-size: 32px; font-weight: 500; margin-top: 20px; }
+.thesis-path strong { display: block; font-size: 32px; font-weight: 500; line-height: 1.3; margin-top: 20px; }
 .thesis-path .octicon { width: 36px; height: 36px; color: var(--accent); }
 .thesis-path > [data-icon] { margin-top: 60px; }
 .thesis-path p { font-size: 26px; color: var(--secondary); }
@@ -200,7 +200,6 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .graph-node.hub rect { fill: var(--code-focus); stroke: var(--accent); stroke-width: 2; }
 .graph-node.gate rect { stroke: var(--accent); stroke-width: 2; }
 .graph-node .octicon { color: var(--accent); width: 24px; height: 24px; }
-.graph-scaffold path { fill: none; stroke: var(--line); stroke-width: 1; opacity: 0.55; }
 .node-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 600; fill: var(--ink); }
 .node-detail { font-family: 'Poppins', sans-serif; font-size: 20px; fill: var(--secondary); }
 .edge-path { fill: none; stroke: var(--accent); stroke-width: 2.5; }
@@ -241,7 +240,8 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .evidence-chain li span { color: var(--secondary); font-size: 21px; }
 .reveal .identifier { font-size: 51px; color: var(--accent); margin: 46px 0; }
 .reveal blockquote { width: 100%; padding: 0; margin: 38px 0; background: transparent; box-shadow: none; font-size: 43px; line-height: 1.5; font-style: normal; }
-.workflow-path { display: flex; gap: 22px; justify-content: space-between; align-items: center; padding: 0; margin: 16px 0 22px; font-size: 22px; }
+.workflow-path { display: flex; flex-wrap: wrap; width: fit-content; max-width: 100%; gap: 22px; justify-content: center; align-items: center; padding: 0; margin: 16px auto 22px; font-size: 22px; text-align: center; }
+.workflow-path code { white-space: nowrap; }
 .workflow-path > span { color: var(--accent); }
 :root[data-reading='true'] .reveal .scroll-page { height: auto !important; min-height: calc(100dvh - var(--toolbar-height)); }
 :root[data-reading='true'] .reveal .scroll-page-sticky { position: relative !important; height: auto !important; }
@@ -275,13 +275,15 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
   .architecture-mobile small { display: block; font-size: 15px; color: var(--accent); line-height: 1.5; }
   .architecture-mobile .gate .stage-icon, .architecture-mobile .hub .stage-icon { border-color: var(--accent); }
   .code-pair, .code-and-copy { grid-template-columns: 1fr; }
+  .workflow-path { flex-direction: column; align-items: center; }
+  .workflow-path > span { transform: rotate(90deg); }
 }
 @media (max-width: 999px), (max-height: 649px) {
   .chapter-toggle { display: none; }
   :root[data-reading='true'] .reveal { font-size: 22px; }
   :root[data-reading='true'] .reveal .slides section { padding: 28px 24px 40px; }
   :root[data-reading='true'] .reveal h1 { font-size: 58px; }
-  :root[data-reading='true'] .reveal h2 { font-size: 40px; line-height: 1.15; margin-bottom: 25px; }
+  :root[data-reading='true'] .reveal h2 { font-size: 40px; line-height: 1.25; margin-bottom: 25px; }
   :root[data-reading='true'] .reveal h3 { font-size: 26px; }
   :root[data-reading='true'] .reveal pre { font-size: 18px; padding: 16px; max-height: none; }
   :root[data-reading='true'] .reveal .proof-image { height: auto; }
@@ -333,8 +335,8 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
   :root[data-reading='true'] .heading-with-brand h2 { font-size: 30px; }
   :root[data-reading='true'] .skills-list code { font-size: 19px; }
   :root[data-reading='true'] .contrast p { font-size: 22px; }
-  :root[data-reading='true'] .workflow-path { flex-direction: column; align-items: flex-start; gap: 14px; font-size: 17px; }
-  :root[data-reading='true'] .workflow-path > span { transform: rotate(90deg); margin-left: 50px; }
+  :root[data-reading='true'] .workflow-path { flex-direction: column; align-items: center; gap: 14px; font-size: 17px; }
+  :root[data-reading='true'] .workflow-path > span { transform: rotate(90deg); }
   :root[data-reading='true'] .reveal .evidence-chain li { grid-template-columns: 1fr; gap: 4px; font-size: 18px; }
   :root[data-reading='true'] .evidence-chain li span { font-size: 16px; }
   :root[data-reading='true'] .historical-metrics { flex-direction: column; gap: 26px; }

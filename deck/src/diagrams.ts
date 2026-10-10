@@ -37,9 +37,9 @@ const diagrams: Record<string, Diagram> = {
     description: 'Shipped skills guide the agent. The native Aspire CLI retrieves current docs and exact API members, discovers the AppHost model and endpoints, waits for readiness, and takes targeted lifecycle actions. The managed C# AppHost runs the native weather resources. Observed logs, traces, and results feed the CLI and the next precise agent decision, closing the loop. No model training is implied.',
     width: 1280, height: 530,
     nodes: [
-      { id: 'agent', title: 'Agent + shipped skills', detail: ['Choose the next operation'], icon: 'agent', x: 40, y: 45, w: 295, h: 105, step: 0 },
+      { id: 'agent', title: 'Agent + AI skills', detail: ['Choose the next action'], icon: 'agent', x: 40, y: 45, w: 295, h: 105, step: 0 },
       { id: 'cli', title: 'Native Aspire CLI', detail: ['Current docs + exact APIs', 'Model, endpoints, readiness', 'Targeted actions + JSON'], icon: 'terminal', x: 460, y: 130, w: 345, h: 190, step: 0, kind: 'hub' },
-      { id: 'apphost', title: 'C# AppHost', detail: ['Managed application model'], icon: 'code', x: 930, y: 45, w: 310, h: 105, step: 2 },
+      { id: 'apphost', title: 'C# AppHost', detail: ['Managed app model'], icon: 'code', x: 930, y: 45, w: 310, h: 105, step: 2 },
       { id: 'resources', title: 'Healthy native app', detail: ['API, React, public providers'], icon: 'cpu', x: 930, y: 235, w: 310, h: 105, step: 2 },
       { id: 'results', title: 'Observed result', detail: ['Logs, traces, metrics'], icon: 'graph', x: 555, y: 410, w: 320, h: 100, step: 3 },
       { id: 'decision', title: 'Next precise decision', detail: ['Use facts instead of guesses'], icon: 'check', x: 40, y: 395, w: 345, h: 110, step: 4 },
@@ -61,12 +61,12 @@ const diagrams: Record<string, Diagram> = {
     nodes: [
       { id: 'cli', title: 'Aspire CLI', detail: ['NativeAOT executable'], icon: 'terminal', x: 20, y: 35, w: 265, h: 100, step: 0, kind: 'hub' },
       { id: 'host', title: 'C# AppHost', detail: ['Managed .NET model'], icon: 'code', x: 350, y: 35, w: 275, h: 100, step: 1 },
-      { id: 'dcp', title: 'DCP helper', detail: ['Process orchestration'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
-      { id: 'dashboard', title: 'Aspire dashboard', detail: ['.NET telemetry UI'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
+      { id: 'dcp', title: 'DCP helper', detail: ['Launches processes'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
+      { id: 'dashboard', title: 'Dashboard', detail: ['Aspire telemetry UI'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
       { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: 260, w: 265, h: 105, step: 2 },
       { id: 'vite', title: 'Vite dev server', detail: ['Node + hot reload'], icon: 'package', x: 350, y: 220, w: 275, h: 105, step: 2 },
       { id: 'api', title: 'Weather API', detail: ['Actual NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: 220, w: 280, h: 125, step: 2, kind: 'hub' },
-      { id: 'providers', title: 'Public providers', detail: ['Open-Meteo, geocoding', 'BigDataCloud'], icon: 'cloud', x: 1005, y: 380, w: 255, h: 105, step: 2 },
+      { id: 'providers', title: 'Public providers', detail: ['Open-Meteo APIs', 'BigDataCloud'], icon: 'cloud', x: 1005, y: 380, w: 255, h: 120, step: 2 },
     ],
     edges: [
       { from: 'cli', to: 'host', path: 'M285 85 H350', step: 1 },
@@ -90,10 +90,10 @@ const diagrams: Record<string, Diagram> = {
       { id: 'draft', title: 'Safe-output docs PR', detail: ['microsoft/aspire.dev#1619'], icon: 'pr', x: 905, y: 25, w: 340, h: 100, step: 1 },
       { id: 'review', title: 'Human review + merge', detail: ['A proposal is not publication'], icon: 'review', x: 905, y: 220, w: 340, h: 100, step: 2, kind: 'gate' },
       { id: 'deploy', title: 'Build + publish docs', detail: ['Markdown + llms-full.txt'], icon: 'cloud', x: 470, y: 220, w: 335, h: 100, step: 2, kind: 'gate' },
-      { id: 'index', title: 'C# parse / cache / index', detail: ['ETag + local lexical ranking'], icon: 'database', x: 35, y: 220, w: 335, h: 100, step: 3 },
+      { id: 'index', title: 'Parse + cache + index', detail: ['C# / ETag / lexical ranking'], icon: 'database', x: 35, y: 220, w: 335, h: 100, step: 3 },
       { id: 'lookup', title: 'CLI docs + API lookup', detail: ['Current prose, exact member'], icon: 'terminal', x: 35, y: 415, w: 335, h: 100, step: 3, kind: 'hub' },
-      { id: 'skills', title: 'Shipped skills + guidance', detail: ['Feed the precise inner loop'], icon: 'book', x: 470, y: 415, w: 335, h: 100, step: 4 },
-      { id: 'next', title: 'Next app / product change', detail: ['Review the resulting PR'], icon: 'code', x: 905, y: 415, w: 340, h: 100, step: 4 },
+      { id: 'skills', title: 'Shipped AI skills', detail: ['Guidance for the inner loop'], icon: 'book', x: 470, y: 415, w: 335, h: 100, step: 4 },
+      { id: 'next', title: 'Next code change', detail: ['Review the resulting PR'], icon: 'code', x: 905, y: 415, w: 340, h: 100, step: 4 },
     ],
     edges: [
       { from: 'product', to: 'writer', path: 'M370 75 H470', step: 1 },
@@ -112,14 +112,14 @@ const diagrams: Record<string, Diagram> = {
     description: 'Assembly DLL metadata and XML documentation feed a Roslyn canonical model; available PDB source locations enrich it. The deterministic canonical API JSON feeds the C# reference Markdown renderer. Published reference pages and their sitemap feed the separate CLI API index, which returns exact C# member IDs. Only search accepts the language filter; get follows the returned ID.',
     width: 1280, height: 470,
     nodes: [
-      { id: 'dll', title: 'DLL', detail: ['Assembly metadata'], icon: 'package', x: 25, y: 20, w: 220, h: 85, step: 0 },
-      { id: 'xml', title: 'XML docs', detail: ['Member documentation'], icon: 'file', x: 25, y: 150, w: 220, h: 85, step: 0 },
-      { id: 'pdb', title: 'PDB', detail: ['Available source locations'], icon: 'code', x: 25, y: 280, w: 220, h: 85, step: 0 },
+      { id: 'dll', title: 'DLL', detail: ['Assembly API'], icon: 'package', x: 25, y: 20, w: 220, h: 96, step: 0 },
+      { id: 'xml', title: 'XML docs', detail: ['Member docs'], icon: 'file', x: 25, y: 150, w: 220, h: 96, step: 0 },
+      { id: 'pdb', title: 'PDB', detail: ['Source locations'], icon: 'code', x: 25, y: 280, w: 220, h: 96, step: 0 },
       { id: 'roslyn', title: 'Roslyn model', detail: ['Typed canonical API'], icon: 'code', x: 350, y: 150, w: 260, h: 110, step: 1 },
-      { id: 'json', title: 'API JSON', detail: ['Deterministic schema'], icon: 'database', x: 680, y: 150, w: 245, h: 110, step: 2 },
+      { id: 'json', title: 'API JSON', detail: ['Canonical schema'], icon: 'database', x: 680, y: 150, w: 245, h: 110, step: 2 },
       { id: 'markdown', title: 'C# Markdown', detail: ['Published reference'], icon: 'book', x: 995, y: 150, w: 260, h: 110, step: 3 },
-      { id: 'sitemap', title: 'Reference sitemap', detail: ['Discover actual pages'], icon: 'graph', x: 995, y: 345, w: 260, h: 95, step: 3 },
-      { id: 'index', title: 'CLI API index', detail: ['search -> returned ID -> get'], icon: 'terminal', x: 630, y: 345, w: 305, h: 95, step: 4, kind: 'hub' },
+      { id: 'sitemap', title: 'API sitemap', detail: ['Discover actual pages'], icon: 'graph', x: 995, y: 345, w: 260, h: 95, step: 3 },
+      { id: 'index', title: 'CLI API index', detail: ['search -> ID -> get'], icon: 'terminal', x: 630, y: 345, w: 305, h: 95, step: 4, kind: 'hub' },
     ],
     edges: [
       { from: 'dll', to: 'roslyn', path: 'M245 62 H298 V186 H350', step: 1 },
@@ -144,9 +144,16 @@ export function renderDiagrams() {
     const key = mount.dataset.diagram ?? '';
     const diagram = diagrams[key];
     if (!diagram) throw new Error(`Unknown architecture diagram: ${key}`);
-    const steps = Math.max(...diagram.nodes.map((node) => node.step), ...diagram.edges.map((edge) => edge.step));
+    const nodesById = new Map(diagram.nodes.map((node) => [node.id, node]));
+    const connections = diagram.edges.map((edge) => {
+      const source = nodesById.get(edge.from);
+      const target = nodesById.get(edge.to);
+      if (!source || !target) throw new Error(`Missing endpoint for ${key}: ${edge.from} -> ${edge.to}`);
+      return { ...edge, step: Math.max(edge.step, source.step, target.step) };
+    });
+    const steps = Math.max(...diagram.nodes.map((node) => node.step), ...connections.map((edge) => edge.step));
     const stages = Array.from({ length: steps + 1 }, (_, step) => {
-      const edges = diagram.edges.filter((edge) => edge.step === step).map((edge) => `
+      const edges = connections.filter((edge) => edge.step === step).map((edge) => `
         <g class="graph-edge ${edge.kind ?? ''}" data-from="${edge.from}" data-to="${edge.to}">
           <path class="edge-path" d="${edge.path}" pathLength="1" marker-end="url(#${key}-arrow)" />
           ${edge.label ? `<text class="edge-label" x="${edge.x}" y="${edge.y}">${escape(edge.label)}</text>` : ''}
@@ -156,7 +163,7 @@ export function renderDiagrams() {
           <rect width="${node.w}" height="${node.h}" rx="12" />
           <g transform="translate(18 18)">${icon(node.icon)}</g>
           <text class="node-title" x="54" y="36">${escape(node.title)}</text>
-          ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${64 + index * 30}">${escape(line)}</text>`).join('')}
+          ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${70 + index * 30}">${escape(line)}</text>`).join('')}
         </g>`).join('');
       return `<g class="graph-stage${step > 0 ? ' fragment' : ''}" ${step > 0 ? `data-fragment-index="${step - 1}"` : ''} data-stage="${step}">${edges}${nodes}</g>`;
     }).join('');
@@ -166,9 +173,6 @@ export function renderDiagrams() {
         <title id="${key}-title">${escape(diagram.title)}</title>
         <desc id="${key}-description">${escape(diagram.description)}</desc>
         <defs><marker id="${key}-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L8 5 L1 9" class="arrow-head" /></marker></defs>
-        <g class="graph-scaffold" aria-hidden="true">
-          ${diagram.edges.map((edge) => `<path d="${edge.path}" />`).join('')}
-        </g>
         ${stages}
       </svg>
       <ol class="architecture-mobile" aria-label="${escape(diagram.title)}">

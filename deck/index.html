@@ -174,7 +174,7 @@ builder.AddViteApp("frontend",
 
         <section id="timeout">
           <h2>The change that matters.</h2>
-          <p class="identifier"><code>ASPIRE_CLI_START_TIMEOUT</code></p>
+          <p class="identifier"><code>ASPIRE_<wbr />CLI_<wbr />START_<wbr />TIMEOUT</code></p>
           <blockquote>The startup timeout excludes AppHost preparation, including restore and build.</blockquote>
           <p>Build time and resource startup time are different budgets.</p>
           <p class="source-line">The CLI rehearsal asserts the current published build-exclusion prose, not just the environment-variable name.</p>
@@ -184,7 +184,7 @@ builder.AddViteApp("frontend",
         <section id="workflow" data-chapter="Reviewable automation">
           <div class="heading-with-brand"><h2>Proposals have explicit write boundaries.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
           <div class="workflow-path">
-            <code>pr-docs-check.md</code><span aria-hidden="true">&rarr;</span><code>gh aw compile</code><span aria-hidden="true">&rarr;</span><code>pr-docs-check.lock.yml</code>
+            <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
           </div>
           <div class="code-pair">
             <figure class="code-panel"><figcaption><span data-icon="workflow"></span>pr-docs-check.md <span>YAML frontmatter excerpts</span></figcaption><pre data-label="Agentic workflow trigger and safe output" data-line-numbers><code class="language-yaml">on:

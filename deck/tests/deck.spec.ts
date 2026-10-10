@@ -26,7 +26,7 @@ test('loads local assets, actual slide content, and readable mobile text',async 
   await expect(page.locator('section[id]')).toHaveCount(slideCount);
   await expect(page.locator('#the-loop')).toContainText('Native Aspire CLI');
   await expect(page.locator('#timeout')).toContainText('ASPIRE_CLI_START_TIMEOUT');
-  await expect(page.locator('#docs-supply')).toContainText('Next app / product change');
+  await expect(page.locator('#docs-supply')).toContainText('Next code change');
   await expect(page.locator('#api-index')).toContainText('Roslyn');
   await expect.poll(() => page.locator('.brand-link img').evaluateAll((images) =>
     images.every((image) => image instanceof HTMLImageElement&&image.complete&&image.naturalWidth>0))).toBe(true);

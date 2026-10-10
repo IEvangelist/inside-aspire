@@ -61,3 +61,9 @@ The supporting docs cycle shows reviewed PR -> gh-aw/doc-writer -> safe-output d
 The runtime and compiler-reference diagrams are separate. The former distinguishes native CLI/API, managed C# AppHost, DCP orchestration, Node/Vite, browser React, providers, and OTLP/dashboard. The latter shows DLL/XML/available PDB -> Roslyn canonical model -> deterministic schema/C# Markdown -> sitemap/API lookup.
 
 Edges and selective code emphasis advance with the speaker, reverse correctly, and restore from deep links. There are no infinite decorative loops. Reading, print, and reduced motion expose the complete information immediately. Narrow layouts redraw stage/resource relationships with text and semantic icons instead of minuscule SVGs. Public speaker notes and original citations remain available.
+
+Graph connections have no unfragmented background guides: each complete path/arrow/label appears only after both linked boxes have appeared, and hides again when a back step removes an endpoint. The full return cycle appears at its final stage. Static reading, print, and reduced motion retain every connection.
+
+Shortened on-screen graph labels preserve their detailed accessible descriptions. Node text keeps 22px titles and 20px details with horizontal padding and separate title/subtitle baselines; no text is truncated, hidden, or compressed with `textLength`. All 66 rendered labels across the four graphs are checked against their actual SVG node boxes after font loading. Every audience slide is also checked using rendered text ranges and container bounds in light/dark presentation and reading layouts.
+
+The three-item workflow strip uses a compact centered grouping, rather than justified spacing across the slide. It reflows vertically on narrow layouts, with source code retaining left alignment.
