@@ -81,17 +81,22 @@ The docs repo's `doc-writer` and the seven CLI-shipped application skills are di
 
 Open [the published deck](https://ievangelist.github.io/inside-aspire/). Stable chapter links: `#/weather`, `#/skills`, `#/the-loop`, `#/live-cli`, and `#/api-index`.
 
+The refinement makes the CLI the main inner-loop enabler: current docs/API/state -> precise actions -> runtime evidence -> next grounded decision. The GitHub docs cycle is the supporting context supply chain at `#/docs-supply`. The title, exact approved abstract, event, existing PR/run chain, and native facts are unchanged.
+
 | Time | Segment |
 | --- | --- |
-| 0:00-0:05 | Frame the inspectable loop |
-| 0:05-0:20 | Healthy native app, compiler/artifact, API/browser/telemetry |
+| 0:00-0:05 | Speaker introduction and CLI-first payoff |
+| 0:05-0:10 | Draw the main skills/CLI/resources/evidence inner loop |
+| 0:10-0:20 | Healthy native app, real resource model, precise commands/results |
 | 0:20-0:26 | Shipped skills and the skill/tool/MCP distinction |
 | 0:26-0:38 | Real PR/run/docs trail, safe outputs, human review |
 | 0:38-0:44 | Actual C# parser, cached lexical index |
 | 0:44-0:54 | Live CLI docs and separate C# API-reference proof |
 | 0:54-1:00 | Historical context, close, and questions |
 
-Arrow keys navigate, `Esc` opens overview, `R` switches reading mode, `T` changes theme, and `S` opens public-safe speaker notes. Phones default to natural scrolling. Print opens reveal.js's print view. The UI honors reduced motion.
+The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu contains chapter navigation, reading mode, theme, overview, notes, and print. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
+
+Phones, narrow windows, and short screens default to natural reading. `?mode=read` and `?mode=present` explicitly choose the mode without conflicting with reveal.js's reserved view option. Real internal links, chapter jumps, and browser history use actual generated page offsets. Reading/print/reduced-motion expose all stages immediately; presentation steps reveal connected graph paths and selected source lines. Print retains the complete graph and code content.
 
 The blog's 82 PRs/44.8-hour median is explicitly historical May 3-June 2, 2026 data, not today's SLA or this example's individual duration. Omit all unannounced versions and release dates.
 
@@ -99,7 +104,9 @@ The blog's 82 PRs/44.8-hour median is explicitly historical May 3-June 2, 2026 d
 
 [Windows/Linux native CI 38025689486](https://github.com/IEvangelist/inside-aspire/actions/runs/38025689486) passed: 50 parity tests, warning-as-error native compilation, Windows 280/Linux 273 native assertions, OpenAPI 3.1.1, rendered Scalar/native/Vite browsers, and actual traces/logs/metrics. The native format and runtime flags prove AOT; they do not establish a startup or memory benchmark.
 
-The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The deck browser gate covers all 23 slides, desktop bounds, mobile heading/overflow, accessibility, deep links, themes, print, and reduced motion.
+The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The refined 26-slide deck also contains David's actual public portrait, unchanged GitHub branding, and genuine public PR imagery. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
+
+The browser gate checks actual token spans/colors for seven languages, rounded inline code, SVG connections and closed cycles, fragment/back/deep-link state, line emphasis, notes, accessibility, and read/print/reduced motion. It checks 320/390/768/790/1024/16:9/4:3 and short-screen layouts, actual pointer navigation, 44px controls, and Escape focus. It does not rely on slide counts alone to prove the design.
 
 ```powershell
 & $aspire stop --apphost $apphost --non-interactive

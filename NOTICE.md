@@ -18,10 +18,18 @@ Artwork is released under [CC0 1.0 Universal](licenses/aspire-brand-CC0.txt). CC
 
 - Poppins: copyright the Poppins Project Authors, [SIL Open Font License 1.1](licenses/Poppins-OFL.txt). Fonts are self-hosted; no remote Google Fonts request is needed.
 - reveal.js: [original MIT license](licenses/revealjs-MIT.txt).
+- Presentation icons: one family, [Primer Octicons](https://primer.style/octicons), [MIT](deck/public/licenses/octicons-MIT.txt).
+- Syntax highlighting: [Highlight.js](https://highlightjs.org), [BSD-3-Clause](deck/public/licenses/highlightjs-BSD.txt).
 - Official application skills: Microsoft, [original MIT license](licenses/aspire-skills-MIT.txt); [all source and CLI-generation provenance](docs/SKILLS.md). The seven skill trees are complete and unmodified.
 - The published deck also includes its artwork/font/reveal.js license files under `/inside-aspire/licenses/`.
 
 Dependencies retain their own licenses. Linked articles and external source material retain their copyrights and are not relicensed by this repository.
+
+## Speaker imagery and GitHub content branding
+
+David Pine's portrait is his existing public GitHub/site avatar, self-hosted proportionally at its original 300x300 resolution and used at the user's direction. It was not synthesized or replaced with stock imagery. The product/docs PR header images are genuine public browser captures.
+
+Black/white GitHub marks are unchanged files from [the official archive](https://brand.github.com/GitHub_Logos.zip), used for source links, PR/workflow content, and integration context in secondary placement to Aspire. GitHub trademarks and copyrights remain GitHub's; the deck does not imply sponsorship or endorsement. See [asset and code provenance](docs/PRESENTATION-ASSETS.md) and [GitHub's usage guidance](https://brand.github.com/foundations/logo).
 
 ## Weather, map, geocoding, and radar providers
 
