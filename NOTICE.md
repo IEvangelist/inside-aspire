@@ -20,6 +20,7 @@ Artwork is released under [CC0 1.0 Universal](licenses/aspire-brand-CC0.txt). CC
 - reveal.js: [original MIT license](licenses/revealjs-MIT.txt).
 - Presentation icons: one family, [Primer Octicons](https://primer.style/octicons), [MIT](deck/public/licenses/octicons-MIT.txt).
 - Syntax highlighting: [Highlight.js](https://highlightjs.org), [BSD-3-Clause](deck/public/licenses/highlightjs-BSD.txt).
+- Requested X/Bluesky/LinkedIn brand glyphs: [Font Awesome Free Brands](https://fontawesome.com), [original CC BY 4.0 icon / MIT code license](deck/public/licenses/fontawesome-brands.txt); imported individually and used only for the speaker's verified profile links.
 - Official application skills: Microsoft, [original MIT license](licenses/aspire-skills-MIT.txt); [all source and CLI-generation provenance](docs/SKILLS.md). The seven skill trees are complete and unmodified.
 - The published deck also includes its artwork/font/reveal.js license files under `/inside-aspire/licenses/`.
 

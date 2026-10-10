@@ -4,9 +4,9 @@
 
 Wisconsin .NET UG, November 17, 2026 at 6pm Central. A 60-minute speaker slot includes questions.
 
-The terminal is the main docs-loop proof. Keep the weather app healthy. Inspect the existing PR/run; do not dispatch production automation or improvise a failure/repair story.
+Use the prepared app and actual repository in VS Code for the application demo, and a real terminal for CLI decisions and results. The audience deck explains architecture rather than narrating compilation or test checks. Keep the app healthy; inspect the existing PR/run without production dispatch or a failure/repair scenario.
 
-## Before rehearsal
+## Pre-talk preparation only
 
 Use PowerShell 7, a released .NET 10 SDK, and Node 22.12+ (or 20.19+) on Windows/Linux x64. Windows needs existing Visual Studio C++ x64 tools and a Windows SDK. Linux needs clang and zlib development headers. The publish script checks these and does not install global tools.
 
@@ -25,7 +25,23 @@ Native compilation is preparation, not AppHost lifecycle. The Windows script run
 
 All raw captures, telemetry, downloaded gh-aw usage, browser screenshots, and private configuration stay gitignored. Do not commit them or expose dashboard login tokens on public slides.
 
-## Run the real app
+## Live app and source in VS Code
+
+Open the prepared repository in VS Code using the editor's normal folder picker. If its optional CLI is already installed, `code .` opens this workspace; it is not a dependency or an instruction to install/launch the editor automatically.
+
+| Source to show | Exact repository path |
+| --- | --- |
+| C# application/resource model | `demo\host\apphost.cs` |
+| Native API entry point | `demo\Weather.Api\Program.cs` |
+| Complete generated JSON coverage | `demo\Weather.Api\WeatherJsonContext.cs` |
+| Native publication settings | `demo\Weather.Api\Weather.Api.csproj` |
+| Retained React frontend | `demo\frontend\src` |
+
+Choose the editor, app, dashboard, and terminal windows while screen sharing. Native compilation and compatibility verification above must already be complete; they are not audience slides or live build steps.
+
+## Real terminal: exact target and observed results
+
+Use `Start-Demo.ps1` **or** its equivalent CLI start, not both for the same AppHost. The script uses the pinned private CLI, the actual native artifact, an isolated worktree session, and the HTTP launch profile.
 
 ```powershell
 pwsh -NoProfile -File .\scripts\Start-Demo.ps1
@@ -33,6 +49,14 @@ pwsh -NoProfile -File .\scripts\Start-Demo.ps1
 & $aspire wait frontend --apphost $apphost --status healthy --timeout 120 --non-interactive
 & $aspire describe --apphost $apphost --format Json --non-interactive
 ```
+
+Equivalent direct start from the prepared repository:
+
+```powershell
+& $aspire start --apphost $apphost --isolated --non-interactive --launch-profile http
+```
+
+Then use the exact `wait`, `describe`, and `otel` commands here to show readiness, returned endpoints, and actual traces/logs. The concise `#/live-cli` slide is only a handoff cue; share the real terminal instead of narrating a command/JSON card.
 
 Use the **returned** native API and frontend URLs. Search for Madison, select a result, inspect current conditions, the eight visible hourly cells, five days, units, map styles, and radar/provider attribution. Open `/openapi.json` and `/reference` on the discovered native API URL.
 
@@ -87,11 +111,11 @@ The refinement makes the CLI the main inner-loop enabler: current docs/API/state
 | --- | --- |
 | 0:00-0:05 | Speaker introduction and CLI-first payoff |
 | 0:05-0:10 | Draw the main skills/CLI/resources/evidence inner loop |
-| 0:10-0:20 | Healthy native app, real resource model, precise commands/results |
-| 0:20-0:26 | Shipped skills and the skill/tool/MCP distinction |
-| 0:26-0:38 | Real PR/run/docs trail, safe outputs, human review |
-| 0:38-0:44 | Actual C# parser, cached lexical index |
-| 0:44-0:54 | Live CLI docs and separate C# API-reference proof |
+| 0:10-0:23 | Prepared app/VS Code source and real CLI lifecycle/telemetry |
+| 0:23-0:28 | Shipped skills and the skill/tool/MCP distinction |
+| 0:28-0:38 | Supporting PR/run/docs trail, safe outputs, human review |
+| 0:38-0:44 | Actual C# parser and cached lexical index |
+| 0:44-0:54 | Real terminal docs retrieval and separate C# API lookup |
 | 0:54-1:00 | Historical context, close, and questions |
 
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu contains chapter navigation, reading mode, theme, overview, notes, and print. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
@@ -104,9 +128,11 @@ The blog's 82 PRs/44.8-hour median is explicitly historical May 3-June 2, 2026 d
 
 [Windows/Linux native CI 38025689486](https://github.com/IEvangelist/inside-aspire/actions/runs/38025689486) passed: 50 parity tests, warning-as-error native compilation, Windows 280/Linux 273 native assertions, OpenAPI 3.1.1, rendered Scalar/native/Vite browsers, and actual traces/logs/metrics. The native format and runtime flags prove AOT; they do not establish a startup or memory benchmark.
 
-The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The refined 26-slide deck also contains David's actual public portrait, unchanged GitHub branding, and genuine public PR imagery. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
+The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The lean 23-slide deck contains David's actual public portrait, unchanged GitHub branding, genuine public PR imagery, and the requested GitHub/X/Bluesky/LinkedIn profile links. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
 
-The browser gate checks actual token spans/colors for seven languages, rounded inline code, SVG connections and closed cycles, fragment/back/deep-link state, line emphasis, notes, accessibility, and read/print/reduced motion. It checks 320/390/768/790/1024/16:9/4:3 and short-screen layouts, actual pointer navigation, 44px controls, and Escape focus. It does not rely on slide counts alone to prove the design.
+The build/native-proof/operational-result slides are removed from the audience deck. Their real source and verified evidence stay in this repository and in pre-talk preparation. Old `#/aot` and `#/native-proof` links resolve to `#/compiler`; `#/commands` resolves to `#/live-cli`.
+
+The browser gate checks actual token spans/colors for the six remaining displayed languages, all 11 code blocks, rounded inline code, connected cycles, fragments/line focus, notes, accessibility, and read/print/reduced motion. It checks 320/390/768/790/1024/16:9/4:3 and short screens, actual pointer links, 44px controls, Escape focus, and removed-anchor aliases. Ordinary code wraps without altering copyable text; an explicitly layout-preserving wide line can scroll only its full code body, with the scrollbar at the panel bottom.
 
 ```powershell
 & $aspire stop --apphost $apphost --non-interactive

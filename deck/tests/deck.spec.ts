@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=26;
+const slideCount=23;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -157,7 +157,7 @@ test('every desktop slide stays within the presentation viewport',async ({ page 
   }
 });
 
-test('all seven explicit code languages produce real tokens, multiple colors, and safe literal text',async ({ page }) => {
+test('all remaining explicit code languages produce real tokens, multiple colors, and safe literal text',async ({ page }) => {
   await ready(page);
   const blocks=await page.locator('pre > code').evaluateAll((codes) => {
     function luminance(color: string) {
@@ -184,9 +184,9 @@ test('all seven explicit code languages produce real tokens, multiple colors, an
       };
     });
   });
-  expect(blocks.length).toBeGreaterThanOrEqual(16);
+  expect(blocks.length).toBe(11);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
-    ['bash','csharp','json','powershell','typescript','xml','yaml']);
+    ['bash','csharp','json','powershell','typescript','yaml']);
   for(const block of blocks) {
     expect(block.highlighted,block.language).toBe('true');
     expect(block.tokens,block.language).toBeGreaterThan(0);
@@ -194,8 +194,7 @@ test('all seven explicit code languages produce real tokens, multiple colors, an
     expect(block.contrast,`${block.language} token contrast`).toBeGreaterThanOrEqual(4.5);
     expect(block.tokenBackgrounds).toEqual(['rgba(0, 0, 0, 0)']);
   }
-  await expect(page.locator('.language-xml')).toContainText('<PublishAot>true</PublishAot>');
-  await expect(page.locator('.language-xml')).toContainText('<PropertyGroup>');
+  await expect(page.locator('#api-code .language-powershell')).toContainText('& $aspire docs api get $id --format Json');
   await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
   await expect(page.locator('#apphost-code .code-line')).toHaveCount(12);
 });
@@ -303,7 +302,7 @@ test('reading mode exposes the complete diagrams and code without waiting for fr
   await openMenu(page);
   await page.locator('[data-slide="live-cli"]').click();
   await expect(page.locator('#live-cli h2')).toBeInViewport();
-  await expect(page.locator('#live-cli .language-json')).toBeVisible();
+  await expect(page.locator('#live-cli .language-powershell')).toBeVisible();
 });
 
 for(const viewport of [

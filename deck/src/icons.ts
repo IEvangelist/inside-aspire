@@ -20,10 +20,18 @@ import sun from '@primer/octicons/build/svg/sun-24.svg?raw';
 import terminal from '@primer/octicons/build/svg/terminal-24.svg?raw';
 import workflow from '@primer/octicons/build/svg/workflow-24.svg?raw';
 import close from '@primer/octicons/build/svg/x-24.svg?raw';
+import { faBluesky, faLinkedinIn, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+
+function brandSvg(definition: typeof faBluesky): string {
+  const [width, height, , , paths] = definition.icon;
+  const pathData = typeof paths === 'string' ? [paths] : paths;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">${pathData.map((path) => `<path d="${path}" />`).join('')}</svg>`;
+}
 
 const icons = {
   arrowLeft, arrowRight, book, check, cloud, code, cpu, database, agent, file,
   graph, review, menu, moon, package: packageIcon, person, pr, screen, sun, terminal, workflow, close,
+  socialX: brandSvg(faXTwitter), socialBluesky: brandSvg(faBluesky), socialLinkedIn: brandSvg(faLinkedinIn),
 };
 
 export type IconName = keyof typeof icons;

@@ -35,7 +35,9 @@ const initialTheme = new URL(window.location.href).searchParams.get('theme');
 let explicitTheme = initialTheme === 'dark' || initialTheme === 'light';
 const printMode = new URL(window.location.href).searchParams.has('print-pdf');
 const slides = [...root.querySelectorAll<HTMLElement>('.slides > section[id]')];
+const slideAliases: Record<string, string> = { aot: 'compiler', 'native-proof': 'compiler', commands: 'live-cli' };
 const initialView = new URL(window.location.href).searchParams.get('mode');
+const initialSlideId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
 let reading = !printMode && (initialView === 'read' ||
   (initialView !== 'present' && (window.innerWidth < 1000 || window.innerHeight < 650)));
 let currentId = slides[0]?.id ?? 'intro';
@@ -134,6 +136,7 @@ function observeReading() {
 }
 
 function goTo(id: string) {
+  if (Object.hasOwn(slideAliases, id)) id = slideAliases[id];
   const target = document.getElementById(id);
   if (!target) throw new Error(`Missing slide: ${id}`);
   currentId = id;
@@ -246,11 +249,15 @@ reducedMotion.addEventListener('change', () => {
 window.addEventListener('resize', () => {
   if (reading) deck.configure({ width: Math.min(root.clientWidth, 1440), height: root.clientHeight });
 });
-window.addEventListener('hashchange', () => {
-  if (reading && window.location.hash.startsWith('#/')) {
-    goTo(decodeURIComponent(window.location.hash.slice(2).split('/')[0]));
+window.addEventListener('hashchange', (event) => {
+  if (!window.location.hash.startsWith('#/')) return;
+  const id = decodeURIComponent(window.location.hash.slice(2).split('/')[0]);
+  if (reading || Object.hasOwn(slideAliases, id)) {
+    // Natural reading pages own their DOM offsets instead of Reveal's fixed-height hash navigation.
+    event.stopImmediatePropagation();
+    goTo(id);
   }
-});
+}, true);
 
 try {
   updateModeControls();
@@ -260,8 +267,9 @@ try {
   deck.on('fragmentshown', syncControls);
   deck.on('fragmenthidden', syncControls);
   observeReading();
-  if (reading) {
-    const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
+  const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
+  if (Object.hasOwn(slideAliases, initialSlideId)) goTo(initialSlideId);
+  else if (reading) {
     if (targetId) goTo(decodeURIComponent(targetId));
     else root.scrollTop = 0;
   }

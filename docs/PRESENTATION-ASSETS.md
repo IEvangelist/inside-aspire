@@ -30,21 +30,27 @@ No fills, proportions, effects, or paths are modified. The permitted marks link 
 
 Semantic toolbar/resource/review icons use only individual SVGs from [`@primer/octicons` 19.40.0](https://www.npmjs.com/package/@primer/octicons), under its [original MIT license](../deck/public/licenses/octicons-MIT.txt). The whole catalog is not bundled, and no replacement icon paths are hand-drawn.
 
+Under the portrait, the existing GitHub link is joined by only the three requested current public profiles: [X](https://x.com/davidpine7), [Bluesky](https://bsky.app/profile/davidpine.dev), and [LinkedIn](https://www.linkedin.com/in/dpine/). There is no email, Mastodon, stale Bluesky domain, or extra profile. Each link has a platform label, visible focus, a 44px rendered target, and safe new-tab attributes.
+
+Those three brand glyphs come from maintained [`@fortawesome/free-brands-svg-icons` 7.1.0](https://www.npmjs.com/package/@fortawesome/free-brands-svg-icons), imported individually rather than drawing substitute symbols. [The original license](../deck/public/licenses/fontawesome-brands.txt) identifies icons as CC BY 4.0 and code as MIT. Trademark rights are unchanged. This brand-only set is separate from the single Octicons family used for semantic operation/resource icons.
+
 ## Actual code, not invented API calls
 
 The deck explicitly labels snippets as excerpts, selected fields, or commands. Long source expressions are line-wrapped and noncontiguous sections are labeled; the complete source is always linked.
 
-- `Weather.Api.csproj`, `WeatherJsonContext.cs`, and `demo/host/apphost.cs`: the [verified public repository source](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo), unchanged by this presentation refinement.
-- CLI lifecycle/wait/describe/trace operations: the [verified runbook](RUNBOOK.md). The executable `$aspire` and exact `$apphost` path are prepared before using those commands.
-- Native-summary JSON: selected actual fields from the verified Windows native rehearsal, not fabricated `aspire describe` output.
+- `demo/host/apphost.cs`: the [verified application/resource-model source](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo), unchanged by this presentation refinement.
+- `Weather.Api.csproj`, `WeatherJsonContext.cs`, native-summary evidence, and compile/compatibility probes remain in the repository and [pre-talk runbook](RUNBOOK.md), not build/proof cards in the audience deck.
+- CLI lifecycle/wait/describe/trace operations are shown in a real terminal using the runbook's prepared `$aspire` and exact `$apphost`. The existing handoff slide is intentionally concise.
 - `pr-docs-check.md` YAML: trigger and safe-output fields from [the pinned product workflow](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md). The full source retains merged-event guards, deterministic target resolution, and additional policy.
 - Outcome JSON: selected fields from the actual accepted primary `create_pull_request` outcome for docs PR 1619. The secondary notification metadata can remain pending without changing that accepted/merged result.
 - Conditional HTTP code: [CachedHttpDocumentFetcher.cs, lines 37-45](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45).
 - Parser/cache/weights: the [existing pinned C# excerpts](code/) and [source citations](SOURCES.md).
-- Retrieval JSON: selected fields from the actual successful docs rehearsal. These are snapshot observations, not fabricated CLI output or a claim the changing corpus is permanently fixed.
+- Retrieval JSON and actual returned identifiers come from the real CLI rehearsal in the terminal, not a fixed-output imitation on stage.
 - API Markdown TypeScript: the [actual compiler-derived C# member route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts).
 
-Highlighting uses [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core plus explicit C#, PowerShell, shell, YAML, JSON, TypeScript, and XML modules, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Tokens have deliberate light/dark colors; inline-code backgrounds do not leak onto individual syntax tokens.
+The lean audience deck has 11 code blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core plus explicit C#, PowerShell, shell, YAML, JSON, and TypeScript modules, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Tokens have deliberate light/dark colors; inline-code backgrounds do not leak onto individual syntax tokens.
+
+Soft wrapping leaves literal/copied source text intact. The panel header stays fixed outside the scrollable code body, and the body grows to the rounded panel bottom. Only a line explicitly requiring preserved horizontal layout uses `data-preserve-layout`; its accessible body scrolls without clipping content or introducing token/line/page scrollbars.
 
 ## Connected architecture and accessible motion
 
