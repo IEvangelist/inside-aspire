@@ -2,8 +2,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export function validateLinks(value) {
-  if (!Array.isArray(value) || value.length === 0 || value.length > 12) {
-    throw new Error('Provide 1-12 verified live links as a JSON array.');
+  if (!Array.isArray(value) || value.length === 0 || value.length > 32) {
+    throw new Error('Provide 1-32 verified live links as a JSON array.');
   }
   return value.map((item) => {
     if (!item || typeof item.name !== 'string' || !item.name.trim() ||
@@ -12,7 +12,7 @@ export function validateLinks(value) {
       throw new Error('Each link needs an ASCII name and an HTTPS URL.');
     }
     const url = new URL(item.url);
-    const allowedHost = ['github.com', 'gist.github.com', 'ievangelist.github.io', 'davidpine.dev'].includes(url.hostname) ||
+    const allowedHost = ['github.com', 'gist.github.com', 'ievangelist.github.io', 'davidpine.dev', 'github.blog', 'www.meetup.com'].includes(url.hostname) ||
       /^deploy-preview-\d+--davidpinedev\.netlify\.app$/.test(url.hostname);
     if (url.protocol !== 'https:' || url.username || url.password || !allowedHost ||
         [...url.searchParams.keys()].some((key) => /token|secret|auth|key|signature/i.test(key))) {

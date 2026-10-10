@@ -6,13 +6,13 @@ November 17, 2026 at 6pm Central.
 
 60-minute speaker slot
 
-What actually connects a product change to better-grounded AI-assisted development? This session opens the architecture instead of treating the loop as magic.
+What if the code you ship helped write the documentation that teaches AI how to use it?
 
-We start with a healthy weather explorer: a C# Aspire AppHost, an ASP.NET Core API compiled with NativeAOT, and the original React map UI. Then we follow a real merged product PR through an existing GitHub Agentic Workflow run, a reviewed docs PR, published Markdown, and the C# fetching, parsing, caching, and lexical-search services behind Aspire's documentation tools. The command line is the proof: find the change, retrieve the returned section, and inspect the separate C# API-reference index.
+Join David Pine from Microsoft's Aspire team for a look at the engineering behind that loop. We'll follow a real product pull request through GitHub Agentic Workflows into a documentation draft, see where human review and publication fit, and then go inside the C# services that fetch, parse, cache, and search Aspire's Markdown documentation.
 
-Along the way we use the actual Aspire skills that ship with the CLI and distinguish workflow guidance from executable tools and MCP. Human review, merge, and deployment remain explicit boundaries. This is an inspectable documentation and retrieval loop, not instant self-learning or a model-training claim.
+This is architecture you can watch working. From the terminal, we'll read the published documentation corpus, search its parsed documents and sections, retrieve the actual guidance, and look up C# APIs. Then we'll show how the official Aspire AI skills put those tools to use, with an interactive weather map backed by a NativeAOT ASP.NET Core API as our application context.
 
-Attendees leave with a public demo repository, an official-brand reveal.js deck, complete shipped skills, and a repeatable rehearsal they can run before applying the same architecture to their own work.
+Along the way, we'll explore Aspire's native CLI and dashboard, the boundaries that keep automation reviewable, and why exact, current documentation matters more than a clever prompt. You'll leave with the source, the deck, and a practical picture of how code, docs, CLI tools, and AI skills reinforce one another.
 
 ## Audience and takeaways
 
