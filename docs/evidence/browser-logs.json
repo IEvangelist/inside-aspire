@@ -1,0 +1,60 @@
+{
+  "feature": "Tracked browser runtime configuration and observable evidence",
+  "product": {
+    "url": "https://github.com/microsoft/aspire/pull/16531",
+    "title": "Add BrowserLogs configuration command",
+    "author": "davidfowl",
+    "merged": true,
+    "mergeCommit": "49e47970db3b11809892a12e0c3916b5f7b695a1"
+  },
+  "workflow": {
+    "url": "https://github.com/microsoft/aspire/actions/runs/25092695241",
+    "name": "PR Documentation Check",
+    "path": ".github/workflows/pr-docs-check.lock.yml",
+    "headSha": "42e77dc98549f9cbce290709172ab629a2d3f191",
+    "source": "https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md",
+    "conclusion": "success",
+    "outcomeArtifacts": "expired; no reconstructed outcome metrics"
+  },
+  "docs": {
+    "url": "https://github.com/microsoft/aspire.dev/pull/775",
+    "title": "[docs] Add browser logs documentation",
+    "merged": true,
+    "mergedBy": "davidfowl",
+    "mergeCommit": "d114c3ce136dc2b331878f1c6b9479d132fab53e",
+    "generatedCommit": "6d08e7d641974e374a3d73c1ef9dcac0910f01c3",
+    "refinementCommit": "49371cfd913e1c3eec5a058eca745c21679b848d",
+    "refinementUrl": "https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d",
+    "refinement": "Move browser logs to integrations/devtools and address review feedback",
+    "submittedReviewRecords": 0,
+    "path": "src/frontend/src/content/docs/integrations/devtools/browser-logs.mdx"
+  },
+  "published": {
+    "markdown": "https://aspire.dev/integrations/devtools/browser-logs.md",
+    "corpus": "https://aspire.dev/llms-full.txt",
+    "slug": "browser-logs",
+    "section": "Configure browser logs"
+  },
+  "cli": {
+    "version": "13.6.1",
+    "query": "Configure tracked browser",
+    "apiId": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs",
+    "signature": "WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)",
+    "apiUrl": "https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode",
+    "apiSource": "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289",
+    "commands": [
+      "aspire docs search \"Configure tracked browser\" --format Json",
+      "aspire docs get browser-logs --section \"Configure browser logs\" --format Json",
+      "aspire docs api search WithBrowserLogs --language csharp --format Json",
+      "aspire docs api get \"csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs\" --format Json"
+    ]
+  },
+  "scope": {
+    "package": "Aspire.Hosting.Browsers",
+    "experimentalDiagnostic": "ASPIREBROWSERLOGS001",
+    "alreadyWiredIntoWeatherDemo": false,
+    "logDestination": "child browser resource console log stream",
+    "screenshots": "command artifacts",
+    "productChange": "Configure tracked browser dashboard command, runtime settings, and optional persistence; not the initial creation of every browser-logs capability"
+  }
+}

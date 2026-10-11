@@ -106,9 +106,9 @@ const diagrams: Record<string, Diagram> = {
     description: 'A reviewed and merged product PR triggers gh-aw using docs-repo doc-writer guidance. A separate safe-output handler opens a draft docs PR. Human review and merge precede build and deployment of Markdown and llms-full.txt. C# fetching, fence-aware parsing, caching, and lexical indexing feed CLI docs and API lookup. Shipped skills and retrieved guidance support the next application or product change and its reviewed PR. This outer supply loop feeds the main CLI inner loop; it does not train a model or auto-merge.',
     width: 1280, height: 550,
     nodes: [
-      { id: 'product', title: 'Reviewed product PR', detail: ['microsoft/aspire#19478'], icon: 'pr', x: 35, y: 25, w: 335, h: 100, step: 0, kind: 'gate' },
+      { id: 'product', title: 'Reviewed product PR', detail: ['microsoft/aspire#16531'], icon: 'pr', x: 35, y: 25, w: 335, h: 100, step: 0, kind: 'gate' },
       { id: 'writer', title: 'gh-aw + doc-writer', detail: ['Propose the docs change'], icon: 'agent', x: 470, y: 25, w: 335, h: 100, step: 1 },
-      { id: 'draft', title: 'Safe-output docs PR', detail: ['microsoft/aspire.dev#1619'], icon: 'pr', x: 905, y: 25, w: 340, h: 100, step: 1 },
+      { id: 'draft', title: 'Safe-output docs PR', detail: ['microsoft/aspire.dev#775'], icon: 'pr', x: 905, y: 25, w: 340, h: 100, step: 1 },
       { id: 'review', title: 'Human review + merge', detail: ['A proposal is not publication'], icon: 'review', x: 905, y: 220, w: 340, h: 100, step: 2, kind: 'gate' },
       { id: 'deploy', title: 'Build + publish docs', detail: ['Markdown + llms-full.txt'], icon: 'cloud', x: 470, y: 220, w: 335, h: 100, step: 2, kind: 'gate' },
       { id: 'index', title: 'Parse + cache + index', detail: ['C# / ETag / lexical ranking'], icon: 'database', x: 35, y: 220, w: 335, h: 100, step: 3 },

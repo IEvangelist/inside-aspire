@@ -6,21 +6,27 @@ Public material only. No unannounced versions or release dates are part of this 
 
 | Evidence | Public link |
 | --- | --- |
-| Merged product change: startup timeout excludes builds | [microsoft/aspire#19478](https://github.com/microsoft/aspire/pull/19478) |
-| Successful existing `pr-docs-check` run | [33887017276](https://github.com/microsoft/aspire/actions/runs/33887017276) |
-| Reviewed and merged docs | [microsoft/aspire.dev#1619](https://github.com/microsoft/aspire.dev/pull/1619) |
-| Docs merge | [`7d461ec15f2eb79a601d4fc8c63f5a61a6e2cc76`](https://github.com/microsoft/aspire.dev/commit/7d461ec15f2eb79a601d4fc8c63f5a61a6e2cc76) |
-| Published command Markdown | [aspire-start.md](https://aspire.dev/reference/cli/commands/aspire-start.md) |
+| Merged product change: runtime tracked-browser configuration | [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531) |
+| Successful existing `pr-docs-check` run | [25092695241](https://github.com/microsoft/aspire/actions/runs/25092695241) |
+| Workflow Markdown at that exact run head | [`42e77dc9`](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md) |
+| Bot draft, maintainer-refined and merged docs | [microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775) |
+| Explicit maintainer refinement | [`49371cfd`](https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d): moved the guide and addressed feedback |
+| Docs merge | [`d114c3ce`](https://github.com/microsoft/aspire.dev/commit/d114c3ce136dc2b331878f1c6b9479d132fab53e) |
+| Published feature Markdown | [browser-logs.md](https://aspire.dev/integrations/devtools/browser-logs.md) |
 | Current default corpus | [llms-full.txt](https://aspire.dev/llms-full.txt) |
 
-The primary `gh aw outcomes` item is the `create_pull_request` outcome pointing at docs PR 1619: accepted, with a merged signal and human reviews. A secondary `notify_source_pr` metadata item can remain pending because it has no object reference to check. That does not mean the successful workflow or merged docs PR failed; do not assert every outcome item is accepted.
+The docs PR body links the source PR and exact successful run. Initial commit `6d08e7d6` is bot-authored; David Fowler's explicit refinement and merge are the human evidence. There are zero submitted GitHub review records, so no formal-review count is claimed. The historical run's gh-aw artifacts have expired; the deck uses verified GitHub merged-state fields rather than fabricated outcome metrics. [Public-safe provenance and executed CLI identities](evidence/browser-logs.json) record the complete chain.
+
+Product PR 16531 adds the **Configure tracked browser** dashboard command with runtime configuration and optional persistence. It did not initially create all `WithBrowserLogs` capabilities. That API remains experimental (`ASPIREBROWSERLOGS001`) in `Aspire.Hosting.Browsers`, and it is not enabled in the unchanged weather app.
 
 ## Pinned source
 
 | Source | Pin and role |
 | --- | --- |
 | Weather sample | [`microsoft/aspire-samples@5fb269526842727ff6cb945c27398b093895a758`](https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node): original React UI, hooks, types, API contract, screenshots, provider notices |
-| Aspire implementation | [`microsoft/aspire@213aa53159663c6f3e4a29bf7df907179ae6e1c4`](https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4): workflow and C# docs/API architecture |
+| Aspire implementation | [`microsoft/aspire@213aa53159663c6f3e4a29bf7df907179ae6e1c4`](https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4): C# docs/API architecture |
+| Selected run's workflow | [`microsoft/aspire@42e77dc98549f9cbce290709172ab629a2d3f191`](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md): actual historical source, not a later configuration |
+| Current returned browser API source | [`BrowserLogsBuilderExtensions.cs@f4c27f2d`](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289): exact member source returned by API get |
 | Docs implementation | [`microsoft/aspire.dev@1a61517655b4fd7811ef63fb5913f6fb623d9d6a`](https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a): published docs-source context |
 | Official brand | [`microsoft/aspire-brand@f9eb464dec47870de23d55dd7b3c00d39122813d`](https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d): unchanged logos, brand palette, Poppins guidance, CC0/trademark notice |
 | Public CLI/tool baseline | [Aspire 13.6.1 release](https://github.com/microsoft/aspire/releases/tag/v13.6.1): checksum-pinned Windows/Linux installers, not the presenter's global CLI |
@@ -36,7 +42,7 @@ The public source snapshot and the released CLI baseline are distinct provenance
 - [`ApiDocsIndexService.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/ApiDocs/ApiDocsIndexService.cs): separate API-reference index.
 - [`PackageJsonGenerator`](https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator): DLL metadata and XML documentation analyzed through Roslyn into the canonical API model; available PDB information adds source locations.
 - [`PdbSourceReader.cs`](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator/Helpers/PdbSourceReader.cs) and [C# member Markdown route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts): compiler-derived source/schema information becomes published C# reference Markdown, which is ingested by the separate CLI API index.
-- [`pr-docs-check.md`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md) and [compiled lock workflow](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.lock.yml): product-repo agentic workflow.
+- [`pr-docs-check.md`](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md) and [compiled lock workflow](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.lock.yml): selected run's product-repo agentic workflow.
 
 Short, source-backed C# excerpts are under [code/](code/); the real implementation is linked rather than recreated.
 
@@ -70,3 +76,5 @@ See [NOTICE.md](../NOTICE.md) for licenses, trademarks, and provider attribution
 [Native Windows and Linux gates, run 38025689486](https://github.com/IEvangelist/inside-aspire/actions/runs/38025689486) passed warning-as-error native publication, native format checks, 50 parity tests, browser/OpenAPI/Scalar, and native OTLP traces/logs/metrics. Windows passed 280 assertions; Linux passed 273 because native executable formats have different checks.
 
 The separate live-provider rehearsal called the native API for Madison, returned five forecast days and five geocoding matches, and exercised the actual native/Vite browser plus Scalar. The deck uses those native live captures, not a mock dashboard. Provider-fixture assertions and live-provider evidence are explicitly separate. This is runtime/contract proof, not a startup, memory, or throughput benchmark.
+
+The direct browser-evidence commands were executed with the repository-local public CLI 13.6.1: list/search returned `browser-logs`, get exposed `Configure browser logs`, and section retrieval contained the real runtime dialog, scope/configuration options, persistence, interaction-service requirement, and immediate application. Separate C# API search/get returned the exact `WithBrowserLogs` member, experimental diagnostic, CDP remarks, child-resource log stream, and screenshot artifacts. Only search used `--language`. Raw JSON and captures remain gitignored.

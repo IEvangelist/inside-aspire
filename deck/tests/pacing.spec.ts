@@ -17,7 +17,7 @@ test('audience deck leaves build/proof/operations to real editor and terminal de
   await expect(page.locator('#live-cli')).not.toContainText('runtimeIdentifier');
 });
 
-for (const [removed, target] of [['aot', 'compiler'], ['native-proof', 'compiler'], ['commands', 'live-cli']]) {
+for (const [removed, target] of [['aot', 'compiler'], ['native-proof', 'compiler'], ['commands', 'live-cli'], ['timeout', 'browser-evidence']]) {
   test(`old ${removed} links resolve to the lean ${target} handoff`, async ({ page }) => {
     await page.goto(`#/${removed}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');

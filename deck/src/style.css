@@ -184,7 +184,8 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .reveal .big-support { font-size: 43px; line-height: 1.55; color: var(--secondary); }
 .reveal .large-copy { font-size: 36px; line-height: 1.45; }
 .reveal figure { margin: 0; }
-.reveal .proof-image { width: 100%; height: 500px; object-fit: contain; margin: 0; background: var(--surface); border-radius: 10px; }
+.reveal .proof-image { display: block; width: auto; height: auto; max-width: 100%; max-height: 580px; margin: 0 auto; border-radius: 10px; }
+:root[data-reading='true'] .reveal .proof-image { width: 100%; max-height: none; }
 .reveal figcaption { margin-top: 18px; font-size: 20px; line-height: 1.55; color: var(--secondary); }
 .code-and-copy { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
 .route-list { display: flex; flex-wrap: wrap; gap: 20px 34px; margin-top: 36px; color: var(--secondary); }
@@ -222,7 +223,7 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .heading-with-brand h2 { margin-bottom: 0; }
 .github-brand { flex: 0 0 126px; padding: 10px; min-height: 44px; }
 .github-brand img { display: block; width: 100%; height: auto; margin: 0; }
-.pr-image img { display: block; width: 100%; height: auto; max-height: 205px; object-fit: contain; object-position: left; border-radius: 10px; background: #fff; }
+.pr-image img { display: block; width: 100%; height: auto; border-radius: 10px; background: #fff; }
 .reveal .pr-image figcaption { font-size: 17px; margin-top: 8px; }
 .reveal table { width: 100%; margin: 0; border-collapse: collapse; font-size: 27px; }
 .reveal table th, .reveal table td { padding: 22px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }

@@ -1,14 +1,14 @@
 # Presentation imagery, code, and motion
 
-The refined deck keeps the approved title, abstract, event, native facts, and canonical PR/run/docs chain. Its main thesis is the CLI inner loop: **Aspire makes AI more efficient** by enabling precise decisions from current facts and targeted actions. That is a qualitative statement, not an invented timing, token, or accuracy metric.
+The refined deck keeps the approved title, abstract, event, and native facts. Its main thesis is the CLI inner loop: **Aspire makes AI more efficient** by enabling precise decisions from current facts and targeted actions. The supporting feature chain now demonstrates browser runtime configuration and maintainer-refined evidence guidance. No timing, token, or accuracy metric is invented.
 
 ## Actual imagery
 
 | Asset | Public source and treatment |
 | --- | --- |
 | David Pine portrait | [Existing public GitHub author avatar](https://avatars.githubusercontent.com/u/7679720?v=4&s=512), also used by [the public site](https://github.com/IEvangelist/davidpine.dev/blob/37f77349eac2933503f2f4986c47620e69da76da/src/content/avatar.png). The supplied image is 300x300 even when a larger URL size is requested. Self-hosted WebP, full original aspect/face framing, 260px desktop display; not synthesized for this deck. |
-| Product PR | Genuine browser capture of [microsoft/aspire#19478](https://github.com/microsoft/aspire/pull/19478): title/status area only, proportionally encoded as WebP. |
-| Docs PR | Genuine browser capture of [microsoft/aspire.dev#1619](https://github.com/microsoft/aspire.dev/pull/1619): title/status area only, proportionally encoded as WebP. |
+| Product PR | Genuine browser capture of [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531): title/status/header area, proportionally encoded as WebP. SHA256 `ae29e23535094d9af4a47293ec4694b509fabf8e94ea50a945eb4835dd9f0d8b`. |
+| Docs PR | Genuine browser capture of [microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775): title/status/header area, proportionally encoded as WebP. SHA256 `76cae24c0f55e24de030ab8a0486060ab0502dec9e15f456b6847ab57d5a728c`. |
 | Native map | Existing actual native-artifact Madison captures with public providers and visible attribution. These remain labeled rehearsal captures, not forecast promises. |
 
 The portrait's downloaded PNG SHA256 is `f6b7c99ff0fa5ded75609eb438bdb53f17a31ac60ef53235eb5d7c6a5fa2d76f`; its WebP SHA256 is `209bc4571c67520bd634df6816654ee137cacbfc4dbe6f949abafbfabf174436`. There is no artificial face crop, generated person, stock headshot, fake terminal, or reconstructed GitHub/dashboard screenshot.
@@ -40,12 +40,12 @@ The deck explicitly labels snippets as excerpts, selected fields, or commands. L
 
 - `demo/host/apphost.cs`: the [verified application/resource-model source](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo), unchanged by this presentation refinement.
 - `Weather.Api.csproj`, `WeatherJsonContext.cs`, native-summary evidence, and compile/compatibility probes remain in the repository and [pre-talk runbook](RUNBOOK.md), not build/proof cards in the audience deck.
-- CLI lifecycle/wait/describe/trace operations are shown in a real terminal using the runbook's prepared `$aspire` and exact `$apphost`. The existing handoff slide is intentionally concise.
-- `pr-docs-check.md` YAML: trigger and safe-output fields from [the pinned product workflow](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md). The full source retains merged-event guards, deterministic target resolution, and additional policy.
-- Outcome JSON: selected fields from the actual accepted primary `create_pull_request` outcome for docs PR 1619. The secondary notification metadata can remain pending without changing that accepted/merged result.
+- CLI lifecycle/wait/describe/trace operations run directly in the prepared real terminal. The terminal's process-local PATH selects the public executable, and `$apphost` holds the exact target; no `.ps1` entry point is required on stage.
+- `pr-docs-check.md` YAML: trigger and safe-output fields from [the selected run's actual workflow head](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md). The full source retains merged-event guards, deterministic target resolution, and additional policy.
+- Docs PR JSON: selected actual GitHub REST fields for merged PR 775, including merger `davidfowl`. Its old gh-aw artifacts are expired; no accepted/strong outcome or fabricated review count is shown. The explicit maintainer refinement commit is linked.
 - Conditional HTTP code: [CachedHttpDocumentFetcher.cs, lines 37-45](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45).
 - Parser/cache/weights: the [existing pinned C# excerpts](code/) and [source citations](SOURCES.md).
-- Retrieval JSON and actual returned identifiers come from the real CLI rehearsal in the terminal, not a fixed-output imitation on stage.
+- The live-command slide contains actual, copyable `aspire docs search/get` and `aspire docs api search/get` commands. Slug `browser-logs`, section `Configure browser logs`, and the exact experimental `WithBrowserLogs` member ID were returned by public CLI 13.6.1. [Evidence and scope](evidence/browser-logs.json) distinguish this documented extra capability from the unchanged native app.
 - API Markdown TypeScript: the [actual compiler-derived C# member route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts).
 
 The lean audience deck has 11 code blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core plus explicit C#, PowerShell, shell, YAML, JSON, and TypeScript modules, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Tokens have deliberate light/dark colors; inline-code backgrounds do not leak onto individual syntax tokens.
@@ -71,3 +71,9 @@ The three-item workflow strip uses a compact centered grouping, rather than just
 The adjusted connector ports are derived from the linked node bounds. The DLL/XML/PDB fan-in has three symmetric Roslyn entry ports separated by a quarter of the model height, matching orthogonal elbows, and a straight XML/model centerline. The rest of the API pipeline shares that row. Browser/Vite/API and observed-result/decision rows also align their centers; separate launch, published-traffic, telemetry, and return ports keep their distinct roles. Inner-loop captions sit clear of their routes. The reviewed docs supply graph is unchanged.
 
 Rendered connector checks measure all 32 routes across both themes, projector/aspect layouts, reading, and print. They check boundary positions and arrow direction, inbound arrowhead spacing, final-elbow clearance, viewBox containment, unrelated-node crossings, and label collisions. Narrow reading retains all node identities and relationships; the existing full forward/back checks still require both endpoints before any connection appears.
+
+## Sequential opening and actual image area
+
+**Start presentation** goes to the second slide, `thesis`; chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
+
+The original 1440x1000 native captures are unchanged. Presentation uses a larger 580px proportional image footprint instead of a 500px contain box; reading uses full available width. The image's box matches its actual painted aspect, so increasing layout space increases real map/weather content rather than blank side bands. PR header captures also retain their intrinsic aspect and full available width. Rendered tests measure painted area, not a CSS size string, and preserve attribution and viewport containment.

@@ -1,4 +1,4 @@
-# The real, read-only docs loop
+# Direct CLI and the reviewed browser-evidence loop
 
 This rehearsal reads an already completed cross-repository docs change. It does
 not dispatch a workflow, create a draft, merge a PR, change an AppHost, initialize
@@ -17,7 +17,82 @@ Product PR merged
   -> an agent can retrieve current prose and API references
 ```
 
-## Rehearse from the repository root
+## On stage: direct Aspire commands
+
+The presenter runs the public Aspire CLI directly in a real terminal. No
+PowerShell script is required. Pre-talk preparation selects the
+repository-local public 13.6.1 executable on this terminal's process-local PATH;
+it does not replace a global CLI or modify a user profile. See the
+[runbook](RUNBOOK.md) for exact setup, AppHost scope, and telemetry commands.
+
+```text
+aspire docs list --format Json
+aspire docs search "Configure tracked browser" --format Json
+aspire docs get browser-logs --format Json
+aspire docs get browser-logs --section "Configure browser logs" --format Json
+aspire docs api search WithBrowserLogs --language csharp --format Json
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json
+```
+
+These are actual public CLI command forms, executable in PowerShell or a shell
+without a helper file. Agent execution adds `--non-interactive`; captured
+verification also uses `--nologo`. Follow the current returned slug, section,
+and member ID rather than assuming a first search hit or replaying a transcript.
+
+| Command | Returned shape | Actual evidence to inspect |
+| --- | --- | --- |
+| `docs list` / `docs search` | Nonempty arrays | Page `browser-logs`; a search result's best section can be `Add browser logs to a resource` |
+| `docs get browser-logs` | Object with `content` and `sections` | The real `Configure browser logs` heading |
+| `docs get browser-logs --section "Configure browser logs"` | Object with selected `content` | Runtime dialog, scope/browser/profile/user-data options, user-secret persistence, interaction-service requirement, and immediate apply |
+| `docs api search WithBrowserLogs --language csharp` | Array with one exact member | `WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)` and its real ID |
+| `docs api get <returned-id>` | Member identity and Markdown | Experimental diagnostic, parameters, CDP/browser remarks, child-resource log stream, and screenshot artifacts |
+
+**API get has no `--language` option.** Empty results, invalid JSON, missing
+identity, or a name without the documented semantics do not prove retrieval.
+The observed IDs and public-safe chain facts are recorded in
+[browser-logs.json](evidence/browser-logs.json); raw responses remain gitignored.
+
+## The feature-level input story
+
+1. [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531)
+   added the **Configure tracked browser** dashboard command, runtime browser
+   selection, and optional persistence. It did not first create every
+   `WithBrowserLogs` capability.
+2. [Existing successful run 25092695241](https://github.com/microsoft/aspire/actions/runs/25092695241)
+   ran `pr-docs-check.lock.yml`. The slide's relevant YAML excerpts are pinned
+   to [that run's actual workflow source](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md).
+3. [microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775)
+   linked both the product PR and workflow run. Its initial
+   [generated commit](https://github.com/microsoft/aspire.dev/commit/6d08e7d641974e374a3d73c1ef9dcac0910f01c3)
+   is bot-authored. David Fowler's
+   [explicit refinement commit](https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d)
+   moved the guide to integrations/devtools and addressed feedback on scope,
+   naming, configuration precedence, and browser sharing. He then merged it.
+4. The [published browser-logs.md](https://aspire.dev/integrations/devtools/browser-logs.md)
+   and current [llms-full.txt](https://aspire.dev/llms-full.txt) supply the
+   content retrieved by the direct CLI commands above.
+
+There are **zero submitted GitHub review records** for this docs PR; the
+maintainer's correction and merge are the explicit human evidence. The old
+run's gh-aw artifacts have expired, so no outcome JSON, accepted/strong score,
+review count, or time-to-outcome is reconstructed. The audience JSON shows
+selected actual GitHub PR fields: `number`, `state`, `merged`, and
+`merged_by.login`. Inspect existing public links; never dispatch production
+automation on stage.
+
+`WithBrowserLogs` is experimental under `ASPIREBROWSERLOGS001` and belongs to
+`Aspire.Hosting.Browsers`. It creates a child browser resource whose console
+stream receives browser diagnostics; screenshot captures are command
+artifacts. This is a **documented extra capability, not enabled in the weather
+app**. The source returned by API get is
+[BrowserLogsBuilderExtensions.cs at f4c27f2d](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289).
+No integration, AppHost change, or new native build is needed to tell this story.
+
+## Optional historical timeout regression (pre-talk only)
+
+The helpers below remain unchanged for existing command-contract and regression
+coverage. They use the former startup-timeout example, not the audience's
+browser feature story. They are optional automation, not required live steps.
 
 Requirements: PowerShell 7, the repository-local **public Aspire CLI 13.6.1**,
 Git, and authenticated GitHub CLI with **gh-aw 0.85.4**. The public installer
@@ -31,7 +106,7 @@ pwsh -NoProfile -File .\scripts\Show-DocsLoop.ps1
 pwsh -NoProfile -File .\scripts\Test-DocsLoop.ps1
 ```
 
-The only onstage options are an explicit repository-local `-AspirePath`,
+The historical regression options are an explicit repository-local `-AspirePath`,
 `-OutputDirectory`, and `-SkipGitHub`:
 
 ```powershell
@@ -55,10 +130,11 @@ Markdown/corpus, and gh-aw downloads stay there. A `proof.json` appears only
 after every required check succeeds; an older run cannot masquerade as a new
 successful rehearsal. Do not commit the raw captures or downloaded agent logs.
 
-For the deck, import [the short command snippet](code/DocsLoop.ps1) and the
-source excerpts below, not a pasted terminal transcript.
+The former [helper snippet](code/DocsLoop.ps1) is historical preparation
+material, not the audience's entry point. Use the direct Aspire commands
+above and the source excerpts below, not a pasted terminal transcript.
 
-## The existing, verified example
+## Historical example retained by the optional helpers
 
 1. [Product PR microsoft/aspire#19478](https://github.com/microsoft/aspire/pull/19478)
    merged. Its change stops AppHost preparation/build time consuming the CLI
@@ -146,7 +222,7 @@ That is distinct from CLI-generated, project-local **application skills** in
 this repository. Application skills guide Aspire app work; they neither write
 the website corpus nor replace the engineer's review/merge gate.
 
-## The live CLI JSON contract
+## The historical regression's CLI JSON contract
 
 All six documentation commands request `--format Json --non-interactive
 --nologo`. Every external command must exit zero and return nonempty output;
@@ -163,7 +239,7 @@ identifiers is not success.
 | `docs api search AddViteApp --language csharp` | Array | `id`, `name`, `language`, `kind`, `parentId`, `memberGroup`, `summary`, numeric `score` |
 | `docs api get <derived-id>` | Object | `id`, `name`, `language`, `kind`, `url`, `parentId`, `memberGroup`, **`content`** |
 
-The verified public baseline listed **539 pages** and returned **five search
+The recorded historical baseline listed **539 pages** and returned **five search
 results**, including `aspire-run-command` and `aspire-start-command`. The script does **not** take the first
 ranked hit: it selects the unique returned title for `aspire start`, verifies
 that its returned slug is in `docs list`, then retrieves that slug.
@@ -255,7 +331,7 @@ updated reviewed docs, not autonomous self-learning.
 
 ## Verification and failure behavior
 
-`Test-DocsLoop.ps1` uses bounded child PowerShell fixtures for command
+The optional historical `Test-DocsLoop.ps1` uses bounded child PowerShell fixtures for command
 contracts, then runs `Show-DocsLoop.ps1` against the real public binary and
 remote baseline. Fixtures are explicitly test data, never onstage output, and
 their script/raw capture directory is removed in `finally`.

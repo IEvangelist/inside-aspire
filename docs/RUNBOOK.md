@@ -12,6 +12,7 @@ Use PowerShell 7, a released .NET 10 SDK, and Node 22.12+ (or 20.19+) on Windows
 
 ```powershell
 $aspire = & .\scripts\Install-Aspire.ps1
+$env:PATH = (Split-Path $aspire) + [IO.Path]::PathSeparator + $env:PATH
 $apphost = Join-Path $PWD 'demo\host\apphost.cs'
 pwsh -NoProfile -File .\scripts\Publish-Native.ps1
 pwsh -NoProfile -File .\scripts\Test-Native.ps1
@@ -20,6 +21,8 @@ pwsh -NoProfile -File .\scripts\Test-DocsLoop.ps1
 ```
 
 The installer verifies a pinned public release archive digest in gitignored `.tools`. It never replaces the presenter's global CLI. Publishing compiles the React bundle, native API, and native provider fixture into `demo/.artifacts/native/<rid>`. A missing artifact produces an explicit prep error; there is no managed API fallback.
+
+The PATH change above belongs only to this terminal process, so bare `aspire` resolves the prepared public 13.6.1 executable instead of any global prerelease. Confirm `aspire --version` before screen sharing. Preparation scripts are optional automation before the talk; no `.ps1` entry point is required on stage. The unchanged docs test retains its historical timeout regression, not the new audience feature story.
 
 Native compilation is preparation, not AppHost lifecycle. The Windows script runs `vcvars64.bat` and the compiler in the same process. Keep the publish step off the presentation clock.
 
@@ -41,22 +44,16 @@ Choose the editor, app, dashboard, and terminal windows while screen sharing. Na
 
 ## Real terminal: exact target and observed results
 
-Use `Start-Demo.ps1` **or** its equivalent CLI start, not both for the same AppHost. The script uses the pinned private CLI, the actual native artifact, an isolated worktree session, and the HTTP launch profile.
+Run the Aspire CLI directly from the prepared terminal. The exact AppHost launches the already-published native artifact with isolated worktree state and the HTTP launch profile.
 
 ```powershell
-pwsh -NoProfile -File .\scripts\Start-Demo.ps1
-& $aspire wait api --apphost $apphost --status healthy --timeout 120 --non-interactive
-& $aspire wait frontend --apphost $apphost --status healthy --timeout 120 --non-interactive
-& $aspire describe --apphost $apphost --format Json --non-interactive
+aspire start --apphost $apphost --isolated --non-interactive --launch-profile http
+aspire wait api --apphost $apphost --status healthy --timeout 120 --non-interactive
+aspire wait frontend --apphost $apphost --status healthy --timeout 120 --non-interactive
+aspire describe --apphost $apphost --format Json --non-interactive
 ```
 
-Equivalent direct start from the prepared repository:
-
-```powershell
-& $aspire start --apphost $apphost --isolated --non-interactive --launch-profile http
-```
-
-Then use the exact `wait`, `describe`, and `otel` commands here to show readiness, returned endpoints, and actual traces/logs. The concise `#/live-cli` slide is only a handoff cue; share the real terminal instead of narrating a command/JSON card.
+Then use the exact `wait`, `describe`, and `otel` commands here to show readiness, returned endpoints, and actual traces/logs. `Start-Demo.ps1` remains an optional preparation convenience; do not run it as well as direct start for the same AppHost. The `#/live-cli` slide contains real CLI commands to copy, not a wrapper or simulated terminal.
 
 Use the **returned** native API and frontend URLs. Search for Madison, select a result, inspect current conditions, the eight visible hourly cells, five days, units, map styles, and radar/provider attribution. Open `/openapi.json` and `/reference` on the discovered native API URL.
 
@@ -76,26 +73,37 @@ The live mode checks actual temperatures and Madison search, waits for loaded ma
 Invoke the project-local `aspire-orchestration` skill for lifecycle and `aspire-monitoring` for observation. Copilot discovers all seven under `.github/skills`; [the actual named invocation and complete source provenance are recorded](SKILLS.md).
 
 ```powershell
-& $aspire otel logs api --apphost $apphost --format Json --non-interactive
-& $aspire otel traces api --apphost $apphost --format Json --non-interactive
-& $aspire otel spans api --apphost $apphost --format Json --non-interactive
+aspire otel logs api --apphost $apphost --format Json --non-interactive
+aspire otel traces api --apphost $apphost --format Json --non-interactive
+aspire otel spans api --apphost $apphost --format Json --non-interactive
 ```
 
 Show the actual native process, a weather/provider trace, a correlated log, and its meter data in the dashboard. The deterministic native probe also verifies trace/log/metric payloads forwarded unchanged to Aspire and counts accepted metric points.
 
 **Do not rerun local `aspire agent init`.** The released installer configures usage hooks even with `--mcp=false`. The complete unmodified trees were generated on a fresh Actions runner with a separate real profile. This presenter profile was not modified. Optional MCP/browser-log/extra inspection experiments are outside the baseline.
 
-## Run the real docs proof
+## Direct CLI: the browser-evidence docs and exact API
 
 ```powershell
-pwsh -NoProfile -File .\scripts\Show-DocsLoop.ps1
+aspire docs list --format Json --non-interactive
+aspire docs search "Configure tracked browser" --format Json --non-interactive
+aspire docs get browser-logs --format Json --non-interactive
+aspire docs get browser-logs --section "Configure browser logs" --format Json --non-interactive
+aspire docs api search WithBrowserLogs --language csharp --format Json --non-interactive
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json --non-interactive
 ```
 
-The [guide](DOCS-LOOP.md) documents all exact public-baseline JSON shapes and the existing gh-aw outcome. Follow the returned slug, section, and C# member ID. The script checks merged product/docs PRs, successful existing run 33887017276, the primary accepted docs-PR outcome, and fresh published Markdown/corpus.
+These commands were executed with the public CLI. Search returns the real `browser-logs` slug; its best search section may be `Add browser logs to a resource`. Read the full document's `sections` before selecting `Configure browser logs`. The selected content explains the runtime dialog, browser/profile/user-data options, immediate application, interaction-service requirement, and optional user-secret persistence. Do not assume the search result's section is the one you want.
 
-The exact `ASPIRE_CLI_START_TIMEOUT` preparation/restore/build exclusion must appear in retrieved content. A name-only search hit is insufficient. Exit zero with no results, invalid JSON, empty content, or absent prose is failure.
+API search returns the shown C# member ID and signature. Only search accepts `--language`; get follows the actual returned ID and must contain its member reference, experimental diagnostic, parameters, and CDP/browser evidence remarks. An empty result or name-only hit is not proof. [Public-safe provenance and exact commands](evidence/browser-logs.json) are recorded separately from gitignored raw captures.
 
-`-SkipGitHub` skips the historical GitHub chain **only**; it still requires live CLI and public HTTP content. It is not offline replay. If disconnected, explicitly label a prior gitignored rehearsal capture as prior evidence and do not claim a live result.
+The real input chain is [product PR 16531](https://github.com/microsoft/aspire/pull/16531) -> [successful existing run 25092695241](https://github.com/microsoft/aspire/actions/runs/25092695241) -> [docs PR 775](https://github.com/microsoft/aspire.dev/pull/775) -> [published browser-logs.md](https://aspire.dev/integrations/devtools/browser-logs.md) -> current CLI retrieval. The product change adds runtime browser configuration, not the initial creation of every browser-logs capability. The bot drafted the guide; [David Fowler's explicit refinement commit](https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d) corrected scope, configuration precedence, naming, and sharing before merge. There are no submitted review records on this docs PR; do not claim three reviews.
+
+Inspect only the existing GitHub run/PR. The run's gh-aw artifacts have expired, so do not reconstruct outcome JSON or imply a new dispatch. The slide uses actual GitHub merged-state fields and the workflow Markdown pinned to the selected run head. If disconnected, label a prior capture as prior evidence rather than claiming a live result.
+
+`WithBrowserLogs` is experimental (`ASPIREBROWSERLOGS001`) in `Aspire.Hosting.Browsers`. It creates a child browser resource whose console stream receives browser diagnostics; screenshots are command artifacts. This is a documented extra capability, **not wired into this weather app**. Do not add the package, enable browser automation, or change the native app merely to tell this story.
+
+The unchanged `Show-DocsLoop.ps1` / `Test-DocsLoop.ps1` helpers are optional pre-talk historical regressions. Their timeout example and old safe-output outcome are not the audience story or required live commands; [the guide](DOCS-LOOP.md) keeps that distinction explicit.
 
 Show [the real C# excerpts](code/) and [source links](SOURCES.md): conditional fetch/cache, fenced H1/H2+ parsing, fingerprint/cached indexing, and weighted lexical ranking. The API reference is separately generated from DLL/XML/PDB source information through a Roslyn canonical model into C# Markdown and its CLI API index.
 
@@ -103,9 +111,9 @@ The docs repo's `doc-writer` and the seven CLI-shipped application skills are di
 
 ## Deck and pacing
 
-Open [the published deck](https://ievangelist.github.io/inside-aspire/). Stable chapter links: `#/weather`, `#/skills`, `#/the-loop`, `#/live-cli`, and `#/api-index`.
+Open [the published deck](https://ievangelist.github.io/inside-aspire/). **Start presentation** advances to slide 2, `#/thesis`, without skipping it. Direct chapter links remain available: `#/weather`, `#/skills`, `#/the-loop`, `#/live-cli`, and `#/api-index`.
 
-The refinement makes the CLI the main inner-loop enabler: current docs/API/state -> precise actions -> runtime evidence -> next grounded decision. The GitHub docs cycle is the supporting context supply chain at `#/docs-supply`. The title, exact approved abstract, event, existing PR/run chain, and native facts are unchanged.
+The CLI remains the main inner-loop enabler: current docs/API/state -> precise actions -> runtime evidence -> next grounded decision. The richer browser-configuration PR story supplies context at `#/docs-supply`; it does not turn docs automation into the whole AI loop. The title, exact approved abstract, event, and native facts are unchanged.
 
 | Time | Segment |
 | --- | --- |
@@ -113,7 +121,7 @@ The refinement makes the CLI the main inner-loop enabler: current docs/API/state
 | 0:05-0:10 | Draw the main skills/CLI/resources/evidence inner loop |
 | 0:10-0:23 | Prepared app/VS Code source and real CLI lifecycle/telemetry |
 | 0:23-0:28 | Shipped skills and the skill/tool/MCP distinction |
-| 0:28-0:38 | Supporting PR/run/docs trail, safe outputs, human review |
+| 0:28-0:38 | Browser-configuration PR/run/guide, safe outputs, explicit maintainer refinement |
 | 0:38-0:44 | Actual C# parser and cached lexical index |
 | 0:44-0:54 | Real terminal docs retrieval and separate C# API lookup |
 | 0:54-1:00 | Historical context, close, and questions |
@@ -134,10 +142,12 @@ The separate live-provider rehearsal returned actual Madison weather/geocoding a
 
 The build/native-proof/operational-result slides are removed from the audience deck. Their real source and verified evidence stay in this repository and in pre-talk preparation. Old `#/aot` and `#/native-proof` links resolve to `#/compiler`; `#/commands` resolves to `#/live-cli`.
 
+The weather image displays the entire original 1440x1000 capture at a larger proportional footprint, not in a letterboxed wide box. Reading uses the available width. PR images also use their actual aspect ratio. The former `#/timeout` audience link resolves to the browser-evidence explanation at `#/browser-evidence`.
+
 The browser gate checks actual token spans/colors for the six remaining displayed languages, all 11 code blocks, rounded inline code, connected cycles, fragments/line focus, notes, accessibility, and read/print/reduced motion. It checks 320/390/768/790/1024/16:9/4:3 and short screens, actual pointer links, 44px controls, Escape focus, and removed-anchor aliases. Ordinary code wraps without altering copyable text; an explicitly layout-preserving wide line can scroll only its full code body, with the scrollbar at the panel bottom.
 
 ```powershell
-& $aspire stop --apphost $apphost --non-interactive
+aspire stop --apphost $apphost --non-interactive
 ```
 
 Stop only this exact AppHost. Do not use `--force` for ordinary cleanup, kill unrelated processes, or delete locked build output. The native probe stops any AppHost it owns in `finally`.

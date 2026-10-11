@@ -156,30 +156,38 @@ for (const theme of ['light', 'dark'] as const) {
 
 for (const theme of ['light', 'dark'] as const) {
   for (const width of [320, 375, 386, 390, 394, 414]) {
-    test(`exact timeout identifier fits its rendered ${theme} ${width}px container`, async ({ page }, testInfo) => {
+    test(`feature and long identifiers fit their rendered ${theme} ${width}px container`, async ({ page }, testInfo) => {
       test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit narrow theme/width regression matrix runs once.');
       await openDeck(page, theme, width, 844, 'read');
-      await page.evaluate(() => { window.location.hash = '/timeout'; });
-      await expect(page.locator('#timeout h2')).toBeInViewport();
-      const identifier = page.locator('#timeout .identifier');
-      await expect(identifier).toHaveText('ASPIRE_CLI_START_TIMEOUT');
-      const geometry = await identifier.evaluate((element) => {
-        const container = element.getBoundingClientRect();
-        const code = element.querySelector('code')!;
-        const range = document.createRange();
-        range.selectNodeContents(code);
-        return {
-          overflow: element.scrollWidth - element.clientWidth,
-          right: container.right,
-          rangeRight: Math.max(...[...range.getClientRects()].map((rect) => rect.right)),
-          codeRight: Math.max(...[...code.getClientRects()].map((rect) => rect.right)),
-          text: code.textContent,
-        };
-      });
-      expect(geometry.overflow).toBe(0);
-      expect(geometry.rangeRight).toBeLessThanOrEqual(geometry.right + 0.5);
-      expect(geometry.codeRight).toBeLessThanOrEqual(geometry.right + 0.5);
-      expect(geometry.text).toBe('ASPIRE_CLI_START_TIMEOUT');
+      await page.evaluate(() => { window.location.hash = '/browser-evidence'; });
+      await expect(page.locator('#browser-evidence h2')).toBeInViewport();
+      const identifier = page.locator('#browser-evidence .identifier');
+      for (const expected of ['WithBrowserLogs', 'ASPIRE_CLI_START_TIMEOUT']) {
+        if (expected.startsWith('ASPIRE_')) {
+          await identifier.locator('code').evaluate((code) => {
+            code.replaceChildren('ASPIRE_', document.createElement('wbr'), 'CLI_',
+              document.createElement('wbr'), 'START_', document.createElement('wbr'), 'TIMEOUT');
+          });
+        }
+        await expect(identifier).toHaveText(expected);
+        const geometry = await identifier.evaluate((element) => {
+          const container = element.getBoundingClientRect();
+          const code = element.querySelector('code')!;
+          const range = document.createRange();
+          range.selectNodeContents(code);
+          return {
+            overflow: element.scrollWidth - element.clientWidth,
+            right: container.right,
+            rangeRight: Math.max(...[...range.getClientRects()].map((rect) => rect.right)),
+            codeRight: Math.max(...[...code.getClientRects()].map((rect) => rect.right)),
+            text: code.textContent,
+          };
+        });
+        expect(geometry.overflow).toBe(0);
+        expect(geometry.rangeRight).toBeLessThanOrEqual(geometry.right + 0.5);
+        expect(geometry.codeRight).toBeLessThanOrEqual(geometry.right + 0.5);
+        expect(geometry.text).toBe(expected);
+      }
     });
   }
 }
@@ -191,7 +199,7 @@ for (const theme of ['light', 'dark'] as const) {
       await openDeck(page, theme, width, 844, 'read');
       await page.addStyleTag({ content: '.reveal :not(pre) > code:not(.hljs) { font-family: monospace; }' });
       await page.evaluate(() => document.fonts.ready);
-      for (const id of ['skills', 'timeout']) {
+      for (const id of ['skills', 'browser-evidence']) {
         await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
         await expect(page.locator(`#${id} h2`)).toBeInViewport();
         const results = await page.locator(`#${id} code:not(.hljs)`).evaluateAll((codes) => codes.map((code) => {

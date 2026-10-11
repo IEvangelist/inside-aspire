@@ -63,7 +63,7 @@
             <h1>Inside Aspire</h1>
             <p class="subtitle">The Architecture Behind the AI Loop</p>
             <p class="lede">The CLI makes AI decisions more precise.</p>
-            <a class="primary-link" href="#/the-loop">See the inner loop <span data-icon="arrowRight"></span></a>
+            <a class="primary-link" href="#/thesis">Start presentation <span data-icon="arrowRight"></span></a>
           </div>
           <figure class="speaker">
             <img class="speaker-portrait" src="/inside-aspire/speaker/david-pine.webp" width="300" height="300" alt="David Pine's actual public profile portrait" fetchpriority="high" decoding="async" />
@@ -107,7 +107,7 @@
           <figure>
             <img class="proof-image image-for-dark" src="/inside-aspire/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
             <img class="proof-image image-for-light" src="/inside-aspire/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
-            <figcaption>Actual native artifact, retained React UI, and live Madison provider data. Rehearsal capture; conditions change. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
+            <figcaption>Actual native app and Madison map. Rehearsal capture; conditions change. Provider attribution retained. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
           </figure>
           <aside class="notes">0:10-0:20. Switch out of the slides to the prepared application and VS Code repository. If installed, code . opens the workspace; do not compile during the talk. Show demo/host/apphost.cs, demo/Weather.Api/Program.cs, and demo/frontend/src. Use endpoints returned by Aspire. Search Madison, inspect the forecast and map, and keep provider attribution visible. This image is an actual native-artifact rehearsal capture, not a fabricated UI. The following graph explains the resource model; the editor shows the real source.</aside>
         </section>
@@ -161,33 +161,33 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="evidence" data-chapter="Supporting docs supply">
-          <div class="heading-with-brand"><h2>Current context has a visible trail.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/19478" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
-          <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 19478: Don't count AppHost builds against CLI startup timeout." /><figcaption>Actual public product PR. The docs supply chain feeds the CLI inner loop.</figcaption></figure>
+          <div class="heading-with-brand"><h2>Browser evidence has a visible trail.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
+          <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>A runtime browser-configuration feature becomes a complete, maintainer-refined guide.</figcaption></figure>
           <ol class="evidence-chain">
-            <li><a href="https://github.com/microsoft/aspire/pull/19478">microsoft/aspire#19478</a><span>Merged product change</span></li>
-            <li><a href="https://github.com/microsoft/aspire/actions/runs/33887017276">pr-docs-check run 33887017276</a><span>Successful existing workflow run</span></li>
-            <li><a href="https://github.com/microsoft/aspire.dev/pull/1619">microsoft/aspire.dev#1619</a><span>Reviewed and merged docs</span></li>
-            <li><a href="https://aspire.dev/reference/cli/commands/aspire-start.md">aspire-start.md</a><span>Published Markdown and current corpus</span></li>
+            <li><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a><span>Configure tracked browser command</span></li>
+            <li><a href="https://github.com/microsoft/aspire/actions/runs/25092695241">pr-docs-check run 25092695241</a><span>Successful existing workflow run</span></li>
+            <li><a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a><span>Bot draft, maintainer refinement, merge</span></li>
+            <li><a href="https://aspire.dev/integrations/devtools/browser-logs.md">browser-logs.md</a><span>Published guide, retrieved by the CLI</span></li>
           </ol>
-          <aside class="notes">0:26-0:29. Treat this as the SUPPORTING outer-loop context supply story. The CLI remains the inner-loop enabler. The image is a real public PR capture, not fake GitHub cards. Open existing product PR/run/docs PR. The script verifies their actual states and linkage. No production dispatch, fabricated failure, or model self-training claim.</aside>
+          <aside class="notes">0:26-0:29. Product PR 16531 adds the Configure tracked browser dashboard command and runtime settings/persistence; it did not create all browser-logs functionality. The successful existing run 25092695241 generated docs PR 775, whose body links both. A maintainer moved the guide and corrected resource scope, naming, configuration precedence, and process sharing before merging. This is the supporting context supply story, not the whole CLI inner loop. No production dispatch or synthetic repair.</aside>
         </section>
 
-        <section id="timeout">
-          <h2>The change that matters.</h2>
-          <p class="identifier"><code>ASPIRE_<wbr />CLI_<wbr />START_<wbr />TIMEOUT</code></p>
-          <blockquote>The startup timeout excludes AppHost preparation, including restore and build.</blockquote>
-          <p>Build time and resource startup time are different budgets.</p>
-          <p class="source-line">The CLI rehearsal asserts the current published build-exclusion prose, not just the environment-variable name.</p>
-          <aside class="notes">0:29-0:31. This sentence is a concise paraphrase of the documented clarification. The actual live script checks the exact returned source prose and fails if it is absent. Finding the variable in search is only a proxy; retrieving the section proves the content reached the public tool surface.</aside>
+        <section id="browser-evidence">
+          <h2>Make browser behavior observable.</h2>
+          <p class="identifier"><code>WithBrowserLogs</code></p>
+          <blockquote>Console output, exceptions, network events, and screenshots become evidence.</blockquote>
+          <p>Configure the tracked browser at runtime. Retrieve the reviewed guide before deciding what to enable.</p>
+          <p class="source-line">Experimental <code>ASPIREBROWSERLOGS001</code> in <code>Aspire.Hosting.Browsers</code>. A documented extra capability, not wired into this weather app.</p>
+          <aside class="notes">0:29-0:31. Browser diagnostics flow into the child browser resource's console log stream; screenshots are command artifacts. The product change adds the runtime configuration dialog and optional user-secret persistence. Retrieve Configure browser logs from the actual CLI page. WithBrowserLogs is an experimental API, not a feature already enabled in our healthy NativeAOT app. We do not modify that app or suppress diagnostics during this talk.</aside>
         </section>
 
         <section id="workflow" data-chapter="Reviewable automation">
-          <div class="heading-with-brand"><h2>Proposals have explicit write boundaries.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
+          <div class="heading-with-brand"><h2>Proposals have explicit write boundaries.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
           <div class="workflow-path">
             <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
           </div>
           <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>pr-docs-check.md <span>YAML frontmatter excerpts</span></figcaption><pre data-label="Agentic workflow trigger and safe output" data-line-numbers><code class="language-yaml">on:
+            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>pr-docs-check.md <span>Excerpts at the actual run head</span></figcaption><pre data-label="Agentic workflow trigger and safe output" data-line-numbers><code class="language-yaml">on:
   pull_request:
     types: [closed]
     branches:
@@ -200,29 +200,29 @@ safe-outputs:
     target-repo:
       "microsoft/aspire.dev"
     protected-files: blocked</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="check"></span>Actual primary outcome <span>JSON selected fields</span></figcaption><pre data-label="Verified documentation PR outcome"><code class="language-json">{
-  "type": "create_pull_request",
-  "object_number": 1619,
-  "outcome_status": "accepted",
-  "evidence_strength": "strong",
-  "signal": "merged",
-  "human_reviews": 3
+            <figure class="code-panel"><figcaption><span data-icon="check"></span>Actual docs PR response <span>GitHub JSON selected fields</span></figcaption><pre data-label="Verified merged documentation PR"><code class="language-json">{
+  "number": 775,
+  "state": "closed",
+  "merged": true,
+  "merged_by": {
+    "login": "davidfowl"
+  }
 }</code></pre></figure>
           </div>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/.github/workflows/pr-docs-check.md">Pinned workflow source</a> &middot; <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub blog explanation</a></p>
-          <aside class="notes">0:31-0:34. YAML fields are real excerpts from the pinned workflow with intervening policy/branch resolution omitted. The merged-event guard remains in the full source. The JSON fields are from the actual accepted primary docs-PR outcome, not a fabricated agent output. A separate notify_source_pr metadata item can be pending without invalidating the merged docs. Doc-writer lives in the docs repo, and safe outputs materialize proposals through constrained jobs. Humans approve/merge before publication.</aside>
+          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md">Actual run's workflow source</a> &middot; <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub blog explanation</a></p>
+          <aside class="notes">0:31-0:34. YAML fields are real excerpts pinned to the selected run's actual head, 42e77dc9. Intervening policy/branch resolution is omitted; the merged-event guard remains in the full source. JSON contains selected fields from the actual GitHub response for merged docs PR 775. The old run's gh-aw artifacts have expired; we do not reconstruct outcomes. There are zero submitted GitHub review records; the maintainer's explicit refinement commit and merge are the human evidence. Doc-writer and constrained safe outputs remain separate from CLI-shipped app skills.</aside>
         </section>
 
         <section id="writer">
           <h2>Different skills. Visible human review.</h2>
-          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 1619 clarifying the startup timeout build exclusion." /><figcaption>Actual docs PR. The docs repo's <code>doc-writer</code> is distinct from the CLI-shipped application skills.</figcaption></figure>
+          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>Bot-authored guide, then <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">maintainer refinement</a> and merge. The docs repo's <code>doc-writer</code> is a distinct skill.</figcaption></figure>
           <div class="code-and-copy">
             <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
   --repo "microsoft/aspire" --json</code></pre></figure>
             <div><p><code>doc-writer</code> guides documentation authoring. <code>aspire-orchestration</code> and <code>aspire-monitoring</code> guide precise app operations.</p></div>
           </div>
-          <p class="source-line">The successful existing run and merged docs PR are evidence. Nothing is dispatched on stage.</p>
-          <aside class="notes">0:34-0:35. Do not suggest the CLI installed the production docs writer. The seven shipped application skills and the workflow's doc-writer are distinct. Guidance is repo-specific and reviewable. That distinction prevents a misleading story about a single autonomous agent owning every boundary.</aside>
+          <p class="source-line">Actual refinement commit: moved the guide, corrected scope, configuration precedence, and browser sharing. Nothing is dispatched on stage.</p>
+          <aside class="notes">0:34-0:35. Initial commit 6d08e7d6 is bot-authored. David Fowler's 49371cfd commit explicitly addresses feedback and moves the guide to integrations/devtools; he merged it. Do not substitute an invented submitted-review count. The seven shipped application skills and the workflow's doc-writer are distinct. Inspect the existing linked run, not a new dispatch.</aside>
         </section>
 
         <section id="docs-supply" class="diagram-slide" data-chapter="Outer context supply loop">
@@ -281,7 +281,7 @@ private const float SummaryWeight = 8.0f;
 private const float HeadingWeight = 6.0f;
 private const float CodeWeight = 5.0f;
 private const float BodyWeight = 1.0f;</code></pre></figure>
-            <div><p class="identifier"><code>AddViteApp</code></p><p>The CLI returns a real member ID and its reference content. The agent does not have to invent an API.</p></div>
+            <div><p class="identifier"><code>WithBrowserLogs</code></p><p>The CLI returns a real member ID and its reference content. The agent does not have to invent an API.</p></div>
           </div>
           <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned weights</a>. Local lexical ranking, not embeddings or model training.</p>
           <aside class="notes">0:43-0:44. Developers ask for exact names and sections. Describe the current weighted lexical mechanism without copying historical weights from the earlier blog as if they are current contracts. The API index is separate from narrative documentation; the next CLI segment demonstrates both.</aside>
@@ -289,10 +289,13 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
 
         <section id="live-cli" class="live-slide">
           <h2>Let the CLI drive the next decision.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Switch to the real terminal <span>Rehearsal entry point</span></figcaption><pre data-label="Live documentation rehearsal"><code class="language-powershell">pwsh ./scripts/Show-DocsLoop.ps1</code></pre></figure>
+          <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Run the Aspire CLI directly <span>Docs and exact C# references</span></figcaption><pre data-label="Direct Aspire documentation and API commands"><code class="language-bash">aspire docs search "Configure tracked browser" --format Json
+aspire docs get browser-logs --section "Configure browser logs" --format Json
+aspire docs api search WithBrowserLogs --language csharp --format Json
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
           <p class="large-copy">Current facts. Targeted actions. Observed results.</p>
-          <p class="source-line">Share the terminal and prepared app, not a simulated command window. Full commands and evidence are in the <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">runbook</a>.</p>
-          <aside class="notes">0:44-0:54. Switch to a real terminal or VS Code terminal. The app is already compiled. Use the private public CLI path and exact demo/host/apphost.cs target for start/wait/describe/otel as needed; show actual endpoints and runtime evidence. Then run Show-DocsLoop.ps1 for current docs, returned sections, and separate API lookup. Inspect only the existing production run/PR; do not dispatch. Build/native compatibility checks belong before the talk. Raw captures remain gitignored, and prior snapshots must not be presented as live.</aside>
+          <p class="source-line">The slug, section, and member ID were returned by the public CLI. Follow your current search results. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Direct-command runbook</a>.</p>
+          <aside class="notes">0:44-0:54. Share a real terminal, using the preselected public CLI on the terminal's process-local PATH. Run these Aspire commands directly; no PowerShell script is required on stage. Search returns browser-logs, get lists its sections, and the selected section explains runtime configuration. API search returns this exact C# member ID; get does not accept a language flag. Inspect logs/state of the already-prepared weather app separately, and explain browser logs as an experimental extra, not already wired. Existing run/PR only; no dispatch. Prior captures are not live results.</aside>
         </section>
 
         <section id="api-index" class="diagram-slide" data-chapter="Compiler-derived API evidence">
@@ -300,16 +303,15 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
           <div data-diagram="api"></div>
           <p class="diagram-caption"><span data-icon="file"></span> DLL + XML + available PDB &rarr; Roslyn canonical model &rarr; C# reference Markdown &rarr; separate API lookup.</p>
           <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p>
-          <aside class="notes">0:52-0:54. Continue the same script through C# API search/get. Only search takes the language option in the public baseline; get follows the returned member ID. DLL metadata and XML docs feed Roslyn; available PDB source information enriches the canonical model. Generated C# reference Markdown feeds the separate CLI API index. Display the actual retrieved member, not an invented API call.</aside>
+          <aside class="notes">0:52-0:54. Continue direct C# API search/get in the same terminal. Only search takes the language option in the public baseline; get follows the returned member ID. DLL metadata and XML docs feed Roslyn; available PDB source information enriches the canonical model. Generated C# reference Markdown feeds the separate CLI API index. Display the actual retrieved member, not an invented API call.</aside>
         </section>
 
         <section id="api-code" data-chapter="Exact member, rendered source">
           <h2>Follow the returned C# member.</h2>
           <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Separate API lookup <span>PowerShell</span></figcaption><pre data-label="Supported C# API search and get"><code class="language-powershell">&amp; $aspire docs api search AddViteApp `
-  --language csharp --format Json
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Separate API lookup <span>Aspire CLI</span></figcaption><pre data-label="Supported C# API search and get"><code class="language-powershell">aspire docs api search WithBrowserLogs --language csharp --format Json
 # Use the returned member ID.
-&amp; $aspire docs api get $id --format Json</code></pre></figure>
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
             <figure class="code-panel"><figcaption><span data-icon="file"></span>Member Markdown route <span>Actual TypeScript excerpt</span></figcaption><pre data-label="C# reference Markdown rendering"><code class="language-typescript">return markdownResponse(
   renderCSharpMemberKindMarkdown(
     routeProps.pkg,
@@ -322,7 +324,7 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
           </div>
           <p>The reference site publishes the compiler-derived model. The CLI retrieves the member's actual Markdown, with its identity intact.</p>
           <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts">Actual reference renderer</a>. Only search accepts <code>--language</code>; get follows the returned ID.</p>
-          <aside class="notes">The returned API ID is derived by the tested script. Never add an unsupported language flag to get. The TypeScript excerpt is the real docs-site renderer, not a pretend local implementation. The CLI consumes published compiler-derived references. This is another reason precise retrieval improves the next AI decision.</aside>
+          <aside class="notes">The shown API ID was returned by the actual public CLI search. Follow the current result in the terminal. Never add an unsupported language flag to get. The TypeScript excerpt is the real docs-site renderer, not a pretend local implementation. WithBrowserLogs is an experimental documented capability; this does not change the native demo.</aside>
         </section>
 
         <section id="history">
@@ -360,7 +362,7 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
             <div><h3>Real loop</h3>
               <p><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub: cross-repo docs automation</a></p>
               <p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">David Pine: C# docs architecture</a></p>
-              <p><a href="https://github.com/microsoft/aspire/pull/19478">microsoft/aspire#19478</a> / <a href="https://github.com/microsoft/aspire.dev/pull/1619">microsoft/aspire.dev#1619</a></p>
+              <p><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a> / <a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a></p>
               <p><a href="https://aspire.dev/llms-full.txt">Current llms-full.txt corpus</a></p>
             </div>
             <div><h3>Application and brand</h3>

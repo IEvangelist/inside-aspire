@@ -25,7 +25,7 @@ test('loads local assets, actual slide content, and readable mobile text',async 
   await expect(page.locator('#intro h1')).toHaveText('Inside Aspire');
   await expect(page.locator('section[id]')).toHaveCount(slideCount);
   await expect(page.locator('#the-loop')).toContainText('Native Aspire CLI');
-  await expect(page.locator('#timeout')).toContainText('ASPIRE_CLI_START_TIMEOUT');
+  await expect(page.locator('#browser-evidence')).toContainText('WithBrowserLogs');
   await expect(page.locator('#docs-supply')).toContainText('Next code change');
   await expect(page.locator('#api-index')).toContainText('Roslyn');
   await expect.poll(() => page.locator('.brand-link img').evaluateAll((images) =>
@@ -194,7 +194,8 @@ test('all remaining explicit code languages produce real tokens, multiple colors
     expect(block.contrast,`${block.language} token contrast`).toBeGreaterThanOrEqual(4.5);
     expect(block.tokenBackgrounds).toEqual(['rgba(0, 0, 0, 0)']);
   }
-  await expect(page.locator('#api-code .language-powershell')).toContainText('& $aspire docs api get $id --format Json');
+  await expect(page.locator('#api-code .language-powershell')).toContainText(
+    'aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json');
   await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
   await expect(page.locator('#apphost-code .code-line')).toHaveCount(12);
 });
@@ -302,7 +303,7 @@ test('reading mode exposes the complete diagrams and code without waiting for fr
   await openMenu(page);
   await page.locator('[data-slide="live-cli"]').click();
   await expect(page.locator('#live-cli h2')).toBeInViewport();
-  await expect(page.locator('#live-cli .language-powershell')).toBeVisible();
+  await expect(page.locator('#live-cli .language-bash')).toBeVisible();
 });
 
 for(const viewport of [
@@ -366,10 +367,10 @@ for (const width of [320, 390, 790]) {
     await page.setViewportSize({ width, height: 844 });
     await ready(page);
     await expect(page.locator('#presentation')).toHaveClass(/reveal-scroll/);
-    await page.getByRole('link', { name: 'See the inner loop' }).click();
-    await expect(page).toHaveURL(/#\/the-loop(?:\/\d+)?$/);
-    await expect(page.locator('#the-loop h2')).toBeInViewport();
-    const heading = await page.locator('#the-loop h2').boundingBox();
+    await page.getByRole('link', { name: 'Start presentation' }).click();
+    await expect(page).toHaveURL(/#\/thesis(?:\/\d+)?$/);
+    await expect(page.locator('#thesis h2')).toBeInViewport();
+    const heading = await page.locator('#thesis h2').boundingBox();
     const bar = await page.locator('.toolbar').boundingBox();
     expect(heading?.y).toBeGreaterThanOrEqual((bar?.height ?? 0) - 1);
     await openMenu(page);

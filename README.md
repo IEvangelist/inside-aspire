@@ -24,19 +24,25 @@ Use PowerShell 7 on Windows or Linux x64, a released .NET 10 SDK, and Node 22.12
 # Downloads a checksum-verified public CLI into gitignored .tools.
 # Does not replace the user's global CLI or install global agent hooks.
 $aspire = & .\scripts\Install-Aspire.ps1
+$env:PATH = (Split-Path $aspire) + [IO.Path]::PathSeparator + $env:PATH
 
 # Compile the browser bundle and the actual NativeAOT API before presenting.
 pwsh .\scripts\Publish-Native.ps1
 pwsh .\scripts\Test-Native.ps1
 
 # Aspire owns AppHost lifecycle, readiness, and endpoint discovery.
-pwsh .\scripts\Start-Demo.ps1
+aspire start --apphost demo\host\apphost.cs --isolated --non-interactive --launch-profile http
+aspire wait api --apphost demo\host\apphost.cs --status healthy --timeout 120 --non-interactive
+aspire describe --apphost demo\host\apphost.cs --format Json --non-interactive
 
 # Inspect the real existing PR/run/docs chain and current docs/API indexes.
-pwsh .\scripts\Show-DocsLoop.ps1
+aspire docs search "Configure tracked browser" --format Json
+aspire docs get browser-logs --section "Configure browser logs" --format Json
 ```
 
 The shipped skills are already prepared. **Do not run `aspire agent init` on the presenter's profile just to rehearse.** The released installer configures usage hooks even with MCP disabled; [the preparation workflow uses an ephemeral runner](docs/SKILLS.md).
+
+The PATH selection belongs only to this terminal process, not the user's global configuration. Preparation helpers remain available, but no `.ps1` wrapper is required on stage. The runbook includes direct docs/API and telemetry commands.
 
 ## Rehearse the deck
 
@@ -50,9 +56,9 @@ Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys pres
 
 ## The actual AI loop
 
-The canonical trail is [microsoft/aspire#19478](https://github.com/microsoft/aspire/pull/19478) -> [successful existing run 33887017276](https://github.com/microsoft/aspire/actions/runs/33887017276) -> [microsoft/aspire.dev#1619](https://github.com/microsoft/aspire.dev/pull/1619) -> [published aspire-start.md](https://aspire.dev/reference/cli/commands/aspire-start.md).
+The supporting trail is [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531), adding tracked-browser runtime configuration -> [successful existing run 25092695241](https://github.com/microsoft/aspire/actions/runs/25092695241) -> [bot-generated, maintainer-refined microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775) -> [published browser-logs.md](https://aspire.dev/integrations/devtools/browser-logs.md).
 
-The rehearsal follows returned document slugs, sections, and C# API member IDs. It asserts the current `ASPIRE_CLI_START_TIMEOUT` clarification excluding AppHost preparation, including restore and build. Exit code zero with invalid JSON, empty results, or missing prose is failure.
+The direct CLI demonstration follows returned document slugs, sections, and the exact `WithBrowserLogs` C# member ID. The guide explains runtime configuration, child-resource browser diagnostics, and screenshot artifacts. That API is an experimental documented extra, not wired into the unchanged weather app. The existing timeout scripts remain optional historical regressions rather than the audience story. Exit code zero with empty results or missing semantic content is not proof.
 
 This is a published Markdown corpus consumed by a real C# fetcher/parser/index and the CLI. It is not a custom parser recreation, vector database, training step, or instant self-learning. The docs draft crosses human review, merge, and deployment before entering the retrievable corpus. Application skills, the docs repo's `doc-writer`, CLI tools, and MCP are distinct.
 
