@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Inside Aspire: The Architecture Behind the AI Loop. A NativeAOT weather demo and a real, human-reviewed documentation loop, presented at Wisconsin .NET UG." />
     <meta property="og:title" content="Inside Aspire: The Architecture Behind the AI Loop" />
-    <meta property="og:description" content="A healthy native weather app. A real docs PR. A C# parser. Grounded answers from the CLI." />
+    <meta property="og:description" content="Know what's true. Act precisely. Stay current. Aspire makes AI more efficient." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ievangelist.github.io/inside-aspire/" />
     <link rel="icon" type="image/svg+xml" href="/inside-aspire/brand/aspire-icon-32.svg" />
@@ -15,11 +15,11 @@
   </head>
   <body>
     <!--
-    THESIS: Make the real engineering loop inspectable, not an AI marketing story.
+    THESIS: Aspire makes AI more efficient: know what's true, act precisely, and stay current.
     OWN-WORLD: Official Aspire purple, unmodified SVG marks, self-hosted Poppins, architectural paths and real source images.
-    STORY: Run a healthy native app, distinguish skills from tools, trace reviewed docs into a C# index, prove retrieval in the terminal.
-    FIRST VIEWPORT: The unchanged talk title pairs with David's actual public portrait. A compact bar recedes above a CLI-first story.
-    FORM: Connected SVG paths reveal with the speaker's advance. Explicit syntax colors, real imagery, and narrow-screen redraws make evidence readable.
+    STORY: Each benefit starts with why, then real CLI/application evidence, then the machinery that makes it possible.
+    FIRST VIEWPORT: The unchanged talk title pairs with David's actual public portrait. Start presentation advances to the three-point roadmap.
+    FORM: Connected SVG paths reveal with the speaker's advance. Explicit syntax colors, real imagery, and narrow-screen redraws keep evidence readable.
     -->
     <a class="skip-link" href="#presentation">Skip to presentation</a>
     <header class="toolbar" aria-label="Presentation controls">
@@ -31,21 +31,26 @@
       </button>
       <nav class="slide-navigation" aria-label="Slide navigation">
         <button id="previous" class="icon-button" type="button" aria-label="Previous slide or step"><span data-icon="arrowLeft"></span></button>
-        <output id="slide-position" aria-label="Slide 1 of 23">1 / 23</output>
+        <output id="slide-position" aria-label="Slide 1 of 26">1 / 26</output>
         <button id="next" class="next-button" type="button" aria-label="Next slide or step"><span class="desktop-label">Next</span><span data-icon="arrowRight"></span></button>
         <button id="menu-toggle" class="icon-button" type="button" aria-label="Open presentation menu" aria-haspopup="dialog" aria-controls="deck-menu" aria-expanded="false"><span data-icon="menu"></span></button>
       </nav>
     </header>
     <dialog id="deck-menu" class="deck-menu" aria-labelledby="menu-title">
       <div class="menu-heading"><h2 id="menu-title">Inside Aspire</h2><form method="dialog"><button class="icon-button" aria-label="Close presentation menu"><span data-icon="close"></span></button></form></div>
-      <nav class="chapter-list" aria-label="Presentation chapters">
-        <a href="#/intro" data-slide="intro"><span data-icon="person"></span><span>Start with David Pine</span></a>
-        <a href="#/the-loop" data-slide="the-loop"><span data-icon="terminal"></span><span>The precise CLI inner loop</span></a>
-        <a href="#/weather" data-slide="weather"><span data-icon="cpu"></span><span>Healthy native application</span></a>
-        <a href="#/skills" data-slide="skills"><span data-icon="book"></span><span>Shipped skills in action</span></a>
-        <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Docs context supply chain</span></a>
-        <a href="#/live-cli" data-slide="live-cli"><span data-icon="code"></span><span>Live retrieval and API proof</span></a>
-        <a href="#/sources" data-slide="sources"><span data-icon="file"></span><span>Sources and reuse</span></a>
+      <nav class="chapter-list" aria-label="Three main points">
+        <a href="#/know-truth" data-slide="know-truth" data-core-chapter="Know what's true."><span data-icon="book"></span><span>Know what's true.</span></a>
+        <a href="#/act-precisely" data-slide="act-precisely" data-core-chapter="Act precisely."><span data-icon="terminal"></span><span>Act precisely.</span></a>
+        <a href="#/stay-current" data-slide="stay-current" data-core-chapter="Stay current."><span data-icon="review"></span><span>Stay current.</span></a>
+      </nav>
+      <nav class="chapter-list direct-jumps" aria-label="Direct demos and optional appendices">
+        <a href="#/intro" data-slide="intro"><span data-icon="person"></span><span>Speaker and roadmap</span></a>
+        <a href="#/live-cli" data-slide="live-cli"><span data-icon="code"></span><span>Direct docs and API commands</span></a>
+        <a href="#/weather" data-slide="weather"><span data-icon="cpu"></span><span>Healthy native app</span></a>
+        <a href="#/skills" data-slide="skills"><span data-icon="book"></span><span>Shipped skills</span></a>
+        <a href="#/the-loop" data-slide="the-loop"><span data-icon="terminal"></span><span>The CLI inner loop</span></a>
+        <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Reviewed docs trail</span></a>
+        <a href="#/sources" data-slide="sources"><span data-icon="file"></span><span>Optional sources appendix</span></a>
       </nav>
       <div class="menu-controls" aria-label="Display and presenter tools">
         <button id="read-mode" type="button" aria-pressed="false"><span data-icon="book"></span><span class="control-label">Reading mode</span><kbd>R</kbd></button>
@@ -78,48 +83,176 @@
             </figcaption>
           </figure>
           <p class="event">Wisconsin .NET UG<br />November 17, 2026 at 6pm Central</p>
-          <aside class="notes">0:00-0:03. The title and approved abstract stay unchanged. The thesis is CLI-first: Aspire makes AI more efficient by turning reasoning into precise operations and runtime evidence. The docs corpus and agentic workflows supply current context; they are not the whole inner loop. The portrait is David's actual public profile image, not synthesized for this deck. Keep time for questions.</aside>
+          <aside class="notes">0:00-0:02. Open with the decision problem, not a tour of internals. The title, abstract, and event stay unchanged. This is 60 minutes of presentation; Q&amp;A and networking are separate. The portrait is David's actual public profile image. Advance to the roadmap without skipping it.</aside>
         </section>
 
-        <section id="thesis" class="statement-slide" data-chapter="Precise decisions">
+        <section id="thesis" class="statement-slide" data-chapter="Three main points">
           <h2>Aspire makes AI<br />more efficient.</h2>
-          <div class="thesis-path">
-            <div><span data-icon="book"></span><strong>Current facts</strong><p>Docs, exact APIs, resource state</p></div>
-            <span data-icon="arrowRight"></span>
-            <div><span data-icon="terminal"></span><strong>Targeted actions</strong><p>CLI commands with explicit scope</p></div>
-            <span data-icon="arrowRight"></span>
-            <div><span data-icon="check"></span><strong>Precise decisions</strong><p>Observe the result, choose the next move</p></div>
+          <div class="thesis-path" data-three-points>
+            <div><span data-icon="book"></span><strong data-takeaway>Know what's true.</strong><p>Ground decisions in retrieved facts.</p></div>
+            <div><span data-icon="terminal"></span><strong data-takeaway>Act precisely.</strong><p>Use explicit scope and observed results.</p></div>
+            <div><span data-icon="review"></span><strong data-takeaway>Stay current.</strong><p>Bring product changes back to the CLI.</p></div>
           </div>
-          <p class="large-copy">The CLI is the executable evidence and control hub.</p>
-          <p class="source-line">A qualitative payoff, not an invented timing or token-savings benchmark.</p>
-          <aside class="notes">0:03-0:05. State the payoff confidently. Aspire makes AI more efficient because the CLI lets skills replace guessed APIs, ports, readiness, and actions with exact current facts. No percentages or training claims. The healthy app supplies runtime evidence, while reviewed docs provide context.</aside>
+          <p class="large-copy">One executable evidence and control hub: the CLI.</p>
+          <p class="source-line">Three benefits, not three invented timing or token-savings benchmarks.</p>
+          <aside class="notes">0:02-0:04. Give the audience exactly three memorable points: Know what's true. Act precisely. Stay current. These are benefits; NativeAOT, Roslyn, DCP, C# parsing, and gh-aw are supporting machinery, not extra main topics. Each chapter explains why, shows a concrete proof, then opens the implementation. Repeat these same phrases at the close.</aside>
         </section>
 
-        <section id="the-loop" class="diagram-slide" data-chapter="The CLI inner loop">
-          <h2>Reason. Act precisely. Observe.</h2>
-          <div data-diagram="inner"></div>
-          <p class="diagram-caption"><span data-icon="terminal"></span> Advance to trace skills &rarr; CLI &rarr; resources &rarr; evidence &rarr; next decision.</p>
-          <aside class="notes">0:05. This is the MAIN inner loop. Reveal connections with the speaker's next key. Skills guide the agent to current docs and exact members, then describe/wait/lifecycle and telemetry operations. The managed AppHost runs the actual native API. Runtime results inform the next decision. The CLI is the hub, not a decorative shell around a docs pipeline. Reading, print, and reduced motion show the entire graph.</aside>
+        <section id="know-truth" class="statement-slide" data-chapter="Know what's true." data-purpose="why">
+          <h2 data-takeaway>Know what's true.</h2>
+          <p class="large-copy" data-why>A confident answer isn't evidence.</p>
+          <p class="big-support">A plausible API can still be wrong. Retrieve current guidance and exact identities before choosing the next move.</p>
+          <aside class="notes">0:04-0:06. Start with why this matters: guessed APIs and stale context waste the next decision even when the answer sounds confident. The benefit is evidence you can inspect. Do not start with parser classes or a graph. Next, run the four real CLI commands and inspect what they return.</aside>
         </section>
 
-        <section id="weather" class="image-slide" data-chapter="Healthy native context">
+        <section id="live-cli" class="live-slide" data-chapter="Know what's true." data-purpose="proof">
+          <h2>Ask the CLI, not your memory.</h2>
+          <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Run the Aspire CLI directly <span>Docs and exact C# references</span></figcaption><pre data-label="Direct Aspire documentation and API commands"><code class="language-bash">aspire docs search "Configure tracked browser" --format Json
+aspire docs get browser-logs --section "Configure browser logs" --format Json
+aspire docs api search WithBrowserLogs --language csharp --format Json
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
+          <p class="large-copy">A real section. An exact member. An inspectable answer.</p>
+          <p class="source-line">These identities were returned by the public CLI. Follow your current search results. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Direct-command runbook</a>.</p>
+          <aside class="notes">0:06-0:12. Show useful output before the machinery. Share a real terminal using the preselected public CLI on its process-local PATH; no PowerShell script is required. Search returns browser-logs. The selected Configure browser logs section explains runtime configuration without restarting the AppHost. API search returns the exact C# member ID; get has no language flag. Inspect actual content, not just a name-only hit. WithBrowserLogs is an experimental documented extra, not wired into the weather app. The later Stay current chapter explains how that guide reached the CLI. Prior captures are not live results.</aside>
+        </section>
+
+        <section id="api-code" data-chapter="Know what's true." data-purpose="proof">
+          <h2>An exact member, not a plausible guess.</h2>
+          <div class="code-pair">
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Actual CLI member response <span>JSON selected fields</span></figcaption><pre data-label="Verified returned C# member identity"><code class="language-json">{
+  "id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs",
+  "name": "WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)",
+  "language": "csharp",
+  "kind": "member"
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="file"></span>Member Markdown route <span>Actual TypeScript excerpt</span></figcaption><pre data-label="C# reference Markdown rendering"><code class="language-typescript">return markdownResponse(
+  renderCSharpMemberKindMarkdown(
+    routeProps.pkg,
+    routeProps.type,
+    routeProps.memberKind,
+    routeProps.allTypes,
+    base
+  )
+);</code></pre></figure>
+          </div>
+          <p>The response identifies the member and returns its reference content. The renderer preserves that identity in published Markdown.</p>
+          <p class="source-line"><a href="https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode">Actual returned member</a> / <a href="https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts">reference renderer</a>. Selected fields, not fabricated output.</p>
+          <aside class="notes">0:12-0:14. First point to the actual returned identity and signature, then the small supporting renderer excerpt. The full get response also contains content, source URL, experimental diagnostic, parameters, and CDP remarks; these selected JSON fields are a recorded public CLI response, not a new live capture. Get follows the returned ID without a language flag. We have shown the payoff before the next compiler diagram. Narrative-doc ranking is a different index.</aside>
+        </section>
+
+        <section id="api-index" class="diagram-slide" data-chapter="Know what's true." data-purpose="machinery">
+          <h2>Compiler facts become exact CLI references.</h2>
+          <div data-diagram="api"></div>
+          <p class="diagram-caption"><span data-icon="file"></span> DLL + XML + available PDB &rarr; Roslyn canonical model &rarr; C# reference Markdown &rarr; separate API lookup.</p>
+          <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p>
+          <aside class="notes">0:14-0:17. Now explain the machinery behind the member we just retrieved. DLL metadata and XML docs feed Roslyn; available PDB source information enriches the model. Generated reference Markdown and its sitemap feed the separate CLI API index. Keep all three fan-in ports distinct. Do not attribute the narrative DocsIndexService weights to this API index.</aside>
+        </section>
+
+        <section id="index" data-chapter="Know what's true." data-purpose="machinery">
+          <h2>Fetch current text. Reuse unchanged work.</h2>
+          <div class="code-pair">
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>C# excerpt</span></figcaption><pre data-label="Conditional document HTTP request" data-line-numbers><code class="language-csharp">using var request = new HttpRequestMessage(
+    HttpMethod.Get, url);
+if (!string.IsNullOrEmpty(cachedETag))
+{
+    request.Headers.IfNoneMatch.Add(
+        new EntityTagHeaderValue(cachedETag));
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>C# excerpts</span></figcaption><pre data-label="Corpus fingerprint and parser cache" data-line-numbers><code class="language-csharp">var currentFingerprint =
+    SourceContentFingerprint.Compute(
+        content, IndexSchemaVersion);
+
+await _docsCache.SetIndexAsync(
+    [.. documents], cancellationToken)
+    .ConfigureAwait(false);</code></pre></figure>
+          </div>
+          <p>The narrative-docs path obtains the cached ETag, reuses matching fingerprints, and parses only when needed. Default corpus: <code>llms-full.txt</code>.</p>
+          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45">ETag source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210">cache/index source</a>. Selected lines, wrapped for display.</p>
+          <aside class="notes">0:17-0:19. Switch explicitly from compiler-derived API references to narrative documentation. ETags and content/schema fingerprints are different reuse boundaries. The omitted branch checks the cached fingerprint before parsing; the excerpt does not imply unconditional rebuilding. This is current published context reused efficiently, not embeddings or training.</aside>
+        </section>
+
+        <section id="parser" data-chapter="Know what's true." data-purpose="machinery">
+          <h2>The parser knows fences.</h2>
+          <figure class="code-panel"><figcaption><span data-icon="code"></span>LlmsTxtParser.cs <span>C# source excerpt</span></figcaption><pre data-label="Fence-aware document and section parser" data-line-numbers><code id="parser-code" class="language-csharp">var span = content.AsSpan();
+var codeBlocks = FindCodeBlockRegions(span);
+
+// Find all document boundaries (line indices where H1 headers start)
+var docBoundaries = FindDocumentBoundaries(span, codeBlocks);
+
+// Find all section headings (H2+) using the pre-computed fence regions
+// passed down from ParseAsync.
+var sectionStarts = FindSectionHeadings(docSpan, codeBlocks);</code></pre></figure>
+          <span class="fragment code-step" data-code="parser-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="parser-code" data-lines="7-9" data-fragment-index="1" aria-hidden="true"></span>
+          <p>Headings inside code fences must not split the document.</p>
+          <p class="source-line">Inspect the actual C# parser excerpt in <a href="https://github.com/IEvangelist/inside-aspire/tree/main/docs/code">docs/code</a>. The rehearsal uses Aspire's parser, not a clone.</p>
+          <aside class="notes">0:19-0:21. The retrieved section depends on correct boundaries. This is a verbatim real-parser excerpt at the retained source pin, not a replacement implementation. Advance to show fence regions protecting both H1 document boundaries and H2+ sections. The purpose is reliable evidence, not a parser lecture disconnected from the command we ran.</aside>
+        </section>
+
+        <section id="lexical" data-chapter="Know what's true." data-purpose="machinery">
+          <h2>Find the relevant narrative section.</h2>
+          <div class="code-and-copy">
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Actual narrative-doc weights</span></figcaption><pre data-label="Weighted narrative documentation ranking"><code class="language-csharp">private const float TitleWeight = 10.0f;
+private const float SummaryWeight = 8.0f;
+private const float HeadingWeight = 6.0f;
+private const float CodeWeight = 5.0f;
+private const float BodyWeight = 1.0f;</code></pre></figure>
+            <div><p><code>Configure browser logs</code></p><p>Rank prose and sections, then retrieve the content. This is not the separate compiler-derived API index.</p></div>
+          </div>
+          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned narrative weights</a>. Local lexical ranking, not embeddings or model training.</p>
+          <aside class="notes">0:21-0:22. Close Know what's true. We used two distinct evidence paths: exact compiler-derived API identity, and fetched/parsed narrative guidance. These are the current narrative DocsIndexService weights only, not the API catalog's weights or historical blog values. The benefit is a grounded next decision.</aside>
+        </section>
+
+        <section id="act-precisely" class="statement-slide" data-chapter="Act precisely." data-purpose="why">
+          <h2 data-takeaway>Act precisely.</h2>
+          <p class="large-copy" data-why>Writing code isn't operating a system.</p>
+          <p class="big-support">The next move needs an exact target, readiness, and a result you can inspect.</p>
+          <aside class="notes">0:22-0:24. Transition with the identical second point: Act precisely. Code generation alone cannot tell you which process is running, whether it is healthy, or what the operation changed. Start with this consequence, then prove scoped actions and observable results in the healthy app. Do not introduce a synthetic failure.</aside>
+        </section>
+
+        <section id="weather" class="image-slide" data-chapter="Act precisely." data-purpose="proof">
           <h2>Start with a healthy app.</h2>
           <figure>
             <img class="proof-image image-for-dark" src="/inside-aspire/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
             <img class="proof-image image-for-light" src="/inside-aspire/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
             <figcaption>Actual native app and Madison map. Rehearsal capture; conditions change. Provider attribution retained. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
           </figure>
-          <aside class="notes">0:10-0:20. Switch out of the slides to the prepared application and VS Code repository. If installed, code . opens the workspace; do not compile during the talk. Show demo/host/apphost.cs, demo/Weather.Api/Program.cs, and demo/frontend/src. Use endpoints returned by Aspire. Search Madison, inspect the forecast and map, and keep provider attribution visible. This image is an actual native-artifact rehearsal capture, not a fabricated UI. The following graph explains the resource model; the editor shows the real source.</aside>
+          <aside class="notes">0:24-0:32. Prove the benefit before opening the architecture. Switch to the prepared app, VS Code, and real terminal; code . is optional if installed. Use the exact demo/host/apphost.cs target with direct Aspire start/wait/describe/otel commands from the runbook. Show returned endpoints, Madison search, the forecast/map, and a weather trace/log; keep provider attribution visible. Open demo/Weather.Api/Program.cs and demo/frontend/src only as needed. The displayed image is a prior actual native-artifact capture, not live output. Do not compile, add browser logs, or manufacture a repair during this demo.</aside>
         </section>
 
-        <section id="compiler" class="diagram-slide" data-chapter="Native runtime graph">
+        <section id="skills-vs-tools" data-chapter="Act precisely." data-purpose="machinery">
+          <h2>Guidance chooses. The CLI executes.</h2>
+          <div class="contrast">
+            <div><h3>Skill</h3><p>File-based instructions that guide workflow and tool choice.</p><code>aspire-monitoring/SKILL.md</code><p>A skill selects the observation; it does not replace the tool.</p></div>
+            <div><h3>CLI tool</h3><p>Executable operations that return current evidence.</p>
+              <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Actual scoped operations <span>PowerShell terminal</span></figcaption><pre data-label="Verified public readiness, state, and telemetry commands"><code class="language-powershell">aspire wait api --apphost 'demo\host\apphost.cs' --status healthy --timeout 120 --non-interactive
+aspire describe --apphost 'demo\host\apphost.cs' --format Json --non-interactive
+aspire otel traces api --apphost 'demo\host\apphost.cs' --format Json --non-interactive</code></pre></figure>
+            </div>
+          </div>
+          <p class="source-line">Public CLI 13.6.1. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p>
+          <aside class="notes">0:32-0:35. Define skill versus CLI/tool before listing skill names. The skill tells the agent which exact observation or action is appropriate; the CLI executes it and returns facts. These wait/describe/otel flags and AppHost target were verified against the public 13.6.1 contracts and existing rehearsal. Use the real output already shown, not an invented response card. MCP history is optional after the main close.</aside>
+        </section>
+
+        <section id="skills" data-chapter="Act precisely." data-purpose="machinery">
+          <h2>Skills choose the next move.</h2>
+          <div class="skills-list">
+            <div><h3><span data-icon="code"></span>Route and create</h3><code>aspire</code><code>aspire-init</code><code>aspireify</code><code>aspire-project-v2-migration</code></div>
+            <div><h3><span data-icon="terminal"></span>Run and inspect</h3><code>aspire-orchestration</code><code>aspire-monitoring</code><code>aspire-deployment</code></div>
+          </div>
+          <p><code>aspire-orchestration</code> selects the exact start/wait target. <code>aspire-monitoring</code> selects the logs and traces that ground the next decision.</p>
+          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md">CLI generation, provenance, and profile side effects</a></p>
+          <aside class="notes">0:35-0:37. Now name the shipped skills using the definitions just given. Inspect the complete installed trees and the actual named orchestration/monitoring guidance. Do not rerun agent init or mutate this presenter's profile. The public CLI generated the unchanged seven trees on an ephemeral runner. Their purpose is precise app workflow, not autonomous ownership of every documentation boundary.</aside>
+        </section>
+
+        <section id="compiler" class="diagram-slide" data-chapter="Act precisely." data-purpose="machinery">
           <h2>Know which process is native.</h2>
           <div data-diagram="runtime"></div>
           <p class="diagram-caption"><span data-icon="cpu"></span> Native CLI and API. Managed C# AppHost. Browser React. Node only for frontend development/build.</p>
-          <aside class="notes">Use this architecture graph alongside the actual VS Code app/source demo. The CLI and weather API are native executables; the C# AppHost and .NET dashboard have separate runtimes. DCP owns process orchestration. React runs in the browser and Vite is Node for development. Native compilation, generated-JSON inspection, and compatibility proof are pre-talk preparation in the repository/runbook, not audience build/test slides. Show returned endpoints and observed telemetry in the real terminal/dashboard rather than an embedded imitation.</aside>
+          <aside class="notes">0:37-0:40. Explain the process model behind the app we just operated. The Aspire CLI and weather API are native executables; the C# AppHost and dashboard are managed. DCP owns process orchestration. React is in the browser and Vite uses Node for development/build, not the API runtime. Native compilation and compatibility proof remain pre-talk preparation. Do not replace this distinction with a startup or memory benchmark.</aside>
         </section>
 
-        <section id="lifecycle" data-chapter="Resource model">
+        <section id="lifecycle" data-chapter="Act precisely." data-purpose="machinery">
           <h2>Wire an executable, not a fallback.</h2>
           <figure class="code-panel"><figcaption><span data-icon="code"></span>demo/host/apphost.cs <span>C# source excerpt</span></figcaption><pre data-label="AppHost native executable wiring" data-line-numbers><code id="apphost-code" class="language-csharp">var api = builder.AddExecutable("api", executable, nativeDirectory)
     .WithHttpEndpoint(env: "PORT")
@@ -136,31 +269,33 @@ builder.AddViteApp("frontend",
           <span class="fragment code-step" data-code="apphost-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
           <span class="fragment code-step" data-code="apphost-code" data-lines="7-12" data-fragment-index="1" aria-hidden="true"></span>
           <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo/host/apphost.cs">Actual AppHost</a>: excerpt omits surrounding configuration. Dynamic ports, readiness, references, and OTLP are explicit.</p>
-          <aside class="notes">0:18-0:20. Advance once to focus the native resource, then the Vite relationship. The AppHost's missing-artifact check stops with a prep command rather than silently switching to a managed API. Source lines are excerpted with surrounding environment/health chains omitted; the full file is linked. Only the actual executable supplies native evidence.</aside>
+          <aside class="notes">0:40-0:42. Open the existing resource-model source, not build instructions. Advance to focus the actual executable and then the Vite relationship. Dynamic endpoints, health, waits, and OTLP make scope inspectable. The missing-artifact guard refuses a managed fallback; preparation happened before the talk. Source excerpts omit surrounding configuration, which remains linked.</aside>
         </section>
 
-        <section id="skills" data-chapter="Shipped skills in action">
-          <h2>Skills choose the next move.</h2>
-          <div class="skills-list">
-            <div><h3><span data-icon="code"></span>Route and create</h3><code>aspire</code><code>aspire-init</code><code>aspireify</code><code>aspire-project-v2-migration</code></div>
-            <div><h3><span data-icon="terminal"></span>Run and inspect</h3><code>aspire-orchestration</code><code>aspire-monitoring</code><code>aspire-deployment</code></div>
-          </div>
-          <p><code>aspire-orchestration</code> selects the exact start/wait target. <code>aspire-monitoring</code> selects the logs and traces that ground the next decision.</p>
-          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md">CLI generation, provenance, and profile side effects</a></p>
-          <aside class="notes">0:20-0:24. Inspect the installed skills rather than a custom AGENTS.md approximation. Invoke aspire-orchestration for the exact AppHost, then aspire-monitoring for telemetry. The trees were generated by the public CLI on an ephemeral Actions runner, not by modifying this presenter's profile. No optional browser-log experiments or MCP installation are required for the baseline.</aside>
+        <section id="the-loop" class="diagram-slide" data-chapter="Act precisely." data-purpose="machinery">
+          <h2>Reason. Act precisely. Observe.</h2>
+          <div data-diagram="inner"></div>
+          <p class="diagram-caption"><span data-icon="terminal"></span> Advance to trace skills &rarr; CLI &rarr; resources &rarr; evidence &rarr; next decision.</p>
+          <aside class="notes">0:42-0:44. Close Act precisely by tracing the MAIN inner loop we have just proved. Skills guide the agent, the native CLI retrieves/discovers/waits/acts, the AppHost runs resources, and observed results ground the next decision. This is the executable evidence/control hub, not just a documentation pipeline. Keep all endpoint-gated edges and the final return leg. Next ask how those current facts move with product changes.</aside>
         </section>
 
-        <section id="skills-vs-tools">
-          <h2>Separate skills, CLI, and MCP.</h2>
-          <div class="contrast">
-            <div><h3>Skill</h3><p>File-based instructions that guide workflow and tool choice.</p><code>aspire-monitoring/SKILL.md</code></div>
-            <div><h3>CLI tool</h3><p>Executable operations that return current evidence.</p><code>aspire otel traces</code><code>aspire docs search</code></div>
-          </div>
-          <p class="source-line">MCP is a tool protocol. This rehearsal uses the CLI directly.</p>
-          <aside class="notes">0:24-0:26. Guidance and execution are separate. A skill is not a docs cache, an embedding service, or a model fine-tune. The docs services have reusable consumers; MCP was an earlier surface, while today's proof uses the CLI. We explicitly opted out of MCP during the skill generation.</aside>
+        <section id="stay-current" class="statement-slide" data-chapter="Stay current." data-purpose="why">
+          <h2 data-takeaway>Stay current.</h2>
+          <p class="large-copy" data-why>Correct today can be stale tomorrow.</p>
+          <p class="big-support">Features change. Runtime evidence and reviewed guidance must travel back into the next decision.</p>
+          <aside class="notes">0:44-0:46. Start the third benefit with why. A good answer is not permanently good context. Runtime observations and reviewed product documentation must feed the next decision as the system changes. This is not model training, a merge guarantee, or unattended production automation. Show the browser feature's value before its provenance and policy machinery.</aside>
         </section>
 
-        <section id="evidence" data-chapter="Supporting docs supply">
+        <section id="browser-evidence" data-chapter="Stay current." data-purpose="proof">
+          <h2>Make browser behavior observable.</h2>
+          <p class="identifier"><code>WithBrowserLogs</code></p>
+          <blockquote>Console output, exceptions, network events, and screenshots become evidence.</blockquote>
+          <p>Configure the tracked browser at runtime. The reviewed guide is the same current section we retrieved earlier.</p>
+          <p class="source-line">Experimental <code>ASPIREBROWSERLOGS001</code> in <code>Aspire.Hosting.Browsers</code>. A documented extra capability, not wired into this weather app.</p>
+          <aside class="notes">0:46-0:48. First show why this feature-level change is useful: browser diagnostics reach the child browser resource's console log stream, and screenshots are command artifacts. Product PR 16531 adds the runtime configuration dialog and optional persistence, not the initial creation of every browser-logs capability. The earlier direct CLI section retrieval already exposed those semantics. WithBrowserLogs remains experimental and is not enabled in our unchanged weather app. Now follow how the guide became current.</aside>
+        </section>
+
+        <section id="evidence" data-chapter="Stay current." data-purpose="proof">
           <div class="heading-with-brand"><h2>Browser evidence has a visible trail.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
           <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>A runtime browser-configuration feature becomes a complete, maintainer-refined guide.</figcaption></figure>
           <ol class="evidence-chain">
@@ -169,19 +304,29 @@ builder.AddViteApp("frontend",
             <li><a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a><span>Bot draft, maintainer refinement, merge</span></li>
             <li><a href="https://aspire.dev/integrations/devtools/browser-logs.md">browser-logs.md</a><span>Published guide, retrieved by the CLI</span></li>
           </ol>
-          <aside class="notes">0:26-0:29. Product PR 16531 adds the Configure tracked browser dashboard command and runtime settings/persistence; it did not create all browser-logs functionality. The successful existing run 25092695241 generated docs PR 775, whose body links both. A maintainer moved the guide and corrected resource scope, naming, configuration precedence, and process sharing before merging. This is the supporting context supply story, not the whole CLI inner loop. No production dispatch or synthetic repair.</aside>
+          <aside class="notes">0:48-0:51. Inspect the existing product PR, successful run, linked docs PR, and published guide. PR 775's body links both source PR 16531 and run 25092695241. The real header is a public capture, not reconstructed GitHub UI. This context supply story supports the main CLI inner loop. No production dispatch, fabricated outcome, or synthetic repair.</aside>
         </section>
 
-        <section id="browser-evidence">
-          <h2>Make browser behavior observable.</h2>
-          <p class="identifier"><code>WithBrowserLogs</code></p>
-          <blockquote>Console output, exceptions, network events, and screenshots become evidence.</blockquote>
-          <p>Configure the tracked browser at runtime. Retrieve the reviewed guide before deciding what to enable.</p>
-          <p class="source-line">Experimental <code>ASPIREBROWSERLOGS001</code> in <code>Aspire.Hosting.Browsers</code>. A documented extra capability, not wired into this weather app.</p>
-          <aside class="notes">0:29-0:31. Browser diagnostics flow into the child browser resource's console log stream; screenshots are command artifacts. The product change adds the runtime configuration dialog and optional user-secret persistence. Retrieve Configure browser logs from the actual CLI page. WithBrowserLogs is an experimental API, not a feature already enabled in our healthy NativeAOT app. We do not modify that app or suppress diagnostics during this talk.</aside>
+        <section id="writer" data-chapter="Stay current." data-purpose="proof">
+          <h2>Different skills. Visible human review.</h2>
+          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>Bot-authored guide, then <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">maintainer refinement</a> and merge. The docs repo's <code>doc-writer</code> is a distinct skill.</figcaption></figure>
+          <div class="code-and-copy">
+            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
+  --repo "microsoft/aspire" --json</code></pre></figure>
+            <div><p><code>doc-writer</code> guides documentation authoring. <code>aspire-orchestration</code> and <code>aspire-monitoring</code> guide precise app operations.</p></div>
+          </div>
+          <p class="source-line">Actual refinement commit: moved the guide, corrected scope, configuration precedence, and browser sharing. Nothing is dispatched on stage.</p>
+          <aside class="notes">0:51-0:53. The initial generated commit is bot-authored. David Fowler's 49371cfd refinement explicitly addresses feedback before his merge. There are zero submitted GitHub review records; do not invent a formal-review count. The docs writer is distinct from the CLI-shipped app skills. The old run's artifacts have expired, so read public provenance rather than reconstructing gh-aw outcomes.</aside>
         </section>
 
-        <section id="workflow" data-chapter="Reviewable automation">
+        <section id="docs-supply" class="diagram-slide" data-chapter="Stay current." data-purpose="machinery">
+          <h2>Review and publication supply current facts.</h2>
+          <div data-diagram="outer"></div>
+          <p class="diagram-caption"><span data-icon="review"></span> Human review and deployment are barriers. Published context feeds the CLI, not model weights.</p>
+          <aside class="notes">0:53-0:55. Explain the OUTER supply loop before YAML/write-policy details. The feature moves through proposal, constrained output, human refinement/merge, publication, C# indexing, and CLI retrieval. That is how the context in Know what's true stays current, while runtime results also feed the next precise action. The cycle closes through reviewed change, not retraining or automatic merging.</aside>
+        </section>
+
+        <section id="workflow" data-chapter="Stay current." data-purpose="machinery">
           <div class="heading-with-brand"><h2>Proposals have explicit write boundaries.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
           <div class="workflow-path">
             <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
@@ -210,153 +355,39 @@ safe-outputs:
 }</code></pre></figure>
           </div>
           <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md">Actual run's workflow source</a> &middot; <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub blog explanation</a></p>
-          <aside class="notes">0:31-0:34. YAML fields are real excerpts pinned to the selected run's actual head, 42e77dc9. Intervening policy/branch resolution is omitted; the merged-event guard remains in the full source. JSON contains selected fields from the actual GitHub response for merged docs PR 775. The old run's gh-aw artifacts have expired; we do not reconstruct outcomes. There are zero submitted GitHub review records; the maintainer's explicit refinement commit and merge are the human evidence. Doc-writer and constrained safe outputs remain separate from CLI-shipped app skills.</aside>
+          <aside class="notes">0:55-0:57. Only now open the policy machinery. The relevant YAML is pinned to the exact historical run head, 42e77dc9; merged-event guards and additional policy remain in the full source. Safe outputs constrain proposals, while humans own refinement/merge. JSON shows selected actual GitHub PR fields, not expired gh-aw outcome scores. Keep the centered compile strip and source code left-aligned. Transition directly to the three-point close, not the historical metrics.</aside>
         </section>
 
-        <section id="writer">
-          <h2>Different skills. Visible human review.</h2>
-          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>Bot-authored guide, then <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">maintainer refinement</a> and merge. The docs repo's <code>doc-writer</code> is a distinct skill.</figcaption></figure>
-          <div class="code-and-copy">
-            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
-  --repo "microsoft/aspire" --json</code></pre></figure>
-            <div><p><code>doc-writer</code> guides documentation authoring. <code>aspire-orchestration</code> and <code>aspire-monitoring</code> guide precise app operations.</p></div>
-          </div>
-          <p class="source-line">Actual refinement commit: moved the guide, corrected scope, configuration precedence, and browser sharing. Nothing is dispatched on stage.</p>
-          <aside class="notes">0:34-0:35. Initial commit 6d08e7d6 is bot-authored. David Fowler's 49371cfd commit explicitly addresses feedback and moves the guide to integrations/devtools; he merged it. Do not substitute an invented submitted-review count. The seven shipped application skills and the workflow's doc-writer are distinct. Inspect the existing linked run, not a new dispatch.</aside>
+        <section id="close" class="closing-slide" data-chapter="Aspire makes AI more efficient.">
+          <h2>Aspire makes AI<br />more efficient.</h2>
+          <p class="big-support" data-three-points><span data-takeaway>Know what's true.</span><br /><span data-takeaway>Act precisely.</span><br /><span data-takeaway>Stay current.</span></p>
+          <a class="primary-link" href="https://github.com/IEvangelist/inside-aspire"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="28" height="28" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="28" height="28" alt="" />Get the code <span data-icon="arrowRight"></span></a>
+          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Presenter runbook</a> &middot; <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md">Docs rehearsal</a></p>
+          <aside class="notes">0:57-1:00. End the full 60-minute presentation here. Repeat the identical three benefits: Know what's true. Act precisely. Stay current. The native CLI is the executable evidence and control hub; runtime facts and human-reviewed docs ground the next decision. Aspire makes AI more efficient. No invented savings or training claim. Q&amp;A and networking follow separately. Do not advance into optional appendices as another main topic.</aside>
         </section>
 
-        <section id="docs-supply" class="diagram-slide" data-chapter="Outer context supply loop">
-          <h2>Review and publication supply current facts.</h2>
-          <div data-diagram="outer"></div>
-          <p class="diagram-caption"><span data-icon="review"></span> Human review and deployment are barriers. Published context feeds the CLI, not model weights.</p>
-          <aside class="notes">0:35-0:38. This is the supporting OUTER loop. Advance through proposal, safe output, human review, publication, C# indexing, and CLI context. Shipped skills use that context in the main inner loop; a resulting product change returns through a reviewed PR. The graph visibly closes without skipping people or claiming retraining. Compare it with the CLI inner loop at the start.</aside>
-        </section>
-
-        <section id="index" data-chapter="Current text, efficient reuse">
-          <h2>Fetch current text. Reuse unchanged work.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>C# excerpt</span></figcaption><pre data-label="Conditional document HTTP request" data-line-numbers><code class="language-csharp">using var request = new HttpRequestMessage(
-    HttpMethod.Get, url);
-if (!string.IsNullOrEmpty(cachedETag))
-{
-    request.Headers.IfNoneMatch.Add(
-        new EntityTagHeaderValue(cachedETag));
-}</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>C# excerpts</span></figcaption><pre data-label="Corpus fingerprint and parser cache" data-line-numbers><code class="language-csharp">var currentFingerprint =
-    SourceContentFingerprint.Compute(
-        content, IndexSchemaVersion);
-
-await _docsCache.SetIndexAsync(
-    [.. documents], cancellationToken)
-    .ConfigureAwait(false);</code></pre></figure>
-          </div>
-          <p>The full source obtains the cached ETag, reuses matching fingerprints, and parses only when needed. Default corpus: <code>llms-full.txt</code>.</p>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45">ETag source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210">cache/index source</a>. Selected lines, wrapped for display.</p>
-          <aside class="notes">0:38-0:41. These short actual C# excerpts show conditional HTTP and corpus/index reuse. ETags and schema/content fingerprints are different caching boundaries. The omitted branch checks the cached fingerprint before parsing; do not imply the abbreviated code rebuilds unconditionally. CLI retrieval gets current published facts without a vector database or training step.</aside>
-        </section>
-
-        <section id="parser">
-          <h2>The parser knows fences.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="code"></span>LlmsTxtParser.cs <span>C# source excerpt</span></figcaption><pre data-label="Fence-aware document and section parser" data-line-numbers><code id="parser-code" class="language-csharp">var span = content.AsSpan();
-var codeBlocks = FindCodeBlockRegions(span);
-
-// Find all document boundaries (line indices where H1 headers start)
-var docBoundaries = FindDocumentBoundaries(span, codeBlocks);
-
-// Find all section headings (H2+) using the pre-computed fence regions
-// passed down from ParseAsync.
-var sectionStarts = FindSectionHeadings(docSpan, codeBlocks);</code></pre></figure>
-          <span class="fragment code-step" data-code="parser-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
-          <span class="fragment code-step" data-code="parser-code" data-lines="7-9" data-fragment-index="1" aria-hidden="true"></span>
-          <p>Headings inside code fences must not split the document.</p>
-          <p class="source-line">Inspect the actual C# parser excerpt in <a href="https://github.com/IEvangelist/inside-aspire/tree/main/docs/code">docs/code</a>. The rehearsal uses Aspire's parser, not a clone.</p>
-          <aside class="notes">0:41-0:43. This is a verbatim excerpt of the real C# parser, source lines 140-144 and 464-466 at the pinned Aspire source commit. It is not a replacement parser. Show how the precomputed fence regions protect both document and section boundaries, then return to the terminal.</aside>
-        </section>
-
-        <section id="lexical">
-          <h2>Exact API names deserve exact evidence.</h2>
-          <div class="code-and-copy">
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Actual C# weights at the source pin</span></figcaption><pre data-label="Weighted lexical ranking"><code class="language-csharp">private const float TitleWeight = 10.0f;
-private const float SummaryWeight = 8.0f;
-private const float HeadingWeight = 6.0f;
-private const float CodeWeight = 5.0f;
-private const float BodyWeight = 1.0f;</code></pre></figure>
-            <div><p class="identifier"><code>WithBrowserLogs</code></p><p>The CLI returns a real member ID and its reference content. The agent does not have to invent an API.</p></div>
-          </div>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned weights</a>. Local lexical ranking, not embeddings or model training.</p>
-          <aside class="notes">0:43-0:44. Developers ask for exact names and sections. Describe the current weighted lexical mechanism without copying historical weights from the earlier blog as if they are current contracts. The API index is separate from narrative documentation; the next CLI segment demonstrates both.</aside>
-        </section>
-
-        <section id="live-cli" class="live-slide">
-          <h2>Let the CLI drive the next decision.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Run the Aspire CLI directly <span>Docs and exact C# references</span></figcaption><pre data-label="Direct Aspire documentation and API commands"><code class="language-bash">aspire docs search "Configure tracked browser" --format Json
-aspire docs get browser-logs --section "Configure browser logs" --format Json
-aspire docs api search WithBrowserLogs --language csharp --format Json
-aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
-          <p class="large-copy">Current facts. Targeted actions. Observed results.</p>
-          <p class="source-line">The slug, section, and member ID were returned by the public CLI. Follow your current search results. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Direct-command runbook</a>.</p>
-          <aside class="notes">0:44-0:54. Share a real terminal, using the preselected public CLI on the terminal's process-local PATH. Run these Aspire commands directly; no PowerShell script is required on stage. Search returns browser-logs, get lists its sections, and the selected section explains runtime configuration. API search returns this exact C# member ID; get does not accept a language flag. Inspect logs/state of the already-prepared weather app separately, and explain browser logs as an experimental extra, not already wired. Existing run/PR only; no dispatch. Prior captures are not live results.</aside>
-        </section>
-
-        <section id="api-index" class="diagram-slide" data-chapter="Compiler-derived API evidence">
-          <h2>Compiler facts become exact CLI references.</h2>
-          <div data-diagram="api"></div>
-          <p class="diagram-caption"><span data-icon="file"></span> DLL + XML + available PDB &rarr; Roslyn canonical model &rarr; C# reference Markdown &rarr; separate API lookup.</p>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p>
-          <aside class="notes">0:52-0:54. Continue direct C# API search/get in the same terminal. Only search takes the language option in the public baseline; get follows the returned member ID. DLL metadata and XML docs feed Roslyn; available PDB source information enriches the canonical model. Generated C# reference Markdown feeds the separate CLI API index. Display the actual retrieved member, not an invented API call.</aside>
-        </section>
-
-        <section id="api-code" data-chapter="Exact member, rendered source">
-          <h2>Follow the returned C# member.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Separate API lookup <span>Aspire CLI</span></figcaption><pre data-label="Supported C# API search and get"><code class="language-powershell">aspire docs api search WithBrowserLogs --language csharp --format Json
-# Use the returned member ID.
-aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="file"></span>Member Markdown route <span>Actual TypeScript excerpt</span></figcaption><pre data-label="C# reference Markdown rendering"><code class="language-typescript">return markdownResponse(
-  renderCSharpMemberKindMarkdown(
-    routeProps.pkg,
-    routeProps.type,
-    routeProps.memberKind,
-    routeProps.allTypes,
-    base
-  )
-);</code></pre></figure>
-          </div>
-          <p>The reference site publishes the compiler-derived model. The CLI retrieves the member's actual Markdown, with its identity intact.</p>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts">Actual reference renderer</a>. Only search accepts <code>--language</code>; get follows the returned ID.</p>
-          <aside class="notes">The shown API ID was returned by the actual public CLI search. Follow the current result in the terminal. Never add an unsupported language flag to get. The TypeScript excerpt is the real docs-site renderer, not a pretend local implementation. WithBrowserLogs is an experimental documented capability; this does not change the native demo.</aside>
-        </section>
-
-        <section id="history">
+        <section id="history" data-chapter="Optional appendix" data-appendix="true">
           <h2>Earlier architecture.<br />Current surface.</h2>
           <div class="contrast">
             <div><h3>Personal post</h3><p><code>llms-small.txt</code> and MCP-first list/search/get tools.</p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">The C# architecture story</a></div>
             <div><h3>This rehearsal</h3><p><code>llms-full.txt</code>, CLI docs commands, and a separate API-reference index.</p><a href="https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation">Current pinned implementation</a></div>
           </div>
-          <p class="source-line">Reusable fetching, parsing, indexing, and retrieval outlive a particular tool surface.</p>
-          <aside class="notes">0:54-0:55. The personal article explains how the reusable C# services were conceived. Present it as historical context, not a claim that today's corpus still defaults to llms-small or that MCP is required. The public pinned code and executed CLI supply current evidence.</aside>
+          <p class="source-line">Optional appendix. Reusable fetching, parsing, indexing, and retrieval outlive a particular tool surface.</p>
+          <aside class="notes">Optional appendix, outside the 60-minute presentation. Use only for a follow-up question about the earlier MCP-first design. The personal article explains history, not today's corpus default or CLI contract. MCP is a protocol, not an extra main takeaway.</aside>
         </section>
 
-        <section id="historical-evidence">
+        <section id="historical-evidence" data-chapter="Optional appendix" data-appendix="true">
           <h2>Reported documentation outcomes</h2>
           <div class="historical-metrics">
             <p><strong>82</strong><span>feature-docs PRs merged</span></p>
             <p><strong>44.8h</strong><span>median docs time-to-merge</span></p>
           </div>
-          <p>Reported window: May 3-June 2, 2026.<br />Human-reviewed data from the GitHub blog, not a fresh SLA.</p>
-          <p class="source-line"><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">Source and measurement context</a></p>
-          <aside class="notes">0:55-0:56. These are explicitly historical published metrics. Do not claim the automation guarantees them or that we measured current performance. The important design property is visible work plus engineer review, not a headline number.</aside>
+          <p>Reported window: May 3-June 2, 2026.<br />Historical human-reviewed data, not a fresh SLA.</p>
+          <p class="source-line">Optional appendix. <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">Source and measurement context</a></p>
+          <aside class="notes">Optional appendix, outside the 60-minute presentation. These historical cohort metrics are not a promise, a new measurement, the selected PR's duration, or a fourth main point. Keep them after the emotional close and show only if relevant to a separate question.</aside>
         </section>
 
-        <section id="close" class="closing-slide">
-          <h2>Aspire makes AI<br />more efficient.</h2>
-          <p class="big-support">Current evidence.<br />Targeted CLI operations.<br />More precise next decisions.</p>
-          <a class="primary-link" href="https://github.com/IEvangelist/inside-aspire"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="28" height="28" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="28" height="28" alt="" />Get the code <span data-icon="arrowRight"></span></a>
-          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Presenter runbook</a> &middot; <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md">Docs rehearsal</a></p>
-          <aside class="notes">0:56-1:00. End on the user's central payoff: Aspire makes AI more efficient. The executable CLI hub supplies exact APIs, runtime model/state, precise lifecycle actions, and observed results. Docs automation supplies current context, and humans guard publication. No invented savings benchmark or model-training claim. Leave time for questions.</aside>
-        </section>
-
-        <section id="sources" class="sources-slide">
+        <section id="sources" class="sources-slide" data-chapter="Optional appendix" data-appendix="true">
           <h2>Sources and reuse</h2>
           <div class="source-columns">
             <div><h3>Real loop</h3>
@@ -373,7 +404,7 @@ aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions
               <p><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md">Actual portrait, official GitHub artwork, Octicons, and code-excerpt provenance</a></p>
             </div>
           </div>
-          <aside class="notes">Appendix. Public citations and notices. No full articles are reproduced. Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement. The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</aside>
+          <aside class="notes">Optional appendix, outside the 60-minute presentation. Public citations and notices remain accessible without interrupting the close. Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement. The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</aside>
         </section>
       </div>
     </main>

@@ -111,7 +111,10 @@ function syncControls() {
   previousButton.disabled = index === 0 && (reading || !deck.availableFragments().prev);
   nextButton.disabled = index === slides.length - 1 && (reading || !deck.availableFragments().next);
   menu.querySelectorAll('[data-slide]').forEach((link) => {
-    link.setAttribute('aria-current', link.getAttribute('data-slide') === currentId ? 'step' : 'false');
+    const current = link.hasAttribute('data-core-chapter')
+      ? link.getAttribute('data-core-chapter') === slide?.dataset.chapter
+      : link.getAttribute('data-slide') === currentId;
+    link.setAttribute('aria-current', current ? 'step' : 'false');
   });
   if (slide) focusCode(slide, reading || reducedMotion.matches || printMode);
   if (!reading) {
@@ -251,9 +254,12 @@ window.addEventListener('resize', () => {
 });
 window.addEventListener('hashchange', (event) => {
   if (!window.location.hash.startsWith('#/')) return;
-  const id = decodeURIComponent(window.location.hash.slice(2).split('/')[0]);
-  if (reading || Object.hasOwn(slideAliases, id)) {
-    // Natural reading pages own their DOM offsets instead of Reveal's fixed-height hash navigation.
+  const [slideId, fragment] = window.location.hash.slice(2).split('/');
+  const id = decodeURIComponent(slideId);
+  const directSlideJump = !printMode && fragment === undefined && id !== currentId;
+  if (reading || Object.hasOwn(slideAliases, id) || directSlideJump) {
+    // Plain jumps start at the first step; normal Back and explicit fragment hashes keep Reveal's restoration.
+    // Reading pages own their DOM offsets instead of Reveal's fixed-height hash navigation.
     event.stopImmediatePropagation();
     goTo(id);
   }

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=23;
+const slideCount=26;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -82,7 +82,7 @@ test('deep links, chapter jumps, theme, reading mode, and keyboard navigation wo
   if(testInfo.project.name!=='mobile') {
     await page.locator('#presentation').click({ position: { x: 20,y: 20 } });
     await page.keyboard.press('ArrowRight');
-    await expect(page).toHaveURL(/#\/skills-vs-tools$/);
+    await expect(page).toHaveURL(/#\/compiler$/);
     await page.keyboard.press('Escape');
     await expect(page.locator('.reveal')).toHaveClass(/overview/);
     await page.keyboard.press('Escape');
@@ -126,7 +126,7 @@ test('reduced motion and printable view are supported',async ({ page },testInfo)
     groups.filter((group) => getComputedStyle(group).visibility==='hidden'||Number(getComputedStyle(group).opacity)<1).length);
   expect(invisible).toBe(0);
   await page.locator('#next').click();
-  await expect(page).toHaveURL(/#\/weather$/);
+  await expect(page).toHaveURL(/#\/stay-current$/);
   if(testInfo.project.name!=='mobile') {
     await page.goto('?print-pdf');
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready','true');
@@ -184,7 +184,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(11);
+  expect(blocks.length).toBe(12);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
     ['bash','csharp','json','powershell','typescript','yaml']);
   for(const block of blocks) {
@@ -194,8 +194,10 @@ test('all remaining explicit code languages produce real tokens, multiple colors
     expect(block.contrast,`${block.language} token contrast`).toBeGreaterThanOrEqual(4.5);
     expect(block.tokenBackgrounds).toEqual(['rgba(0, 0, 0, 0)']);
   }
-  await expect(page.locator('#api-code .language-powershell')).toContainText(
-    'aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json');
+  await expect(page.locator('#api-code .language-json')).toContainText(
+    '"id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs"');
+  await expect(page.locator('#skills-vs-tools .language-powershell')).toContainText(
+    "aspire otel traces api --apphost 'demo\\host\\apphost.cs' --format Json --non-interactive");
   await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
   await expect(page.locator('#apphost-code .code-line')).toHaveCount(12);
 });

@@ -100,6 +100,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .chapter-list { display: grid; gap: 4px; }
 .chapter-list a { display: flex; align-items: center; gap: 14px; padding: 12px; min-height: 48px; color: var(--ink); border-radius: 8px; text-decoration: none; font-size: 15px; }
 .chapter-list a:hover, .chapter-list a[aria-current='step'] { background: var(--surface); color: var(--accent); }
+.direct-jumps { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; }
+.direct-jumps a { min-height: 44px; padding: 8px; gap: 8px; font-size: 13px; }
+.direct-jumps .octicon { width: 20px; height: 20px; }
 .menu-controls { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 16px; margin-top: 18px; }
 .menu-controls button, .menu-controls a { display: flex; align-items: center; gap: 10px; padding: 12px; border: 0; font-size: 13px; text-decoration: none; color: var(--ink); min-height: 48px; border-radius: 8px; }
 .menu-controls button:hover, .menu-controls a:hover { background: var(--surface); }
@@ -189,11 +192,10 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .reveal figcaption { margin-top: 18px; font-size: 20px; line-height: 1.55; color: var(--secondary); }
 .code-and-copy { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
 .route-list { display: flex; flex-wrap: wrap; gap: 20px 34px; margin-top: 36px; color: var(--secondary); }
-.thesis-path { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 28px; align-items: start; margin: 55px 0 40px; }
+.thesis-path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; align-items: start; margin: 45px 0 32px; }
 .thesis-path > div { padding-top: 20px; }
 .thesis-path strong { display: block; font-size: 32px; font-weight: 500; line-height: 1.3; margin-top: 20px; }
 .thesis-path .octicon { width: 36px; height: 36px; color: var(--accent); }
-.thesis-path > [data-icon] { margin-top: 60px; }
 .thesis-path p { font-size: 26px; color: var(--secondary); }
 .diagram-slide h2 { font-size: 54px; margin-bottom: 22px; }
 .architecture-svg { display: block; width: 100%; max-height: 540px; overflow: visible; }
@@ -296,7 +298,6 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
   :root[data-reading='true'] .reveal .source-line, :root[data-reading='true'] .reveal figcaption { font-size: 17px; }
   :root[data-reading='true'] .reveal .identifier { font-size: 30px; overflow-wrap: anywhere; }
   :root[data-reading='true'] .reveal .thesis-path { grid-template-columns: 1fr; gap: 4px; margin: 25px 0; }
-  :root[data-reading='true'] .thesis-path > [data-icon] { display: none; }
   :root[data-reading='true'] .thesis-path strong { font-size: 27px; margin-top: 10px; }
   :root[data-reading='true'] .thesis-path p { font-size: 22px; }
 }

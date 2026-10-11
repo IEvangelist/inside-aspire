@@ -1,8 +1,10 @@
 # Inside Aspire: The Architecture Behind the AI Loop
 
-The public talk repository for Wisconsin .NET UG, November 17, 2026 at 6pm Central. The 60-minute session follows a healthy NativeAOT weather app and a real, human-reviewed documentation loop.
+The public talk repository for Wisconsin .NET UG, November 17, 2026 at 6pm Central. All 60 minutes are presentation time; Q&A and networking are separate.
 
 **[Open the live deck](https://ievangelist.github.io/inside-aspire/)** | [Presenter runbook](docs/RUNBOOK.md) | [Public abstract](docs/ABSTRACT.md) | [Source pins](docs/SOURCES.md)
+
+**Aspire makes AI more efficient.** The talk drives home three benefits: **Know what's true. Act precisely. Stay current.** Each chapter starts with why it matters, proves it through direct CLI/app or reviewed-doc evidence, then explains the machinery. The opening action reaches the three-point roadmap; optional history, metrics, and sources follow the main close.
 
 ## What is here
 
@@ -53,6 +55,8 @@ node .\deck\node_modules\vite\bin\vite.js preview deck --host 127.0.0.1 --port 4
 ```
 
 Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys present; `Esc` opens overview; `R` switches reading mode; `T` switches theme; `S` opens speaker notes. Chapter links and slide IDs are stable. Phones default to scrolling. The Print control opens reveal.js's printable view. Reduced motion and light/dark modes are supported.
+
+The deck has 26 slides: 23 in the main presentation, then three optional appendices. The menu's core links are `#/know-truth`, `#/act-precisely`, and `#/stay-current`; useful direct demos and existing hashes remain available. `#/live-cli` and the actual member response now appear before the compiler/parser explanation. Skill/tool definitions precede the shipped-skill names, and the outer docs supply graph precedes detailed workflow policy.
 
 ## The actual AI loop
 

@@ -49,7 +49,7 @@ for (const theme of ['light', 'dark'] as const) {
           checked++;
         }
       }
-      expect(checked).toBe(11);
+      expect(checked).toBe(12);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
     });

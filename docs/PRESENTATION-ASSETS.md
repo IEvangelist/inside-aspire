@@ -48,7 +48,7 @@ The deck explicitly labels snippets as excerpts, selected fields, or commands. L
 - The live-command slide contains actual, copyable `aspire docs search/get` and `aspire docs api search/get` commands. Slug `browser-logs`, section `Configure browser logs`, and the exact experimental `WithBrowserLogs` member ID were returned by public CLI 13.6.1. [Evidence and scope](evidence/browser-logs.json) distinguish this documented extra capability from the unchanged native app.
 - API Markdown TypeScript: the [actual compiler-derived C# member route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts).
 
-The lean audience deck has 11 code blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core plus explicit C#, PowerShell, shell, YAML, JSON, and TypeScript modules, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Tokens have deliberate light/dark colors; inline-code backgrounds do not leak onto individual syntax tokens.
+The deck has 12 code blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core plus explicit C#, PowerShell, shell, YAML, JSON, and TypeScript modules, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Tokens have deliberate light/dark colors; inline-code backgrounds do not leak onto individual syntax tokens.
 
 Soft wrapping leaves literal/copied source text intact. The panel header stays fixed outside the scrollable code body, and the body grows to the rounded panel bottom. Only a line explicitly requiring preserved horizontal layout uses `data-preserve-layout`; its accessible body scrolls without clipping content or introducing token/line/page scrollbars.
 
@@ -77,3 +77,11 @@ Rendered connector checks measure all 32 routes across both themes, projector/as
 **Start presentation** goes to the second slide, `thesis`; chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
 
 The original 1440x1000 native captures are unchanged. Presentation uses a larger 580px proportional image footprint instead of a 500px contain box; reading uses full available width. The image's box matches its actual painted aspect, so increasing layout space increases real map/weather content rather than blank side bands. PR header captures also retain their intrinsic aspect and full available width. Rendered tests measure painted area, not a CSS size string, and preserve attribution and viewport containment.
+
+## Three benefits, proof before internals
+
+The opening roadmap, chapter entries, and main close repeat **Know what's true. Act precisely. Stay current.** Why-first copy is visible on the three entries, not only in notes. The selected CLI member JSON at `api-code` matches the actual public response's `id`, `name`, `language`, and `kind`; it precedes the compiler/API diagram. The TypeScript renderer excerpt remains supporting source, and narrative-doc weights are explicitly separate from the API catalog.
+
+The added three-command operations excerpt uses the existing exact `demo\host\apphost.cs` target for `wait`, `describe`, and `otel traces`. Public CLI 13.6.1 help and the recorded app rehearsal verify the flags. It sits with the skill/tool definition after the healthy-app proof, not on a new build/test slide. AppHost/parser/renderer/workflow excerpts, native screenshots, PR captures, and all connector geometry remain intact.
+
+The 26-slide order has 23 timed main slides and three optional appendices after the close. Notes cover exactly 60 presentation minutes with Q&A/networking separate. No approved abstract, runtime, skill tree, brand asset, or public evidence chain changed.
