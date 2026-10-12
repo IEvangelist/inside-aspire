@@ -280,7 +280,7 @@ test('prompt-free command/output copy and one bottom-aligned output scroller sta
   expect(geometry.tokenOverflow).toBe('visible');
   await pre.focus();
   await page.keyboard.press('ArrowRight');
-  expect(await pre.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+  await expect.poll(() => pre.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
   expect(await terminal.locator('figcaption').boundingBox()).toEqual(header);
   expect(await pre.locator('code').textContent()).toBe(fixture);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
