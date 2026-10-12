@@ -1,8 +1,8 @@
 # Recorded CLI command and result replay
 
 The command/result surfaces are **recorded CLI runs**, not commands executed by
-GitHub Pages. The presenter chooses Next/Back. One advance gives a 180ms replay
-cue and a 420ms expansion; these authored durations are illustrative motion,
+GitHub Pages. The presenter chooses Next/Back. One advance gives a 180ms pause
+and a 420ms expansion; these authored durations are illustrative motion,
 not CLI latency, a progress estimate, or a performance benchmark. No browser
 bridge, backend, new animation dependency, or command autoplay is used.
 
@@ -14,9 +14,12 @@ SHA256 digests were retained in gitignored capture artifacts. Every displayed
 run exited zero and had its useful semantic output checked before publication.
 
 [Public-safe capture provenance](evidence/cli-replay.json) links the complete
-public stdout/stderr files and records their hashes. Each visible result is
-labeled either complete stdout or an exact bounded excerpt. JSON content-field
-excerpts are explicitly identified rather than presented as a made-up response.
+public stdout/stderr files and records their hashes. Each panel renders the
+entire existing public-safe stdout, not selected fields or decoded Markdown.
+All six `--format Json` commands display complete, parseable JSON with the
+original array/object shape; Markdown remains an escaped `content` string.
+The wait result remains genuine plaintext. Only one final newline is omitted
+from the displayed/copied text; no values or capture files are changed.
 The prompt decoration is outside the copyable command text.
 
 | Command surface | Actual recorded evidence |
@@ -26,8 +29,8 @@ The prompt decoration is outside the copyable command text.
 | `api-search` | The unique C# `WithBrowserLogs` member ID, signature, language, kind, parent, summary, and score |
 | `api-member` | Get followed that returned ID without `--language`, including the experimental diagnostic, parameters, source, and browser/CDP remarks |
 | `runtime-wait` | Actual `api` readiness on the exact `demo\host\apphost.cs` target; the resource was already healthy after start, so its reported `0.0s` is recorded output, not an animation/performance claim |
-| `runtime-state` | Actual description of the API as an Executable, Running, Healthy resource; the complete response does not claim every resource was healthy |
-| `runtime-traces` | Actual nonempty telemetry after a successful Madison weather request through the native API, including a successful `GET /api/weather` trace and four spans |
+| `runtime-state` | All six safe resource records, including the Executable/Running/Healthy API, NotStarted installer, and Unhealthy frontend; the response does not claim every resource was healthy |
+| `runtime-traces` | Both actual traces after a successful Madison weather request through the native API: the health trace and successful `GET /api/weather` trace with all four spans |
 
 The runtime capture reused the prepared Windows x64 artifact. Its PE32+ x64
 format and absent CLR header were checked, and its SHA256 is recorded. No
@@ -72,12 +75,19 @@ fragment links and normal Back restore the correct state.
 
 Interruption, theme changes, and viewport changes cancel or settle the short
 sequence. No delayed callback can show a response on another slide. The command
-remains anchored while its result pane expands. Output scrolling belongs to
-one complete body at the bottom of the rounded terminal, never to syntax tokens
-or a separate middle gutter.
+remains anchored while its result pane expands to a bounded height. Its fixed
+header continuously says **Recorded CLI run**, and source/proof links remain.
+There is no visible status/excerpt row or reserved space for one; short polite
+status announcements use the existing visually hidden accessibility style.
+Output scrolling belongs to one complete body at the bottom of the rounded
+terminal, never to the command, wrapper, syntax tokens, or a separate middle
+gutter. Long JSON strings wrap without truncation or smaller projector type.
+The output region is keyboard-focusable and supports keyboard, wheel, and
+touch scrolling to the final record.
 
 Reading, print, and reduced-motion modes expose the recorded commands and
-results immediately across their consecutive surfaces. Without JavaScript,
-the static commands, excerpts, and complete-capture links remain readable;
+results immediately across their consecutive surfaces. Reading and print
+expand the full output naturally, so print cannot clip scroll-hidden lines.
+Without JavaScript, the static commands, complete stdout, and capture links remain readable;
 there is no claim of live execution. Real live demonstrations remain available
 in the runbook's separate direct-terminal commands.

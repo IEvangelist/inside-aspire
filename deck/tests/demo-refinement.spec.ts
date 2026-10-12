@@ -22,7 +22,7 @@ for (const theme of ['light', 'dark'] as const) {
         }
         await expect(page).toHaveURL(/#\/thesis$/);
         await expect(page.locator('#thesis h2')).toBeInViewport();
-        await expect(page.locator('#slide-position')).toHaveText('2 / 32');
+        await expect(page.locator('#slide-position')).toHaveText('2 / 41');
         const bounds = await page.locator('#thesis h2').boundingBox();
         const toolbar = await page.locator('.toolbar').boundingBox();
         expect(bounds!.y).toBeGreaterThanOrEqual(toolbar!.y + toolbar!.height - 1);
@@ -139,10 +139,10 @@ test('feature story preserves real links, experimental scope, and explicit maint
   await expect(page.locator('#browser-evidence .notes')).toContainText('child browser resource');
   const audience = await page.locator('section[id]').allTextContents();
   expect(audience.join('\n')).not.toMatch(/19478|33887017276|1619|human_reviews|outcome_status|Show-DocsLoop\.ps1/);
-  await expect(page.locator('section[id]')).toHaveCount(32);
+  await expect(page.locator('section[id]')).toHaveCount(41);
 });
 
-test('three-point audience surfaces render coherently in one desktop/mobile visual batch', async ({ page }, testInfo) => {
+test('three-area audience surfaces render coherently in one desktop/mobile visual batch', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One bounded desktop/mobile/theme capture batch is sufficient.');
   for (const layout of [
     { width: 1280, height: 720, theme: 'dark', mode: 'present' },
@@ -153,8 +153,9 @@ test('three-point audience surfaces render coherently in one desktop/mobile visu
     await page.goto(`?theme=${layout.theme}&mode=${layout.mode}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await page.evaluate(() => document.fonts.ready);
-    for (const id of ['thesis', 'know-truth', 'live-cli', 'api-code', 'act-precisely', 'weather',
-      'skills-vs-tools', 'stay-current', 'docs-supply', 'close']) {
+    for (const id of ['thesis', 'ai-loops', 'live-cli', 'api-code', 'act-precisely', 'weather',
+      'skills-vs-tools', 'stay-current', 'docs-supply', 'dashboard', 'dashboard-integrated',
+      'dashboard-standalone', 'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'close']) {
       await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
       const slide = page.locator(`#${id}`);
       await expect(slide.locator('h1,h2').first()).toBeInViewport();

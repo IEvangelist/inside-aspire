@@ -1,7 +1,7 @@
 {
   "cliVersion": "13.6.1",
   "cliRelease": "https://github.com/microsoft/aspire/releases/tag/v13.6.1",
-  "interpretation": "Recorded CLI runs, not browser execution. Cue/expansion duration is illustrative, not command performance.",
+  "interpretation": "Recorded CLI runs, not browser execution. Expansion duration is illustrative, not command performance.",
   "captureOptions": "Commands executed with capture-only --nologo; docs/API capture also uses --non-interactive. These do not replace semantic output validation.",
   "formatting": "ANSI CSI formatting removed if present; CRLF normalized to LF. Runtime JSON indented for readability with explicit redactions; no other field values invented or changed.",
   "attribution": [
@@ -41,9 +41,7 @@
       "rawStderrSha256": "534a449b6d098a8c2ab2fd87dea6818a53f4449aeaccc9f5851355ff5c2edd1f",
       "publicStdoutSha256": "e580475226dca111a594262ce855c02b9d29fc07d604aa10a6fc806e74d7d195",
       "publicStderrSha256": "eb25b76b648bfa81a3de83843062a86aff29642261da03118ee3ef461892fc18",
-      "excerpt": "[\n  {\n    \"title\": \"Browser logs\",\n    \"slug\": \"browser-logs\",\n    \"content\": \"Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.\",\n    \"section\": \"Add browser logs to a resource\",\n    \"score\": 172.43004\n  },",
       "outputLanguage": "json",
-      "excerptLabel": "First returned record; exact stdout lines 1-8",
       "redactions": []
     },
     {
@@ -68,9 +66,7 @@
       "rawStderrSha256": "534a449b6d098a8c2ab2fd87dea6818a53f4449aeaccc9f5851355ff5c2edd1f",
       "publicStdoutSha256": "1cee97af265e2aa894ac74257ae6e638b4a261d52fb5ff27d52e09131244d16a",
       "publicStderrSha256": "eb25b76b648bfa81a3de83843062a86aff29642261da03118ee3ef461892fc18",
-      "excerpt": "## Configure browser logs\n\nThe **Configure tracked browser** command opens an interactive settings dialog directly in the Aspire dashboard. Use it to adjust the browser session at runtime without restarting the AppHost.",
-      "outputLanguage": "plaintext",
-      "excerptLabel": "First three lines of the actual returned content field",
+      "outputLanguage": "json",
       "redactions": []
     },
     {
@@ -96,9 +92,7 @@
       "rawStderrSha256": "054b424c0755362241326178f3de98c2f43a64c2cecd3238d9103df0872a5cad",
       "publicStdoutSha256": "4fd12432f90777988974b712eb9b6f373009db74a06b1839fb18745d0d141e8f",
       "publicStderrSha256": "74015ccca2c62827b91e841ea2e737db44bda9170034620effbb59d5736359f2",
-      "excerpt": "[\n  {\n    \"id\": \"csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs\",\n    \"name\": \"WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)\",\n    \"language\": \"csharp\",\n    \"kind\": \"member\",",
       "outputLanguage": "json",
-      "excerptLabel": "Exact identity excerpt; stdout lines 1-6",
       "redactions": []
     },
     {
@@ -122,9 +116,7 @@
       "rawStderrSha256": "054b424c0755362241326178f3de98c2f43a64c2cecd3238d9103df0872a5cad",
       "publicStdoutSha256": "24613db706da2bdc18b4ee4b172e0c5700c229867fa1775540fe1b85abd511e7",
       "publicStderrSha256": "74015ccca2c62827b91e841ea2e737db44bda9170034620effbb59d5736359f2",
-      "excerpt": "## WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)\n\n> **Experimental:** ASPIREBROWSERLOGS001 - [Learn more](https://aspire.dev/diagnostics/aspirebrowserlogs001/)",
-      "outputLanguage": "plaintext",
-      "excerptLabel": "Exact member heading and experimental diagnostic from returned content",
+      "outputLanguage": "json",
       "redactions": []
     },
     {
@@ -150,9 +142,7 @@
       "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "publicStdoutSha256": "87c299b44340e7cf221e571b38383bb36a318919230a04baf99e7f1279a57350",
       "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "excerpt": "Waiting for resource 'api' to be healthy...\n\n✅ Resource 'api' is healthy. (0.0s)",
       "outputLanguage": "plaintext",
-      "excerptLabel": "Complete captured stdout; API was already healthy after start",
       "redactions": []
     },
     {
@@ -175,9 +165,7 @@
       "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "publicStdoutSha256": "d1f68544545973ac6d6aae6eaca05b6137b327a0496d7c69b900027b09aea3f4",
       "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "excerpt": "      \"name\": \"api-kewwzmak\",\n      \"displayName\": \"api\",\n      \"resourceType\": \"Executable\",\n      \"state\": \"Running\",\n      \"creationTimestamp\": \"2026-10-12T11:24:41+00:00\",\n      \"startTimestamp\": \"2026-10-12T11:24:41.8+00:00\",\n      \"source\": \"Weather.Api.exe\",\n      \"healthStatus\": \"Healthy\",",
       "outputLanguage": "json",
-      "excerptLabel": "Exact API-record excerpt; complete response privacy-redacted",
       "redactions": [
         "dashboardUrl",
         "local filesystem path",
@@ -206,12 +194,11 @@
       "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "publicStdoutSha256": "5f02cc236561208be1eb565e0aa17135a9e574c2f2d19e81c6fedccf5b519ff1",
       "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "excerpt": "    \"traceId\": \"7e37e007d193c9d60fa813ee5f4df1ca\",\n    \"durationMs\": 523,\n    \"title\": \"GET /api/weather\",\n    \"spans\": [\n      {\n        \"traceId\": \"7e37e007d193c9d60fa813ee5f4df1ca\",\n        \"spanId\": \"d5cdad39eba8b8fe\",\n        \"kind\": \"Server\",\n        \"name\": \"GET /api/weather\",\n        \"source\": \"api\",\n        \"destination\": \"localhost:62869\",\n        \"durationMs\": 523,\n        \"timestamp\": \"2026-10-12T11:24:44.6316734Z\",\n        \"attributes\": {",
       "outputLanguage": "json",
-      "excerptLabel": "Exact successful weather-trace excerpt; full sanitized response linked",
       "redactions": [
         "dashboardUrl"
       ]
     }
-  ]
+  ],
+  "displayFormatting": "Every panel renders complete public-safe stdout. Only the final newline is omitted in HTML; complete JSON envelopes/arrays and escaped content strings remain intact."
 }

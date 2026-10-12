@@ -2,19 +2,17 @@ type ReplayPanel = {
   section: HTMLElement;
   panel: HTMLElement;
   response: HTMLElement;
-  cue: HTMLElement;
   step: HTMLElement;
   expanded: boolean;
 };
 
-export function createReplayController(root: HTMLElement) {
+export function createReplayController(root: HTMLElement, announcement: HTMLElement) {
   const panels: ReplayPanel[] = [...root.querySelectorAll<HTMLElement>('[data-cli-replay]')].map((panel) => {
     const section = panel.closest<HTMLElement>('section');
     const response = panel.querySelector<HTMLElement>('.replay-response');
-    const cue = panel.querySelector<HTMLElement>('.replay-cue');
     const step = section?.querySelector<HTMLElement>('.replay-step');
-    if (!section || !response || !cue || !step) throw new Error('Recorded CLI surface is incomplete.');
-    return { section, panel, response, cue, step, expanded: false };
+    if (!section || !response || !step) throw new Error('Recorded CLI surface is incomplete.');
+    return { section, panel, response, step, expanded: false };
   });
   let pending: { panel: ReplayPanel; timer?: number; animation?: Animation } | undefined;
 
@@ -23,22 +21,20 @@ export function createReplayController(root: HTMLElement) {
     window.clearTimeout(pending.timer);
     pending.animation?.cancel();
     pending = undefined;
+    announcement.textContent = '';
   }
 
   function settle(record: ReplayPanel, expanded: boolean) {
     record.expanded = expanded;
     record.response.hidden = !expanded;
     record.panel.dataset.replayPhase = expanded ? 'complete' : 'command';
-    record.cue.textContent = expanded
-      ? 'Captured output / exit 0. Recorded CLI run, not live execution.'
-      : 'Recorded CLI run. Next replays its captured output.';
   }
 
   function play(record: ReplayPanel) {
     record.expanded = true;
     record.response.hidden = true;
     record.panel.dataset.replayPhase = 'cue';
-    record.cue.textContent = 'Replaying captured output... Illustrative timing.';
+    announcement.textContent = 'Replaying the recorded response.';
     const task: { panel: ReplayPanel; timer?: number; animation?: Animation } = { panel: record };
     pending = task;
     task.timer = window.setTimeout(() => {
@@ -54,6 +50,7 @@ export function createReplayController(root: HTMLElement) {
         if (pending !== task) return;
         pending = undefined;
         settle(record, true);
+        announcement.textContent = 'Complete captured stdout is available. Exit code 0.';
       };
     }, 180);
   }
@@ -67,10 +64,15 @@ export function createReplayController(root: HTMLElement) {
       if (record === activePanel && wanted && !record.expanded && animate && !staticMode) play(record);
       else if (pending?.panel !== record) settle(record, wanted);
     }
+    if (!pending) {
+      announcement.textContent = activePanel && expanded && !staticMode
+        ? 'Complete captured stdout is available. Exit code 0.' : '';
+    }
   }
 
   return { sync, settle: () => {
     cancel();
     for (const record of panels) settle(record, record.expanded);
+    announcement.textContent = '';
   } };
 }

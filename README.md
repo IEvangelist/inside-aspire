@@ -4,7 +4,7 @@ The public talk repository for Wisconsin .NET UG, November 17, 2026 at 6pm Centr
 
 **[Open the live deck](https://ievangelist.github.io/inside-aspire/)** | [Presenter runbook](docs/RUNBOOK.md) | [Public abstract](docs/ABSTRACT.md) | [Source pins](docs/SOURCES.md)
 
-**Aspire makes AI more efficient.** The talk drives home three benefits: **Know what's true. Act precisely. Stay current.** Each chapter starts with why it matters, proves it through direct CLI/app or reviewed-doc evidence, then explains the machinery. The opening action reaches the three-point roadmap; optional history, metrics, and sources follow the main close.
+**Aspire makes AI more efficient.** The user's three primary areas are **AI loops**, **Aspire dashboard**, and **Aspire deployment**. Reviewed product/docs publication supplies the skill-guided developer loop; the dashboard makes outcomes inspectable with an AppHost or independently; deployment carries application intent into configured targets. Each area starts with why, then source-backed proof and machinery. The opening reaches the three-area roadmap; optional history, metrics, and sources follow the main close.
 
 ## What is here
 
@@ -56,15 +56,29 @@ node .\deck\node_modules\vite\bin\vite.js preview deck --host 127.0.0.1 --port 4
 
 Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys present; `Esc` opens overview; `R` switches reading mode; `T` switches theme; `S` opens speaker notes. Chapter links and slide IDs are stable. Phones default to scrolling. The Print control opens reveal.js's printable view. Reduced motion and light/dark modes are supported.
 
-The deck has 32 slides: 29 in the main presentation, then three optional appendices. The menu's core links are `#/know-truth`, `#/act-precisely`, and `#/stay-current`; useful direct demos and existing hashes remain available. One-command/result **Recorded CLI run** surfaces appear before the supporting machinery. Next gives a short replay cue and expands the genuine captured response; Back restores it. This is static-site playback, not live browser execution or a latency benchmark. [Capture proof and controls](docs/CLI-REPLAY.md) link complete public output. Reading/print/reduced-motion expose the pairs immediately. Skill/tool definitions precede the shipped-skill names, and the outer docs supply graph precedes detailed workflow policy.
+The deck has 41 slides: 38 in the full-hour presentation, then three untimed appendices. The core links are `#/ai-loops`, `#/dashboard`, and `#/deployment`; direct demos and legacy hashes remain available. Seven **Recorded CLI run** pairs retain full genuine stdout in one bounded output-only scroller, with no visible status row. Six JSON responses preserve their full envelopes and escaped Markdown strings; wait is plaintext. [Capture proof and controls](docs/CLI-REPLAY.md) link immutable output. Read/print/reduced motion expose pairs immediately; read/print do not clip output. New dashboard/deployment commands are honestly labeled source-backed references, not additional captures or executed infrastructure.
 
-## The actual AI loop
+## The actual AI loops
 
 The supporting trail is [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531), adding tracked-browser runtime configuration -> [successful existing run 25092695241](https://github.com/microsoft/aspire/actions/runs/25092695241) -> [bot-generated, maintainer-refined microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775) -> [published browser-logs.md](https://aspire.dev/integrations/devtools/browser-logs.md).
 
 The direct CLI demonstration follows returned document slugs, sections, and the exact `WithBrowserLogs` C# member ID. The guide explains runtime configuration, child-resource browser diagnostics, and screenshot artifacts. That API is an experimental documented extra, not wired into the unchanged weather app. The existing timeout scripts remain optional historical regressions rather than the audience story. Exit code zero with empty results or missing semantic content is not proof.
 
 This is a published Markdown corpus consumed by a real C# fetcher/parser/index and the CLI. It is not a custom parser recreation, vector database, training step, or instant self-learning. The docs draft crosses human review, merge, and deployment before entering the retrievable corpus. Application skills, the docs repo's `doc-writer`, CLI tools, and MCP are distinct.
+
+That internal product/docs loop feeds the developer cycle: shipped skills ->
+CLI -> current published docs, separate versioned API references and exact
+resource evidence -> scoped operation -> observed results -> next decision.
+Package-version API generation and the narrative corpus are separate; the
+current captures do not prove automatic CLI-semver matching.
+
+The dashboard chapter contrasts the integrated resource service with the
+standalone OTLP viewer and its official container image. The deployment
+chapter uses an explicitly labeled Docker Compose example to separate model,
+publish and deploy. It does not change or deploy the weather AppHost, enable
+anonymous dashboard access, or provision any cloud infrastructure. [Source
+verification and official screenshot hashes](docs/evidence/dashboard-deployment.json)
+retain those boundaries.
 
 On stage we inspect an **existing** agentic workflow run and PR. We do not dispatch production automation or manufacture a failure/repair segment. The [docs-loop guide](docs/DOCS-LOOP.md) distinguishes the earlier personal post's MCP-first/`llms-small.txt` architecture from the current CLI/`llms-full.txt` surface.
 

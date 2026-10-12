@@ -79,4 +79,31 @@ The separate live-provider rehearsal called the native API for Madison, returned
 
 The direct browser-evidence commands were executed with the repository-local public CLI 13.6.1: list/search returned `browser-logs`, get exposed `Configure browser logs`, and section retrieval contained the real runtime dialog, scope/configuration options, persistence, interaction-service requirement, and immediate application. Separate C# API search/get returned the exact `WithBrowserLogs` member, experimental diagnostic, CDP remarks, child-resource log stream, and screenshot artifacts. Only search used `--language`. Raw JSON and captures remain gitignored.
 
-The benefit-led presentation now shows that direct CLI proof and selected actual member-response fields before the compiler/parser explanation. It keeps the narrative `DocsIndexService` lexical weights separate from the compiler-derived API index. The scoped `wait api`, `describe`, and `otel traces api` excerpt uses the unchanged `demo\host\apphost.cs` target; the public 13.6.1 help confirms its resource/target/status/timeout/format flags, and the existing native rehearsal remains the execution evidence. These support **Know what's true. Act precisely. Stay current.**, not new runtime claims or a new native build.
+The user-directed three-area story is **AI loops**, **Aspire dashboard**, and
+**Aspire deployment**. Real product/docs publication feeds the skill-guided
+developer cycle. Direct CLI proof precedes compiler/parser explanation;
+all seven replay panels render complete recorded stdout, while `api-code`
+selects genuine member fields. Narrative lexical weights remain separate from
+the API index. Exact scoped native observations retain their original
+`demo\host\apphost.cs` target and immutable public captures.
+
+## Dashboard, deployment and versioned context
+
+The parent independently verified the current public documentation and
+public CLI 13.6.1 help before these presentation-only additions. No new
+startup, hosting integration, native build, artifact publication, deployment
+or cloud provisioning was executed in this worktree.
+
+| Surface | Verified public source |
+| --- | --- |
+| Integrated dashboard/resource service | [Dashboard overview](https://aspire.dev/dashboard/overview.md); actual official light/dark resource-page assets are self-hosted unchanged |
+| Standalone CLI and OCI image | [Standalone dashboard](https://aspire.dev/dashboard/standalone.md); default authentication retained, loopback port bindings labeled as a safety adaptation |
+| Model/publish/deploy distinctions | [Docker Compose deployment](https://aspire.dev/deployment/docker-compose.md), as an explicit documented example rather than a target selected for the weather demo |
+| Compose environment API | [AddDockerComposeEnvironment source](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101) and [WithDashboard](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180) |
+| Per-package-version API model | [PackageJsonGenerator README](https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md) |
+| Separate current narrative corpus | [Astro configuration](https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs), excluding `reference/api/**` |
+
+[Exact image hashes, source pins, CLI/API shapes and safety boundaries](evidence/dashboard-deployment.json)
+are retained separately from executed CLI replay proof. Release-published docs
+and versioned API generation do not prove automatic CLI-semver matching or
+review-free publication.

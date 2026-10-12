@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('audience deck leaves build/proof/operations to real editor and terminal demos', async ({ page }) => {
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('section[id]')).toHaveCount(32);
+  await expect(page.locator('section[id]')).toHaveCount(41);
   await expect(page.locator('#aot, #native-proof, #commands')).toHaveCount(0);
   const headings = await page.locator('section h2').allTextContents();
   expect(headings).not.toContain('Compile the API. Generate its shapes.');
@@ -17,7 +17,7 @@ test('audience deck leaves build/proof/operations to real editor and terminal de
   await expect(page.locator('#live-cli')).not.toContainText('runtimeIdentifier');
 });
 
-for (const [removed, target] of [['aot', 'compiler'], ['native-proof', 'compiler'], ['commands', 'live-cli'], ['timeout', 'browser-evidence']]) {
+for (const [removed, target] of [['aot', 'compiler'], ['native-proof', 'compiler'], ['commands', 'live-cli'], ['timeout', 'browser-evidence'], ['know-truth', 'ai-loops']]) {
   test(`old ${removed} links resolve to the lean ${target} handoff`, async ({ page }) => {
     await page.goto(`#/${removed}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');

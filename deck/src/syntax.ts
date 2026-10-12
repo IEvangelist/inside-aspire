@@ -61,7 +61,9 @@ export function highlightCode() {
     if (pre) {
       pre.tabIndex = 0;
       pre.setAttribute('role', 'region');
-      pre.setAttribute('aria-label', `${pre.dataset.label ?? language} code excerpt. Scroll horizontally if needed.`);
+      pre.setAttribute('aria-label', pre.classList.contains('replay-output')
+        ? `${pre.dataset.label}. Scroll the complete output if needed.`
+        : `${pre.dataset.label ?? language} code excerpt. Scroll horizontally if needed.`);
     }
   }
 }

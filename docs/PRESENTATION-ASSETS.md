@@ -1,6 +1,6 @@
 # Presentation imagery, code, and motion
 
-The refined deck keeps the approved title, abstract, event, and native facts. Its main thesis is the CLI inner loop: **Aspire makes AI more efficient** by enabling precise decisions from current facts and targeted actions. The supporting feature chain now demonstrates browser runtime configuration and maintainer-refined evidence guidance. No timing, token, or accuracy metric is invented.
+The deck keeps the approved title, abstract, event and native facts. Its payoff is **Aspire makes AI more efficient**, now organized around the user's three areas: **AI loops**, **Aspire dashboard**, **Aspire deployment**. The reviewed product/docs supply loop feeds the skill-guided developer cycle; the dashboard exposes outcomes; a configured deployment model carries intent. No timing, token or accuracy metric is invented.
 
 ## Actual imagery
 
@@ -10,6 +10,7 @@ The refined deck keeps the approved title, abstract, event, and native facts. It
 | Product PR | Genuine browser capture of [microsoft/aspire#16531](https://github.com/microsoft/aspire/pull/16531): title/status/header area, proportionally encoded as WebP. SHA256 `ae29e23535094d9af4a47293ec4694b509fabf8e94ea50a945eb4835dd9f0d8b`. |
 | Docs PR | Genuine browser capture of [microsoft/aspire.dev#775](https://github.com/microsoft/aspire.dev/pull/775): title/status/header area, proportionally encoded as WebP. SHA256 `76cae24c0f55e24de030ab8a0486060ab0502dec9e15f456b6847ab57d5a728c`. |
 | Native map | Existing actual native-artifact Madison captures with public providers and visible attribution. These remain labeled rehearsal captures, not forecast promises. |
+| Integrated dashboard | Original official 2560x800 resource-page screenshots from the published overview, self-hosted unchanged in light/dark themes. Attributed as documentation imagery, not this weather run. Source URLs, byte lengths and SHA256 are in [dashboard/deployment provenance](evidence/dashboard-deployment.json). |
 
 The portrait's downloaded PNG SHA256 is `f6b7c99ff0fa5ded75609eb438bdb53f17a31ac60ef53235eb5d7c6a5fa2d76f`; its WebP SHA256 is `209bc4571c67520bd634df6816654ee137cacbfc4dbe6f949abafbfabf174436`. There is no artificial face crop, generated person, stock headshot, fake terminal, or reconstructed GitHub/dashboard screenshot.
 
@@ -48,7 +49,7 @@ The deck explicitly labels snippets as excerpts, selected fields, or commands. L
 - The live-command slide contains actual, copyable `aspire docs search/get` and `aspire docs api search/get` commands. Slug `browser-logs`, section `Configure browser logs`, and the exact experimental `WithBrowserLogs` member ID were returned by public CLI 13.6.1. [Evidence and scope](evidence/browser-logs.json) distinguish this documented extra capability from the unchanged native app.
 - API Markdown TypeScript: the [actual compiler-derived C# member route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts).
 
-The deck has 24 command/output/source blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core with explicit C#, PowerShell, shell, YAML, JSON, TypeScript, and plain-text stdout, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). It does not auto-detect code or load the all-language plugin. Source/structured output has real tokens; plain stdout remains honest plain text. Contrast and exact copy remain checked in both themes.
+The deck has 30 command/output/source blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core with explicit C#, PowerShell, shell, YAML, JSON, TypeScript and plaintext, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). Existing structured output keeps real tokens and exact copy. The six new dashboard/deployment blocks are clearly source-backed references, not recorded executions or fictional generated output; they introduce no new terminal replay.
 
 Soft wrapping leaves literal/copied source text intact. The panel header stays fixed outside the scrollable code body, and the body grows to the rounded panel bottom. Only a line explicitly requiring preserved horizontal layout uses `data-preserve-layout`; its accessible body scrolls without clipping content or introducing token/line/page scrollbars.
 
@@ -80,7 +81,7 @@ The original 1440x1000 native captures are unchanged. Presentation uses a larger
 
 ## Three benefits, proof before internals
 
-The opening roadmap, chapter entries, and main close repeat **Know what's true. Act precisely. Stay current.** Why-first copy is visible on the three entries, not only in notes. The selected CLI member JSON at `api-code` matches the actual public response's `id`, `name`, `language`, and `kind`; it precedes the compiler/API diagram. The TypeScript renderer excerpt remains supporting source, and narrative-doc weights are explicitly separate from the API catalog.
+The roadmap, primary entries and close repeat the user's **AI loops**, **Aspire dashboard**, **Aspire deployment**. Why-first copy is visible. The earlier benefit phrases support the content, not additional chapters. The selected CLI member JSON still matches genuine `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
 
 The three operations use the existing exact `demo\host\apphost.cs` target for
 `wait`, `describe`, and `otel traces`. Public CLI 13.6.1 was executed against
@@ -92,8 +93,35 @@ records hashes, privacy redactions, native format, and safe runtime cleanup.
 AppHost/parser/renderer/workflow excerpts, native/PR imagery, and connector
 geometry remain intact.
 
-The 32-slide order has 29 timed main slides and three optional appendices after
+The 41-slide order has 38 timed main slides and three optional appendices after
 the close. Notes cover exactly 60 presentation minutes with Q&A/networking
 separate. No approved abstract, runtime source, skill tree, brand asset, or
 verified PR chain changed. Seven genuine captured command/result pairs are
 continuously labeled recorded; no browser command bridge or fake output exists.
+All seven panels render their unchanged, complete public-safe stdout. The six
+JSON responses preserve full envelopes/arrays and escaped Markdown strings,
+not decoded excerpts. The visible status/excerpt rows are removed; the single
+output body owns bounded presentation scrolling while header/command stay
+anchored. Read/print/no-JS show the full response naturally. No capture hashes,
+privacy redactions, command text, native proof, or source imagery changed.
+
+## Dashboard and deployment reference boundaries
+
+Official dashboard screenshot hashes are
+`7e4b0c2cd12c8f64c6d7caadd7d764608b34eab7ea3cd3d7a59547661204ee42`
+(dark) and `f936cd9d38eb12863bb59f122ad4003d7ef32a0364ba1beab2df201f00feefac`
+(light). Images are downloaded unchanged from the overview's public assets,
+not generated UI or new native captures.
+
+The independent dashboard examples preserve browser authentication and use
+explicitly labeled loopback container-port bindings. `latest` is the documented
+mutable public image tag, not a pinned-version claim. Instrumentation/OTLP is
+required; standalone is not automatic AppHost orchestration or unlimited
+production retention. No dashboard command was run here.
+
+Compose is a documented example, not a user-chosen deployment target or a
+change to the weather graph. The public API pattern and placeholder
+publish/deploy references are source-backed and were not executed. Publish
+and deploy are distinct; no generated output is invented. Source pins for
+the versioned API generator, separate narrative corpus, Compose environment
+and dashboard opt-in are in the provenance JSON.

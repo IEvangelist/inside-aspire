@@ -6,7 +6,7 @@ import { expect, test, type Page } from '@playwright/test';
 type CapturedRun = {
   id: string; command: string; arguments: string[]; exitCode: number; capturedAt: string;
   stdout: string; stderr: string; publicStdoutSha256: string; publicStderrSha256: string;
-  rawStdoutSha256: string; rawStderrSha256: string; excerpt: string; outputLanguage: string; excerptLabel: string;
+  rawStdoutSha256: string; rawStderrSha256: string; outputLanguage: string;
 };
 const evidence: { cliVersion: string; native: { format: string; clrHeader: boolean; resource: string;
   sha256: string; stoppedAfterCapture: boolean; fixtureProviders: boolean }; runs: CapturedRun[] } =
@@ -16,6 +16,11 @@ const surfaces = [
   ['api-member', 'api-member'], ['runtime-wait', 'runtime-wait'], ['runtime-state', 'runtime-describe'],
   ['runtime-traces', 'runtime-traces'],
 ] as const;
+
+function completeStdout(run: CapturedRun): string {
+  return readFileSync(resolve('public', 'replays', run.stdout.split('/').at(-1)!), 'utf8')
+    .replace(/\r\n/g, '\n').replace(/\n$/, '');
+}
 
 async function open(page: Page, id: string, theme = 'dark', mode = 'present') {
   await page.goto(`?theme=${theme}&mode=${mode}#/${id}`);
@@ -40,7 +45,8 @@ test('public replay files match capture hashes, exact semantic output, native pr
       expect(createHash('sha256').update(content).digest('hex')).toBe(digest);
       expect(content.toString()).not.toMatch(/\x1b|\b[A-Z]:[\\/]|[?&](?:t|token|api[-_]?key)=/i);
     }
-    expect(run.excerpt.trim().length).toBeGreaterThan(20);
+    expect(completeStdout(run).trim().length).toBeGreaterThan(20);
+    expect(run.outputLanguage).toBe(run.command.includes('--format Json') ? 'json' : 'plaintext');
     expect(run.arguments).toContain('--non-interactive');
     expect(run.arguments).toContain('--nologo');
     if (run.id === 'api-member') expect(run.arguments).not.toContain('--language');
@@ -149,8 +155,8 @@ for (const theme of ['light', 'dark'] as const) {
       const finalAnchor = await command.boundingBox();
       expect(Math.abs(finalAnchor!.x - anchor!.x)).toBeLessThan(0.5);
       expect(Math.abs(finalAnchor!.y - anchor!.y)).toBeLessThan(0.5);
-      expect(await terminal.locator('.replay-output code').textContent()).toBe(record.excerpt);
-      await expect(terminal.locator('.replay-excerpt')).toHaveText(record.excerptLabel);
+      expect(await terminal.locator('.replay-output code').textContent()).toBe(completeStdout(record));
+      await expect(terminal.locator('.replay-cue, .replay-excerpt')).toHaveCount(0);
       const output = await terminal.locator('.replay-output').boundingBox();
       expect(after!.y + after!.height - output!.y - output!.height).toBeLessThanOrEqual(2);
       expect(after!.y + after!.height).toBeLessThanOrEqual(719);
@@ -215,7 +221,8 @@ for (const theme of ['light', 'dark'] as const) {
     test(`all captured pairs are instantly available in ${theme} ${mode}`, async ({ page }, testInfo) => {
       test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit static/theme modes run once.');
       await page.setViewportSize({ width: mode === 'read' ? 390 : 1280, height: mode === 'read' ? 844 : 720 });
-      await page.emulateMedia({ colorScheme: theme, reducedMotion: mode === 'reduce' ? 'reduce' : 'no-preference' });
+      await page.emulateMedia({ colorScheme: theme, media: mode === 'print' ? 'print' : 'screen',
+        reducedMotion: mode === 'reduce' ? 'reduce' : 'no-preference' });
       await page.goto(`?theme=${theme}&${mode === 'print' ? 'print-pdf' : `mode=${mode === 'read' ? 'read' : 'present'}`}`);
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
       for (const [id, runId] of surfaces) {
@@ -224,8 +231,15 @@ for (const theme of ['light', 'dark'] as const) {
         if (mode === 'print') await panel.scrollIntoViewIfNeeded();
         await expect(panel).toHaveAttribute('data-replay-phase', 'complete');
         await expect(panel.locator('.replay-response')).toBeVisible();
-        expect(await panel.locator('.replay-output code').textContent()).toBe(evidence.runs.find((run) => run.id === runId)!.excerpt);
+        expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(evidence.runs.find((run) => run.id === runId)!));
         expect(await panel.locator('.replay-response').evaluate((element) => element.getAnimations().length)).toBe(0);
+        if (mode === 'print' || mode === 'read') {
+          expect(await panel.locator('.replay-output').evaluate((element) =>
+            element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
+          const finalLine = panel.locator('.replay-output .code-line').last();
+          await finalLine.scrollIntoViewIfNeeded();
+          await expect(finalLine).toBeInViewport();
+        }
         if (mode === 'read') {
           const footer = page.locator(`#${id} > .source-line`);
           await footer.scrollIntoViewIfNeeded();
@@ -252,7 +266,11 @@ test('prompt-free command/output copy and one bottom-aligned output scroller sta
   const pre = terminal.locator('.replay-output');
   await expect(pre).toHaveAttribute('role', 'region');
   await expect(pre).toHaveAttribute('tabindex', '0');
-  await expect(terminal.locator('.replay-cue')).toHaveAttribute('aria-live', 'polite');
+  await expect(terminal.locator('.replay-cue, .replay-excerpt')).toHaveCount(0);
+  await expect(page.locator('#replay-status')).toHaveAttribute('aria-live', 'polite');
+  const status = await page.locator('#replay-status').boundingBox();
+  expect(status!.width).toBeLessThanOrEqual(1);
+  expect(status!.height).toBeLessThanOrEqual(1);
   const fixture = 'required-output-'.repeat(90);
   await pre.evaluate((element, text) => {
     element.setAttribute('data-preserve-layout', '');
@@ -294,7 +312,9 @@ test.describe('honest static no-JavaScript fallback', () => {
       const panel = page.locator(`#${id} [data-cli-replay]`);
       await expect(panel.locator('figcaption')).toContainText('Recorded CLI run');
       await expect(panel.locator('.replay-response')).toBeVisible();
-      expect(await panel.locator('.replay-output code').textContent()).toBe(evidence.runs.find((run) => run.id === runId)!.excerpt);
+      expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(evidence.runs.find((run) => run.id === runId)!));
+      expect(await panel.locator('.replay-output').evaluate((element) =>
+        element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
     }
   });
 });

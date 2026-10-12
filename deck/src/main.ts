@@ -36,7 +36,7 @@ const initialTheme = new URL(window.location.href).searchParams.get('theme');
 let explicitTheme = initialTheme === 'dark' || initialTheme === 'light';
 const printMode = new URL(window.location.href).searchParams.has('print-pdf');
 const slides = [...root.querySelectorAll<HTMLElement>('.slides > section[id]')];
-const slideAliases: Record<string, string> = { aot: 'compiler', 'native-proof': 'compiler', commands: 'live-cli', timeout: 'browser-evidence' };
+const slideAliases: Record<string, string> = { aot: 'compiler', 'native-proof': 'compiler', commands: 'live-cli', timeout: 'browser-evidence', 'know-truth': 'ai-loops' };
 const initialView = new URL(window.location.href).searchParams.get('mode');
 const initialSlideId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
 let reading = !printMode && (initialView === 'read' ||
@@ -47,7 +47,7 @@ let readingObserver: IntersectionObserver | undefined;
 renderIcons();
 renderDiagrams();
 highlightCode();
-const replay = createReplayController(root);
+const replay = createReplayController(root, element('replay-status', HTMLSpanElement));
 
 function setTheme(theme: 'dark' | 'light') {
   replay.settle();

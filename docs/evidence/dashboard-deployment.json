@@ -1,0 +1,62 @@
+{
+  "verifiedDate": "2026-10-12",
+  "verification": "Parent-verified public documentation, public CLI 13.6.1 help, and exact published API references. This worktree downloaded only official screenshot assets; no dashboard startup, integration install, native run/build, publish, deploy or cloud provisioning was performed.",
+  "examples": "Documented reference syntax/patterns, not additional recorded CLI runs or fictional generated output. Docker Compose is an illustrative supported target, not a target selected by the user or configured in the weather demo.",
+  "sources": {
+    "dashboard": "https://aspire.dev/dashboard/overview.md",
+    "standalone": "https://aspire.dev/dashboard/standalone.md",
+    "dockerCompose": "https://aspire.dev/deployment/docker-compose.md",
+    "apiGenerator": "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md",
+    "narrativeCorpus": "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs",
+    "composeApi": "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101",
+    "composeDashboardApi": "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180"
+  },
+  "dashboard": {
+    "integrated": "Starting C#/TypeScript AppHosts launches the dashboard connected to the resource service. State, health, console, configuration and lifecycle are separate from instrumented OTLP logs/traces/metrics.",
+    "standalone": "Any instrumented OTLP emitter; no AppHost required. No automatic process orchestration/health/console/lifecycle without a connected resource service. Designed for development and short-term diagnostics, not unlimited production monitoring.",
+    "cli": "aspire dashboard run --non-interactive",
+    "cliForegroundBlocking": true,
+    "cliDefaultPorts": { "ui": 18888, "otlpGrpc": 4317, "otlpHttp": 4318 },
+    "image": "mcr.microsoft.com/dotnet/aspire-dashboard:latest",
+    "imageTag": "Documented mutable public tag, not a pinned release claim.",
+    "containerPorts": { "ui": 18888, "otlpGrpc": 18889, "otlpHttp": 18890 },
+    "examplePortBindings": ["127.0.0.1:18888:18888", "127.0.0.1:4317:18889", "127.0.0.1:4318:18890"],
+    "auth": "Default browser authentication retained. Loopback bindings are an explicitly labeled safety adaptation; no public anonymous access or login tokens are shown.",
+    "screenshots": [
+      {
+        "theme": "dark",
+        "source": "https://aspire.dev/_astro/projects-dark.CVNtxLhf_2p26e0.webp",
+        "file": "/inside-aspire/dashboard/projects-dark.webp",
+        "sha256": "7e4b0c2cd12c8f64c6d7caadd7d764608b34eab7ea3cd3d7a59547661204ee42",
+        "bytes": 61264,
+        "width": 2560,
+        "height": 800
+      },
+      {
+        "theme": "light",
+        "source": "https://aspire.dev/_astro/projects-light.C2KKkOZ7_1gdDIh.webp",
+        "file": "/inside-aspire/dashboard/projects-light.webp",
+        "sha256": "f936cd9d38eb12863bb59f122ad4003d7ef32a0364ba1beab2df201f00feefac",
+        "bytes": 61672,
+        "width": 2560,
+        "height": 800
+      }
+    ]
+  },
+  "deployment": {
+    "package": "Aspire.Hosting.Docker",
+    "apiId": "csharp/aspire.hosting.docker/dockercomposeenvironmentextensions/methods#adddockercomposeenvironment",
+    "signature": "AddDockerComposeEnvironment(IDistributedApplicationBuilder, string)",
+    "returns": "IResourceBuilder<DockerComposeEnvironmentResource>",
+    "dashboard": "WithDashboard(bool enabled = true) is an explicit Compose-environment opt-in, not an automatic all-target claim.",
+    "publish": "Generates target artifacts from the configured AppHost. Compose artifact shapes are docker-compose.yaml/.env. Does not build images or apply deployment.",
+    "deploy": "Applies the configured target pipeline from the AppHost model, not an old publish folder; deploys declared resources, not the AppHost process. Compose resolves parameters, builds images and runs Compose up.",
+    "scope": "Reference commands use explicit placeholder paths/environment. Weather AddExecutable/Vite development graph is unchanged and has not been deployed. Cloud targets require appropriate integrations, provider setup/authentication and parameters."
+  },
+  "versionedContext": {
+    "sourcePin": "ce6d2424abb1414a581837605d8c793cfc869fb2",
+    "api": "Package.{version}.json is generated from exact assembly assets using catalog-pinned versions/release feeds.",
+    "narrative": "Reviewed release publication supplies the current llms-full.txt narrative corpus. Astro explicitly excludes reference/api/**.",
+    "cliBoundary": "The existing public 13.6.1 captures retrieve current published corpus/API references; they do not prove automatic matching-semver selection."
+  }
+}

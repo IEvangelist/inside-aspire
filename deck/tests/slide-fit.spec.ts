@@ -18,11 +18,11 @@ for (const theme of ['light', 'dark'] as const) {
     { width: 768, height: 1024, mode: 'read' },
     { width: 790, height: 900, mode: 'read' },
   ] as const) {
-    test(`all 32 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
+    test(`all 41 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
       test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit all-slide/theme matrix runs once.');
       await openDeck(page, theme, viewport.width, viewport.height, viewport.mode);
       const ids = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
-      expect(ids).toHaveLength(32);
+      expect(ids).toHaveLength(41);
       const results = [];
       for (const id of ids) {
         await page.evaluate((slideId) => { window.location.hash = `/${slideId}`; }, id);
@@ -334,7 +334,7 @@ for (const width of [320, 390, 790, 1280]) {
     await page.goto('#/workflow');
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await page.evaluate(() => document.fonts.ready);
-    const result = await page.locator('.workflow-path').evaluate((group) => {
+    const result = await page.locator('#workflow .workflow-path').evaluate((group) => {
       const bounds = group.getBoundingClientRect();
       const slide = group.closest('section')!.getBoundingClientRect();
       const pills = [...group.querySelectorAll('code')].map((pill) => {

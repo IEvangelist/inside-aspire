@@ -2,28 +2,35 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test } from '@playwright/test';
 
-const points = ["Know what's true.", 'Act precisely.', 'Stay current.'];
+const points = ['AI loops', 'Aspire dashboard', 'Aspire deployment'];
 const order = [
-  'intro', 'thesis', 'know-truth', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'api-index', 'index', 'parser', 'lexical',
-  'act-precisely', 'weather', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop',
-  'stay-current', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow', 'close',
+  'intro', 'thesis', 'ai-loops', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow',
+  'stay-current', 'weather', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'act-precisely',
+  'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'api-index', 'index', 'parser', 'lexical',
+  'compiler', 'lifecycle', 'the-loop', 'dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals',
+  'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries', 'close',
   'history', 'historical-evidence', 'sources',
 ];
 const chapters = [
   { point: points[0], why: "A confident answer isn't evidence.",
-    slides: ['know-truth', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'api-index', 'index', 'parser', 'lexical'],
-    purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'machinery', 'machinery'] },
-  { point: points[1], why: "Writing code isn't operating a system.",
-    slides: ['act-precisely', 'weather', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop'],
-    purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
-  { point: points[2], why: 'Correct today can be stale tomorrow.',
-    slides: ['stay-current', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow'],
-    purposes: ['why', 'proof', 'proof', 'proof', 'machinery', 'machinery'] },
+    slides: ['ai-loops', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow',
+      'stay-current', 'weather', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code',
+      'act-precisely', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills',
+      'api-index', 'index', 'parser', 'lexical', 'compiler', 'lifecycle', 'the-loop'],
+    purposes: ['why', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'why', 'proof',
+      'proof', 'proof', 'proof', 'proof', 'proof', 'why', 'proof', 'proof', 'proof',
+      'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
+  { point: points[1], why: "A running process isn't the whole story.",
+    slides: ['dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals'],
+    purposes: ['why', 'proof', 'proof', 'machinery'] },
+  { point: points[2], why: 'Application intent should outlive your laptop.',
+    slides: ['deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries'],
+    purposes: ['why', 'proof', 'proof', 'proof', 'machinery'] },
 ];
 const evidence: { cli: { apiId: string; signature: string } } =
   JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'browser-logs.json'), 'utf8'));
 
-test('exactly three identical benefits drive roadmap, chapter entries, and close', async ({ page }) => {
+test('exactly the user-directed three areas drive roadmap, chapter entries, and close', async ({ page }) => {
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const actualOrder = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
@@ -55,6 +62,9 @@ test('each chapter shows why and concrete proof before its supporting machinery'
   expect(order.indexOf('skills-vs-tools')).toBeLessThan(order.indexOf('skills'));
   expect(order.indexOf('browser-evidence')).toBeLessThan(order.indexOf('evidence'));
   expect(order.indexOf('docs-supply')).toBeLessThan(order.indexOf('workflow'));
+  expect(order.indexOf('workflow')).toBeLessThan(order.indexOf('live-cli'));
+  expect(order.indexOf('the-loop')).toBeLessThan(order.indexOf('dashboard'));
+  expect(order.indexOf('dashboard-signals')).toBeLessThan(order.indexOf('deployment'));
   await expect(page.locator('#index')).toContainText('narrative-docs');
   await expect(page.locator('#lexical')).toContainText('not the separate compiler-derived API index');
   await expect(page.locator('#api-index .notes')).toContainText('Do not attribute the narrative');
@@ -83,7 +93,7 @@ test('speaker notes cover a contiguous full-hour presentation with untimed appen
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const main = await page.locator('section:not([data-appendix]) > .notes').allTextContents();
-  expect(main).toHaveLength(29);
+  expect(main).toHaveLength(38);
   const spans = main.map((note) => {
     const match = note.match(/^(\d):(\d{2})-(\d):(\d{2})\./);
     expect(match, `A main slide is missing its explicit time range: ${note.slice(0, 90)}`).not.toBeNull();
@@ -153,7 +163,7 @@ for (const mode of ['present', 'read'] as const) {
         await expect(page.locator(`#${first} h2`)).toBeInViewport();
         await expect(page.locator(`#${first} [data-why]`)).toBeVisible();
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
-        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 32`);
+        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 41`);
         await page.locator('#next').click();
         await expect(page).toHaveURL(new RegExp(`#/${chapter.slides[1]}(?:/\\d+)?$`));
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);

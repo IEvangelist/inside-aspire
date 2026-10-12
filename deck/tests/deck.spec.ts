@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=32;
+const slideCount=41;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -82,7 +82,7 @@ test('deep links, chapter jumps, theme, reading mode, and keyboard navigation wo
   if(testInfo.project.name!=='mobile') {
     await page.locator('#presentation').click({ position: { x: 20,y: 20 } });
     await page.keyboard.press('ArrowRight');
-    await expect(page).toHaveURL(/#\/compiler$/);
+    await expect(page).toHaveURL(/#\/api-index$/);
     await page.keyboard.press('Escape');
     await expect(page.locator('.reveal')).toHaveClass(/overview/);
     await page.keyboard.press('Escape');
@@ -126,7 +126,7 @@ test('reduced motion and printable view are supported',async ({ page },testInfo)
     groups.filter((group) => getComputedStyle(group).visibility==='hidden'||Number(getComputedStyle(group).opacity)<1).length);
   expect(invisible).toBe(0);
   await page.locator('#next').click();
-  await expect(page).toHaveURL(/#\/stay-current$/);
+  await expect(page).toHaveURL(/#\/dashboard$/);
   if(testInfo.project.name!=='mobile') {
     await page.goto('?print-pdf');
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready','true');
@@ -184,7 +184,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(24);
+  expect(blocks.length).toBe(30);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
     ['bash','csharp','json','plaintext','powershell','typescript','yaml']);
   for(const block of blocks) {

@@ -164,13 +164,13 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .replay-command-line { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: start; }
 .replay-prompt { padding: 20px 0 0 18px; color: var(--accent); font: 22px/1.5 ui-monospace, monospace; }
 .reveal pre.replay-command { flex: none; padding: 20px 20px 12px 10px; border-radius: 0; background: var(--code); overflow: visible; }
-.replay-cue { padding: 4px 18px 12px; color: var(--secondary); font-size: 16px; line-height: 1.4; }
 .replay-response { display: flex; flex-direction: column; min-height: 0; }
 .replay-response[hidden] { display: none; }
-.reveal .replay-excerpt { margin: 0; padding: 10px 18px; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.4; color: var(--secondary); max-width: none; }
-.reveal pre.replay-output { min-height: 0; max-height: 330px; padding: 14px 20px; border-radius: 0 0 10px 10px; }
+.reveal pre.replay-output { min-height: 0; max-height: 330px; padding: 14px 20px; border-top: 1px solid var(--line); border-radius: 0 0 10px 10px; }
+.replay-output .code-line { white-space: break-spaces; }
 .replay-step { position: absolute; width: 0; height: 0; pointer-events: none; }
-:root[data-reading='true'] .reveal pre.replay-output { max-height: none; }
+:root[data-reading='true'] .reveal pre.replay-output,
+.print-pdf .reveal pre.replay-output { max-height: none; }
 @media print { .reveal pre.replay-output { max-height: none; } }
 .code-step { position: absolute; width: 0; height: 0; pointer-events: none; }
 .hljs-keyword, .hljs-selector-tag, .hljs-meta, .hljs-built_in { color: var(--syntax-keyword); }
@@ -242,6 +242,8 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .github-brand img { display: block; width: 100%; height: auto; margin: 0; }
 .pr-image img { display: block; width: 100%; height: auto; border-radius: 10px; background: #fff; }
 .reveal .pr-image figcaption { font-size: 17px; margin-top: 8px; }
+.dashboard-image img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.reveal .dashboard-image figcaption { font-size: 17px; margin-top: 8px; }
 .reveal table { width: 100%; margin: 0; border-collapse: collapse; font-size: 27px; }
 .reveal table th, .reveal table td { padding: 22px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 .reveal table thead th { font-size: 23px; color: var(--secondary); font-weight: 500; }
