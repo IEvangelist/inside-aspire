@@ -4,18 +4,18 @@ import { expect, test } from '@playwright/test';
 
 const points = ["Know what's true.", 'Act precisely.', 'Stay current.'];
 const order = [
-  'intro', 'thesis', 'know-truth', 'live-cli', 'api-code', 'api-index', 'index', 'parser', 'lexical',
-  'act-precisely', 'weather', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop',
+  'intro', 'thesis', 'know-truth', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'api-index', 'index', 'parser', 'lexical',
+  'act-precisely', 'weather', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop',
   'stay-current', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow', 'close',
   'history', 'historical-evidence', 'sources',
 ];
 const chapters = [
   { point: points[0], why: "A confident answer isn't evidence.",
-    slides: ['know-truth', 'live-cli', 'api-code', 'api-index', 'index', 'parser', 'lexical'],
-    purposes: ['why', 'proof', 'proof', 'machinery', 'machinery', 'machinery', 'machinery'] },
+    slides: ['know-truth', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'api-index', 'index', 'parser', 'lexical'],
+    purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'machinery', 'machinery'] },
   { point: points[1], why: "Writing code isn't operating a system.",
-    slides: ['act-precisely', 'weather', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop'],
-    purposes: ['why', 'proof', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
+    slides: ['act-precisely', 'weather', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'compiler', 'lifecycle', 'the-loop'],
+    purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
   { point: points[2], why: 'Correct today can be stale tomorrow.',
     slides: ['stay-current', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow'],
     purposes: ['why', 'proof', 'proof', 'proof', 'machinery', 'machinery'] },
@@ -67,7 +67,7 @@ test('early API response and scoped operations are actual copyable evidence, not
   expect(response).toEqual({ id: evidence.cli.apiId, name: evidence.cli.signature, language: 'csharp', kind: 'member' });
   await expect(page.locator('#api-code .notes')).toContainText('recorded public CLI response');
   await expect(page.locator('#api-code .language-typescript')).toContainText('renderCSharpMemberKindMarkdown');
-  const commands = await page.locator('#skills-vs-tools .language-powershell').textContent();
+  const commands = (await page.locator('#runtime-wait .replay-command code, #runtime-state .replay-command code, #runtime-traces .replay-command code').allTextContents()).join('\n');
   expect(commands).toBe([
     "aspire wait api --apphost 'demo\\host\\apphost.cs' --status healthy --timeout 120 --non-interactive",
     "aspire describe --apphost 'demo\\host\\apphost.cs' --format Json --non-interactive",
@@ -83,7 +83,7 @@ test('speaker notes cover a contiguous full-hour presentation with untimed appen
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const main = await page.locator('section:not([data-appendix]) > .notes').allTextContents();
-  expect(main).toHaveLength(23);
+  expect(main).toHaveLength(29);
   const spans = main.map((note) => {
     const match = note.match(/^(\d):(\d{2})-(\d):(\d{2})\./);
     expect(match, `A main slide is missing its explicit time range: ${note.slice(0, 90)}`).not.toBeNull();
@@ -153,9 +153,9 @@ for (const mode of ['present', 'read'] as const) {
         await expect(page.locator(`#${first} h2`)).toBeInViewport();
         await expect(page.locator(`#${first} [data-why]`)).toBeVisible();
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
-        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 26`);
+        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 32`);
         await page.locator('#next').click();
-        await expect(page).toHaveURL(new RegExp(`#/${chapter.slides[1]}$`));
+        await expect(page).toHaveURL(new RegExp(`#/${chapter.slides[1]}(?:/\\d+)?$`));
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
         await page.locator('#menu-toggle').click();
         await expect(link).toHaveAttribute('aria-current', 'step');

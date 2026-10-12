@@ -1,0 +1,12 @@
+[
+  {
+    "id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs",
+    "name": "WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)",
+    "language": "csharp",
+    "kind": "member",
+    "parentId": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods",
+    "memberGroup": "methods",
+    "summary": "Adds a child resource that can open the application's primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.",
+    "score": 59
+  }
+]

@@ -56,7 +56,7 @@ node .\deck\node_modules\vite\bin\vite.js preview deck --host 127.0.0.1 --port 4
 
 Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys present; `Esc` opens overview; `R` switches reading mode; `T` switches theme; `S` opens speaker notes. Chapter links and slide IDs are stable. Phones default to scrolling. The Print control opens reveal.js's printable view. Reduced motion and light/dark modes are supported.
 
-The deck has 26 slides: 23 in the main presentation, then three optional appendices. The menu's core links are `#/know-truth`, `#/act-precisely`, and `#/stay-current`; useful direct demos and existing hashes remain available. `#/live-cli` and the actual member response now appear before the compiler/parser explanation. Skill/tool definitions precede the shipped-skill names, and the outer docs supply graph precedes detailed workflow policy.
+The deck has 32 slides: 29 in the main presentation, then three optional appendices. The menu's core links are `#/know-truth`, `#/act-precisely`, and `#/stay-current`; useful direct demos and existing hashes remain available. One-command/result **Recorded CLI run** surfaces appear before the supporting machinery. Next gives a short replay cue and expands the genuine captured response; Back restores it. This is static-site playback, not live browser execution or a latency benchmark. [Capture proof and controls](docs/CLI-REPLAY.md) link complete public output. Reading/print/reduced-motion expose the pairs immediately. Skill/tool definitions precede the shipped-skill names, and the outer docs supply graph precedes detailed workflow policy.
 
 ## The actual AI loop
 

@@ -18,11 +18,11 @@ for (const theme of ['light', 'dark'] as const) {
     { width: 768, height: 1024, mode: 'read' },
     { width: 790, height: 900, mode: 'read' },
   ] as const) {
-    test(`all 26 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
+    test(`all 32 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
       test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit all-slide/theme matrix runs once.');
       await openDeck(page, theme, viewport.width, viewport.height, viewport.mode);
       const ids = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
-      expect(ids).toHaveLength(26);
+      expect(ids).toHaveLength(32);
       const results = [];
       for (const id of ids) {
         await page.evaluate((slideId) => { window.location.hash = `/${slideId}`; }, id);

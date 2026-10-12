@@ -1,0 +1,83 @@
+# Recorded CLI command and result replay
+
+The command/result surfaces are **recorded CLI runs**, not commands executed by
+GitHub Pages. The presenter chooses Next/Back. One advance gives a 180ms replay
+cue and a 420ms expansion; these authored durations are illustrative motion,
+not CLI latency, a progress estimate, or a performance benchmark. No browser
+bridge, backend, new animation dependency, or command autoplay is used.
+
+## Genuine evidence
+
+All seven displayed commands were executed with the repository-local public
+Aspire CLI **13.6.1**. stdout, stderr, exit status, arguments, capture time, and
+SHA256 digests were retained in gitignored capture artifacts. Every displayed
+run exited zero and had its useful semantic output checked before publication.
+
+[Public-safe capture provenance](evidence/cli-replay.json) links the complete
+public stdout/stderr files and records their hashes. Each visible result is
+labeled either complete stdout or an exact bounded excerpt. JSON content-field
+excerpts are explicitly identified rather than presented as a made-up response.
+The prompt decoration is outside the copyable command text.
+
+| Command surface | Actual recorded evidence |
+| --- | --- |
+| `live-cli` | Docs search returned the genuine Browser logs title, `browser-logs` slug, summary content, best section, and score; all five results remain in full stdout |
+| `docs-section` | Get returned `Configure browser logs` and the actual runtime configuration dialog semantics |
+| `api-search` | The unique C# `WithBrowserLogs` member ID, signature, language, kind, parent, summary, and score |
+| `api-member` | Get followed that returned ID without `--language`, including the experimental diagnostic, parameters, source, and browser/CDP remarks |
+| `runtime-wait` | Actual `api` readiness on the exact `demo\host\apphost.cs` target; the resource was already healthy after start, so its reported `0.0s` is recorded output, not an animation/performance claim |
+| `runtime-state` | Actual description of the API as an Executable, Running, Healthy resource; the complete response does not claim every resource was healthy |
+| `runtime-traces` | Actual nonempty telemetry after a successful Madison weather request through the native API, including a successful `GET /api/weather` trace and four spans |
+
+The runtime capture reused the prepared Windows x64 artifact. Its PE32+ x64
+format and absent CLR header were checked, and its SHA256 is recorded. No
+managed fallback, source change, or native rebuild was used. The public CLI
+started one exact-target, isolated AppHost, used `aspire wait`, and discovered
+the request endpoint from `aspire describe`. A single actual weather request
+generated the telemetry; no HTTP readiness polling loop was used.
+
+The capture-owned AppHost was stopped with exact-target `aspire stop`, without
+`--force` or `--all`. Post-capture `aspire ps` returned no running AppHosts.
+No global CLI, agent skill tree, native app, or profile configuration was
+modified.
+
+## Formatting and privacy
+
+Capture-only `--nologo` suppressed the banner; docs/API capture also used
+`--non-interactive`. These options do not manufacture a response. ANSI CSI
+formatting is removed if present and CRLF is normalized to LF. No captured
+stdout had ANSI formatting in this run.
+
+Runtime JSON is indented for readability. Dashboard URLs, environment values,
+credential-shaped properties, host/user names, and personal absolute filesystem
+paths are explicitly redacted. No other field values are invented or changed.
+The raw private hashes and distinct public-file hashes document the boundary.
+Raw AppHost start output, dashboard login links, and private environment data
+are never published.
+
+The docs/API captures are short, attributed outputs from the published
+[browser guide](https://aspire.dev/integrations/devtools/browser-logs.md) and
+[generated member reference](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode).
+No whole documentation corpus, blog article, or agent transcript is bundled.
+`WithBrowserLogs` remains experimental and is not enabled in the unchanged
+weather app.
+
+## Controls and static modes
+
+In presentation mode each surface initially shows one real command and no
+result. Next reveals that command's recorded result; the following Next moves
+deliberately to the next related command. Back collapses or returns to the
+matching previous result. Plain jumps reset the surface, while explicit
+fragment links and normal Back restore the correct state.
+
+Interruption, theme changes, and viewport changes cancel or settle the short
+sequence. No delayed callback can show a response on another slide. The command
+remains anchored while its result pane expands. Output scrolling belongs to
+one complete body at the bottom of the rounded terminal, never to syntax tokens
+or a separate middle gutter.
+
+Reading, print, and reduced-motion modes expose the recorded commands and
+results immediately across their consecutive surfaces. Without JavaScript,
+the static commands, excerpts, and complete-capture links remain readable;
+there is no claim of live execution. Real live demonstrations remain available
+in the runbook's separate direct-terminal commands.

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=26;
+const slideCount=32;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -184,19 +184,25 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(12);
+  expect(blocks.length).toBe(24);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
-    ['bash','csharp','json','powershell','typescript','yaml']);
+    ['bash','csharp','json','plaintext','powershell','typescript','yaml']);
   for(const block of blocks) {
     expect(block.highlighted,block.language).toBe('true');
-    expect(block.tokens,block.language).toBeGreaterThan(0);
-    expect(block.colors,block.language).toBeGreaterThanOrEqual(2);
+    if(block.language==='plaintext') {
+      expect(block.tokens).toBe(0);
+      expect(block.colors).toBe(1);
+      expect(block.tokenBackgrounds).toEqual([]);
+    } else {
+      expect(block.tokens,block.language).toBeGreaterThan(0);
+      expect(block.colors,block.language).toBeGreaterThanOrEqual(2);
+      expect(block.tokenBackgrounds).toEqual(['rgba(0, 0, 0, 0)']);
+    }
     expect(block.contrast,`${block.language} token contrast`).toBeGreaterThanOrEqual(4.5);
-    expect(block.tokenBackgrounds).toEqual(['rgba(0, 0, 0, 0)']);
   }
   await expect(page.locator('#api-code .language-json')).toContainText(
     '"id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs"');
-  await expect(page.locator('#skills-vs-tools .language-powershell')).toContainText(
+  await expect(page.locator('#runtime-traces .replay-command code')).toContainText(
     "aspire otel traces api --apphost 'demo\\host\\apphost.cs' --format Json --non-interactive");
   await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
   await expect(page.locator('#apphost-code .code-line')).toHaveCount(12);

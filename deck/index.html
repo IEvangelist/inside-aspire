@@ -31,7 +31,7 @@
       </button>
       <nav class="slide-navigation" aria-label="Slide navigation">
         <button id="previous" class="icon-button" type="button" aria-label="Previous slide or step"><span data-icon="arrowLeft"></span></button>
-        <output id="slide-position" aria-label="Slide 1 of 26">1 / 26</output>
+        <output id="slide-position" aria-label="Slide 1 of 32">1 / 32</output>
         <button id="next" class="next-button" type="button" aria-label="Next slide or step"><span class="desktop-label">Next</span><span data-icon="arrowRight"></span></button>
         <button id="menu-toggle" class="icon-button" type="button" aria-label="Open presentation menu" aria-haspopup="dialog" aria-controls="deck-menu" aria-expanded="false"><span data-icon="menu"></span></button>
       </nav>
@@ -47,6 +47,7 @@
         <a href="#/intro" data-slide="intro"><span data-icon="person"></span><span>Speaker and roadmap</span></a>
         <a href="#/live-cli" data-slide="live-cli"><span data-icon="code"></span><span>Direct docs and API commands</span></a>
         <a href="#/weather" data-slide="weather"><span data-icon="cpu"></span><span>Healthy native app</span></a>
+        <a href="#/runtime-wait" data-slide="runtime-wait"><span data-icon="terminal"></span><span>Recorded native results</span></a>
         <a href="#/skills" data-slide="skills"><span data-icon="book"></span><span>Shipped skills</span></a>
         <a href="#/the-loop" data-slide="the-loop"><span data-icon="terminal"></span><span>The CLI inner loop</span></a>
         <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Reviewed docs trail</span></a>
@@ -105,15 +106,84 @@
           <aside class="notes">0:04-0:06. Start with why this matters: guessed APIs and stale context waste the next decision even when the answer sounds confident. The benefit is evidence you can inspect. Do not start with parser classes or a graph. Next, run the four real CLI commands and inspect what they return.</aside>
         </section>
 
-        <section id="live-cli" class="live-slide" data-chapter="Know what's true." data-purpose="proof">
-          <h2>Ask the CLI, not your memory.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Run the Aspire CLI directly <span>Docs and exact C# references</span></figcaption><pre data-label="Direct Aspire documentation and API commands"><code class="language-bash">aspire docs search "Configure tracked browser" --format Json
-aspire docs get browser-logs --section "Configure browser logs" --format Json
-aspire docs api search WithBrowserLogs --language csharp --format Json
-aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json</code></pre></figure>
-          <p class="large-copy">A real section. An exact member. An inspectable answer.</p>
-          <p class="source-line">These identities were returned by the public CLI. Follow your current search results. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Direct-command runbook</a>.</p>
-          <aside class="notes">0:06-0:12. Show useful output before the machinery. Share a real terminal using the preselected public CLI on its process-local PATH; no PowerShell script is required. Search returns browser-logs. The selected Configure browser logs section explains runtime configuration without restarting the AppHost. API search returns the exact C# member ID; get has no language flag. Inspect actual content, not just a name-only hit. WithBrowserLogs is an experimental documented extra, not wired into the weather app. The later Stay current chapter explains how that guide reached the CLI. Prior captures are not live results.</aside>
+        <section id="live-cli" class="live-slide" data-chapter="Know what&#39;s true." data-purpose="proof">
+          <h2>Find current guidance.</h2>
+          <figure class="cli-terminal" data-cli-replay="docs-search" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded docs-search command"><code class="language-bash">aspire docs search &quot;Configure tracked browser&quot; --format Json</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">First returned record; exact stdout lines 1-8</p>
+              <pre class="replay-output" data-label="Recorded docs-search output"><code class="language-json">[
+  {
+    &quot;title&quot;: &quot;Browser logs&quot;,
+    &quot;slug&quot;: &quot;browser-logs&quot;,
+    &quot;content&quot;: &quot;Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.&quot;,
+    &quot;section&quot;: &quot;Add browser logs to a resource&quot;,
+    &quot;score&quot;: 172.43004
+  },</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/docs-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:06-0:08. Presenter-controlled recorded CLI run, not execution in GitHub Pages. Initially show one real search command. Next gives a short illustrative replay cue and expands the actual captured first-result excerpt; title, slug, content, section and score remain genuine. Full public stdout/stderr and capture proof are linked. No PowerShell script is required on stage. Next after the result moves deliberately to section retrieval; Back returns to the command. Reading/print/reduced motion show both immediately.</aside>
+        </section>
+
+        <section id="docs-section" class="live-slide" data-chapter="Know what&#39;s true." data-purpose="proof">
+          <h2>Read the actual guidance.</h2>
+          <figure class="cli-terminal" data-cli-replay="docs-section" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded docs-section command"><code class="language-bash">aspire docs get browser-logs --section &quot;Configure browser logs&quot; --format Json</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">First three lines of the actual returned content field</p>
+              <pre class="replay-output" data-label="Recorded docs-section output"><code class="language-plaintext">## Configure browser logs
+
+The **Configure tracked browser** command opens an interactive settings dialog directly in the Aspire dashboard. Use it to adjust the browser session at runtime without restarting the AppHost.</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/docs-section.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-section.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:08-0:10. Replay the recorded get for browser-logs and Configure browser logs. The shown Markdown is the actual returned content field, not an invented answer. Point to runtime configuration without restarting the AppHost. The search result had a different best section; this selected heading came from the retrieved document. The full recorded JSON is linked. Timing is illustrative, not CLI latency.</aside>
+        </section>
+
+        <section id="api-search" class="live-slide" data-chapter="Know what&#39;s true." data-purpose="proof">
+          <h2>Find an exact C# member.</h2>
+          <figure class="cli-terminal" data-cli-replay="api-search" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded api-search command"><code class="language-powershell">aspire docs api search WithBrowserLogs --language csharp --format Json</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">Exact identity excerpt; stdout lines 1-6</p>
+              <pre class="replay-output" data-label="Recorded api-search output"><code class="language-json">[
+  {
+    &quot;id&quot;: &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot;,
+    &quot;name&quot;: &quot;WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)&quot;,
+    &quot;language&quot;: &quot;csharp&quot;,
+    &quot;kind&quot;: &quot;member&quot;,</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/api-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:10-0:11. Replay the genuine language-filtered API search. The returned ID and signature identify the experimental WithBrowserLogs member. Show one command and one response, not four commands at once. The linked complete stdout preserves parent/member group, summary and score. This is a recorded baseline run; current live search can be run separately in the real terminal.</aside>
+        </section>
+
+        <section id="api-member" class="live-slide" data-chapter="Know what&#39;s true." data-purpose="proof">
+          <h2>Inspect the member, not a guess.</h2>
+          <figure class="cli-terminal" data-cli-replay="api-member" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded api-member command"><code class="language-bash">aspire docs api get &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot; --format Json</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">Exact member heading and experimental diagnostic from returned content</p>
+              <pre class="replay-output" data-label="Recorded api-member output"><code class="language-plaintext">## WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)
+
+&gt; **Experimental:** ASPIREBROWSERLOGS001 - [Learn more](https://aspire.dev/diagnostics/aspirebrowserlogs001/)</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/api-member.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-member.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:11-0:12. Replay the recorded API get following the exact returned ID; get has no language flag. The actual content heading and ASPIREBROWSERLOGS001 diagnostic are visible, and the complete recorded member response is linked. This is a documented extra capability, not wired into the unchanged weather app. The next slide shows selected identity fields and supporting renderer source before the compiler graph.</aside>
         </section>
 
         <section id="api-code" data-chapter="Know what's true." data-purpose="proof">
@@ -217,7 +287,77 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
             <img class="proof-image image-for-light" src="/inside-aspire/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
             <figcaption>Actual native app and Madison map. Rehearsal capture; conditions change. Provider attribution retained. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
           </figure>
-          <aside class="notes">0:24-0:32. Prove the benefit before opening the architecture. Switch to the prepared app, VS Code, and real terminal; code . is optional if installed. Use the exact demo/host/apphost.cs target with direct Aspire start/wait/describe/otel commands from the runbook. Show returned endpoints, Madison search, the forecast/map, and a weather trace/log; keep provider attribution visible. Open demo/Weather.Api/Program.cs and demo/frontend/src only as needed. The displayed image is a prior actual native-artifact capture, not live output. Do not compile, add browser logs, or manufacture a repair during this demo.</aside>
+          <aside class="notes">0:24-0:28. Prove the benefit before opening the architecture. Switch to the prepared app, VS Code, and real terminal; code . is optional if installed. Use the exact demo/host/apphost.cs target with direct Aspire start/wait/describe/otel commands from the runbook. Show returned endpoints, Madison search, the forecast/map, and a weather trace/log; keep provider attribution visible. Open demo/Weather.Api/Program.cs and demo/frontend/src only as needed. The displayed image is a prior actual native-artifact capture, not live output. Do not compile, add browser logs, or manufacture a repair during this demo.</aside>
+        </section>
+
+        <section id="runtime-wait" class="live-slide" data-chapter="Act precisely." data-purpose="proof">
+          <h2>Wait for the actual native API.</h2>
+          <figure class="cli-terminal" data-cli-replay="runtime-wait" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-wait command"><code class="language-powershell">aspire wait api --apphost &#39;demo\host\apphost.cs&#39; --status healthy --timeout 120 --non-interactive</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">Complete captured stdout; API was already healthy after start</p>
+              <pre class="replay-output" data-label="Recorded runtime-wait output"><code class="language-plaintext">Waiting for resource &#39;api&#39; to be healthy...
+
+✅ Resource &#39;api&#39; is healthy. (0.0s)</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-wait.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-wait.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:28-0:29. Replay actual public CLI wait against the existing isolated AppHost and resource api. The prepared PE32+ executable had no CLR header; no managed fallback or native rebuild was used. The captured API was already healthy after start, so the reported 0.0s is genuine capture text, not an animation duration or readiness benchmark. One Next expands the actual stdout. The capture-owned AppHost was stopped afterward.</aside>
+        </section>
+
+        <section id="runtime-state" class="live-slide" data-chapter="Act precisely." data-purpose="proof">
+          <h2>Inspect what is running.</h2>
+          <figure class="cli-terminal" data-cli-replay="runtime-describe" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-describe command"><code class="language-powershell">aspire describe --apphost &#39;demo\host\apphost.cs&#39; --format Json --non-interactive</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">Exact API-record excerpt; complete response privacy-redacted</p>
+              <pre class="replay-output" data-label="Recorded runtime-describe output"><code class="language-json">      &quot;name&quot;: &quot;api-kewwzmak&quot;,
+      &quot;displayName&quot;: &quot;api&quot;,
+      &quot;resourceType&quot;: &quot;Executable&quot;,
+      &quot;state&quot;: &quot;Running&quot;,
+      &quot;creationTimestamp&quot;: &quot;2026-10-12T11:24:41+00:00&quot;,
+      &quot;startTimestamp&quot;: &quot;2026-10-12T11:24:41.8+00:00&quot;,
+      &quot;source&quot;: &quot;Weather.Api.exe&quot;,
+      &quot;healthStatus&quot;: &quot;Healthy&quot;,</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-describe.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-describe.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:29-0:30. Replay the actual describe command and the exact API-record excerpt: Executable, Running, Healthy. The full public response is linked with explicit environment, dashboard URL and local-path redactions; do not imply every resource was healthy. The raw private stdout hash is recorded in provenance. This is the actual native API capture, not fabricated state or browser execution.</aside>
+        </section>
+
+        <section id="runtime-traces" class="live-slide" data-chapter="Act precisely." data-purpose="proof">
+          <h2>See the request trace come back.</h2>
+          <figure class="cli-terminal" data-cli-replay="runtime-traces" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-traces command"><code class="language-powershell">aspire otel traces api --apphost &#39;demo\host\apphost.cs&#39; --format Json --non-interactive</code></pre></div>
+            <div class="replay-cue" role="status" aria-live="polite">Recorded output below; no browser execution.</div>
+            <div class="replay-response">
+              <p class="replay-excerpt">Exact successful weather-trace excerpt; full sanitized response linked</p>
+              <pre class="replay-output" data-label="Recorded runtime-traces output"><code class="language-json">    &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
+    &quot;durationMs&quot;: 523,
+    &quot;title&quot;: &quot;GET /api/weather&quot;,
+    &quot;spans&quot;: [
+      {
+        &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
+        &quot;spanId&quot;: &quot;d5cdad39eba8b8fe&quot;,
+        &quot;kind&quot;: &quot;Server&quot;,
+        &quot;name&quot;: &quot;GET /api/weather&quot;,
+        &quot;source&quot;: &quot;api&quot;,
+        &quot;destination&quot;: &quot;localhost:62869&quot;,
+        &quot;durationMs&quot;: 523,
+        &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6316734Z&quot;,
+        &quot;attributes&quot;: {</code></pre>
+            </div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-traces.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-traces.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
+          <aside class="notes">0:30-0:32. Replay actual nonempty telemetry after a successful Madison weather request through the native API. The linked response includes the successful GET /api/weather trace and four spans, with real trace IDs and recorded durations. Those numbers are observations, not an animation timing or performance promise. Dashboard URLs are redacted in the public capture. The runtime was stopped safely after this capture; use real current endpoints if demonstrating live separately.</aside>
         </section>
 
         <section id="skills-vs-tools" data-chapter="Act precisely." data-purpose="machinery">
@@ -225,13 +365,11 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
           <div class="contrast">
             <div><h3>Skill</h3><p>File-based instructions that guide workflow and tool choice.</p><code>aspire-monitoring/SKILL.md</code><p>A skill selects the observation; it does not replace the tool.</p></div>
             <div><h3>CLI tool</h3><p>Executable operations that return current evidence.</p>
-              <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Actual scoped operations <span>PowerShell terminal</span></figcaption><pre data-label="Verified public readiness, state, and telemetry commands"><code class="language-powershell">aspire wait api --apphost 'demo\host\apphost.cs' --status healthy --timeout 120 --non-interactive
-aspire describe --apphost 'demo\host\apphost.cs' --format Json --non-interactive
-aspire otel traces api --apphost 'demo\host\apphost.cs' --format Json --non-interactive</code></pre></figure>
+              <code>aspire wait api</code><code>aspire describe</code><code>aspire otel traces api</code>
             </div>
           </div>
           <p class="source-line">Public CLI 13.6.1. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p>
-          <aside class="notes">0:32-0:35. Define skill versus CLI/tool before listing skill names. The skill tells the agent which exact observation or action is appropriate; the CLI executes it and returns facts. These wait/describe/otel flags and AppHost target were verified against the public 13.6.1 contracts and existing rehearsal. Use the real output already shown, not an invented response card. MCP history is optional after the main close.</aside>
+          <aside class="notes">0:32-0:35. Define skill versus CLI/tool before listing skill names. The skill tells the agent which exact observation or action is appropriate; the CLI executes it and returns facts. The preceding dedicated recorded-run surfaces show actual wait/describe/otel outputs from the native app. Define these mechanisms without nesting the animation in a half-width taxonomy column. Captured playback is labeled; live terminal operations remain separate. MCP history is optional after the main close.</aside>
         </section>
 
         <section id="skills" data-chapter="Act precisely." data-purpose="machinery">
@@ -409,7 +547,15 @@ safe-outputs:
       </div>
     </main>
     <p id="deck-status" class="deck-status" role="status" aria-live="polite"></p>
-    <noscript><p>This deck needs JavaScript for presentation controls. All slide text and citations remain readable below the toolbar.</p></noscript>
+    <noscript>
+      <style>
+        .reveal { height: auto; overflow: visible; }
+        .reveal .slides { position: static; width: auto; height: auto; transform: none; }
+        .reveal .slides section { display: block !important; position: static !important; width: auto; height: auto; transform: none !important; opacity: 1; visibility: visible; padding: 28px 24px; }
+        .reveal pre.replay-output { max-height: none; }
+      </style>
+      <p>JavaScript is disabled. These are recorded CLI runs, not live execution. Static commands, captured excerpts, complete-output links, and citations are readable; animations and presentation controls are unavailable.</p>
+    </noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,0 +1,3 @@
+Waiting for resource 'api' to be healthy...
+
+✅ Resource 'api' is healthy. (0.0s)

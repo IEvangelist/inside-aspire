@@ -8,6 +8,7 @@ import '@fontsource/poppins/latin-700.css';
 import { renderIcons } from './icons';
 import { renderDiagrams } from './diagrams';
 import { focusCode, highlightCode } from './syntax';
+import { createReplayController } from './replay';
 import './style.css';
 
 function element<T extends HTMLElement>(id: string, type: { new(): T }): T {
@@ -46,8 +47,10 @@ let readingObserver: IntersectionObserver | undefined;
 renderIcons();
 renderDiagrams();
 highlightCode();
+const replay = createReplayController(root);
 
 function setTheme(theme: 'dark' | 'light') {
+  replay.settle();
   document.documentElement.dataset.theme = theme;
   themeButton.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
 }
@@ -101,7 +104,7 @@ function updateModeControls() {
   document.documentElement.dataset.static = String(reading || reducedMotion.matches || printMode);
 }
 
-function syncControls() {
+function syncControls(animateReplay = false) {
   if (!reading) currentId = deck.getCurrentSlide()?.id ?? currentId;
   const index = slides.findIndex((slide) => slide.id === currentId);
   const slide = document.getElementById(currentId);
@@ -117,6 +120,7 @@ function syncControls() {
     link.setAttribute('aria-current', current ? 'step' : 'false');
   });
   if (slide) focusCode(slide, reading || reducedMotion.matches || printMode);
+  replay.sync(slide ?? undefined, reading || reducedMotion.matches || printMode, animateReplay);
   if (!reading) {
     for (const inactive of root.querySelectorAll<HTMLElement>('section:not(.present)')) {
       inactive.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
@@ -250,6 +254,7 @@ reducedMotion.addEventListener('change', () => {
   syncControls();
 });
 window.addEventListener('resize', () => {
+  replay.settle();
   if (reading) deck.configure({ width: Math.min(root.clientWidth, 1440), height: root.clientHeight });
 });
 window.addEventListener('hashchange', (event) => {
@@ -269,9 +274,9 @@ try {
   updateModeControls();
   await deck.initialize();
   root.removeAttribute('role');
-  deck.on('slidechanged', syncControls);
-  deck.on('fragmentshown', syncControls);
-  deck.on('fragmenthidden', syncControls);
+  deck.on('slidechanged', () => syncControls());
+  deck.on('fragmentshown', () => syncControls(true));
+  deck.on('fragmenthidden', () => syncControls());
   observeReading();
   const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
   if (Object.hasOwn(slideAliases, initialSlideId)) goTo(initialSlideId);

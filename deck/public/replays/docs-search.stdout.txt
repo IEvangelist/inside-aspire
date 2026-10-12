@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Browser logs",
+    "slug": "browser-logs",
+    "content": "Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.",
+    "section": "Add browser logs to a resource",
+    "score": 172.43004
+  },
+  {
+    "title": "Browser app configuration",
+    "slug": "browser-app-configuration",
+    "content": "Configure generic JavaScript browser apps to send OpenTelemetry data to the Aspire dashboard with OTLP HTTP exporters.",
+    "section": "Example browser telemetry code",
+    "score": 119.291626
+  },
+  {
+    "title": "Enable browser telemetry",
+    "slug": "enable-browser-telemetry",
+    "content": "Enable browser telemetry in the Aspire dashboard to capture client-side OpenTelemetry logs, traces, and metrics from front-end JavaScript apps.",
+    "section": "Dashboard configuration",
+    "score": 101.06361
+  },
+  {
+    "title": "Set up Grafana k6 in the Aspire AppHost",
+    "slug": "set-up-grafana-k6-in-the-aspire-apphost",
+    "content": "Configure the Community Toolkit k6 resource in Aspire, including scripts, browser testing, endpoints, health checks, and OpenTelemetry.",
+    "section": "Use a fixed port or browser-enabled image",
+    "score": 73.46021
+  },
+  {
+    "title": "Compiler Error ASPIREBROWSERLOGS001",
+    "slug": "compiler-error-aspirebrowserlogs001",
+    "content": "Learn what causes the Aspire compiler error ASPIREBROWSERLOGS001 and how to fix it so your AppHost builds cleanly.",
+    "section": "To correct this error",
+    "score": 71.18428
+  }
+]

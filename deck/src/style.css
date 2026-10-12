@@ -157,6 +157,21 @@ pre[data-line-numbers] .code-line::before { content: attr(data-line); position: 
 .reveal .code-panel figcaption { flex: none; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; padding: 14px 18px; border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; font-size: 20px; line-height: 1.4; color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
 .code-panel figcaption > span:last-child:not([data-icon]) { font-size: 15px; color: var(--secondary); font-weight: 400; margin-left: auto; }
 .code-panel .octicon { width: 20px; height: 20px; }
+.cli-terminal { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--code); }
+.reveal .cli-terminal figcaption { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 20px; line-height: 1.4; color: var(--ink); }
+.cli-terminal figcaption > span:last-child { margin-left: auto; font-size: 15px; color: var(--secondary); }
+.cli-terminal .octicon { width: 20px; height: 20px; }
+.replay-command-line { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: start; }
+.replay-prompt { padding: 20px 0 0 18px; color: var(--accent); font: 22px/1.5 ui-monospace, monospace; }
+.reveal pre.replay-command { flex: none; padding: 20px 20px 12px 10px; border-radius: 0; background: var(--code); overflow: visible; }
+.replay-cue { padding: 4px 18px 12px; color: var(--secondary); font-size: 16px; line-height: 1.4; }
+.replay-response { display: flex; flex-direction: column; min-height: 0; }
+.replay-response[hidden] { display: none; }
+.reveal .replay-excerpt { margin: 0; padding: 10px 18px; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.4; color: var(--secondary); max-width: none; }
+.reveal pre.replay-output { min-height: 0; max-height: 330px; padding: 14px 20px; border-radius: 0 0 10px 10px; }
+.replay-step { position: absolute; width: 0; height: 0; pointer-events: none; }
+:root[data-reading='true'] .reveal pre.replay-output { max-height: none; }
+@media print { .reveal pre.replay-output { max-height: none; } }
 .code-step { position: absolute; width: 0; height: 0; pointer-events: none; }
 .hljs-keyword, .hljs-selector-tag, .hljs-meta, .hljs-built_in { color: var(--syntax-keyword); }
 .hljs-string, .hljs-regexp { color: var(--syntax-string); }

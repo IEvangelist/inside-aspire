@@ -1,0 +1,267 @@
+{
+  "resources": [
+    {
+      "name": "api-kewwzmak",
+      "displayName": "api",
+      "resourceType": "Executable",
+      "state": "Running",
+      "creationTimestamp": "2026-10-12T11:24:41+00:00",
+      "startTimestamp": "2026-10-12T11:24:41.8+00:00",
+      "source": "Weather.Api.exe",
+      "healthStatus": "Healthy",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [
+        {
+          "type": "Reference",
+          "resourceName": "open-meteo"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "reverse-geocoding"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "geocoding"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "open-meteo"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "reverse-geocoding"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "geocoding"
+        }
+      ],
+      "urls": [
+        {
+          "name": "http",
+          "url": "http://localhost:62869"
+        }
+      ],
+      "volumes": [],
+      "properties": {
+        "executable.args": null,
+        "executable.path": "[redacted local filesystem path]",
+        "executable.pid": 40208,
+        "executable.workDir": "[redacted local filesystem path]",
+        "resource.appArgs": [],
+        "resource.appArgsSensitivity": []
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {
+        "api_http_/health_200_check": {
+          "status": "Healthy"
+        }
+      },
+      "commands": {
+        "restart": {
+          "displayName": "Restart",
+          "description": "Restart resource",
+          "state": "Enabled",
+          "sortOrder": 2
+        },
+        "stop": {
+          "displayName": "Stop",
+          "description": "Stop resource",
+          "state": "Enabled",
+          "sortOrder": 1
+        }
+      }
+    },
+    {
+      "name": "frontend-installer-trmtsfbm",
+      "displayName": "frontend-installer",
+      "resourceType": "Executable",
+      "state": "NotStarted",
+      "source": "npm",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [
+        {
+          "type": "Parent",
+          "resourceName": "frontend-quwryuxr"
+        }
+      ],
+      "urls": [],
+      "volumes": [],
+      "properties": {
+        "executable.args": null,
+        "executable.path": "npm",
+        "executable.pid": null,
+        "executable.workDir": "[redacted local filesystem path]",
+        "resource.appArgs": null,
+        "resource.appArgsSensitivity": null,
+        "resource.parentName": "frontend-quwryuxr"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {},
+      "commands": {
+        "start": {
+          "displayName": "Start",
+          "description": "Start resource",
+          "state": "Enabled",
+          "sortOrder": 0
+        }
+      }
+    },
+    {
+      "name": "frontend-quwryuxr",
+      "displayName": "frontend",
+      "resourceType": "Executable",
+      "state": "Running",
+      "creationTimestamp": "2026-10-12T11:24:42+00:00",
+      "startTimestamp": "2026-10-12T11:24:42.205+00:00",
+      "source": "npm",
+      "healthStatus": "Unhealthy",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [
+        {
+          "type": "WaitFor",
+          "resourceName": "frontend-installer-trmtsfbm"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "api-kewwzmak"
+        },
+        {
+          "type": "WaitFor",
+          "resourceName": "api-kewwzmak"
+        },
+        {
+          "type": "Reference",
+          "resourceName": "api-kewwzmak"
+        }
+      ],
+      "urls": [
+        {
+          "name": "http",
+          "url": "http://localhost:62871"
+        }
+      ],
+      "volumes": [],
+      "properties": {
+        "executable.args": null,
+        "executable.path": "npm",
+        "executable.pid": 14900,
+        "executable.workDir": "[redacted local filesystem path]",
+        "resource.appArgs": [
+          "run",
+          "dev",
+          "--",
+          "--port",
+          "11338"
+        ],
+        "resource.appArgsSensitivity": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "resource.launchConfigurationType": "node"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {
+        "frontend_http_/_200_check": {}
+      },
+      "commands": {
+        "restart": {
+          "displayName": "Restart",
+          "description": "Restart resource",
+          "state": "Enabled",
+          "sortOrder": 2
+        },
+        "stop": {
+          "displayName": "Stop",
+          "description": "Stop resource",
+          "state": "Enabled",
+          "sortOrder": 1
+        }
+      }
+    },
+    {
+      "name": "geocoding",
+      "displayName": "geocoding",
+      "resourceType": "ExternalService",
+      "state": "Running",
+      "source": "geocoding-api.open-meteo.com",
+      "healthStatus": "Healthy",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [],
+      "urls": [
+        {
+          "name": "default",
+          "url": "https://geocoding-api.open-meteo.com/v1/search"
+        }
+      ],
+      "volumes": [],
+      "properties": {
+        "resource.source": "geocoding-api.open-meteo.com"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {
+        "geocoding_external_/v1/search?name=Seattle&count=1&language=en&format=json_200_check": {
+          "status": "Healthy"
+        }
+      },
+      "commands": {}
+    },
+    {
+      "name": "open-meteo",
+      "displayName": "open-meteo",
+      "resourceType": "ExternalService",
+      "state": "Running",
+      "source": "api.open-meteo.com",
+      "healthStatus": "Healthy",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [],
+      "urls": [
+        {
+          "name": "default",
+          "url": "https://api.open-meteo.com/"
+        }
+      ],
+      "volumes": [],
+      "properties": {
+        "resource.source": "api.open-meteo.com"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {
+        "open-meteo_external_/v1/forecast?latitude=0&longitude=0&current=temperature_2m_200_check": {
+          "status": "Healthy"
+        }
+      },
+      "commands": {}
+    },
+    {
+      "name": "reverse-geocoding",
+      "displayName": "reverse-geocoding",
+      "resourceType": "ExternalService",
+      "state": "Running",
+      "source": "api.bigdatacloud.net",
+      "healthStatus": "Healthy",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [],
+      "urls": [
+        {
+          "name": "default",
+          "url": "https://api.bigdatacloud.net/data/reverse-geocode-client"
+        }
+      ],
+      "volumes": [],
+      "properties": {
+        "resource.source": "api.bigdatacloud.net"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {
+        "reverse-geocoding_external_/data/reverse-geocode-client?latitude=0&longitude=0&localityLanguage=en_200_check": {
+          "status": "Healthy"
+        }
+      },
+      "commands": {}
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Browser logs",
+  "slug": "browser-logs",
+  "summary": "Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.",
+  "content": "## Configure browser logs\n\nThe **Configure tracked browser** command opens an interactive settings dialog directly in the Aspire dashboard. Use it to adjust the browser session at runtime without restarting the AppHost.\n\nThe dialog presents the following options:\n* **Scope** — Apply changes to the current resource only, or globally to all browser log resources in the AppHost.\n* **Browser** — Choose a detected Chromium browser (Edge or Chrome) or specify a custom executable path.\n* **User data mode** — `Shared` (cross-AppHost persistent data directory) or `Isolated` (per-AppHost persistent data directory).\n* **Profile** — Select a discovered Chromium profile from the Aspire-managed browser hive (available in `Shared` mode only).\n* **Save to user secrets** — Persist the selected settings to the AppHost’s user secrets so they’re restored on the next run. This option is only shown when the AppHost project has a user secrets ID configured. Run [`aspire secret set`](https://aspire.dev/reference/cli/commands/aspire-secret-set/) once in the AppHost project to initialize a user secrets store; subsequent **Save to user secrets** clicks then write the browser configuration into it.\n\nNote\n\nThe **Configure tracked browser** command is only available when the Aspire dashboard’s interaction service is active (that is, when the dashboard is connected to the AppHost). It is disabled in standalone dashboard mode.\n\nAfter confirming the dialog, the new configuration takes effect immediately: the current browser session restarts with the updated settings.",
+  "sections": [
+    "Prerequisites",
+    "Install the package",
+    "Add browser logs to a resource",
+    "Optional parameters",
+    "Configure via app settings",
+    "Configure browser logs",
+    "Browser sessions, tabs, and process sharing",
+    "How browser logs are captured",
+    "See also"
+  ]
+}

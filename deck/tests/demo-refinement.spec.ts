@@ -22,7 +22,7 @@ for (const theme of ['light', 'dark'] as const) {
         }
         await expect(page).toHaveURL(/#\/thesis$/);
         await expect(page.locator('#thesis h2')).toBeInViewport();
-        await expect(page.locator('#slide-position')).toHaveText('2 / 26');
+        await expect(page.locator('#slide-position')).toHaveText('2 / 32');
         const bounds = await page.locator('#thesis h2').boundingBox();
         const toolbar = await page.locator('.toolbar').boundingBox();
         expect(bounds!.y).toBeGreaterThanOrEqual(toolbar!.y + toolbar!.height - 1);
@@ -100,17 +100,17 @@ for (const theme of ['light', 'dark'] as const) {
 test('audience command text is directly copyable Aspire CLI with verified identities', async ({ page }) => {
   await page.goto('#/live-cli');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  const code = page.locator('#live-cli pre > code');
   const commands = evidence.cli.commands.join('\n');
-  expect(await code.textContent()).toBe(commands);
-  const selected = await code.evaluate((element) => {
+  const codes = page.locator('#live-cli .replay-command code, #docs-section .replay-command code, #api-search .replay-command code, #api-member .replay-command code');
+  expect((await codes.allTextContents()).join('\n')).toBe(commands);
+  const selected = await codes.evaluateAll((elements) => elements.map((element) => {
     const range = document.createRange();
     range.selectNodeContents(element);
     const selection = window.getSelection()!;
     selection.removeAllRanges();
     selection.addRange(range);
     return range.toString();
-  });
+  }).join('\n'));
   expect(selected).toBe(commands);
   expect(selected).not.toMatch(/pwsh|\.ps1|\$aspire|\$id/);
   expect(selected.split('\n')).toHaveLength(4);
@@ -119,7 +119,7 @@ test('audience command text is directly copyable Aspire CLI with verified identi
     expect(command).toContain(evidence.cli.apiId);
   }
   await expect(page.locator('#api-code code').first()).toContainText(evidence.cli.apiId);
-  await expect(page.locator('#live-cli .notes')).toContainText('no PowerShell script is required');
+  await expect(page.locator('#live-cli .notes')).toContainText('No PowerShell script is required');
 });
 
 test('feature story preserves real links, experimental scope, and explicit maintainer refinement', async ({ page }) => {
@@ -139,7 +139,7 @@ test('feature story preserves real links, experimental scope, and explicit maint
   await expect(page.locator('#browser-evidence .notes')).toContainText('child browser resource');
   const audience = await page.locator('section[id]').allTextContents();
   expect(audience.join('\n')).not.toMatch(/19478|33887017276|1619|human_reviews|outcome_status|Show-DocsLoop\.ps1/);
-  await expect(page.locator('section[id]')).toHaveCount(26);
+  await expect(page.locator('section[id]')).toHaveCount(32);
 });
 
 test('three-point audience surfaces render coherently in one desktop/mobile visual batch', async ({ page }, testInfo) => {
