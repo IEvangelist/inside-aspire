@@ -38,6 +38,7 @@
     </header>
     <dialog id="deck-menu" class="deck-menu" aria-labelledby="menu-title">
       <div class="menu-heading"><h2 id="menu-title">Inside Aspire</h2><form method="dialog"><button class="icon-button" aria-label="Close presentation menu"><span data-icon="close"></span></button></form></div>
+      <div class="menu-slides">
       <nav class="chapter-list" aria-label="Three main areas">
         <a href="#/ai-loops" data-slide="ai-loops" data-core-chapter="AI loops"><span data-icon="agent"></span><span>AI loops</span></a>
         <a href="#/dashboard" data-slide="dashboard" data-core-chapter="Aspire dashboard"><span data-icon="screen"></span><span>Aspire dashboard</span></a>
@@ -53,6 +54,7 @@
         <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Reviewed docs trail</span></a>
         <a href="#/sources" data-slide="sources"><span data-icon="file"></span><span>Optional sources appendix</span></a>
       </nav>
+      </div>
       <div class="menu-controls" aria-label="Display and presenter tools">
         <button id="read-mode" type="button" aria-pressed="false"><span data-icon="book"></span><span class="control-label">Reading mode</span><kbd>R</kbd></button>
         <button id="overview" type="button"><span data-icon="screen"></span><span>Overview</span><kbd>Esc</kbd></button>
@@ -63,10 +65,11 @@
       </div>
     </dialog>
     <main id="presentation" class="reveal" tabindex="-1" aria-label="Inside Aspire presentation">
+      <div id="slide-viewport" class="slide-viewport">
       <div class="slides">
         <section id="intro" class="title-slide" data-chapter="Inside Aspire">
           <div class="title-copy">
-            <h1>Inside Aspire</h1>
+            <h1>Inside <span class="accent">Aspire</span></h1>
             <p class="subtitle">The Architecture Behind the AI Loop</p>
             <p class="lede">Ground decisions. Observe outcomes. Ship intent.</p>
             <a class="primary-link" href="#/thesis">Start presentation <span data-icon="arrowRight"></span></a>
@@ -88,7 +91,7 @@
         </section>
 
         <section id="thesis" class="statement-slide" data-chapter="Three main areas">
-          <h2>Aspire makes AI<br />more efficient.</h2>
+          <h2>Aspire makes AI<br />more <span class="accent">efficient.</span></h2>
           <div class="thesis-path" data-three-points>
             <div><span data-icon="agent"></span><strong data-takeaway>AI loops</strong><p>Reviewed facts guide the next move.</p></div>
             <div><span data-icon="screen"></span><strong data-takeaway>Aspire dashboard</strong><p>Observe with an AppHost or without.</p></div>
@@ -100,7 +103,7 @@
         </section>
 
         <section id="ai-loops" class="statement-slide" data-chapter="AI loops" data-purpose="why">
-          <h2 data-takeaway>AI loops</h2>
+          <h2 data-takeaway>AI <span class="accent">loops</span></h2>
           <p class="large-copy" data-why>A confident answer isn't evidence.</p>
           <p class="big-support">We use AI to build Aspire and aspire.dev. Reviewed, published facts then ground the developer's next move.</p>
           <aside class="notes">0:04-0:06. Explain why this is plural before diagrams. The internal product-to-docs loop proposes and reviews updated guidance; the developer inner loop uses shipped skills, CLI docs/API retrieval, and runtime observations to choose an explicit next action. Know what's true, act precisely, and stay current are supporting benefits, not three extra chapters. Neither loop trains model weights or grants unattended production merge authority. Start with the real browser feature and its reviewed PR trail.</aside>
@@ -901,7 +904,7 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="dashboard" class="statement-slide" data-chapter="Aspire dashboard" data-purpose="why">
-          <h2 data-takeaway>Aspire dashboard</h2>
+          <h2 data-takeaway>Aspire <span class="accent">dashboard</span></h2>
           <p class="large-copy" data-why>A running process isn't the whole story.</p>
           <p class="big-support">See resource state and the request's actual path. Share that evidence with the next human or agent decision.</p>
           <aside class="notes">0:36-0:38. Open the second primary area with why. A process can be running while a dependency, health check, or request is failing. Resource state and telemetry answer different questions. The AppHost bundles a dashboard connected to its resource service; the same OTLP viewer is also available independently as a standalone image. Instrumentation and export are still required. Do not imply a removed dashboard AI assistant or automatic instrumentation.</aside>
@@ -947,7 +950,7 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="deployment" class="statement-slide" data-chapter="Aspire deployment" data-purpose="why">
-          <h2 data-takeaway>Aspire deployment</h2>
+          <h2 data-takeaway>Aspire <span class="accent">deployment</span></h2>
           <p class="large-copy" data-why>Application intent should outlive your laptop.</p>
           <p class="big-support">Keep relationships explicit. Publish target artifacts, deploy configured resources, and verify the actual outcome.</p>
           <aside class="notes">0:46-0:48. Open the third primary area with why: manually rebuilding development relationships in a deployment script loses inspectable intent. Aspire can carry a model through target-specific publishing and deployment, with explicit integration and configuration boundaries. This is a presentation about that capability, not permission to provision infrastructure. The Windows native executable/Vite weather graph remains a development demo and has not been deployed.</aside>
@@ -1002,7 +1005,7 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="close" class="closing-slide" data-chapter="Aspire makes AI more efficient.">
-          <h2>Aspire makes AI<br />more efficient.</h2>
+          <h2>Aspire makes AI<br />more <span class="accent">efficient.</span></h2>
           <p class="big-support" data-three-points><span data-takeaway>AI loops</span><br /><span data-takeaway>Aspire dashboard</span><br /><span data-takeaway>Aspire deployment</span></p>
           <a class="primary-link" href="https://github.com/IEvangelist/inside-aspire"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="28" height="28" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="28" height="28" alt="" />Get the code <span data-icon="arrowRight"></span></a>
           <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Presenter runbook</a> &middot; <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md">Docs rehearsal</a></p>
@@ -1049,6 +1052,7 @@ builder.AddViteApp("frontend",
           </div>
           <aside class="notes">Optional appendix, outside the 60-minute presentation. Public citations and notices remain accessible without interrupting the close. Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement. The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</aside>
         </section>
+      </div>
       </div>
     </main>
     <span id="replay-status" class="visually-hidden" role="status" aria-live="polite"></span>

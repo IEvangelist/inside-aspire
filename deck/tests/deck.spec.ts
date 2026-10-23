@@ -304,7 +304,7 @@ test('reading mode exposes the complete diagrams and code without waiting for fr
   await ready(page,'?mode=read#/the-loop');
   await expect(page.locator('html')).toHaveAttribute('data-static','true');
   await expect(page.locator('html')).toHaveAttribute('data-reading','true');
-  await expect(page.locator('#presentation')).toHaveClass(/reveal-scroll/);
+  await expect(page.locator('#slide-viewport')).toHaveCSS('overflow-y', 'auto');
   const invisible=await page.locator('#the-loop .fragment').evaluateAll((groups) =>
     groups.filter((group) => getComputedStyle(group).visibility==='hidden'||Number(getComputedStyle(group).opacity)<1).length);
   expect(invisible).toBe(0);
@@ -374,7 +374,7 @@ for (const width of [320, 390, 790]) {
     test.skip(testInfo.project.name !== 'desktop-dark', 'Actual pointer/keyboard matrix runs once.');
     await page.setViewportSize({ width, height: 844 });
     await ready(page);
-    await expect(page.locator('#presentation')).toHaveClass(/reveal-scroll/);
+    await expect(page.locator('#slide-viewport')).toHaveCSS('overflow-y', 'auto');
     await page.getByRole('link', { name: 'Start presentation' }).click();
     await expect(page).toHaveURL(/#\/thesis(?:\/\d+)?$/);
     await expect(page.locator('#thesis h2')).toBeInViewport();

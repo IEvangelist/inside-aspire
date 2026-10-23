@@ -28,12 +28,16 @@ export function createReplayController(root: HTMLElement, announcement: HTMLElem
     record.expanded = expanded;
     record.response.hidden = !expanded;
     record.panel.dataset.replayPhase = expanded ? 'complete' : 'command';
+    const copy = record.panel.querySelector<HTMLButtonElement>('[data-copy-output]');
+    if (copy) copy.disabled = !expanded;
   }
 
   function play(record: ReplayPanel) {
     record.expanded = true;
     record.response.hidden = true;
     record.panel.dataset.replayPhase = 'cue';
+    const copy = record.panel.querySelector<HTMLButtonElement>('[data-copy-output]');
+    if (copy) copy.disabled = true;
     announcement.textContent = 'Replaying the recorded response.';
     const task: { panel: ReplayPanel; timer?: number; animation?: Animation } = { panel: record };
     pending = task;

@@ -166,7 +166,7 @@ test('touch reading can scroll the complete JSON envelope without an internal hi
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const output = page.locator('#api-member .replay-output');
   expect(await output.evaluate((element) => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
-  const start = await page.locator('#presentation').evaluate((element) => element.scrollTop);
+  const start = await page.locator('#slide-viewport').evaluate((element) => element.scrollTop);
   const session = await page.context().newCDPSession(page);
   try {
     await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 620 }] });
@@ -175,7 +175,7 @@ test('touch reading can scroll the complete JSON envelope without an internal hi
       await page.waitForTimeout(32);
     }
     await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-    await expect.poll(() => page.locator('#presentation').evaluate((element) => element.scrollTop)).toBeGreaterThan(start);
+    await expect.poll(() => page.locator('#slide-viewport').evaluate((element) => element.scrollTop)).toBeGreaterThan(start);
     const lastLine = output.locator('.code-line').last();
     await lastLine.scrollIntoViewIfNeeded();
     await expect(lastLine).toBeInViewport();

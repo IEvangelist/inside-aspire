@@ -2,6 +2,36 @@
 
 The user-approved direction is technical keynote craft in the official Aspire identity: self-hosted Poppins, unchanged logo SVGs, `#7455dd`/`#512bd4` purple, and `#1f1e33` dark. Design variance 6, motion 5, and visual density 4 express a readable talk with deliberate presenter-driven graph and code sequences.
 
+## Additive template UX sync
+
+The shell now adapts the [Aspire deck template at 719b552](https://github.com/IEvangelist/aspire-deck-template/tree/719b552b592c85f31fa5d257a1860117ea785f58),
+not its starter content or Markdown/config authoring model. Poppins headlines
+use the source's heavier weights/open tracking and selective same-copy accents.
+Fira Code 5.3.0 is self-hosted for code, window labels and keycaps. Quiet purple
+glow/title-only grid, hairline surfaces, squared 44px actions, traffic-light
+code/diagram chrome, numbered navigation chips, fixed menu chrome and themed
+thin body scrollbars come from the pinned shell.
+
+All 41 authored slides, notes, code strings, media, citations, order, public IDs,
+aliases and ten existing paired layouts are frozen in the
+[pre-port contract](../docs/evidence/template-ux-baseline.json). The original
+`syntax.ts` line focus, complete recorded replay controller and endpoint-gated
+SVG model remain talk-specific. Do not replace them with the template's syntax
+helper, source-only arrow staging, generic Steps list styles or starter slides.
+Only explicitly opted-in components should gain new semantic layout behavior.
+
+Natural reading uses a dedicated `slide-viewport`, with Reveal layout disabled
+instead of its delayed scroll-wrapper reset. Source code remains left-aligned;
+desktop pairs retain their columns and narrow pairs retain DOM order.
+Overview keeps actual slide thumbnails framed and clickable. Print uses one
+variable-height page per leaf slide: very long immutable stdout gets a taller
+page, not smaller type, hidden lines, or an excerpt. Clipboard controls copy
+original source, not syntax markup or prompts, and report real failures.
+
+This is a deliberate manual UX port, not a shared package or automatic
+template-update mechanism. Its source pin and retained differences are in
+[UX provenance](../docs/evidence/template-ux.json).
+
 The unchanged title pairs with David Pine's actual 300px public portrait, displayed proportionally at 260px on the desktop. The 56px presentation bar uses the official 32px Aspire mark without a stretched or overpowering wordmark. One primary advance group and a compact chapter indicator remain visible; secondary controls and chapter navigation live in an accessible dialog/sheet. Controls have 44px targets.
 
 The thesis and ending remain **Aspire makes AI more efficient**. The user's three primary areas repeat on roadmap, chapter entries and close: **AI loops**, **Aspire dashboard**, **Aspire deployment**. Each starts with why, then concrete/source-backed proof and machinery. The real internal product/docs loop now precedes and supplies the skill-guided developer loop; current narrative context and separate per-package-version API references are not conflated. Dashboard is integrated and independent; deployment is a complete third chapter, not an appendix. The former benefit phrases may support the story, not form three extra chapters.

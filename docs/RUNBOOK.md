@@ -253,6 +253,16 @@ The CLI remains the main inner-loop enabler: current docs/API/state -> precise a
 
 The speaker notes have contiguous, nonoverlapping ranges covering exactly 60 minutes. Stop at the main close. The 41-slide deck has 38 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
 
+The shell's manual [template 719 UX sync](evidence/template-ux.json) does not change
+that content or timing. Existing line-highlight fragments, all ten paired
+layouts, seven recorded replays and endpoint-gated graphs remain. New window
+copy controls copy exact source/command/full stdout. The menu heading and
+presenter tools remain fixed while navigation alone scrolls. Reading uses its
+own inner viewport; it should remain aligned after more than 1.2 seconds, not
+reset horizontally. Overview thumbnails remain real slide targets. Print has
+one variable-height page per slide with all code/output included; long recorded
+JSON is not clipped or squeezed into a projector-sized page.
+
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu leads with exactly the user's three primary areas; smaller direct demo/appendix jumps remain separate. The chapter indicator follows the active area through supporting slides. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
 
 Advance the graphs to reveal boxes and their connections together. Paths, arrowheads, and edge labels never point toward still-hidden boxes, including the return leg; there are no faint future guides. The workflow filename/compile/lockfile strip is centered as one compact sequence, while code stays left-aligned.

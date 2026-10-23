@@ -4,6 +4,7 @@ import book from '@primer/octicons/build/svg/book-24.svg?raw';
 import check from '@primer/octicons/build/svg/check-circle-24.svg?raw';
 import cloud from '@primer/octicons/build/svg/cloud-24.svg?raw';
 import code from '@primer/octicons/build/svg/code-24.svg?raw';
+import copy from '@primer/octicons/build/svg/copy-24.svg?raw';
 import cpu from '@primer/octicons/build/svg/cpu-24.svg?raw';
 import database from '@primer/octicons/build/svg/database-24.svg?raw';
 import agent from '@primer/octicons/build/svg/dependabot-24.svg?raw';
@@ -29,7 +30,7 @@ function brandSvg(definition: typeof faBluesky): string {
 }
 
 const icons = {
-  arrowLeft, arrowRight, book, check, cloud, code, cpu, database, agent, file,
+  arrowLeft, arrowRight, book, check, cloud, code, copy, cpu, database, agent, file,
   graph, review, menu, moon, package: packageIcon, person, pr, screen, sun, terminal, workflow, close,
   socialX: brandSvg(faXTwitter), socialBluesky: brandSvg(faBluesky), socialLinkedIn: brandSvg(faLinkedinIn),
 };

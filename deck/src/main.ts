@@ -5,10 +5,15 @@ import '@fontsource/poppins/latin-400.css';
 import '@fontsource/poppins/latin-500.css';
 import '@fontsource/poppins/latin-600.css';
 import '@fontsource/poppins/latin-700.css';
+import '@fontsource/fira-code/latin-400.css';
+import '@fontsource/fira-code/latin-500.css';
+import '@fontsource/fira-code/latin-600.css';
 import { renderIcons } from './icons';
 import { renderDiagrams } from './diagrams';
 import { focusCode, highlightCode } from './syntax';
 import { createReplayController } from './replay';
+import { prepareWindows } from './windows';
+import { sizePrintPages } from './printing';
 import './style.css';
 
 function element<T extends HTMLElement>(id: string, type: { new(): T }): T {
@@ -18,6 +23,7 @@ function element<T extends HTMLElement>(id: string, type: { new(): T }): T {
 }
 
 const root = element('presentation', HTMLElement);
+const viewport = element('slide-viewport', HTMLElement);
 const themeButton = element('theme', HTMLButtonElement);
 const readButton = element('read-mode', HTMLButtonElement);
 const overviewButton = element('overview', HTMLButtonElement);
@@ -42,17 +48,36 @@ const initialSlideId = window.location.hash.startsWith('#/') ? window.location.h
 let reading = !printMode && (initialView === 'read' ||
   (initialView !== 'present' && (window.innerWidth < 1000 || window.innerHeight < 650)));
 let currentId = slides[0]?.id ?? 'intro';
-let readingObserver: IntersectionObserver | undefined;
+let scrollFrame = 0;
+
+function dimensions() {
+  return {
+    width: reading ? Math.min(root.clientWidth, 1440) : Math.max(1200, Math.min(1440, root.clientWidth / root.clientHeight * 810)),
+    height: reading ? root.clientHeight : 810,
+  };
+}
 
 renderIcons();
 renderDiagrams();
+prepareWindows(root, (message) => { status.textContent = message; });
 highlightCode();
+for (const link of menu.querySelectorAll<HTMLElement>('[data-slide]')) {
+  const index = slides.findIndex((slide) => slide.id === link.dataset.slide);
+  if (index < 0) throw new Error(`Missing menu slide: ${link.dataset.slide}`);
+  const chip = document.createElement('span');
+  chip.className = 'slide-number';
+  chip.dataset.uxDecoration = '';
+  chip.setAttribute('aria-hidden', 'true');
+  chip.textContent = String(index + 1);
+  link.prepend(chip);
+}
 const replay = createReplayController(root, element('replay-status', HTMLSpanElement));
 
 function setTheme(theme: 'dark' | 'light') {
   replay.settle();
   document.documentElement.dataset.theme = theme;
   themeButton.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
+  themeButton.querySelector('span:not([data-icon])')!.textContent = `${theme === 'dark' ? 'Light' : 'Dark'} theme`;
 }
 
 function toggleTheme() {
@@ -62,6 +87,7 @@ function toggleTheme() {
   const url = new URL(window.location.href);
   url.searchParams.set('theme', theme);
   window.history.replaceState(null, '', url);
+  updatePrintLink();
 }
 
 setTheme(initialTheme === 'dark' || initialTheme === 'light'
@@ -69,8 +95,7 @@ setTheme(initialTheme === 'dark' || initialTheme === 'light'
   : darkPreference.matches ? 'dark' : 'light');
 
 const deck = new Reveal(root, {
-  width: reading ? Math.min(root.clientWidth, 1440) : Math.max(1200, Math.min(1440, root.clientWidth / root.clientHeight * 810)),
-  height: reading ? root.clientHeight : 810,
+  ...dimensions(),
   margin: 0.07,
   minScale: 0.15,
   maxScale: 1.4,
@@ -83,14 +108,15 @@ const deck = new Reveal(root, {
   transition: reducedMotion.matches ? 'none' : 'fade',
   backgroundTransition: 'none',
   transitionSpeed: 'fast',
-  view: reading ? 'scroll' : null,
-  scrollSnap: 'proximity',
+  disableLayout: reading,
+  overview: !reading,
   scrollActivationWidth: 0,
   scrollProgress: false,
   showNotes: false,
   fragments: !reading && !reducedMotion.matches && !printMode,
   pdfSeparateFragments: false,
-  keyboardCondition: () => !menu.open && document.activeElement?.tagName !== 'PRE',
+  keyboardCondition: () => !menu.open && !(document.activeElement instanceof Element &&
+    document.activeElement.closest('a, button, input, textarea, select, pre, [role="region"][tabindex], [contenteditable]')),
   plugins: [Notes],
 });
 
@@ -102,12 +128,15 @@ function updateModeControls() {
   overviewButton.title = reading ? 'Switch to presentation mode for overview' : 'Overview (Esc)';
   document.documentElement.dataset.reading = String(reading);
   document.documentElement.dataset.static = String(reading || reducedMotion.matches || printMode);
+  document.documentElement.dataset.print = String(printMode);
 }
 
 function syncControls(animateReplay = false) {
   if (!reading) currentId = deck.getCurrentSlide()?.id ?? currentId;
   const index = slides.findIndex((slide) => slide.id === currentId);
   const slide = document.getElementById(currentId);
+  document.documentElement.dataset.intro = String(index === 0);
+  document.documentElement.style.setProperty('--slide-scale', String(reading ? 1 : deck.getScale()));
   position.value = `${index + 1} / ${slides.length}`;
   position.setAttribute('aria-label', `Slide ${index + 1} of ${slides.length}`);
   chapterLabel.textContent = slide?.dataset.chapter ?? 'Inside Aspire';
@@ -126,20 +155,7 @@ function syncControls(animateReplay = false) {
       inactive.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
     }
   }
-}
-
-function observeReading() {
-  readingObserver?.disconnect();
-  if (!reading) return;
-  readingObserver = new IntersectionObserver((entries) => {
-    const visible = entries.filter((entry) => entry.isIntersecting)
-      .sort((first, second) => Math.abs(first.boundingClientRect.top - root.getBoundingClientRect().top) -
-        Math.abs(second.boundingClientRect.top - root.getBoundingClientRect().top));
-    if (!visible[0]) return;
-    currentId = (visible[0].target as HTMLElement).id;
-    syncControls();
-  }, { root, threshold: [0.15, 0.5], rootMargin: '0px 0px -20% 0px' });
-  for (const slide of root.querySelectorAll<HTMLElement>('section[id]')) readingObserver.observe(slide);
+  if (reading) for (const slide of slides) slide.removeAttribute('aria-hidden');
 }
 
 function goTo(id: string) {
@@ -147,19 +163,19 @@ function goTo(id: string) {
   const target = document.getElementById(id);
   if (!target) throw new Error(`Missing slide: ${id}`);
   currentId = id;
+  const indices = deck.getIndices(target);
+  deck.slide(indices.h, indices.v, -1);
+  syncControls();
   if (reading) {
-    root.scrollTo({
-      top: root.scrollTop + target.getBoundingClientRect().top - root.getBoundingClientRect().top,
+    viewport.scrollTo({
+      top: viewport.scrollTop + target.getBoundingClientRect().top - viewport.getBoundingClientRect().top,
       behavior: 'instant',
     });
     const url = new URL(window.location.href);
     url.hash = `/${target.id}`;
     if (window.location.hash !== url.hash) window.history.pushState(null, '', url);
-    syncControls();
-  } else {
-    const indices = deck.getIndices(target);
-    deck.slide(indices.h, indices.v, -1);
   }
+  syncControls();
 }
 
 function closeMenu() {
@@ -176,16 +192,24 @@ function toggleReading() {
   window.history.replaceState(null, '', url);
   updateModeControls();
   deck.configure({
-    view: reading ? 'scroll' : null,
-    width: reading ? Math.min(root.clientWidth, 1440) : Math.max(1200, Math.min(1440, root.clientWidth / root.clientHeight * 810)),
-    height: reading ? root.clientHeight : 810,
+    ...dimensions(),
+    disableLayout: reading,
+    overview: !reading,
     fragments: !reading && !reducedMotion.matches,
     hash: !reading,
     history: !reading,
   });
-  observeReading();
   goTo(id);
+  updatePrintLink();
   status.textContent = reading ? 'Reading mode. Scroll through the slides.' : 'Presentation mode. Use arrow keys to navigate.';
+}
+
+function updatePrintLink() {
+  const url = new URL(window.location.href);
+  url.searchParams.delete('mode');
+  url.searchParams.set('print-pdf', '');
+  url.hash = '';
+  element('print-link', HTMLAnchorElement).href = url.href;
 }
 
 function openNotes() {
@@ -233,11 +257,42 @@ root.addEventListener('click', (event) => {
 previousButton.addEventListener('click', () => {
   if (reading) goTo(slides[Math.max(0, slides.findIndex((slide) => slide.id === currentId) - 1)].id);
   else deck.prev();
+  root.focus({ preventScroll: true });
 });
 nextButton.addEventListener('click', () => {
   if (reading) goTo(slides[Math.min(slides.length - 1, slides.findIndex((slide) => slide.id === currentId) + 1)].id);
   else deck.next();
+  root.focus({ preventScroll: true });
 });
+viewport.addEventListener('scroll', () => {
+  if (!reading || scrollFrame) return;
+  scrollFrame = requestAnimationFrame(() => {
+    scrollFrame = 0;
+    const frame = viewport.getBoundingClientRect();
+    const current = slides.find((slide) => {
+      const bounds = slide.getBoundingClientRect();
+      return bounds.top <= frame.top + 24 && bounds.bottom > frame.top + 24;
+    });
+    if (!current) return;
+    currentId = current.id;
+    if (deck.getCurrentSlide() !== current) {
+      const indices = deck.getIndices(current);
+      deck.slide(indices.h, indices.v, -1);
+    }
+    syncControls();
+  });
+});
+window.addEventListener('keydown', (event) => {
+  if (!reading || menu.open || event.altKey || event.ctrlKey || event.metaKey ||
+      (event.target instanceof Element && event.target.closest('a, button, input, textarea, select, pre, [role="region"][tabindex], [contenteditable]'))) return;
+  const direction = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key) ? 1 :
+    ['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key) ? -1 : 0;
+  if (direction) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    goTo(slides[Math.max(0, Math.min(slides.length - 1, slides.findIndex((slide) => slide.id === currentId) + direction))].id);
+  }
+}, true);
 document.querySelector('.skip-link')?.addEventListener('click', (event) => {
   event.preventDefault();
   root.focus();
@@ -255,7 +310,9 @@ reducedMotion.addEventListener('change', () => {
 });
 window.addEventListener('resize', () => {
   replay.settle();
-  if (reading) deck.configure({ width: Math.min(root.clientWidth, 1440), height: root.clientHeight });
+  updateModeControls();
+  deck.configure({ ...dimensions(), disableLayout: reading });
+  syncControls();
 });
 window.addEventListener('hashchange', (event) => {
   if (!window.location.hash.startsWith('#/')) return;
@@ -272,21 +329,37 @@ window.addEventListener('hashchange', (event) => {
 
 try {
   updateModeControls();
+  await Promise.all([
+    document.fonts.load('400 28px Poppins'),
+    document.fonts.load('700 84px Poppins'),
+    document.fonts.load('400 22px "Fira Code"'),
+    document.fonts.load('500 18px "Fira Code"'),
+    document.fonts.load('600 18px "Fira Code"'),
+  ]);
+  await document.fonts.ready;
+  if (printMode) {
+    deck.on('pdf-ready', () => sizePrintPages(root));
+    window.addEventListener('beforeprint', () => sizePrintPages(root));
+  }
   await deck.initialize();
+  if (printMode) sizePrintPages(root);
   root.removeAttribute('role');
-  deck.on('slidechanged', () => syncControls());
+  deck.on('slidechanged', () => {
+    if (!reading) viewport.scrollTop = 0;
+    syncControls();
+  });
   deck.on('fragmentshown', () => syncControls(true));
   deck.on('fragmenthidden', () => syncControls());
-  observeReading();
   const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
   if (Object.hasOwn(slideAliases, initialSlideId)) goTo(initialSlideId);
   else if (reading) {
     if (targetId) goTo(decodeURIComponent(targetId));
-    else root.scrollTop = 0;
+    else viewport.scrollTop = 0;
   }
   deck.addKeyBinding({ keyCode: 84, key: 'T', description: 'Switch theme' }, toggleTheme);
   deck.addKeyBinding({ keyCode: 82, key: 'R', description: 'Switch reading mode' }, toggleReading);
   syncControls();
+  updatePrintLink();
   document.documentElement.dataset.deckReady = 'true';
 } catch (error) {
   status.textContent = 'The presentation could not initialize. Reload, or read the repository runbook.';

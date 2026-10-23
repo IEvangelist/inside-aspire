@@ -11,10 +11,12 @@ async function openDeck(page: Page, theme: 'light' | 'dark', width: number, heig
 for (const theme of ['light', 'dark'] as const) {
   for (const viewport of [
     { width: 1280, height: 720, mode: 'present' },
+    { width: 1920, height: 1080, mode: 'present' },
     { width: 1024, height: 768, mode: 'present' },
     { width: 1024, height: 576, mode: 'present' },
     { width: 320, height: 760, mode: 'read' },
     { width: 390, height: 844, mode: 'read' },
+    { width: 617, height: 900, mode: 'read' },
     { width: 768, height: 1024, mode: 'read' },
     { width: 790, height: 900, mode: 'read' },
   ] as const) {

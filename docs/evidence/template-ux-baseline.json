@@ -1,0 +1,1967 @@
+{
+  "commit": "838d5e766947a4e27dbd12919ede7a6bc708c0f5",
+  "template": "719b552b592c85f31fa5d257a1860117ea785f58",
+  "normalization": "Authored slide text collapses whitespace only; code and notes retain exact text. Added data-ux-decoration controls/chrome are excluded. Existing content, IDs, order, links, images, code focus steps and pairs must match.",
+  "slides": [
+    {
+      "id": "intro",
+      "chapter": "Inside Aspire",
+      "purpose": null,
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "#/thesis",
+        "https://github.com/IEvangelist",
+        "https://x.com/davidpine7",
+        "https://bsky.app/profile/davidpine.dev",
+        "https://www.linkedin.com/in/dpine/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/speaker/david-pine.webp",
+          "alt": "David Pine's actual public profile portrait",
+          "width": "300",
+          "height": "300"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-black.svg",
+          "alt": "",
+          "width": "24",
+          "height": "24"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-white.svg",
+          "alt": "",
+          "width": "24",
+          "height": "24"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "a18cbfec0426864c427d6442d064efc747c29066d1ec1bf49b12b3d4263a7af8",
+      "notesSha256": "b4d7b4e4673b1c068b2718a34f15d40a3be065bc3c386c6483c58084f4560ef2"
+    },
+    {
+      "id": "thesis",
+      "chapter": "Three main areas",
+      "purpose": null,
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "9233fea740f9fc6b0352c5df9bcd21b3bb3a6af9bf32a8f142892b3a9c4cf7d6",
+      "notesSha256": "f37db3e01ae9f67542f38952e782746b5b4e71127e336ce34190ea034ae2f5e7"
+    },
+    {
+      "id": "ai-loops",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "c792e168f4f052fec5b975c02e36180721a64bb21055c3dd6f675bc83e68ade1",
+      "notesSha256": "7aae5aae263093529ba1e62713cbb6368d0db58d1d9b14732305039f046fa43a"
+    },
+    {
+      "id": "browser-evidence",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "5fd32d8df64eb7a00e4dec92e35e01610f3f439a3765e0e5354458015565507f",
+      "notesSha256": "eb2d84eb29e027b429013f4f90c60890a34d34ae195b6d0fb2dc1d2c717ef524"
+    },
+    {
+      "id": "evidence",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire/actions/runs/25092695241",
+        "https://github.com/microsoft/aspire.dev/pull/775",
+        "https://aspire.dev/integrations/devtools/browser-logs.md"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/github-black.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/github/github-white.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/proof/product-pr.webp",
+          "alt": "Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command.",
+          "width": "1268",
+          "height": "235"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "b337d695817cae21563758d5e0d5df225abcabead0fcd76ba9df108f1ac5c063",
+      "notesSha256": "ac4099f9baf9ec018119d9d6fff44abbbbfc4b80051080d1111f870e75670715"
+    },
+    {
+      "id": "writer",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "870befb134c923cd3c02ad20686401d7cc37a9a783dc0c6af8df6fd82c87eff9"
+        }
+      ],
+      "links": [
+        "https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/proof/docs-pr.webp",
+          "alt": "Actual GitHub header for merged docs PR 775: Add browser logs documentation.",
+          "width": "1268",
+          "height": "235"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-and-copy",
+          "children": 2
+        }
+      ],
+      "textSha256": "cb24d304c78e2c6fbe94e943a008c3906d7aead29769646fedb03b2a7c2251d2",
+      "notesSha256": "700adc965aefae916642a5ee42a9dcb4493f4120786ea057bc184be5f10d0cc6"
+    },
+    {
+      "id": "docs-supply",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "outer"
+      ],
+      "pairs": [],
+      "textSha256": "9a39e42c705aa36252f994dfcac1d1ed64473506a72deaddca6024acf516cbd5",
+      "notesSha256": "548298363fd9202a2d5b2032c4484a39bcff451f9bab47e5366316834af94b42"
+    },
+    {
+      "id": "workflow",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-yaml",
+          "sha256": "b4a65bde5ed430cddf0c1e22603d2096179db38f4db3b81b8eb0702a54132929"
+        },
+        {
+          "language": "language-json",
+          "sha256": "ca59c7aa70e9a79fb856a5e798814c566ddb95ea1f4e60bfb934caaea8a9ccca"
+        }
+      ],
+      "links": [
+        "https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md",
+        "https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md",
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/github-black.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/github/github-white.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "5d6bf4135c41af4d4251d6cd3875a6f9c185501f990b3e5d9d04dee75f981c2f",
+      "notesSha256": "dc1fd424afdd66bb7eb9aac2daf320092b3b3ab20cfad4d6b46594412e431bdf"
+    },
+    {
+      "id": "stay-current",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md",
+        "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "16ab7c99148f1e9d337c120f6239b548ff1c81f59aeb6978884f8fe10faa5912",
+      "notesSha256": "a37ef8c5ec4e86d7972de9bea65cfe22798ee7d1ca35d48d787f726f49505169"
+    },
+    {
+      "id": "weather",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/proof/native-map-dark.webp",
+          "alt": "The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode.",
+          "width": "1440",
+          "height": "1000"
+        },
+        {
+          "src": "/inside-aspire/proof/native-map-light.webp",
+          "alt": "The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode.",
+          "width": "1440",
+          "height": "1000"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "fcc625f797b423395bad43c75ac134474dcae3514e286d0f44d6db7fa8f12ff0",
+      "notesSha256": "7c0962528fd1057725e34820d906ed35117b027993a447c9730a3a5f04f9a1c2"
+    },
+    {
+      "id": "live-cli",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "955bb794469dcc973eea36a9f69faf12c2a88e985ad6c7319550653f056383a5"
+        },
+        {
+          "language": "language-json",
+          "sha256": "e8e29391258e0a57bb977f0ef3e08ca74827a95152e9d1e3e9e7901ab4550e68"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/docs-search.stdout.txt",
+        "/inside-aspire/replays/docs-search.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "docs-search",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "c6cb6d348c7b720c4c730b039ae27d822ed3da5f3952f03251933f7ef6e9aaec",
+      "notesSha256": "804452b40d6b89965c35ad850d3a6ec421fa52ecc8b6a3a960b558edf2bb3c44"
+    },
+    {
+      "id": "docs-section",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "7aadac8729a17016b7cb53d87f199f8c916849894fa681e535992ea424b07f08"
+        },
+        {
+          "language": "language-json",
+          "sha256": "859ba2621e96cb26cff06721fd90ba3b42cdc89a643affcb523d501334377e48"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/docs-section.stdout.txt",
+        "/inside-aspire/replays/docs-section.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "docs-section",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "9e45e4920395a4e1a9d7dc98295ab00519a05108e9e4f2bce6838310ef9aa639",
+      "notesSha256": "abc2265a4b526fc8d617cb89a032de37c9b9ba968ab5cad21be33d3f9e5e26c1"
+    },
+    {
+      "id": "api-search",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "de0e64a0ebf8c8ea4068fd5e5063797412f7b76cef344bdf5acbb2c0b64b1970"
+        },
+        {
+          "language": "language-json",
+          "sha256": "b9cf40e2fba167f2a5ccad8554ad3ef872c90eef7c86e503284cdea41190b4af"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/api-search.stdout.txt",
+        "/inside-aspire/replays/api-search.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "api-search",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "4ccf8592dd670dec3a863c8c3e10caac5ab05690e71711c8c1b9e526b396adc5",
+      "notesSha256": "def8a8e4ef1f828b2d38705b81b9efd986fec510f6d714704aa3b6cd2253c040"
+    },
+    {
+      "id": "api-member",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "142efbeb3591a7663ad04a8cf212e8e4a54fa5c85b1e0f171e167cf6d52c44c8"
+        },
+        {
+          "language": "language-json",
+          "sha256": "60c52a7b8fcea1ee51e6da1e434cb2cdca6fc4a6825f19778a08c5b5ecfbc518"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/api-member.stdout.txt",
+        "/inside-aspire/replays/api-member.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "api-member",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "963c65466756edf4f0a87d2a24419ad939b89cbe72cff4a7655012b8799e174b",
+      "notesSha256": "1a7b164b68d62a469487736422d7ec1a11f4fbf17950238639ca00ead0a064b6"
+    },
+    {
+      "id": "api-code",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-json",
+          "sha256": "a29995344b6e2e77251c4601d59a7c95d66c92e925b3ecd6be94ad91ebbe28fa"
+        },
+        {
+          "language": "language-typescript",
+          "sha256": "704bd921775d6a825f55ab6de4261d652bb4d6ce27228b28b0f364fd285b2121"
+        }
+      ],
+      "links": [
+        "https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode",
+        "https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "d2486445299f8b8863d185fd6717b947d90515634246998f126d52dea48df1bb",
+      "notesSha256": "5f784f8ae4141e9d5ed0fad670ac7faff643af41a4b132fd61c86ba2150af0b1"
+    },
+    {
+      "id": "act-precisely",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "7a8685d59f1ba028e883ced8fea0369fee7a1362ccbfd94e242e91ad14fe556d",
+      "notesSha256": "cd5bf7c2ec8b99fbbd079dc6cc26f8cc144326b9c68b4faf3458a9b06fdbb383"
+    },
+    {
+      "id": "runtime-wait",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "2e59e70c675d3daf93bd70e3b62b17a8e2d88a2b656143c157aa71f3ac565e05"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "82fecc67667d07744b54f82c3118ca8d30a7b4f62c52bcdd9c8fb9285b565528"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/runtime-wait.stdout.txt",
+        "/inside-aspire/replays/runtime-wait.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-wait",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "8f59128cdc85f143fbd5962347e0a23bb58d1017575c70c146a4173ce47b8c58",
+      "notesSha256": "f3abd6f1f3dcef220dbaa54e86b4da0f36f08686d8c83e668b37200829e93798"
+    },
+    {
+      "id": "runtime-state",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "44b527851234d8b76c83974d3aacea5e88651dc4755a0f0bb51ae7c0335560f4"
+        },
+        {
+          "language": "language-json",
+          "sha256": "f9b815985decee676447bfc56d3e5f6d5900dee8c97d2a552fe0d81aa369233b"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/runtime-describe.stdout.txt",
+        "/inside-aspire/replays/runtime-describe.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-describe",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "61b7e3a24b5319cb469fdb8894f0cb92cb11af97fe5e5f3ec26694d28fb02564",
+      "notesSha256": "71717add59b10d129c72fd704226fb49d336562d0a5630c6a6dcd39943d5af14"
+    },
+    {
+      "id": "runtime-traces",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "2358fae8b37495105957834b5688039d7c49c6a236afddeade24def83936f9ce"
+        },
+        {
+          "language": "language-json",
+          "sha256": "4eda438901fd461613dc0ddea279a224256ee926aa1709699858d4f00f033359"
+        }
+      ],
+      "links": [
+        "/inside-aspire/replays/runtime-traces.stdout.txt",
+        "/inside-aspire/replays/runtime-traces.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-traces",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "0b2d65f037a5d5905c6c5a47dcd9678c2daba335155e3ec58d5f574dcef06004",
+      "notesSha256": "64157bc4567a16f1bd0cdefe0c1c422adc9259e68e71908d0afbdaf48eb9d52c"
+    },
+    {
+      "id": "skills-vs-tools",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "ae7820555f9dc4122d3d76b2d39788407613f7b6d322f45af308f2d066823f50",
+      "notesSha256": "b322950313aefb75a69eb0e47e33946b55708a6299d8224cfc83cd9d374aafdb"
+    },
+    {
+      "id": "skills",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "f41a227006ca351f28d5c0b4810c5d271e0d6bfb6c5c2f45352f8aad3b4bdc04",
+      "notesSha256": "ec5b57b750c6980c70334c9591b4829822a575dfa64d083da08bb1e2a26bf20e"
+    },
+    {
+      "id": "api-index",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "api"
+      ],
+      "pairs": [],
+      "textSha256": "f0023a3689c953ffd4ee27b0bb04aea989654d700c701cf9bf8859a36a018ac3",
+      "notesSha256": "3498d82392635b9c63dca1495de735ff91110a23d5dc67046ebe66d6bf85a75e"
+    },
+    {
+      "id": "index",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "f9604a399fb580fcff54debffee90ae0f134925e7cbba8fb5ab9484e95dce108"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "6785c286744783cf2cb1f36075174c641cae8bf8435064892a057834181dc4ee"
+        }
+      ],
+      "links": [
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45",
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "a9c40f48d168dff67a0f38d0dda8aa11175af6f23887f2c42f88b26d89ff9cd7",
+      "notesSha256": "1ee0df864121c74f1d0e1562c3a9c757b162c144d755bab9aec0125ac8da9533"
+    },
+    {
+      "id": "parser",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "572b62eed9069e41280289e3651dca2399aa90cfad5e3735555397842367fe9a"
+        }
+      ],
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/tree/main/docs/code"
+      ],
+      "images": [],
+      "steps": [
+        {
+          "code": "parser-code",
+          "lines": "1-5",
+          "index": "0"
+        },
+        {
+          "code": "parser-code",
+          "lines": "7-9",
+          "index": "1"
+        }
+      ],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "d1fa7280c880811b2dac5f9ae50d2319658617c5d2ba4f9eeee7b3e7afef9625",
+      "notesSha256": "ebe2de4c2ebce776a75074019f5824491406ff4da6d6afc68d98015110700047"
+    },
+    {
+      "id": "lexical",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "9a6144598d4f924c753d10c2d21c82854650afa9024604f3ffc5fed0caa91798"
+        }
+      ],
+      "links": [
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-and-copy",
+          "children": 2
+        }
+      ],
+      "textSha256": "f7254c0a5ef340089e17262b0c45f0090dc9cece8a6b092fcfa925ae13446399",
+      "notesSha256": "0eadc333f33f42899e35d10ab9847607ea16f643d827e636b588b612d9765a62"
+    },
+    {
+      "id": "compiler",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "runtime"
+      ],
+      "pairs": [],
+      "textSha256": "6170a7d360f1209790f58994928367c0399757ce20552e1c03d18d0cf56d5896",
+      "notesSha256": "a2ad2f8bf753e23dbc3e55cbf61842fad497f3d0e6959e6d38a0c03112084465"
+    },
+    {
+      "id": "lifecycle",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "d04d0197a3d7f3b37386b24333062241608aeba1a8fdfa1d2035ef011798f4bf"
+        }
+      ],
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo/host/apphost.cs"
+      ],
+      "images": [],
+      "steps": [
+        {
+          "code": "apphost-code",
+          "lines": "1-5",
+          "index": "0"
+        },
+        {
+          "code": "apphost-code",
+          "lines": "7-12",
+          "index": "1"
+        }
+      ],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "6c162dca2230a23fbca0ca40292279234fd2fd337ce4ecd7bdb910866924c972",
+      "notesSha256": "7c827cd3ccc7e49ca721c22bd75684af2f56755cced36535cf21c49a06c7d323"
+    },
+    {
+      "id": "the-loop",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "inner"
+      ],
+      "pairs": [],
+      "textSha256": "ed2abcad84f68673a2819d94965d24ba46e3e069e52b919ebcadcb322f213a7d",
+      "notesSha256": "da579d7896bc86685b8935f94dbd00b5b835b024584702b9926fcc2d66522804"
+    },
+    {
+      "id": "dashboard",
+      "chapter": "Aspire dashboard",
+      "purpose": "why",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "5c5b604b0c57574c206cea65d51a8c41600693a88e69054c1e1db88cbef49f63",
+      "notesSha256": "6c1cf6d842d8f8103d20f93c93031dd318173b4e6cdca61c1d1032f95f0f2ed4"
+    },
+    {
+      "id": "dashboard-integrated",
+      "chapter": "Aspire dashboard",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://aspire.dev/dashboard/overview/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/dashboard/projects-dark.webp",
+          "alt": "Official Aspire documentation screenshot of the integrated dashboard Resources page in dark theme.",
+          "width": "2560",
+          "height": "800"
+        },
+        {
+          "src": "/inside-aspire/dashboard/projects-light.webp",
+          "alt": "Official Aspire documentation screenshot of the integrated dashboard Resources page in light theme.",
+          "width": "2560",
+          "height": "800"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "46fe227a9142a9c952f5f3bb368861e137eece67ee519186d0497ea9485783f2",
+      "notesSha256": "37aec4c7b6fd37d80fe1970d5b400ee92396a68d7f45dd1c4e84c1d9c9cd754f"
+    },
+    {
+      "id": "dashboard-standalone",
+      "chapter": "Aspire dashboard",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "76bf1f3d9be6fb3a05550429b0400f3bfa4dabfe9da8e63bc2720a1e0ded0e6a"
+        },
+        {
+          "language": "language-powershell",
+          "sha256": "8631bb6c95b60dc4ca5a97ed5c98c6d4f68f4fcd2895f063e5341b8c3d63d04f"
+        }
+      ],
+      "links": [
+        "https://aspire.dev/dashboard/standalone/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "4527ad76f4172e1b1ba5dc5c876d771d8e745b1774f9a18676cc9cbd4756de5d",
+      "notesSha256": "41fd9ae9df8d3e2551a241b5dcba5b79ab3007bbfdf59c2470e10af2eefbb1a0"
+    },
+    {
+      "id": "dashboard-signals",
+      "chapter": "Aspire dashboard",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://aspire.dev/dashboard/overview/",
+        "https://aspire.dev/dashboard/standalone/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "82b59aeccfa31bb5eda11d866bc73dd8130def6684d992f25db789dd02fabce1",
+      "notesSha256": "bccd2fc47737d74a4c09d923bea1414ee9ffb6689c90291664d2265a10a28e8f"
+    },
+    {
+      "id": "deployment",
+      "chapter": "Aspire deployment",
+      "purpose": "why",
+      "appendix": null,
+      "codes": [],
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "9fb316591b247ee03bb544c8cb0e2d6951e269547c50c9722d9ec94d33f888b6",
+      "notesSha256": "db25c8389b497e1c44a2777287d453825b1400947a944eb9641cdb5b168d8e1f"
+    },
+    {
+      "id": "deployment-model",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "eec5103175c12b5cd724b737fa8f27fb86df437a4e0755f1e2129287df07f2bd"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "09f9668644cc1db308fa8cb06ca9f324df24379fd10c8bc172ed9ec683eb57d9"
+        }
+      ],
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101",
+        "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "26d516877c916ca4da9dab312b4bc097d17b0b4dcb79404c1fcce546e474db74",
+      "notesSha256": "3f1064d7ef91c05d037b7478a0595b51e2c701cd976dcec2cf53d72d5738f305"
+    },
+    {
+      "id": "deployment-publish",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "92ec6d9ddb2c21ec2eac66fc65dca4762a4abff68f5d54513fa532cfb12b665e"
+        }
+      ],
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "dd812107ab8874c93a2049bf0618d9b2339b65ac1c2cd2af8c9554a6c8e299de",
+      "notesSha256": "dc9e4b3705f01f2ebfa8083881c687c340bccbe5e19a64d8aed744bae3d80140"
+    },
+    {
+      "id": "deployment-deploy",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "9a52308e71d07948aefcc66c4e174aef7a341481c1179dc5135e193af7752559"
+        }
+      ],
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "e672e46e47e8e60a3b87282a4a2ed5989b93cd1c8b420f16bfc0ff10461b7531",
+      "notesSha256": "e1208c82313f785a9267e15131d703fa94a069ce0bdc4084c5cafc3e4d033943"
+    },
+    {
+      "id": "deployment-boundaries",
+      "chapter": "Aspire deployment",
+      "purpose": "machinery",
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/.github/skills/aspire-deployment/SKILL.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "e19327b8787c576ba6f622957d4622234763f263ca258a8f2354d8f75cefc54b",
+      "notesSha256": "ea9c1a486c2e41373f1d0b952e37f68b1ae8f08904b47bcd27aa172954ed777c"
+    },
+    {
+      "id": "close",
+      "chapter": "Aspire makes AI more efficient.",
+      "purpose": null,
+      "appendix": null,
+      "codes": [],
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/invertocat-black.svg",
+          "alt": "",
+          "width": "28",
+          "height": "28"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-white.svg",
+          "alt": "",
+          "width": "28",
+          "height": "28"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "b57ef5dceb41496641e5cdfe2a07a27067e8f3a6abaad71f90c1638bb93416be",
+      "notesSha256": "7ff16382ae41c93d7a4e0885a8a7c17b4e4c9cdb61f86e64d627b56f3e6c59b1"
+    },
+    {
+      "id": "history",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "codes": [],
+      "links": [
+        "https://davidpine.dev/posts/aspire-docs-mcp-tools/",
+        "https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "40db35a405ef487397507f4760192d3d91d2f97e93bb3cf273216cd56a0fcca7",
+      "notesSha256": "41cef3046c5006e0adae927f3e52f53aa557890ca4f74ebc2e968cc0596a334d"
+    },
+    {
+      "id": "historical-evidence",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "codes": [],
+      "links": [
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "7c0f173bb68df00e2309334333aee309476fa5f658d3edae11b9b1a4a274a9b1",
+      "notesSha256": "0ed54e8d9e7696d47ca8c4594c34cdd369c0cde56ed7ccc61418e922b74db2fb"
+    },
+    {
+      "id": "sources",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "codes": [],
+      "links": [
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/",
+        "https://davidpine.dev/posts/aspire-docs-mcp-tools/",
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire.dev/pull/775",
+        "https://aspire.dev/llms-full.txt",
+        "https://aspire.dev/dashboard/overview/",
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node",
+        "https://aka.ms/aspire/brand",
+        "https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/NOTICE.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/SOURCES.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "e9f426a4bdec4f24b9e78bcf1430027efa28e588f2f1ac2c4bfdcd7aaec112ab",
+      "notesSha256": "6ca5a03aba6419b1495886d033e0bfa2bdb1c646e26b2d86ee2bfa2549afa21f"
+    }
+  ],
+  "chapters": [
+    {
+      "title": "AI loops",
+      "href": "#/ai-loops"
+    },
+    {
+      "title": "Aspire dashboard",
+      "href": "#/dashboard"
+    },
+    {
+      "title": "Aspire deployment",
+      "href": "#/deployment"
+    }
+  ],
+  "protectedFiles": [
+    {
+      "path": ".github/skills/aspire-deployment/SKILL.md",
+      "gitBlob": "5c6266ccb07ed7dfdb9ed85f0c1b584fe2a177c0"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/aws.md",
+      "gitBlob": "e00750a5b87cdb9026c7c953161e6bb9730df430"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/azure.md",
+      "gitBlob": "635b8c29e92e94ba0e413af1d37f668f96e3ed45"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/cicd.md",
+      "gitBlob": "4eb984f11912526130ecff122379af04ca744ded"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/docker-compose.md",
+      "gitBlob": "290ac391229141c75b48a80f31c3104f11313dec"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/github-actions-azure-csharp.yml",
+      "gitBlob": "76abb909fe1e32bc929bd2eaaf7a11589bb26432"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/github-actions-azure-typescript.yml",
+      "gitBlob": "5675ca1d00f2ee26650c5596ee20b3b736c71079"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/javascript.md",
+      "gitBlob": "c82f911fce53ec37677b11ddc691171819a2f873"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/kubernetes.md",
+      "gitBlob": "48fc6d0e1f3d1ebaca85ef765602298d7d70da86"
+    },
+    {
+      "path": ".github/skills/aspire-deployment/references/preflight.md",
+      "gitBlob": "0d0a8772361820c14943d3bd7f244af862ffe470"
+    },
+    {
+      "path": ".github/skills/aspire-init/SKILL.md",
+      "gitBlob": "5b530adfce10ee396cde891c91e62884b0881f34"
+    },
+    {
+      "path": ".github/skills/aspire-init/references/init-workflow.md",
+      "gitBlob": "4efa63ed140e2fa7d967a6d255df7773750bac72"
+    },
+    {
+      "path": ".github/skills/aspire-init/references/templates.md",
+      "gitBlob": "83bace71a6b586b109857f646db53bb2ae21f45f"
+    },
+    {
+      "path": ".github/skills/aspire-monitoring/SKILL.md",
+      "gitBlob": "0265bb104b34a6c452152b35feee17b86ac5900a"
+    },
+    {
+      "path": ".github/skills/aspire-monitoring/references/diagnostics-bridge.md",
+      "gitBlob": "115d77ea6bb2711a4aca05b48bdabdce7ef007cf"
+    },
+    {
+      "path": ".github/skills/aspire-monitoring/references/monitoring.md",
+      "gitBlob": "43a1bd664018f7a189bbccb726c71c826ceb7c2e"
+    },
+    {
+      "path": ".github/skills/aspire-monitoring/references/playwright-handoff.md",
+      "gitBlob": "4c22b230935bb6515744af502aa6e5863888b061"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/SKILL.md",
+      "gitBlob": "780390c79a56b590e0b94e6c2da5b1ae831c1162"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/references/agent-workflows.md",
+      "gitBlob": "cded06dc620170e98359ae70f9dbe96422bc94b8"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/references/app-commands.md",
+      "gitBlob": "1a95c824119b0f8b65477457ca988967406f6c32"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/references/detection.md",
+      "gitBlob": "8bca849a9d222ff2357dfe613ed06e2fac3fa797"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/references/resource-management.md",
+      "gitBlob": "ab071b58c24e37e8ceb7f20a11e97047e86ed783"
+    },
+    {
+      "path": ".github/skills/aspire-orchestration/references/safety-guardrails.md",
+      "gitBlob": "dbe19d729fa3332d03c303a6368adab43debad6d"
+    },
+    {
+      "path": ".github/skills/aspire-project-v2-migration/SKILL.md",
+      "gitBlob": "66c71ee6a0d8df8cf741275f61e2bb3776437d16"
+    },
+    {
+      "path": ".github/skills/aspire-project-v2-migration/references/compatibility-and-validation.md",
+      "gitBlob": "c10c40e75c3bfd8b01f1326d11cdba0237ae8a2a"
+    },
+    {
+      "path": ".github/skills/aspire-project-v2-migration/references/migration-patterns.md",
+      "gitBlob": "610659b65270f530d45dd615193abfd60e025481"
+    },
+    {
+      "path": ".github/skills/aspire/SKILL.md",
+      "gitBlob": "ed6994bb0f5a2809e983a9ed38905ad7900985a9"
+    },
+    {
+      "path": ".github/skills/aspire/references/aspire-13-3-breaking-changes.md",
+      "gitBlob": "2419ef593d34af2232050e17cb6998a19d6ba1d5"
+    },
+    {
+      "path": ".github/skills/aspire/references/aspire-13-5-breaking-changes.md",
+      "gitBlob": "4fc340624d1951a483739052f350f188ddb4dd74"
+    },
+    {
+      "path": ".github/skills/aspireify/SKILL.md",
+      "gitBlob": "501aa3305c4d62f6b3b58a9982071f02ead71006"
+    },
+    {
+      "path": ".github/skills/aspireify/references/apphost-wiring.md",
+      "gitBlob": "729ea982fd6659e2e020119478804413c01c88d8"
+    },
+    {
+      "path": ".github/skills/aspireify/references/csharp-authoring.md",
+      "gitBlob": "b2d9d5714a4f90b94c7423283924da5285f99fcc"
+    },
+    {
+      "path": ".github/skills/aspireify/references/docker-compose.md",
+      "gitBlob": "54ae1206f2cfe7aef56c0d4ac4fdb1c34cd20a50"
+    },
+    {
+      "path": ".github/skills/aspireify/references/full-solution-apphosts.md",
+      "gitBlob": "bcc9b14c529ed7b2a049a359400c79a98b0c8a07"
+    },
+    {
+      "path": ".github/skills/aspireify/references/javascript-apps.md",
+      "gitBlob": "f3a0bf2dc9559bb39b730a916ab4f440ec5c0b50"
+    },
+    {
+      "path": ".github/skills/aspireify/references/opentelemetry.md",
+      "gitBlob": "382fe8f79c7ef9bbadbf418034244427955eed99"
+    },
+    {
+      "path": ".github/skills/aspireify/references/scan-and-propose.md",
+      "gitBlob": "c3ed2076c54e8ccbb5d340ba6aa60833847d3f8d"
+    },
+    {
+      "path": ".github/skills/aspireify/references/service-defaults.md",
+      "gitBlob": "0f8b417f370d44760615b2fb6f59901de825a5b2"
+    },
+    {
+      "path": ".github/skills/aspireify/references/typescript-authoring.md",
+      "gitBlob": "60b418a73d9d5ce9cb4066f1fe6d3940d68807ef"
+    },
+    {
+      "path": ".github/skills/aspireify/references/validation.md",
+      "gitBlob": "8dc6f326b890383edad4878488d03962cf277401"
+    },
+    {
+      "path": "deck/public/brand/aspire-icon-256.svg",
+      "gitBlob": "8119728471f0a020276d628797441fdecda087fe"
+    },
+    {
+      "path": "deck/public/brand/aspire-icon-32.svg",
+      "gitBlob": "89fe2a3fc8e82a802e9ab198291662631bc41c10"
+    },
+    {
+      "path": "deck/public/brand/aspire-logo-dark-horizontal.svg",
+      "gitBlob": "064d526c4e9d47b43bc1c0aa128805300bd9365c"
+    },
+    {
+      "path": "deck/public/brand/aspire-logo-light-horizontal.svg",
+      "gitBlob": "ef83cb55ef2629451578bd475a43415727312ac0"
+    },
+    {
+      "path": "deck/public/dashboard/projects-dark.webp",
+      "gitBlob": "4505861b7fd4ba0fc4732659827b6e93636544c0"
+    },
+    {
+      "path": "deck/public/dashboard/projects-light.webp",
+      "gitBlob": "214fbdb28885d2623da6391a868dce00862f7da7"
+    },
+    {
+      "path": "deck/public/github/github-black.svg",
+      "gitBlob": "39349fea62a87266ac43b5a7769d5543b6cf915a"
+    },
+    {
+      "path": "deck/public/github/github-white.svg",
+      "gitBlob": "454fe75ae09ab44d07bd174d15d2c0d8b78a56df"
+    },
+    {
+      "path": "deck/public/github/invertocat-black.svg",
+      "gitBlob": "4f46bf35718f15eed373514acb531d195f6cfe15"
+    },
+    {
+      "path": "deck/public/github/invertocat-white.svg",
+      "gitBlob": "527ba11c505b1b20b1a7b0b73630b042eda16c93"
+    },
+    {
+      "path": "deck/public/licenses/Poppins-OFL.txt",
+      "gitBlob": "3c49f41b2d2623a173a5c4f1068168faa3490f8c"
+    },
+    {
+      "path": "deck/public/licenses/aspire-brand-CC0.txt",
+      "gitBlob": "670154e3538863b2d9891fd5483160fbdfc89164"
+    },
+    {
+      "path": "deck/public/licenses/fontawesome-brands.txt",
+      "gitBlob": "45063c11ed54e094d4fcdb9da1d669b39e61890c"
+    },
+    {
+      "path": "deck/public/licenses/highlightjs-BSD.txt",
+      "gitBlob": "2250cc7eca9bfe58df2f7e0b5db32e00baadfad3"
+    },
+    {
+      "path": "deck/public/licenses/octicons-MIT.txt",
+      "gitBlob": "aa1fa80ed83cf856fb31c22ba56557c42ca84488"
+    },
+    {
+      "path": "deck/public/licenses/revealjs-MIT.txt",
+      "gitBlob": "38ff0eb4258f99016db33f771449e453c6414979"
+    },
+    {
+      "path": "deck/public/proof/docs-pr.webp",
+      "gitBlob": "3735f30709c4c1e12f3329e93c2123cc0cc64ddb"
+    },
+    {
+      "path": "deck/public/proof/native-map-dark.webp",
+      "gitBlob": "f5cd8e795d97ae308ff897a5cd21d32f0c0d442f"
+    },
+    {
+      "path": "deck/public/proof/native-map-light.webp",
+      "gitBlob": "267c629ca17a852f081d6b165a12c66496483d01"
+    },
+    {
+      "path": "deck/public/proof/product-pr.webp",
+      "gitBlob": "65bdf0fe6df870dd840a35810155241913238c2b"
+    },
+    {
+      "path": "deck/public/replays/api-member.stderr.txt",
+      "gitBlob": "99ce165d8bf14772aaa4764bfa41c6f4bf9e7162"
+    },
+    {
+      "path": "deck/public/replays/api-member.stdout.txt",
+      "gitBlob": "b48f9f7be76133271da16ded061d61bfbec9b9a9"
+    },
+    {
+      "path": "deck/public/replays/api-search.stderr.txt",
+      "gitBlob": "99ce165d8bf14772aaa4764bfa41c6f4bf9e7162"
+    },
+    {
+      "path": "deck/public/replays/api-search.stdout.txt",
+      "gitBlob": "44967bb833cbde4f6be1bb42070cece192ab540a"
+    },
+    {
+      "path": "deck/public/replays/docs-search.stderr.txt",
+      "gitBlob": "ce92ad92169297ca562447d363b6559cd18a9d49"
+    },
+    {
+      "path": "deck/public/replays/docs-search.stdout.txt",
+      "gitBlob": "f357bbaf07b60017a0b7cf3680921b7a1c2f5e17"
+    },
+    {
+      "path": "deck/public/replays/docs-section.stderr.txt",
+      "gitBlob": "ce92ad92169297ca562447d363b6559cd18a9d49"
+    },
+    {
+      "path": "deck/public/replays/docs-section.stdout.txt",
+      "gitBlob": "223f6c7c6f38f7e44c58a54ea96296db99890c69"
+    },
+    {
+      "path": "deck/public/replays/runtime-describe.stderr.txt",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "deck/public/replays/runtime-describe.stdout.txt",
+      "gitBlob": "adcc966404ef770a85f9154ec4cffe91ca1b057e"
+    },
+    {
+      "path": "deck/public/replays/runtime-traces.stderr.txt",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "deck/public/replays/runtime-traces.stdout.txt",
+      "gitBlob": "d36efc503770a1d66b192be3ff34d3f427600969"
+    },
+    {
+      "path": "deck/public/replays/runtime-wait.stderr.txt",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "deck/public/replays/runtime-wait.stdout.txt",
+      "gitBlob": "c3f2a152528c0d0506015ad4e22031ed12b893e5"
+    },
+    {
+      "path": "deck/public/speaker/david-pine.webp",
+      "gitBlob": "fa9f891c62cad182246d9adef0b39c495205c678"
+    },
+    {
+      "path": "deck/src/diagrams.ts",
+      "gitBlob": "b5b9aae1ea4f709848e4cb465905acfb0e812afa"
+    },
+    {
+      "path": "demo/SOURCE.md",
+      "gitBlob": "e2eadcff1c87679d112fe0fb87c43430d9a67937"
+    },
+    {
+      "path": "demo/Weather.Api/Models.cs",
+      "gitBlob": "3d423108e589f21b0d8288dfb1eea07c1165f4c5"
+    },
+    {
+      "path": "demo/Weather.Api/Program.cs",
+      "gitBlob": "df93d5a937f16d865030a814804307f48c5c417a"
+    },
+    {
+      "path": "demo/Weather.Api/QueryValues.cs",
+      "gitBlob": "d9b3cc6115ea8b1bfbb1644aa4979ea637c21b92"
+    },
+    {
+      "path": "demo/Weather.Api/Weather.Api.csproj",
+      "gitBlob": "f3cfc9913d092a22525ac538bb4a790b9a42b734"
+    },
+    {
+      "path": "demo/Weather.Api/WeatherEndpoints.cs",
+      "gitBlob": "db695efbccac1456d311caf014b4c53b87d1c81b"
+    },
+    {
+      "path": "demo/Weather.Api/WeatherJsonContext.cs",
+      "gitBlob": "2f63be394af2f72dee1ece6f712a0599e9d7cd6e"
+    },
+    {
+      "path": "demo/Weather.Api/WeatherMapping.cs",
+      "gitBlob": "2733b08f441f244153f0867dbd1dbe1fbc3fb958"
+    },
+    {
+      "path": "demo/Weather.Api/WeatherProvider.cs",
+      "gitBlob": "64de5da1356c9852e0eae9804f57e67ef9e4dcbc"
+    },
+    {
+      "path": "demo/Weather.Api/WeatherTelemetry.cs",
+      "gitBlob": "7e039e23544e63e42246bf761e2110102b3fa242"
+    },
+    {
+      "path": "demo/Weather.Fixtures/FixtureData.cs",
+      "gitBlob": "65de3a3a69e217c67c64dd2d7bec695fad3b62aa"
+    },
+    {
+      "path": "demo/Weather.Fixtures/FixtureState.cs",
+      "gitBlob": "042f738d59b9b11ffc06569a36f3e12652be64f9"
+    },
+    {
+      "path": "demo/Weather.Fixtures/OtlpMetrics.cs",
+      "gitBlob": "516358e81f5f78b3692c27548b05356bf2d6fccb"
+    },
+    {
+      "path": "demo/Weather.Fixtures/OtlpRelay.cs",
+      "gitBlob": "10ede5298d2fbcf990fc6ede550e14986f58b61a"
+    },
+    {
+      "path": "demo/Weather.Fixtures/Program.cs",
+      "gitBlob": "377d6b2164e03e2e388a6d1e449c6b2663c76c70"
+    },
+    {
+      "path": "demo/Weather.Fixtures/Weather.Fixtures.csproj",
+      "gitBlob": "639724f2df637f5a9f406c1dc5da6a8ec79a8a25"
+    },
+    {
+      "path": "demo/Weather.Tests/MappingTests.cs",
+      "gitBlob": "d65e429ff76f6aa735c1c5228340cd178073bb4a"
+    },
+    {
+      "path": "demo/Weather.Tests/OtlpMetricsTests.cs",
+      "gitBlob": "e8ba46a7be8f49ff8c9d00a914983c701c4a5d2e"
+    },
+    {
+      "path": "demo/Weather.Tests/ProviderTests.cs",
+      "gitBlob": "11334fd1e9833dfe75708c110407898ff5faf261"
+    },
+    {
+      "path": "demo/Weather.Tests/QueryTests.cs",
+      "gitBlob": "c21372c33b95b3bc8dacff1bb6229a4781dab10c"
+    },
+    {
+      "path": "demo/Weather.Tests/Weather.Tests.csproj",
+      "gitBlob": "f50e2e025563871edbf666e5aea6058f0c4616bf"
+    },
+    {
+      "path": "demo/frontend/.dockerignore",
+      "gitBlob": "b9470778764f72c5257a3361590d2994547f90e1"
+    },
+    {
+      "path": "demo/frontend/eslint.config.js",
+      "gitBlob": "82805d74a57cd09eae34cb502d39540a3f67a20c"
+    },
+    {
+      "path": "demo/frontend/index.html",
+      "gitBlob": "e395f704b53670f9df56fd3980cb5de80d509041"
+    },
+    {
+      "path": "demo/frontend/package-lock.json",
+      "gitBlob": "e18be3f71068da6a69d029a053d97ebd9d1b87ed"
+    },
+    {
+      "path": "demo/frontend/package.json",
+      "gitBlob": "6cac2c866d5b081f9984f2b350d7703a2aa4eabe"
+    },
+    {
+      "path": "demo/frontend/public/Aspire.png",
+      "gitBlob": "d4be662a618a66cc2f0492b7a505d4279d608941"
+    },
+    {
+      "path": "demo/frontend/public/github.svg",
+      "gitBlob": "162a4a43a3532e3266029065d1d789fd6f19d9bd"
+    },
+    {
+      "path": "demo/frontend/src/App.css",
+      "gitBlob": "e3c192224cf2da4f510392c00127724e4019bbec"
+    },
+    {
+      "path": "demo/frontend/src/App.tsx",
+      "gitBlob": "23d1ef97790a41d00821ec0d5804c31b554da48c"
+    },
+    {
+      "path": "demo/frontend/src/components/icons/Glyphs.tsx",
+      "gitBlob": "344830be5a88c39c09066f8a44129297475eb60b"
+    },
+    {
+      "path": "demo/frontend/src/components/icons/WeatherIcon.tsx",
+      "gitBlob": "8a3cb9a9bad2f4c2727ef9ba932c2a2e6753a1ec"
+    },
+    {
+      "path": "demo/frontend/src/components/map/MapClickHandler.tsx",
+      "gitBlob": "830f8873985b373d8ee0223ffd3a111aec5e2c26"
+    },
+    {
+      "path": "demo/frontend/src/components/map/MapStyleControl.tsx",
+      "gitBlob": "6db129a355f959a3457d64507e1dd83ce64e0b18"
+    },
+    {
+      "path": "demo/frontend/src/components/map/RadarLegend.tsx",
+      "gitBlob": "ddf8adefa68c4d3021be3dff25e9d8715d0a7bbb"
+    },
+    {
+      "path": "demo/frontend/src/components/map/RadarTimeline.tsx",
+      "gitBlob": "34fb4d291fe5a32f893192c0b6a65e7ef8601094"
+    },
+    {
+      "path": "demo/frontend/src/components/map/RadarToggle.tsx",
+      "gitBlob": "4917e4e0e15a8a4de218c7672fb1d3b8f569cb76"
+    },
+    {
+      "path": "demo/frontend/src/components/map/WeatherMap.tsx",
+      "gitBlob": "35abb217ddc94a35cfa9c39131e3a0e053cfe65c"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/ControlPane.tsx",
+      "gitBlob": "550f27629ed1c68368612918590ca76fdb065f4e"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/DailyForecast.tsx",
+      "gitBlob": "964d52dc288840784e87d945b9d5b37e28703b4b"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/Forecast.tsx",
+      "gitBlob": "59c6b721fad99f6c53adbcae7f7b62708974a0df"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/ForecastSkeleton.tsx",
+      "gitBlob": "24e61a93719c95e322c81136c40df8cbfba83d03"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/HourlyStrip.tsx",
+      "gitBlob": "cd48062da09bb19f89ae6d01d84d0b09d0ea04ab"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/Metrics.tsx",
+      "gitBlob": "fb7503eb772dd2fdae96ae8ac30bb7cf41e0fde6"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/NowCard.tsx",
+      "gitBlob": "226ae583ee4eec7e9647b782bf47be7e8eb48d32"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/PaneHeader.tsx",
+      "gitBlob": "96097d02e0c847b00aa8f47c0c494fa42f857545"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/PaneLauncher.tsx",
+      "gitBlob": "13e0469c1d5693e9f4c4496e4523cd3183f319bd"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/SearchBox.tsx",
+      "gitBlob": "35599730e8180b2851d0aba077ccae04fcc9eaec"
+    },
+    {
+      "path": "demo/frontend/src/components/pane/SunTimes.tsx",
+      "gitBlob": "c253f79a4a2da24bd06fe324aff9f8097801d916"
+    },
+    {
+      "path": "demo/frontend/src/hooks/useGeocodeSearch.ts",
+      "gitBlob": "cd132dabc9ffa2e3cb32617a48c3ea937c305855"
+    },
+    {
+      "path": "demo/frontend/src/hooks/useMapInteraction.ts",
+      "gitBlob": "a3ecb8499882c41788de9be0cbd91095f49d2d55"
+    },
+    {
+      "path": "demo/frontend/src/hooks/useRadar.ts",
+      "gitBlob": "635a47d7da892ba875244e8ea123026d910160ff"
+    },
+    {
+      "path": "demo/frontend/src/hooks/useWeather.ts",
+      "gitBlob": "1c8bb47038ca00d308a57ee2d6b69966ff1e6854"
+    },
+    {
+      "path": "demo/frontend/src/index.css",
+      "gitBlob": "d40972062fd7ea612afc8dd6d406d60090dfb4d1"
+    },
+    {
+      "path": "demo/frontend/src/lib/format.ts",
+      "gitBlob": "4298d9936da373935563048af1862c8aeba21402"
+    },
+    {
+      "path": "demo/frontend/src/lib/http.ts",
+      "gitBlob": "688466b4563795470072ccd838fd455155fb6355"
+    },
+    {
+      "path": "demo/frontend/src/lib/mapStyles.ts",
+      "gitBlob": "9a058a3fa7bdf6ccf79e334b8f3ff9b5c3e27e54"
+    },
+    {
+      "path": "demo/frontend/src/lib/weatherCodes.ts",
+      "gitBlob": "61bbd6f4c496806b54f326ef70a42ce833ae4252"
+    },
+    {
+      "path": "demo/frontend/src/lib/weatherVisuals.ts",
+      "gitBlob": "1729348e2aa242ffea95d09258fb0813ddaafda4"
+    },
+    {
+      "path": "demo/frontend/src/main.tsx",
+      "gitBlob": "68e7a29b41e34c9ceec392031ba6f6837303d6e6"
+    },
+    {
+      "path": "demo/frontend/src/types/map.ts",
+      "gitBlob": "6c538a3902ed5858d2f6733ec5ad89643b87eb1b"
+    },
+    {
+      "path": "demo/frontend/src/types/weather.ts",
+      "gitBlob": "8406ee865a5d7e526de79381a6097353ac38aca2"
+    },
+    {
+      "path": "demo/frontend/src/vite-env.d.ts",
+      "gitBlob": "11f02fe2a0061d6e6e1f271b21da95423b448b32"
+    },
+    {
+      "path": "demo/frontend/tsconfig.app.json",
+      "gitBlob": "c9ccbd4c59447b9eee284f0b85de748b750299d8"
+    },
+    {
+      "path": "demo/frontend/tsconfig.json",
+      "gitBlob": "1ffef600d959ec9e396d5a260bd3f5b927b2cef8"
+    },
+    {
+      "path": "demo/frontend/tsconfig.node.json",
+      "gitBlob": "9728af2d81af0efc7985ffc705287be4bad10ba4"
+    },
+    {
+      "path": "demo/frontend/vite.config.ts",
+      "gitBlob": "5d05672ed55d18eadcd92282f720cb86cc680dc7"
+    },
+    {
+      "path": "demo/host/.vscode/extensions.json",
+      "gitBlob": "782b41e6b10dc63942e9f6584e1bcb5187c6bf2f"
+    },
+    {
+      "path": "demo/host/apphost.cs",
+      "gitBlob": "3b6815e14ada912dcb05f641b6035e938dc4a300"
+    },
+    {
+      "path": "demo/host/apphost.run.json",
+      "gitBlob": "3bfa82c310aa9a05e8082b8c1a06f5fb14a3a30a"
+    },
+    {
+      "path": "demo/host/aspire.config.json",
+      "gitBlob": "a777aa51facf7b132ecbacf2614c3e952f44ad61"
+    },
+    {
+      "path": "demo/upstream/LICENSE",
+      "gitBlob": "4f0d38ca3728d10bbdace067e20b22de42994af0"
+    },
+    {
+      "path": "demo/upstream/README.md",
+      "gitBlob": "8e7e2d387f9b5a2499b9e30b7c4eaab606cce425"
+    },
+    {
+      "path": "demo/upstream/api/package-lock.json",
+      "gitBlob": "ddbaa380d33a65e325e7adbb06b3707834c03ee6"
+    },
+    {
+      "path": "demo/upstream/api/package.json",
+      "gitBlob": "df61df64e83708db133feebe6c5aaeb8a18e34e7"
+    },
+    {
+      "path": "demo/upstream/api/src/index.ts",
+      "gitBlob": "625672958bc3d3dce3debdc40ee1f4a6da00ae0f"
+    },
+    {
+      "path": "demo/upstream/api/src/instrumentation.ts",
+      "gitBlob": "a5a16c1930523d26672798c86b27984c2ba9a758"
+    },
+    {
+      "path": "demo/upstream/api/src/openapi.ts",
+      "gitBlob": "91a605a3c2626fd7992f35db834ac1e4d4fde57f"
+    },
+    {
+      "path": "demo/upstream/api/tsconfig.json",
+      "gitBlob": "4b7b4f510182be9227b00220f8058a2047c44aa3"
+    },
+    {
+      "path": "demo/upstream/apphost.mts",
+      "gitBlob": "3a12e6fd9dca001e9e9075780ff91525055cee7d"
+    },
+    {
+      "path": "demo/upstream/aspire.config.json",
+      "gitBlob": "141f44599c39c6721fdd5753c7f9007c9506817a"
+    },
+    {
+      "path": "demo/upstream/eslint.config.mjs",
+      "gitBlob": "a6d7c582c8fa0afe67f14e3b0ebe0b9aa8b5683e"
+    },
+    {
+      "path": "demo/upstream/frontend/.dockerignore",
+      "gitBlob": "b9470778764f72c5257a3361590d2994547f90e1"
+    },
+    {
+      "path": "demo/upstream/frontend/eslint.config.js",
+      "gitBlob": "82805d74a57cd09eae34cb502d39540a3f67a20c"
+    },
+    {
+      "path": "demo/upstream/frontend/index.html",
+      "gitBlob": "e395f704b53670f9df56fd3980cb5de80d509041"
+    },
+    {
+      "path": "demo/upstream/frontend/package-lock.json",
+      "gitBlob": "e18be3f71068da6a69d029a053d97ebd9d1b87ed"
+    },
+    {
+      "path": "demo/upstream/frontend/package.json",
+      "gitBlob": "6cac2c866d5b081f9984f2b350d7703a2aa4eabe"
+    },
+    {
+      "path": "demo/upstream/frontend/public/Aspire.png",
+      "gitBlob": "d4be662a618a66cc2f0492b7a505d4279d608941"
+    },
+    {
+      "path": "demo/upstream/frontend/public/github.svg",
+      "gitBlob": "162a4a43a3532e3266029065d1d789fd6f19d9bd"
+    },
+    {
+      "path": "demo/upstream/frontend/src/App.css",
+      "gitBlob": "e3c192224cf2da4f510392c00127724e4019bbec"
+    },
+    {
+      "path": "demo/upstream/frontend/src/App.tsx",
+      "gitBlob": "23d1ef97790a41d00821ec0d5804c31b554da48c"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/icons/Glyphs.tsx",
+      "gitBlob": "344830be5a88c39c09066f8a44129297475eb60b"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/icons/WeatherIcon.tsx",
+      "gitBlob": "8a3cb9a9bad2f4c2727ef9ba932c2a2e6753a1ec"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/MapClickHandler.tsx",
+      "gitBlob": "830f8873985b373d8ee0223ffd3a111aec5e2c26"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/MapStyleControl.tsx",
+      "gitBlob": "6db129a355f959a3457d64507e1dd83ce64e0b18"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/RadarLegend.tsx",
+      "gitBlob": "ddf8adefa68c4d3021be3dff25e9d8715d0a7bbb"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/RadarTimeline.tsx",
+      "gitBlob": "34fb4d291fe5a32f893192c0b6a65e7ef8601094"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/RadarToggle.tsx",
+      "gitBlob": "4917e4e0e15a8a4de218c7672fb1d3b8f569cb76"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/map/WeatherMap.tsx",
+      "gitBlob": "35abb217ddc94a35cfa9c39131e3a0e053cfe65c"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/ControlPane.tsx",
+      "gitBlob": "550f27629ed1c68368612918590ca76fdb065f4e"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/DailyForecast.tsx",
+      "gitBlob": "964d52dc288840784e87d945b9d5b37e28703b4b"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/Forecast.tsx",
+      "gitBlob": "59c6b721fad99f6c53adbcae7f7b62708974a0df"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/ForecastSkeleton.tsx",
+      "gitBlob": "24e61a93719c95e322c81136c40df8cbfba83d03"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/HourlyStrip.tsx",
+      "gitBlob": "cd48062da09bb19f89ae6d01d84d0b09d0ea04ab"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/Metrics.tsx",
+      "gitBlob": "fb7503eb772dd2fdae96ae8ac30bb7cf41e0fde6"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/NowCard.tsx",
+      "gitBlob": "226ae583ee4eec7e9647b782bf47be7e8eb48d32"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/PaneHeader.tsx",
+      "gitBlob": "96097d02e0c847b00aa8f47c0c494fa42f857545"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/PaneLauncher.tsx",
+      "gitBlob": "13e0469c1d5693e9f4c4496e4523cd3183f319bd"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/SearchBox.tsx",
+      "gitBlob": "35599730e8180b2851d0aba077ccae04fcc9eaec"
+    },
+    {
+      "path": "demo/upstream/frontend/src/components/pane/SunTimes.tsx",
+      "gitBlob": "c253f79a4a2da24bd06fe324aff9f8097801d916"
+    },
+    {
+      "path": "demo/upstream/frontend/src/hooks/useGeocodeSearch.ts",
+      "gitBlob": "cd132dabc9ffa2e3cb32617a48c3ea937c305855"
+    },
+    {
+      "path": "demo/upstream/frontend/src/hooks/useMapInteraction.ts",
+      "gitBlob": "a3ecb8499882c41788de9be0cbd91095f49d2d55"
+    },
+    {
+      "path": "demo/upstream/frontend/src/hooks/useRadar.ts",
+      "gitBlob": "635a47d7da892ba875244e8ea123026d910160ff"
+    },
+    {
+      "path": "demo/upstream/frontend/src/hooks/useWeather.ts",
+      "gitBlob": "1c8bb47038ca00d308a57ee2d6b69966ff1e6854"
+    },
+    {
+      "path": "demo/upstream/frontend/src/index.css",
+      "gitBlob": "d40972062fd7ea612afc8dd6d406d60090dfb4d1"
+    },
+    {
+      "path": "demo/upstream/frontend/src/lib/format.ts",
+      "gitBlob": "4298d9936da373935563048af1862c8aeba21402"
+    },
+    {
+      "path": "demo/upstream/frontend/src/lib/http.ts",
+      "gitBlob": "688466b4563795470072ccd838fd455155fb6355"
+    },
+    {
+      "path": "demo/upstream/frontend/src/lib/mapStyles.ts",
+      "gitBlob": "9a058a3fa7bdf6ccf79e334b8f3ff9b5c3e27e54"
+    },
+    {
+      "path": "demo/upstream/frontend/src/lib/weatherCodes.ts",
+      "gitBlob": "61bbd6f4c496806b54f326ef70a42ce833ae4252"
+    },
+    {
+      "path": "demo/upstream/frontend/src/lib/weatherVisuals.ts",
+      "gitBlob": "1729348e2aa242ffea95d09258fb0813ddaafda4"
+    },
+    {
+      "path": "demo/upstream/frontend/src/main.tsx",
+      "gitBlob": "68e7a29b41e34c9ceec392031ba6f6837303d6e6"
+    },
+    {
+      "path": "demo/upstream/frontend/src/types/map.ts",
+      "gitBlob": "6c538a3902ed5858d2f6733ec5ad89643b87eb1b"
+    },
+    {
+      "path": "demo/upstream/frontend/src/types/weather.ts",
+      "gitBlob": "8406ee865a5d7e526de79381a6097353ac38aca2"
+    },
+    {
+      "path": "demo/upstream/frontend/src/vite-env.d.ts",
+      "gitBlob": "11f02fe2a0061d6e6e1f271b21da95423b448b32"
+    },
+    {
+      "path": "demo/upstream/frontend/tsconfig.app.json",
+      "gitBlob": "c9ccbd4c59447b9eee284f0b85de748b750299d8"
+    },
+    {
+      "path": "demo/upstream/frontend/tsconfig.json",
+      "gitBlob": "1ffef600d959ec9e396d5a260bd3f5b927b2cef8"
+    },
+    {
+      "path": "demo/upstream/frontend/tsconfig.node.json",
+      "gitBlob": "9728af2d81af0efc7985ffc705287be4bad10ba4"
+    },
+    {
+      "path": "demo/upstream/frontend/vite.config.ts",
+      "gitBlob": "de23e504e52e7c3492db326ed69c8a242b03cebf"
+    },
+    {
+      "path": "demo/upstream/images/aspire-with-node-primary-page-dark.png",
+      "gitBlob": "6462234aba35cfbfdaa684419db2f7ed929226da"
+    },
+    {
+      "path": "demo/upstream/images/aspire-with-node-primary-page-light.png",
+      "gitBlob": "2f16582ac90f10b5f57b8b88d70781c78855b1a8"
+    },
+    {
+      "path": "demo/upstream/package-lock.json",
+      "gitBlob": "ff7d1d6b50e72e843fe44caac13cc48a9a5b0828"
+    },
+    {
+      "path": "demo/upstream/package.json",
+      "gitBlob": "1aea60db75762e8aff5b48af64ff10e29fbfa7af"
+    },
+    {
+      "path": "demo/upstream/tsconfig.apphost.json",
+      "gitBlob": "f4c827b47d3924d7b32677ddb32812f3975a01f3"
+    },
+    {
+      "path": "demo/upstream/tsconfig.json",
+      "gitBlob": "1e44664428b68082d7b3dadb0397e6ddb0eab379"
+    },
+    {
+      "path": "demo/verification/browser.mjs",
+      "gitBlob": "8cceb4a3a80e0c5de333fd092c5aa974412684b0"
+    },
+    {
+      "path": "demo/verification/package-lock.json",
+      "gitBlob": "5c4573dad24e0974d0b5daba382e20ed95af1411"
+    },
+    {
+      "path": "demo/verification/package.json",
+      "gitBlob": "fd530dcf0b3baa4f41a1ed372eb0d01a0cc884cf"
+    },
+    {
+      "path": "docs/ABSTRACT.md",
+      "gitBlob": "61198a0fb39a2af548e6073b04f4b35105a04edb"
+    },
+    {
+      "path": "docs/evidence/browser-logs.json",
+      "gitBlob": "828e5f1aeede526de44fc13fe3a388acb70867b4"
+    },
+    {
+      "path": "docs/evidence/cli-replay.json",
+      "gitBlob": "c3e8c6953a7a36e97020dfa19a3bbdf5def38fe5"
+    },
+    {
+      "path": "docs/evidence/dashboard-deployment.json",
+      "gitBlob": "a80802379525260105f735d11c15cd50bd8f5f5b"
+    },
+    {
+      "path": "scripts/Install-Aspire.ps1",
+      "gitBlob": "824ed4bcd6607231b8873120fd15f298b93ea9a0"
+    },
+    {
+      "path": "scripts/Publish-Native.ps1",
+      "gitBlob": "c27d7faff1666eaf007111817f5cb96cf1dcea21"
+    },
+    {
+      "path": "scripts/Show-DocsLoop.ps1",
+      "gitBlob": "942faffa5a8808a5acb20d79de5b37353a08b901"
+    },
+    {
+      "path": "scripts/Start-Demo.ps1",
+      "gitBlob": "34a24ec874b419b03b5d1fb72638831a3e9ed1ba"
+    },
+    {
+      "path": "scripts/Test-DocsLoop.ps1",
+      "gitBlob": "473a53ace1faa2eafa4088ee839f4b5a6bf6f3c1"
+    },
+    {
+      "path": "scripts/Test-Native.ps1",
+      "gitBlob": "73685a40f75cd532ae545e246e5916070b0375d4"
+    },
+    {
+      "path": "scripts/Verify-Skills.ps1",
+      "gitBlob": "4ee8d55fa48f429669f092d356122e0618b9ecfa"
+    },
+    {
+      "path": "scripts/notify-links.mjs",
+      "gitBlob": "c3a0a884827f38877f15d1722bf3dc880064e9eb"
+    },
+    {
+      "path": "scripts/notify-links.test.mjs",
+      "gitBlob": "c3356391dfaec68d589ef568a0f00173146391c5"
+    }
+  ]
+}

@@ -17,6 +17,7 @@ Artwork is released under [CC0 1.0 Universal](licenses/aspire-brand-CC0.txt). CC
 ## Fonts, deck, and skills
 
 - Poppins: copyright the Poppins Project Authors, [SIL Open Font License 1.1](licenses/Poppins-OFL.txt). Fonts are self-hosted; no remote Google Fonts request is needed.
+- Fira Code: copyright the Fira Code Project Authors, [SIL Open Font License 1.1](deck/public/licenses/FiraCode-OFL.txt). The deck self-hosts the pinned font for code, filenames, and keyboard hints.
 - reveal.js: [original MIT license](licenses/revealjs-MIT.txt).
 - Presentation icons: one family, [Primer Octicons](https://primer.style/octicons), [MIT](deck/public/licenses/octicons-MIT.txt).
 - Syntax highlighting: [Highlight.js](https://highlightjs.org), [BSD-3-Clause](deck/public/licenses/highlightjs-BSD.txt).

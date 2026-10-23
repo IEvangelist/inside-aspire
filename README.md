@@ -56,6 +56,15 @@ node .\deck\node_modules\vite\bin\vite.js preview deck --host 127.0.0.1 --port 4
 
 Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys present; `Esc` opens overview; `R` switches reading mode; `T` switches theme; `S` opens speaker notes. Chapter links and slide IDs are stable. Phones default to scrolling. The Print control opens reveal.js's printable view. Reduced motion and light/dark modes are supported.
 
+The presentation shell additively adopts [Aspire deck template 719b552](https://github.com/IEvangelist/aspire-deck-template/tree/719b552b592c85f31fa5d257a1860117ea785f58):
+official-site typography/surfaces, self-hosted Fira Code, shared window chrome,
+fixed menu controls, numbered navigation and reliable reading/overview/print.
+The HTML-authored talk keeps highlighted code-line navigation, desktop paired
+layouts, all seven click-to-expand full-output replays and the original graph
+reveal rules. Copy buttons preserve exact source; print includes complete code
+on one variable-height page per slide. This manual sync does not make future
+template changes automatic. [Preservation/source proof](docs/evidence/template-ux.json).
+
 The deck has 41 slides: 38 in the full-hour presentation, then three untimed appendices. The core links are `#/ai-loops`, `#/dashboard`, and `#/deployment`; direct demos and legacy hashes remain available. Seven **Recorded CLI run** pairs retain full genuine stdout in one bounded output-only scroller, with no visible status row. Six JSON responses preserve their full envelopes and escaped Markdown strings; wait is plaintext. [Capture proof and controls](docs/CLI-REPLAY.md) link immutable output. Read/print/reduced motion expose pairs immediately; read/print do not clip output. New dashboard/deployment commands are honestly labeled source-backed references, not additional captures or executed infrastructure.
 
 ## The actual AI loops

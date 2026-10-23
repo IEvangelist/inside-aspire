@@ -16,6 +16,18 @@ The portrait's downloaded PNG SHA256 is `f6b7c99ff0fa5ded75609eb438bdb53f17a31ac
 
 ## Official branding and icons
 
+The additive UX sync uses [template 719b552](https://github.com/IEvangelist/aspire-deck-template/tree/719b552b592c85f31fa5d257a1860117ea785f58)
+as a read-only shell reference. Existing artwork/portrait/native/PR/dashboard
+image bytes remain unchanged. The only new font is self-hosted
+`@fontsource/fira-code` 5.3.0, with its original
+[SIL OFL](../deck/public/licenses/FiraCode-OFL.txt). It changes glyph rendering,
+not copied operators, whitespace, recorded output or generated JSON.
+The clipboard write argument retains the original LF source exactly; Windows
+can normalize LF to CRLF in its native clipboard readback. Range copy and
+immutable linked stdout keep their original contents.
+Template traffic-light window chrome is decorative; original captions,
+recorded-run labels, source links and graph semantics remain.
+
 The navigation uses the unchanged official Aspire compact mark. GitHub branding is secondary and identifies the GitHub-hosted workflow, PRs, and repository lineage; it does not replace Aspire or imply sponsorship.
 
 The black/white GitHub Invertocat and wordmark files come unchanged from [GitHub's official logo archive](https://brand.github.com/GitHub_Logos.zip), linked by the [current usage guidance](https://brand.github.com/foundations/logo). Archive SHA256: `e2a67d6cc51d990a52c46c1cf6bcab688db4830982174bca50e0be7a5c2f3194`.

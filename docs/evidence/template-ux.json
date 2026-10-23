@@ -1,0 +1,53 @@
+{
+  "targetBaseline": "838d5e766947a4e27dbd12919ede7a6bc708c0f5",
+  "template": {
+    "repository": "IEvangelist/aspire-deck-template",
+    "commit": "719b552b592c85f31fa5d257a1860117ea785f58",
+    "url": "https://github.com/IEvangelist/aspire-deck-template/tree/719b552b592c85f31fa5d257a1860117ea785f58",
+    "archiveSha256": "b19c2e4c53c71dda1c8a110a75d7c7a36cbc502d542fd171e7bc36b6feeb9786",
+    "readOnlySources": ["README.md", "SKILL.md", "src/styles.css", "src/main.ts", "src/code.ts", "src/icons.ts", "src/diagrams.ts", "tests/shell.spec.ts", "package.json"],
+    "sourceExecution": "None. Pinned reference archive downloaded into ignored artifacts; no template build, tests, install, scripts or edits.",
+    "sync": "Manual additive UX port, not whole-template replacement, Markdown conversion, shared package or automatic future updates."
+  },
+  "baseline": {
+    "inventory": "template-ux-baseline.json",
+    "slides": 41,
+    "timedMain": 38,
+    "untimedAppendices": 3,
+    "presentationMinutes": 60,
+    "codeBlocks": 30,
+    "pairedLayouts": { "code-pair": 5, "code-and-copy": 2, "contrast": 3 },
+    "replays": 7,
+    "graphs": 4,
+    "nodes": 31,
+    "labels": 66,
+    "routes": 32,
+    "forwardBackStates": 76,
+    "protectedFiles": 226,
+    "preEditBehaviorChecks": 10
+  },
+  "ported": [
+    "Heavier Poppins/open heading tracking and selective same-copy accent spans",
+    "Self-hosted Fira Code5.3.0 with original SIL OFL",
+    "Quiet ambient purple glow and title-only hero grid",
+    "Hairline surfaces and squared44px icon/label actions",
+    "Shared traffic-light code/diagram windows with fixed captions and exact-source copy",
+    "Numbered menu chips, keyboard keycaps and fixed menu heading/presenter controls",
+    "Themed thin scrollbars owned by the actual code/output/list bodies",
+    "Independent natural reading viewport, framed clickable overview, full-code print"
+  ],
+  "intentionalTalkSpecificDifferences": [
+    "Existing HTML authoring, all talk copy/notes/IDs/order/citations/media and stable aliases remain",
+    "Original explicit-language syntax.ts/focusCode retains all presenter-controlled line navigation",
+    "All ten existing side-by-side surfaces remain desktop pairs and narrow DOM-order stacks",
+    "All seven genuine recorded command/full-stdout replays retain motion, rewind, interruption and honesty",
+    "No visible replay status/excerpt narration rows or gaps; output-only scrolling below anchored command/header",
+    "Six complete original JSON responses retain Markdown inside content strings, plus actual plaintext wait",
+    "SVG edge stages remain max(edge,source,target), not template source-only arrow-first staging",
+    "Existing graph geometry, ports, marker IDs, fonts and76forward/back states remain",
+    "No blanket Steps styles applied to evidence chains/mobile graph lists",
+    "Narrow/short views still default to natural reading. Explicit presentation preserves the original full Reveal fragment model instead of adding a new compact graph-staging mode.",
+    "One variable-height print page per original slide preserves very long stdout without shrinking or clipping",
+    "No demo/native/AppHost/scripts/skills/abstract/capture/proof/image/brand/profile/cloud/site/gist/notification work"
+  ]
+}
