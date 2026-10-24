@@ -120,27 +120,50 @@ test('semantic roles, mapped identifiers, labels and rails retain theme and prin
       await page.emulateMedia({ media, colorScheme: theme, reducedMotion: 'reduce' });
       await page.goto(`?theme=${theme}&mode=read`);
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-      await page.locator('.pkg-api').evaluateAll((tokens) => tokens.forEach((token) =>
-        token.closest('.code-line')!.classList.add('is-focused')));
-      const ratios = await page.evaluate(() => {
-        function luminance(color: string) {
-          const rgb = color.match(/[\d.]+/g)!.slice(0, 3).map(Number);
+      const samples = await page.evaluate((mode) => {
+        function channels(color: string) {
+          const values = color.match(/[\d.]+/g)?.map(Number);
+          if (!values || values.length < 3) throw new Error(`Unsupported computed contrast color: ${color}`);
+          return values;
+        }
+        function luminance(rgb: number[]) {
           return rgb.map((value) => value / 255).map((value) =>
             value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4)
             .reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
         }
+        function paintedBackground(element: Element) {
+          const rgb = [0, 0, 0];
+          let uncovered = 1;
+          for (let current: Element | null = element; current; current = current.parentElement) {
+            const values = channels(getComputedStyle(current).backgroundColor);
+            const alpha = values[3] ?? 1;
+            rgb.forEach((_, index) => { rgb[index] += values[index] * alpha * uncovered; });
+            uncovered *= 1 - alpha;
+            if (uncovered === 0) return rgb;
+          }
+          throw new Error('Contrast measurement could not resolve an opaque painted ancestor.');
+        }
         const result = [];
         for (const token of document.querySelectorAll<HTMLElement>('.pkg-api, .package-label')) {
-          const surface = token.matches('.pkg-api')
-            ? token.closest('.is-focused')! : token.closest('figcaption')!;
-          const text = luminance(getComputedStyle(token).color);
-          const background = luminance(getComputedStyle(surface).backgroundColor);
-          result.push((Math.max(text, background) + 0.05) / (Math.min(text, background) + 0.05));
+          const api = token.matches('.pkg-api');
+          if (api) {
+            const line = token.closest<HTMLElement>('.code-line')!;
+            line.classList.add('is-focused');
+            // Transparent print lines paint their light code panel, never opaque black.
+            if (mode === 'print') line.style.backgroundColor = 'transparent';
+          }
+          const backgroundRgb = paintedBackground(token);
+          const text = luminance(channels(getComputedStyle(token).color).slice(0, 3));
+          const background = luminance(backgroundRgb);
+          result.push({ api, backgroundRgb, ratio: (Math.max(text, background) + 0.05) / (Math.min(text, background) + 0.05) });
         }
         return result;
-      });
-      expect(ratios.length).toBeGreaterThanOrEqual(6);
-      expect(Math.min(...ratios)).toBeGreaterThanOrEqual(4.5);
+      }, media);
+      expect(samples.length).toBeGreaterThanOrEqual(6);
+      expect(Math.min(...samples.map((sample) => sample.ratio))).toBeGreaterThanOrEqual(4.5);
+      if (media === 'print') {
+        for (const sample of samples.filter((sample) => sample.api)) expect(sample.backgroundRgb).toEqual([239, 236, 247]);
+      }
       await expect(page.locator('#lifecycle .package-label')).toContainText('Aspire.Hosting.JavaScript');
       await expect(page.locator('#deployment-model .package-label')).toContainText('Aspire.Hosting.Docker');
     }
