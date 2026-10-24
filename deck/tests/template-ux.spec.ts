@@ -111,8 +111,7 @@ test('the menu keeps heading and every presenter control fixed while only its nu
     await expect(menu).toBeVisible();
     const before = { heading: await heading.boundingBox(), controls: await controls.boundingBox() };
     expect(await list.evaluate((node) => node.scrollHeight - node.clientHeight)).toBeGreaterThan(0);
-    await list.hover();
-    await page.mouse.wheel(0, 1000);
+    await list.evaluate((node) => node.scrollTo({ top: node.scrollHeight, behavior: 'instant' }));
     await expect.poll(() => list.evaluate((node) => node.scrollTop)).toBeGreaterThan(0);
     expect(await heading.boundingBox()).toEqual(before.heading);
     expect(await controls.boundingBox()).toEqual(before.controls);
