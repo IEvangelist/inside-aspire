@@ -265,6 +265,109 @@ JSON is not clipped or squeezed into a projector-sized page.
 
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu leads with exactly the user's three primary areas; smaller direct demo/appendix jumps remain separate. The chapter indicator follows the active area through supporting slides. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
 
+### Native speaker view and complete backward navigation
+
+Open **Speaker notes** from the menu or focus the presentation and press **S**.
+Allow pop-ups for the deck's site. Reveal's native presenter console opens in
+a separate window with current and upcoming previews, the original timed notes,
+a clock and elapsed timer. Move that window to the presenter's second screen;
+share the audience window, not the notes window. The native console's arrow
+keys also drive the audience presentation. The `receiver` frames always use
+presentation layout, even though they are narrow. A blocked popup reports an
+actionable error instead of claiming success.
+
+Speaker notes are public source, not confidential presenter-only storage. The
+38 original main-slide note ranges still cover exactly 60 minutes; optional
+language references do not extend the timed talk.
+
+After walking a code block forward and leaving its slide, **Previous** and
+**ArrowLeft** return to its last step, rewind every highlight, then leave for
+the preceding slide. Browser **Back/Forward** restores the exact history state.
+An absent fragment in the URL means the initial no-highlight state, not the
+first cached highlight. Explicit fragment links, code-body keyboard scrolling,
+selection and Copy keep their original behavior.
+Pointer Copy returns focus to the deck, so the next backward key is not trapped
+on the button. Keyboard-activated Copy keeps accessible control focus. A short,
+non-scrolling code body does not consume slide navigation keys; an actually
+scrollable output/code region still owns its arrows for native scrolling.
+Native presenter receiver URLs keep their query flags across reload, with
+audience toolbar chrome hidden and receiver history disabled. Inside has no
+`base` element, so native hash updates retain those flags and keep the current
+preview state reloadable; the template's base-specific workaround is not copied.
+
+### Package callouts and optional language references
+
+Source windows opt into the template's package-ownership convention with
+`data-pkg-cyan="Aspire.Hosting.JavaScript"`,
+`data-add-cyan="javascript"`, `data-apis-cyan="AddViteApp WithNpm"` and
+`data-lines-cyan="7-12"` on their `pre`. Valid accents are purple/cyan/pink/teal.
+At least one package/add label and exact APIs are required. Without line ranges,
+only lines with an owned API get a rail. Do not overlap ranges or assign one
+API to multiple packages. Unknown/missing/non-code mappings fail visibly.
+Strings/comments and common endpoint/reference/environment/build operations
+remain neutral; legends and rails never enter copied source.
+
+The original native executable/Vite excerpt remains exact. Cyan identifies
+JavaScript APIs; purple identifies the documented Docker environment; teal
+identifies the optional official `Aspire.Hosting.Go` / `aspire add go` API.
+The old deprecated Toolkit Golang package and unsupported Go AppHost authoring
+are not presented. All focus bands have square interior joins and round only
+the ends of each contiguous group.
+
+In the optional `history` appendix, open **C# AppHost + Go service references**
+to switch to natural reading. It shows an illustrative top-level `AppHost.cs`
+and a separate `main.go` reading `PORT`; module/toolchain setup is identified
+rather than silently implied. Both are reference additions, not runs or changes
+to this weather app. Reading/print show them completely. Their separate notes
+are optional cues, not extra minutes in the timed talk. Existing TypeScript
+AppHost names remain correctly `apphost.mts`.
+
+### Social cards
+
+The site advertises the canonical absolute `1200x630` PNG through OG and Twitter
+large-image metadata, with descriptive alt text. The separate `1280x640`
+GitHub-ready PNG is safely below 1 MB. Both use the unchanged real portrait,
+official wordmark and existing fonts; [exact public assets and hashes](evidence/social-artwork.json)
+are retained. To activate the repository's own card, upload
+`deck/public/social/inside-aspire-social.png` in **Settings > Social preview >
+Edit > Upload an image** while signed in. The deployed site's metadata and
+GitHub's repository setting are separate; no unsupported API or token/cookie
+workaround is used. The [official GitHub setup guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview)
+documents that upload route and the under-1-MB/1280x640 recommendation.
+
+### Native slide and chapter transitions
+
+Edit `transitionSettings` in `deck/src/transitions.ts` for whole-deck defaults
+and overrides keyed by the existing, real `data-chapter` names. Settings are
+independent fields: `style`, `speed`, and `background`. The order is deck
+defaults < chapter defaults < explicit attributes on the actual leaf slide.
+Layout columns and nested content never become transition targets.
+
+Supported styles are `none`, `fade`, `slide`, `convex`, `concave`, and `zoom`;
+speeds are `default`, `fast`, and `slow`. Slide/chapter styles may use native
+in/out pairs such as `slide-in fade-out`. Background styles use a single native
+style. For an explicit slide override, author normal Reveal attributes:
+
+```html
+<section id="existing-slide"
+  data-transition="slide-in fade-out"
+  data-transition-speed="fast"
+  data-background-transition="fade">
+```
+
+Unknown chapter names, invalid styles/speeds and malformed directional pairs
+fail explicitly with their chapter/slide identity. Ordinary slides retain a
+quiet fade; primary chapter entries use a restrained distinct entrance, and
+the existing weather proof has one explicit in/out override. There is no new
+View Transition API wrapper, navigation runtime or animation dependency.
+
+Reduced motion, natural reading, print and native speaker receivers override
+every effective slide/background transition to `none`, including authored
+per-slide overrides. They do not wait on decorative motion. Receiver fragments
+still match the native current/upcoming states; they are not expanded into
+future audience content. Normal presentation restores the configured values,
+and all navigation origins use the same native Reveal state machine.
+
 Advance the graphs to reveal boxes and their connections together. Paths, arrowheads, and edge labels never point toward still-hidden boxes, including the return leg; there are no faint future guides. The workflow filename/compile/lockfile strip is centered as one compact sequence, while code stays left-aligned.
 
 Phones, narrow windows, and short screens default to natural reading. `?mode=read` and `?mode=present` explicitly choose the mode without conflicting with reveal.js's reserved view option. Real internal links, chapter jumps, and browser history use actual generated page offsets. Reading/print/reduced-motion expose all stages immediately; presentation steps reveal connected graph paths and selected source lines. Print retains the complete graph and code content.

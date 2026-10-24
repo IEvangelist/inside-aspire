@@ -1,0 +1,62 @@
+{
+  "baseline": "e1b585eb50990f6d087e5a37db0c3d040bdb450d",
+  "reference": "The user-supplied code-window legend example: package labels/swatches, matching actual API identifiers and grouped rails. Its old apphost.ts filename and unverified API assumptions were not copied.",
+  "annotationContract": {
+    "version": 1,
+    "origin": "Settled reusable contract supplied by the Aspire deck template owner; adapted to the existing HTML renderer without replacing line focus, replay, or graph behavior.",
+    "attributesOnPre": ["data-pkg-<accent>", "data-add-<accent>", "data-apis-<accent>", "data-lines-<accent>"],
+    "accents": ["purple", "cyan", "pink", "teal"],
+    "semantics": "Package name and/or aspire add identifier, exact owned API names, optional one-based line ranges. Strings/comments do not count as API tokens. Common/core operations retain neutral syntax styling.",
+    "nonColorCues": "Visible package/add labels, underlined identifiers with package titles, accessible legend descriptions and contiguous 4px rails outside copyable text.",
+    "codeSurfaceBoundary": "Code/chrome stay dark in both screen themes, so package tokens use the dark-window palette. Light prose and print use their own deeper variants.",
+    "darkCodeColors": { "purple": "#b79cff", "cyan": "#6bd3ff", "pink": "#f08cff", "teal": "#3ddbc0" },
+    "lightProseColors": { "purple": "#512bd4", "cyan": "#0b6a8c", "pink": "#a3198f", "teal": "#0f766e" },
+    "printColors": { "purple": "#512bd4", "cyan": "#075a78", "pink": "#a3198f", "teal": "#0b5f58" },
+    "validation": "Visible slide/block errors for unknown accents, duplicate ownership, absent/non-code APIs, missing labels/APIs, invalid/out-of-range/overlapping lines and API/range mismatches. Vite validates duplicate authored attributes before HTML normalization."
+  },
+  "mappings": [
+    { "block": "apphost-code", "package": "Aspire.Hosting.JavaScript", "add": "javascript", "accent": "cyan", "apis": ["AddViteApp", "WithNpm"], "lines": "7-12" },
+    { "block": "compose-environment-code", "package": "Aspire.Hosting.Docker", "add": "docker", "accent": "purple", "apis": ["AddDockerComposeEnvironment", "WithDashboard"], "lines": "1-3" },
+    { "block": "go-apphost-code", "package": "Aspire.Hosting.Go", "add": "go", "accent": "teal", "apis": ["AddGoApp"], "lines": "4-6" }
+  ],
+  "languageReferences": {
+    "scope": "Two explicitly labeled illustrative code blocks in an optional appendix disclosure; no original slide/text/source/notes/order/timing or weather application is replaced. Opening them switches to natural reading; reading/print expand them fully.",
+    "csharp": "AppHost.cs, genuine top-level C# statements using the official Aspire.Hosting.Go AddGoApp integration.",
+    "go": "main.go, a standard-library Go workload reading PORT, not a Go-authored AppHost or an invented Go AppHost SDK.",
+    "typescript": "An authored TypeScript AppHost remains apphost.mts, not apphost.ts; no existing correct TypeScript/source block was rewritten.",
+    "sources": [
+      "https://aspire.dev/languages-and-runtimes/",
+      "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Go/README.md",
+      "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Go/GoHostingExtensions.cs",
+      "https://github.com/IEvangelist/inside-aspire/blob/e1b585eb50990f6d087e5a37db0c3d040bdb450d/demo/host/apphost.cs",
+      "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs"
+    ],
+    "execution": "None. No Go/native/AppHost workload, package installation, profile mutation, capture rewrite or infrastructure operation was performed."
+  },
+  "focusBands": "Only the first and last lines of each contiguous focused run have 6px outside corners; joins are square. Isolated and disjoint runs round independently; source text, line ranges and navigation semantics remain exact.",
+  "navigation": {
+    "reproducedBeforeFix": "Browser Back from #/parser/0 to the same slide's initial #/parser history entry retained cached fragment0 and rewrote the hash back to /0, trapping history. Lifecycle reproduced identically. Toolbar Previous/ArrowLeft complete walkthroughs worked in the control.",
+    "regression": "Expected parser,24/41,#/parser,[]; actual parser,24/41,#/parser/0,[1,2,3,4,5].",
+    "fix": "An absent fragment explicitly means -1 even for same-slide browser history. Normal native Previous restoration and explicit fragment hashes remain unchanged; no blanket reset or skipped fragments.",
+    "pointerFocusControl": "Actual Inside failing controls also showed pointer Copy and a clicked non-scrolling code body trapping ArrowLeft at lifecycle/1. These paths were not covered by the old body-focused test.",
+    "keyboardOwnershipFix": "A pointer Copy returns focus to the presentation; keyboard Copy keeps accessible control focus. A code/region owns navigation only when its actual scrollHeight or scrollWidth exceeds the client box. Long output and preserved-layout bodies retain native key scrolling."
+  },
+  "speakerNotes": {
+    "runtime": "Existing native Reveal Notes plugin, not a custom presenter replacement.",
+    "reproducedBeforeFix": "Small native receiver iframes entered automatic reading, then numeric initial hashes failed lookup and the speaker current/upcoming connection never became ready.",
+    "fix": "Native receivers always use presentation layout, independent of their size or inherited mode=read, and hide audience toolbar chrome. Inside has no base element: native hash updates safely retain query flags and keep the current state reloadable, with history disabled in receivers. Disabling hash updates here left a stale initial preview URL, so that template-specific workaround is deliberately not transplanted. Menu and S use the same actionable blocked-popup path.",
+    "preserved": "All 38 original timed main-slide notes and the full 60-minute allocation remain unchanged. New illustrative references have concise separate optional cues. Notes are public source, not confidential storage."
+  },
+  "transitions": {
+    "implementation": "Native Reveal only; no View Transition API wrapper or new runtime/dependency.",
+    "configuration": "deck/src/transitions.ts transitionSettings defaults and real chapter-name overrides; explicit native attributes on original leaf slides win per field.",
+    "precedence": ["deck default", "chapter default", "explicit slide attributes"],
+    "styles": ["none", "fade", "slide", "convex", "concave", "zoom"],
+    "speeds": ["default", "fast", "slow"],
+    "directional": "Native slide/chapter in/out pairs, e.g. slide-in fade-out. Backgrounds use single native styles.",
+    "choreography": "Quiet fades within chapters, a distinct restrained primary chapter entry, and one explicit existing weather-proof override. No original IDs/text/source/notes/fragments/timing changes.",
+    "static": "Effective slide and background overrides are none for reduced motion, reading, print and native Notes receivers. Receiver code/graph/replay fragments still reflect exact native current/upcoming state.",
+    "validation": "Unknown chapter keys and invalid styles/speeds/directional forms fail with chapter or slide identity."
+  },
+  "protected": "All 226 pre-port protected blobs, original 30 code objects, all 7 immutable full recorded responses, actual images/PR/native proof, demo/AppHost/scripts/skills/abstract and max(edge,source,target) graph gating remain unchanged."
+}

@@ -1,6 +1,6 @@
 import { icon } from './icons';
 
-export function prepareWindows(root: HTMLElement, announce: (message: string) => void) {
+export function prepareWindows(root: HTMLElement, announce: (message: string) => void, focusPresentation: () => void) {
   for (const panel of root.querySelectorAll<HTMLElement>('.code-panel, .cli-terminal')) {
     const caption = panel.querySelector('figcaption');
     if (!caption) throw new Error('Code window is missing its original caption.');
@@ -30,7 +30,7 @@ export function prepareWindows(root: HTMLElement, announce: (message: string) =>
         button.dataset.copyOutput = '';
         button.disabled = true;
       }
-      button.addEventListener('click', async () => {
+      button.addEventListener('click', async (event) => {
         try {
           if (!navigator.clipboard) throw new Error('Clipboard access requires HTTPS or localhost.');
           await navigator.clipboard.writeText(source);
@@ -38,6 +38,8 @@ export function prepareWindows(root: HTMLElement, announce: (message: string) =>
         } catch (error) {
           console.error('Code copy failed.', error);
           announce(`Could not copy ${label}. Allow clipboard access, or select and copy the code directly.`);
+        } finally {
+          if (event.detail > 0) focusPresentation();
         }
       });
       controls.append(button);

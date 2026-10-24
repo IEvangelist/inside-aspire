@@ -14,6 +14,8 @@ import { focusCode, highlightCode } from './syntax';
 import { createReplayController } from './replay';
 import { prepareWindows } from './windows';
 import { sizePrintPages } from './printing';
+import { annotatePackages } from './packages';
+import { createTransitionPolicy, transitionSettings } from './transitions';
 import './style.css';
 
 function element<T extends HTMLElement>(id: string, type: { new(): T }): T {
@@ -38,14 +40,17 @@ const position = element('slide-position', HTMLOutputElement);
 const status = element('deck-status', HTMLParagraphElement);
 const darkPreference = window.matchMedia('(prefers-color-scheme: dark)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const printPreference = window.matchMedia('print');
 const initialTheme = new URL(window.location.href).searchParams.get('theme');
 let explicitTheme = initialTheme === 'dark' || initialTheme === 'light';
 const printMode = new URL(window.location.href).searchParams.has('print-pdf');
+// Native speaker frames are narrow, but must accept presentation state rather than reading layout.
+const speakerReceiver = new URL(window.location.href).searchParams.has('receiver');
 const slides = [...root.querySelectorAll<HTMLElement>('.slides > section[id]')];
 const slideAliases: Record<string, string> = { aot: 'compiler', 'native-proof': 'compiler', commands: 'live-cli', timeout: 'browser-evidence', 'know-truth': 'ai-loops' };
 const initialView = new URL(window.location.href).searchParams.get('mode');
 const initialSlideId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
-let reading = !printMode && (initialView === 'read' ||
+let reading = !printMode && !speakerReceiver && (initialView === 'read' ||
   (initialView !== 'present' && (window.innerWidth < 1000 || window.innerHeight < 650)));
 let currentId = slides[0]?.id ?? 'intro';
 let scrollFrame = 0;
@@ -59,8 +64,16 @@ function dimensions() {
 
 renderIcons();
 renderDiagrams();
-prepareWindows(root, (message) => { status.textContent = message; });
+prepareWindows(root, (message) => { status.textContent = message; },
+  () => root.focus({ preventScroll: true }));
 highlightCode();
+try {
+  annotatePackages(root);
+} catch (error) {
+  status.textContent = error instanceof Error ? error.message : 'Package annotations could not initialize.';
+  console.error('Package annotations could not initialize.', error);
+  throw error;
+}
 for (const link of menu.querySelectorAll<HTMLElement>('[data-slide]')) {
   const index = slides.findIndex((slide) => slide.id === link.dataset.slide);
   if (index < 0) throw new Error(`Missing menu slide: ${link.dataset.slide}`);
@@ -72,10 +85,27 @@ for (const link of menu.querySelectorAll<HTMLElement>('[data-slide]')) {
   link.prepend(chip);
 }
 const replay = createReplayController(root, element('replay-status', HTMLSpanElement));
+let transitions: ReturnType<typeof createTransitionPolicy>;
+try {
+  transitions = createTransitionPolicy(root, slides, transitionSettings);
+} catch (error) {
+  status.textContent = error instanceof Error ? error.message : 'Transitions could not initialize.';
+  console.error('Transitions could not initialize.', error);
+  throw error;
+}
+
+function noMotion() {
+  return staticContent() || speakerReceiver;
+}
+
+function staticContent() {
+  return reading || reducedMotion.matches || printMode || printPreference.matches;
+}
 
 function setTheme(theme: 'dark' | 'light') {
   replay.settle();
   document.documentElement.dataset.theme = theme;
+  element('theme-color', HTMLMetaElement).content = theme === 'dark' ? '#151423' : '#f5f6f8';
   themeButton.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
   themeButton.querySelector('span:not([data-icon])')!.textContent = `${theme === 'dark' ? 'Light' : 'Dark'} theme`;
 }
@@ -100,25 +130,28 @@ const deck = new Reveal(root, {
   minScale: 0.15,
   maxScale: 1.4,
   hash: !reading,
-  history: !reading,
+  history: !reading && !speakerReceiver,
   controls: false,
   progress: true,
   embedded: true,
   center: false,
-  transition: reducedMotion.matches ? 'none' : 'fade',
-  backgroundTransition: 'none',
-  transitionSpeed: 'fast',
+  ...transitions.apply(noMotion()),
   disableLayout: reading,
   overview: !reading,
   scrollActivationWidth: 0,
   scrollProgress: false,
   showNotes: false,
-  fragments: !reading && !reducedMotion.matches && !printMode,
+  fragments: !staticContent(),
   pdfSeparateFragments: false,
-  keyboardCondition: () => !menu.open && !(document.activeElement instanceof Element &&
-    document.activeElement.closest('a, button, input, textarea, select, pre, [role="region"][tabindex], [contenteditable]')),
+  keyboardCondition: () => !menu.open && !ownsNavigationKeys(document.activeElement),
   plugins: [Notes],
 });
+
+function ownsNavigationKeys(target: Element | null) {
+  if (target?.closest('a, button, input, textarea, select, [contenteditable]')) return true;
+  const region = target?.closest<HTMLElement>('pre, [role="region"][tabindex]');
+  return !!region && (region.scrollHeight > region.clientHeight || region.scrollWidth > region.clientWidth);
+}
 
 function updateModeControls() {
   readButton.querySelector('.control-label')!.textContent = reading ? 'Presentation mode' : 'Reading mode';
@@ -127,8 +160,12 @@ function updateModeControls() {
   overviewButton.disabled = reading;
   overviewButton.title = reading ? 'Switch to presentation mode for overview' : 'Overview (Esc)';
   document.documentElement.dataset.reading = String(reading);
-  document.documentElement.dataset.static = String(reading || reducedMotion.matches || printMode);
+  document.documentElement.dataset.static = String(staticContent());
   document.documentElement.dataset.print = String(printMode);
+  document.documentElement.dataset.speakerReceiver = String(speakerReceiver);
+  for (const details of root.querySelectorAll<HTMLDetailsElement>('.language-examples')) {
+    details.open = reading || printMode || printPreference.matches;
+  }
 }
 
 function syncControls(animateReplay = false) {
@@ -148,8 +185,8 @@ function syncControls(animateReplay = false) {
       : link.getAttribute('data-slide') === currentId;
     link.setAttribute('aria-current', current ? 'step' : 'false');
   });
-  if (slide) focusCode(slide, reading || reducedMotion.matches || printMode);
-  replay.sync(slide ?? undefined, reading || reducedMotion.matches || printMode, animateReplay);
+  if (slide) focusCode(slide, staticContent());
+  replay.sync(slide ?? undefined, staticContent(), animateReplay && !speakerReceiver);
   if (!reading) {
     for (const inactive of root.querySelectorAll<HTMLElement>('section:not(.present)')) {
       inactive.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
@@ -185,6 +222,7 @@ function closeMenu() {
 }
 
 function toggleReading() {
+  if (speakerReceiver) return;
   const id = currentId;
   reading = !reading;
   const url = new URL(window.location.href);
@@ -193,12 +231,14 @@ function toggleReading() {
   updateModeControls();
   deck.configure({
     ...dimensions(),
+    ...transitions.apply(noMotion()),
     disableLayout: reading,
     overview: !reading,
-    fragments: !reading && !reducedMotion.matches,
+    fragments: !staticContent(),
     hash: !reading,
     history: !reading,
   });
+  deck.sync();
   goTo(id);
   updatePrintLink();
   status.textContent = reading ? 'Reading mode. Scroll through the slides.' : 'Presentation mode. Use arrow keys to navigate.';
@@ -215,7 +255,12 @@ function updatePrintLink() {
 function openNotes() {
   const plugin = deck.getPlugin('notes');
   if ('open' in plugin && typeof plugin.open === 'function') {
-    plugin.open();
+    try {
+      plugin.open();
+    } catch (error) {
+      status.textContent = 'Speaker view could not open. Allow pop-ups for this site, then choose Speaker notes or press S again.';
+      console.error('Native Reveal speaker view could not open.', error);
+    }
   } else {
     status.textContent = 'Speaker notes could not open. Use S or allow popups for this site.';
     console.error('Reveal notes plugin is unavailable.');
@@ -226,6 +271,14 @@ themeButton.addEventListener('click', toggleTheme);
 readButton.addEventListener('click', () => { closeMenu(); toggleReading(); root.focus({ preventScroll: true }); });
 overviewButton.addEventListener('click', () => { closeMenu(); deck.toggleOverview(); root.focus({ preventScroll: true }); });
 notesButton.addEventListener('click', () => { closeMenu(); openNotes(); });
+for (const details of root.querySelectorAll<HTMLDetailsElement>('.language-examples')) {
+  details.addEventListener('toggle', () => {
+    if (details.open && !reading && !printMode && !printPreference.matches) {
+      toggleReading();
+      details.scrollIntoView({ block: 'start' });
+    }
+  });
+}
 for (const button of [menuButton, chapterButton]) {
   button.addEventListener('click', () => {
     menu.showModal();
@@ -284,7 +337,7 @@ viewport.addEventListener('scroll', () => {
 });
 window.addEventListener('keydown', (event) => {
   if (!reading || menu.open || event.altKey || event.ctrlKey || event.metaKey ||
-      (event.target instanceof Element && event.target.closest('a, button, input, textarea, select, pre, [role="region"][tabindex], [contenteditable]'))) return;
+      (event.target instanceof Element && ownsNavigationKeys(event.target))) return;
   const direction = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key) ? 1 :
     ['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key) ? -1 : 0;
   if (direction) {
@@ -303,9 +356,22 @@ darkPreference.addEventListener('change', () => {
 reducedMotion.addEventListener('change', () => {
   updateModeControls();
   deck.configure({
-    transition: reducedMotion.matches ? 'none' : 'fade',
-    fragments: !reading && !reducedMotion.matches && !printMode,
+    ...transitions.apply(noMotion()),
+    fragments: !staticContent(),
   });
+  let beforePrint: ReturnType<typeof deck.getState> | undefined;
+  printPreference.addEventListener('change', () => {
+    if (printPreference.matches) beforePrint = deck.getState();
+    updateModeControls();
+    deck.configure({ ...transitions.apply(noMotion()), fragments: !staticContent() });
+    deck.sync();
+    if (!printPreference.matches && beforePrint) {
+      deck.setState(beforePrint);
+      beforePrint = undefined;
+    }
+    syncControls();
+  });
+  deck.sync();
   syncControls();
 });
 window.addEventListener('resize', () => {
@@ -318,9 +384,11 @@ window.addEventListener('hashchange', (event) => {
   if (!window.location.hash.startsWith('#/')) return;
   const [slideId, fragment] = window.location.hash.slice(2).split('/');
   const id = decodeURIComponent(slideId);
-  const directSlideJump = !printMode && fragment === undefined && id !== currentId;
+  const directSlideJump = !printMode && fragment === undefined &&
+    (id !== currentId || (deck.getIndices().f ?? -1) >= 0);
   if (reading || Object.hasOwn(slideAliases, id) || directSlideJump) {
-    // Plain jumps start at the first step; normal Back and explicit fragment hashes keep Reveal's restoration.
+    // An absent fragment also means -1 when browser Back returns to this slide's initial history entry.
+    // Toolbar Back and explicit fragment hashes keep Reveal's restoration.
     // Reading pages own their DOM offsets instead of Reveal's fixed-height hash navigation.
     event.stopImmediatePropagation();
     goTo(id);
@@ -358,6 +426,7 @@ try {
   }
   deck.addKeyBinding({ keyCode: 84, key: 'T', description: 'Switch theme' }, toggleTheme);
   deck.addKeyBinding({ keyCode: 82, key: 'R', description: 'Switch reading mode' }, toggleReading);
+  deck.addKeyBinding({ keyCode: 83, key: 'S', description: 'Open speaker notes and presenter view' }, openNotes);
   syncControls();
   updatePrintLink();
   document.documentElement.dataset.deckReady = 'true';

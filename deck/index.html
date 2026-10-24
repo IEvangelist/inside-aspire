@@ -4,11 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
+    <meta id="theme-color" name="theme-color" content="#f5f6f8" />
     <meta name="description" content="Inside Aspire: The Architecture Behind the AI Loop. A NativeAOT weather demo and a real, human-reviewed documentation loop, presented at Wisconsin .NET UG." />
     <meta property="og:title" content="Inside Aspire: The Architecture Behind the AI Loop" />
     <meta property="og:description" content="AI loops. Aspire dashboard. Aspire deployment. How Aspire makes AI more efficient." />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Inside Aspire" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://ievangelist.github.io/inside-aspire/" />
+    <meta property="og:image" content="https://ievangelist.github.io/inside-aspire/social/inside-aspire-og.png" />
+    <meta property="og:image:secure_url" content="https://ievangelist.github.io/inside-aspire/social/inside-aspire-og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Inside Aspire: The Architecture Behind the AI Loop, presented by David Pine, with his actual portrait and official Aspire branding." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Inside Aspire: The Architecture Behind the AI Loop" />
+    <meta name="twitter:description" content="AI loops. Aspire dashboard. Aspire deployment. How Aspire makes AI more efficient." />
+    <meta name="twitter:url" content="https://ievangelist.github.io/inside-aspire/" />
+    <meta name="twitter:image" content="https://ievangelist.github.io/inside-aspire/social/inside-aspire-og.png" />
+    <meta name="twitter:image:alt" content="Inside Aspire: The Architecture Behind the AI Loop, presented by David Pine, with his actual portrait and official Aspire branding." />
     <link rel="icon" type="image/svg+xml" href="/inside-aspire/brand/aspire-icon-32.svg" />
     <link rel="canonical" href="https://ievangelist.github.io/inside-aspire/" />
     <title>Inside Aspire: The Architecture Behind the AI Loop</title>
@@ -59,7 +74,7 @@
         <button id="read-mode" type="button" aria-pressed="false"><span data-icon="book"></span><span class="control-label">Reading mode</span><kbd>R</kbd></button>
         <button id="overview" type="button"><span data-icon="screen"></span><span>Overview</span><kbd>Esc</kbd></button>
         <button id="theme" type="button"><span data-icon="sun"></span><span>Switch theme</span><kbd>T</kbd></button>
-        <button id="notes" type="button"><span data-icon="person"></span><span>Speaker notes</span><kbd>S</kbd></button>
+        <button id="notes" type="button" title="S: open native speaker notes, current/upcoming slides, and timer"><span data-icon="person"></span><span>Speaker notes</span><kbd>S</kbd></button>
         <a id="print-link" href="?print-pdf" target="_blank" rel="noopener"><span data-icon="file"></span><span>Print the deck</span></a>
         <a href="https://github.com/IEvangelist/inside-aspire"><span data-icon="package"></span><span>Source repository</span></a>
       </div>
@@ -93,16 +108,16 @@
         <section id="thesis" class="statement-slide" data-chapter="Three main areas">
           <h2>Aspire makes AI<br />more <span class="accent">efficient.</span></h2>
           <div class="thesis-path" data-three-points>
-            <div><span data-icon="agent"></span><strong data-takeaway>AI loops</strong><p>Reviewed facts guide the next move.</p></div>
-            <div><span data-icon="screen"></span><strong data-takeaway>Aspire dashboard</strong><p>Observe with an AppHost or without.</p></div>
-            <div><span data-icon="cloud"></span><strong data-takeaway>Aspire deployment</strong><p>Take intent to a configured target.</p></div>
+            <div data-tone="purple"><span data-icon="agent"></span><strong data-takeaway>AI loops</strong><p>Reviewed facts guide the next move.</p></div>
+            <div data-tone="cyan"><span data-icon="screen"></span><strong data-takeaway>Aspire dashboard</strong><p>Observe with an AppHost or without.</p></div>
+            <div data-tone="teal"><span data-icon="cloud"></span><strong data-takeaway>Aspire deployment</strong><p>Take intent to a configured target.</p></div>
           </div>
           <p class="large-copy">Evidence and application intent travel together.</p>
           <p class="source-line">Three areas. One payoff: precise, inspectable decisions, not invented savings.</p>
           <aside class="notes">0:02-0:04. Name the user's exact three areas: AI loops, Aspire dashboard, Aspire deployment. The first is plural: an internal product/docs supply loop supports the skill-guided developer inner loop. The dashboard is both integrated with AppHosts and independently available as a container. Deployment is a full third area, not an appendix. Every area starts with why, then source-backed proof, then machinery. The CLI and NativeAOT details support the payoff, not a fourth main point.</aside>
         </section>
 
-        <section id="ai-loops" class="statement-slide" data-chapter="AI loops" data-purpose="why">
+        <section id="ai-loops" class="statement-slide" data-chapter="AI loops" data-purpose="why" data-transition="slide-in fade-out">
           <h2 data-takeaway>AI <span class="accent">loops</span></h2>
           <p class="large-copy" data-why>A confident answer isn't evidence.</p>
           <p class="big-support">We use AI to build Aspire and aspire.dev. Reviewed, published facts then ground the developer's next move.</p>
@@ -131,7 +146,7 @@
         </section>
 
         <section id="writer" data-chapter="AI loops" data-purpose="proof">
-          <h2>Different skills. Visible human review.</h2>
+          <h2>Different skills. Visible human <span class="accent" data-tone="pink">review.</span></h2>
           <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>Bot-authored guide, then <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">maintainer refinement</a> and merge. The docs repo's <code>doc-writer</code> is a distinct skill.</figcaption></figure>
           <div class="code-and-copy">
             <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
@@ -192,7 +207,7 @@ safe-outputs:
           <aside class="notes">0:14-0:15. Bridge the internal docs loop to the developer loop. Reviewed release publication supplies the narrative corpus; PackageJsonGenerator produces Package.{version}.json from exact assembly assets, with catalog-pinned versions and release feeds. Astro excludes reference/api/** from the narrative corpus. The CLI's ETag/fingerprint refresh retrieves current published context; our13.6.1 captures do not prove matching-semver selection. This is updated evidence, not model training. Next show the healthy app and concrete CLI retrieval/operations.</aside>
         </section>
 
-        <section id="weather" class="image-slide" data-chapter="AI loops" data-purpose="proof">
+        <section id="weather" class="image-slide" data-chapter="AI loops" data-purpose="proof" data-transition="fade-in slide-out">
           <h2>Start with a healthy app.</h2>
           <figure>
             <img class="proof-image image-for-dark" src="/inside-aspire/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
@@ -878,7 +893,7 @@ private const float BodyWeight = 1.0f;</code></pre></figure>
 
         <section id="lifecycle" data-chapter="AI loops" data-purpose="machinery">
           <h2>Wire an executable, not a fallback.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="code"></span>demo/host/apphost.cs <span>C# source excerpt</span></figcaption><pre data-label="AppHost native executable wiring" data-line-numbers><code id="apphost-code" class="language-csharp">var api = builder.AddExecutable("api", executable, nativeDirectory)
+          <figure class="code-panel"><figcaption><span data-icon="code"></span>demo/host/apphost.cs <span>C# source excerpt</span></figcaption><pre data-label="AppHost native executable wiring" data-line-numbers data-pkg-cyan="Aspire.Hosting.JavaScript" data-add-cyan="javascript" data-apis-cyan="AddViteApp WithNpm" data-lines-cyan="7-12"><code id="apphost-code" class="language-csharp">var api = builder.AddExecutable("api", executable, nativeDirectory)
     .WithHttpEndpoint(env: "PORT")
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints()
@@ -897,14 +912,14 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="the-loop" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Reason. Act precisely. Observe.</h2>
+          <h2><span class="accent" data-tone="purple">Reason.</span> Act precisely. <span class="accent" data-tone="cyan">Observe.</span></h2>
           <div data-diagram="inner"></div>
           <p class="diagram-caption"><span data-icon="terminal"></span> Advance to trace skills &rarr; CLI &rarr; resources &rarr; evidence &rarr; next decision.</p>
           <aside class="notes">0:34-0:36. Close the plural AI-loops area by tracing the skill-guided developer cycle: shipped instructions -&gt; native CLI -&gt; generated/current published docs and exact API/resource evidence -&gt; scoped operation -&gt; observed results -&gt; next decision. The earlier internal product/docs loop maintains that context through review/release publication. Neither cycle retrains a model or grants automatic production permission. Preserve every endpoint-gated edge and final return leg. Next show the dashboard that makes observed outcomes inspectable.</aside>
         </section>
 
-        <section id="dashboard" class="statement-slide" data-chapter="Aspire dashboard" data-purpose="why">
-          <h2 data-takeaway>Aspire <span class="accent">dashboard</span></h2>
+        <section id="dashboard" class="statement-slide" data-chapter="Aspire dashboard" data-purpose="why" data-transition="slide-in fade-out">
+          <h2 data-takeaway>Aspire <span class="accent" data-tone="cyan">dashboard</span></h2>
           <p class="large-copy" data-why>A running process isn't the whole story.</p>
           <p class="big-support">See resource state and the request's actual path. Share that evidence with the next human or agent decision.</p>
           <aside class="notes">0:36-0:38. Open the second primary area with why. A process can be running while a dependency, health check, or request is failing. Resource state and telemetry answer different questions. The AppHost bundles a dashboard connected to its resource service; the same OTLP viewer is also available independently as a standalone image. Instrumentation and export are still required. Do not imply a removed dashboard AI assistant or automatic instrumentation.</aside>
@@ -949,8 +964,8 @@ builder.AddViteApp("frontend",
           <aside class="notes">0:44-0:46. Open the machinery only after the dashboard's real UI and startup options. OTLP emitters produce logs/traces/metrics; the resource service separately contributes process state, health, console and lifecycle. The native API already emitted real telemetry without a CLR, but arbitrary code must still be instrumented. Standalone supports any instrumented runtime; optional persistence is not a promise of unlimited production monitoring. CLI local backchannel resource operations are not remote dashboard orchestration. Connect the observed evidence back to the next AI-loop decision, then carry the application model beyond development.</aside>
         </section>
 
-        <section id="deployment" class="statement-slide" data-chapter="Aspire deployment" data-purpose="why">
-          <h2 data-takeaway>Aspire <span class="accent">deployment</span></h2>
+        <section id="deployment" class="statement-slide" data-chapter="Aspire deployment" data-purpose="why" data-transition="slide-in fade-out">
+          <h2 data-takeaway>Aspire <span class="accent" data-tone="teal">deployment</span></h2>
           <p class="large-copy" data-why>Application intent should outlive your laptop.</p>
           <p class="big-support">Keep relationships explicit. Publish target artifacts, deploy configured resources, and verify the actual outcome.</p>
           <aside class="notes">0:46-0:48. Open the third primary area with why: manually rebuilding development relationships in a deployment script loses inspectable intent. Aspire can carry a model through target-specific publishing and deployment, with explicit integration and configuration boundaries. This is a presentation about that capability, not permission to provision infrastructure. The Windows native executable/Vite weather graph remains a development demo and has not been deployed.</aside>
@@ -963,7 +978,7 @@ builder.AddViteApp("frontend",
           </div>
           <div class="code-pair">
             <figure class="code-panel"><figcaption><span data-icon="package"></span>Docker integration <span>Reference, not installed here</span></figcaption><pre data-label="Documented Docker integration addition"><code class="language-powershell">aspire add docker --non-interactive</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="code"></span>Compose environment <span>Documented C# pattern</span></figcaption><pre data-label="Documented Compose environment API pattern"><code class="language-csharp">var environment = builder
+            <figure class="code-panel"><figcaption><span data-icon="code"></span>Compose environment <span>Documented C# pattern</span></figcaption><pre data-label="Documented Compose environment API pattern" data-pkg-purple="Aspire.Hosting.Docker" data-add-purple="docker" data-apis-purple="AddDockerComposeEnvironment WithDashboard" data-lines-purple="1-3"><code id="compose-environment-code" class="language-csharp">var environment = builder
     .AddDockerComposeEnvironment("env")
     .WithDashboard();</code></pre></figure>
           </div>
@@ -993,7 +1008,7 @@ builder.AddViteApp("frontend",
         </section>
 
         <section id="deployment-boundaries" data-chapter="Aspire deployment" data-purpose="machinery">
-          <h2>Same intent. Explicit boundaries.</h2>
+          <h2>Same intent. Explicit <span class="accent" data-tone="teal">boundaries.</span></h2>
           <div class="thesis-path">
             <div><span data-icon="package"></span><strong>Target</strong><p>Choose the supported integration and environment.</p></div>
             <div><span data-icon="review"></span><strong>Permission</strong><p>Resolve parameters, secrets, authentication and allowed side effects.</p></div>
@@ -1020,6 +1035,38 @@ builder.AddViteApp("frontend",
           </div>
           <p class="source-line">Optional appendix. Reusable fetching, parsing, indexing, and retrieval outlive a particular tool surface.</p>
           <aside class="notes">Optional appendix, outside the 60-minute presentation. Use only for a follow-up question about the earlier MCP-first design. The personal article explains history, not today's corpus default or CLI contract. MCP is a protocol, not an extra main takeaway.</aside>
+          <details class="language-examples" data-illustrative-addition>
+            <summary>C# AppHost + Go service references (opens reading mode)</summary>
+            <p>Illustrative additions, not the weather demo. C# and TypeScript author AppHosts; Go runs as a workload. These examples were not executed here.</p>
+            <div class="language-reference-pair">
+              <figure class="code-panel"><figcaption><span data-icon="code"></span>AppHost.cs <span>C# top-level statements</span></figcaption><pre data-label="Illustrative C# AppHost for a Go service" data-pkg-teal="Aspire.Hosting.Go" data-add-teal="go" data-apis-teal="AddGoApp" data-lines-teal="4-6"><code id="go-apphost-code" class="language-csharp">using Aspire.Hosting;
+
+var builder = DistributedApplication.CreateBuilder(args);
+builder.AddGoApp("api", "../go-api")
+    .WithHttpEndpoint(port: 8080, env: "PORT")
+    .WithExternalHttpEndpoints();
+builder.Build().Run();</code></pre></figure>
+              <figure class="code-panel"><figcaption><span data-icon="code"></span>main.go <span>Go workload, not a Go AppHost</span></figcaption><pre data-label="Illustrative Go HTTP service"><code id="go-service-code" class="language-go">package main
+
+import (
+    "fmt"
+    "log"
+    "net/http"
+    "os"
+)
+
+func main() {
+    port := os.Getenv("PORT")
+    if port == "" { port = "8080" }
+    http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+        fmt.Fprintln(w, "Hello from Go")
+    })
+    log.Fatal(http.ListenAndServe(":"+port, nil))
+}</code></pre></figure>
+            </div>
+            <p class="source-line">Requires a configured C# AppHost with <code>Aspire.Hosting.Go</code>, the Go toolchain, and a Go module at the illustrative path. <a href="https://aspire.dev/languages-and-runtimes/">Authoring versus workload languages</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Go/README.md">pinned integration source</a>. A TypeScript AppHost remains <code>apphost.mts</code>, not <code>apphost.ts</code>.</p>
+            <aside class="notes">Optional reference outside the timed talk. Point to the top-level C# AppHost and the separate Go main entry point. Teal identifies AddGoApp's Aspire.Hosting.Go package; endpoint/environment/reference/build operations remain neutral. The workload reads the injected PORT. Neither sample replaces or changes the native weather demo, and neither was run for these slides.</aside>
+          </details>
         </section>
 
         <section id="historical-evidence" data-chapter="Optional appendix" data-appendix="true">

@@ -65,6 +65,23 @@ reveal rules. Copy buttons preserve exact source; print includes complete code
 on one variable-height page per slide. This manual sync does not make future
 template changes automatic. [Preservation/source proof](docs/evidence/template-ux.json).
 
+Package callouts now label the real integration and `aspire add` name, matching
+only the APIs that package owns. Contiguous code highlights have rounded ends,
+not rounded seams on every line. The optional history appendix includes clearly
+separated top-level C# AppHost and Go workload references; the original demo
+and all recorded output are unchanged. **S** or **Speaker notes** opens Reveal's
+native second-screen presenter console with notes, previews and timer.
+Native transitions are configurable per deck, real chapter and individual
+slide, with explicit slide attributes winning. Reduced-motion/read/print and
+presenter previews remain immediate. [Authoring and presenter guidance](docs/RUNBOOK.md).
+
+The deployed site's OG/Twitter card uses the approved portrait artwork.
+For the separate GitHub repository setting, download
+[`inside-aspire-social.png`](deck/public/social/inside-aspire-social.png), then use
+**Repository Settings > Social preview > Edit > Upload an image**.
+Committing the PNG does not set that GitHub setting automatically. [Artwork
+hashes and setup boundary](docs/evidence/social-artwork.json).
+
 The deck has 41 slides: 38 in the full-hour presentation, then three untimed appendices. The core links are `#/ai-loops`, `#/dashboard`, and `#/deployment`; direct demos and legacy hashes remain available. Seven **Recorded CLI run** pairs retain full genuine stdout in one bounded output-only scroller, with no visible status row. Six JSON responses preserve their full envelopes and escaped Markdown strings; wait is plaintext. [Capture proof and controls](docs/CLI-REPLAY.md) link immutable output. Read/print/reduced motion expose pairs immediately; read/print do not clip output. New dashboard/deployment commands are honestly labeled source-backed references, not additional captures or executed infrastructure.
 
 ## The actual AI loops

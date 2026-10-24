@@ -34,6 +34,44 @@ template-update mechanism. Its source pin and retained differences are in
 
 The unchanged title pairs with David Pine's actual 300px public portrait, displayed proportionally at 260px on the desktop. The 56px presentation bar uses the official 32px Aspire mark without a stretched or overpowering wordmark. One primary advance group and a compact chapter indicator remain visible; secondary controls and chapter navigation live in an accessible dialog/sheet. Controls have 44px targets.
 
+## Semantic accents and package ownership
+
+Purple remains Aspire's primary/action identity. Cyan marks code/reference and
+observability cues, teal run/proof/deployment cues, and pink human-review/data
+boundaries. Those roles accompany existing labels/icons, not color-only claims
+or random rainbow decoration. The palette matches the template owner's settled
+annotation contract; dark code windows keep bright, contrast-safe package
+colors even on light pages, with deeper prose/print counterparts.
+
+Opt-in package legends use `data-pkg-<accent>`, `data-add-<accent>`,
+`data-apis-<accent>` and optional `data-lines-<accent>` on the original `pre`.
+Only exact owned API tokens are recolored/underlined; strings, comments, core
+operations, source text and copied whitespace stay intact. Visible labels,
+described legends and contiguous gutter rails supply non-color cues. The
+JavaScript, Docker and Go mappings are source-backed, not guessed from syntax.
+Invalid ownership/ranges fail explicitly with the slide/block name.
+
+Focused code is one connected band per contiguous selection: six-pixel outer
+end corners, square interior joins, and independently rounded isolated/disjoint
+groups. The original line-navigation contract remains. The only language
+additions are clearly labeled optional `AppHost.cs` top-level C# and `main.go`
+workload references; the official Go integration is not Go AppHost authoring.
+No existing example or timed note is replaced. [Source/behavior proof](../docs/evidence/package-accents.json).
+
+The native Reveal speaker console remains the presenter runtime. Its receiver
+iframes explicitly use presentation mode so their small sizes cannot trigger
+reading layout. Same-slide initial browser-history entries explicitly restore
+fragment `-1`, fixing the reproduced backward-navigation trap without changing
+normal Previous or explicit fragment restoration.
+
+Native transition configuration uses deck < real chapter < explicit leaf-slide
+precedence through `src/transitions.ts` and Reveal's standard attributes. Quiet
+within-chapter fades remain the baseline; a restrained directional chapter
+entrance and one weather-proof in/out override supply hierarchy rather than a
+different animation on every slide. Reduced/read/print/receiver contexts force
+all effective slide/background overrides to `none`; receiver fragment state
+stays exact. No View Transition wrapper or new animation dependency is used.
+
 The thesis and ending remain **Aspire makes AI more efficient**. The user's three primary areas repeat on roadmap, chapter entries and close: **AI loops**, **Aspire dashboard**, **Aspire deployment**. Each starts with why, then concrete/source-backed proof and machinery. The real internal product/docs loop now precedes and supplies the skill-guided developer loop; current narrative context and separate per-package-version API references are not conflated. Dashboard is integrated and independent; deployment is a complete third chapter, not an appendix. The former benefit phrases may support the story, not form three extra chapters.
 
 The main SVG loop centers the native CLI between shipped skills, the AppHost/native app, and observed results. The reviewed GitHub docs supply loop supports that hub; a separate API graph preserves DLL/XML/PDB -> Roslyn -> schema/Markdown -> API-index boundaries. Narrative-docs cache/fence parsing/lexical weights are not attributed to the separate API index.

@@ -184,9 +184,9 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(30);
+  expect(blocks.length).toBe(32);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
-    ['bash','csharp','json','plaintext','powershell','typescript','yaml']);
+    ['bash','csharp','go','json','plaintext','powershell','typescript','yaml']);
   for(const block of blocks) {
     expect(block.highlighted,block.language).toBe('true');
     if(block.language==='plaintext') {

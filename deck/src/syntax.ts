@@ -6,8 +6,9 @@ import yaml from 'highlight.js/lib/languages/yaml';
 import json from 'highlight.js/lib/languages/json';
 import typescript from 'highlight.js/lib/languages/typescript';
 import plaintext from 'highlight.js/lib/languages/plaintext';
+import go from 'highlight.js/lib/languages/go';
 
-const languages = { csharp, powershell, bash, yaml, json, typescript, plaintext };
+const languages = { csharp, powershell, bash, yaml, json, typescript, plaintext, go };
 for (const [name, definition] of Object.entries(languages)) hljs.registerLanguage(name, definition);
 
 function lineMarkup(markup: string): DocumentFragment {

@@ -10,7 +10,7 @@ for (const theme of ['light', 'dark'] as const) {
       await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: theme });
       await page.goto('');
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-      const sections = await page.locator('.code-panel').evaluateAll((panels) =>
+      const sections = await page.locator('.code-panel:not([data-illustrative-addition] .code-panel)').evaluateAll((panels) =>
         [...new Set(panels.map((panel) => panel.closest('section')!.id))]);
       let checked = 0;
       for (const id of sections) {

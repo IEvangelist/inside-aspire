@@ -28,6 +28,26 @@ immutable linked stdout keep their original contents.
 Template traffic-light window chrome is decorative; original captions,
 recorded-run labels, source links and graph semantics remain.
 
+The parent-produced `social/inside-aspire-og.png` (`1200x630`) and
+`social/inside-aspire-social.png` (`1280x640`) retain the existing portrait's
+bytes/framing and the official white wordmark. They were reviewed at native
+size with actual painted Poppins/Fira Code and text contrast at least 4.5:1.
+No competing portrait, generated person or altered logo is introduced.
+The final user-requested icon revision adds the unmodified official GitHub mark,
+existing Primer Octicons globe/code, and a real Segoe UI Emoji nerd-face glyph
+beside the speaker name. The image is self-contained, with no new runtime font
+or icon dependency.
+[Asset SHA256, metadata and one-time GitHub setup](evidence/social-artwork.json)
+distinguish deployed site OG activation from the separate repository setting.
+
+New source-window legends follow the shared package contract, not arbitrary
+syntax colors. Exact identifiers, labels, underlines and group rails agree;
+core APIs remain neutral. [Pinned source mappings](evidence/package-accents.json)
+cover JavaScript/Docker and the two explicitly illustrative C#/Go reference
+blocks. The original 30 source/output blocks and all seven captured responses
+remain byte-semantically unchanged. Go is a workload, not a new AppHost
+language; no demo or toolchain was rebuilt to produce these references.
+
 The navigation uses the unchanged official Aspire compact mark. GitHub branding is secondary and identifies the GitHub-hosted workflow, PRs, and repository lineage; it does not replace Aspire or imply sponsorship.
 
 The black/white GitHub Invertocat and wordmark files come unchanged from [GitHub's official logo archive](https://brand.github.com/GitHub_Logos.zip), linked by the [current usage guidance](https://brand.github.com/foundations/logo). Archive SHA256: `e2a67d6cc51d990a52c46c1cf6bcab688db4830982174bca50e0be7a5c2f3194`.

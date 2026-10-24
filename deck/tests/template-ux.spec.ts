@@ -18,7 +18,7 @@ test('the pre-port content, order, notes, code, citations, media, focus steps an
   expect(response.status()).toBe(200);
   const actual = await page.evaluate((source) => {
     const document = new DOMParser().parseFromString(source, 'text/html');
-    document.querySelectorAll('[data-ux-decoration]').forEach((node) => node.remove());
+    document.querySelectorAll('[data-ux-decoration], [data-illustrative-addition]').forEach((node) => node.remove());
     return [...document.querySelectorAll<HTMLElement>('.slides > section[id]')].map((slide) => ({
       id: slide.id, chapter: slide.getAttribute('data-chapter'), purpose: slide.getAttribute('data-purpose'),
       appendix: slide.getAttribute('data-appendix'), text: slide.textContent!.replace(/\s+/g, ' ').trim(),

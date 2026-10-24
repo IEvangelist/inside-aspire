@@ -1,0 +1,52 @@
+{
+  "createdDate": "2026-10-23",
+  "description": "Final parent-produced, independently reviewed icon-version portrait artwork (v2). No portrait edits, invented person, new event/version/performance claim or source/brand changes.",
+  "portrait": {
+    "file": "deck/public/speaker/david-pine.webp",
+    "sha256": "209bc4571c67520bd634df6816654ee137cacbfc4dbe6f949abafbfabf174436",
+    "treatment": "Existing actual David Pine portrait, unchanged bytes and full framing."
+  },
+  "branding": {
+    "asset": "aspire-logo-light-horizontal.svg",
+    "treatment": "Unmodified official light/white Aspire wordmark.",
+    "source": "https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d",
+    "fonts": "Actual self-hosted Poppins and Fira Code from the existing pinned deck dependencies."
+  },
+  "images": [
+    {
+      "file": "inside-aspire-og.png",
+      "width": 1200,
+      "height": 630,
+      "bytes": 203735,
+      "sha256": "fff2ef12cb577180ad1301823cd4cb13c70a94e4b22b25fd972496d01ae3558a",
+      "url": "https://ievangelist.github.io/inside-aspire/social/inside-aspire-og.png",
+      "purpose": "Deployed site's canonical OpenGraph and summary_large_image Twitter card."
+    },
+    {
+      "file": "inside-aspire-social.png",
+      "width": 1280,
+      "height": 640,
+      "bytes": 204595,
+      "sha256": "d7773cb76405b235a731edd1a9e1c7ae3cb7d93edf6b54cf14fad8ee37ca7155",
+      "url": "https://ievangelist.github.io/inside-aspire/social/inside-aspire-social.png",
+      "purpose": "GitHub repository social-preview upload asset, below the documented 1 MB limit."
+    }
+  ],
+  "icons": {
+    "github": "Unmodified official GitHub mark beside the repository name.",
+    "websiteAndCode": "Existing pinned Primer Octicons globe and code marks; original MIT license retained.",
+    "nerdEmoji": "Actual Segoe UI Emoji nerd-face glyph beside David Pine's name, verified painted by the parent; not a hand-drawn or fabricated emoji.",
+    "dependencies": "None added. The published PNGs are self-contained."
+  },
+  "review": "Parent verified native dimensions, no clipping, actual painted Poppins/Fira Code/Segoe UI Emoji faces, text contrast at least 4.5:1 and no source portrait/wordmark edits. Final icon revision was user-directed, not an extra polish loop. Render recipe/proof stays with the coordinator; private absolute paths, embedded font dumps and temporary helpers are not published.",
+  "githubSocialPreview": {
+    "checkedDate": "2026-10-23",
+    "automaticSettingChanged": false,
+    "usesCustomOpenGraphImageAtCheck": false,
+    "publicGraphqlImageMutationFields": [],
+    "browserState": "Shared browser was signed out; this is not a GitHub CLI or MCP authentication-expiry claim.",
+    "documentedSetup": "Repository Settings > Social preview > Edit > Upload an image: select inside-aspire-social.png.",
+    "documentation": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview",
+    "boundary": "Publishing PNG files and site metadata activates the deployed site's card; it does not update GitHub's separate repository social-preview setting. No unofficial upload, token or cookie workaround was attempted."
+  }
+}
