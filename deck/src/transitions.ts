@@ -18,8 +18,8 @@ function style(value: string, scope: string, directional = false): string {
   const parts = value.split(/\s+/);
   if (directional && parts.length === 2 &&
       parts[0].endsWith('-in') && parts[1].endsWith('-out') &&
-      styles.some((candidate) => `${candidate}-in` === parts[0]) &&
-      styles.some((candidate) => `${candidate}-out` === parts[1])) return value;
+      styles.some((candidate) => candidate !== 'none' && `${candidate}-in` === parts[0]) &&
+      styles.some((candidate) => candidate !== 'none' && `${candidate}-out` === parts[1])) return value;
   throw new Error(`Transitions: ${scope}: invalid style "${value}". Use a native style or a style-in style-out slide pair.`);
 }
 

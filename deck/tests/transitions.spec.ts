@@ -104,6 +104,10 @@ test('native chapter-entry in/out effects retain exact Back symmetry, fragment r
 test('invalid native defaults and chapter names/styles/speeds fail with their scope', () => {
   const chapters = new Set(['AI loops', 'Aspire dashboard', 'Aspire deployment']);
   expect(() => validateTransitionSettings({
+    defaults: { style: 'none', speed: 'default', background: 'none' },
+    chapters: { 'AI loops': { style: 'none', background: 'none' } },
+  }, chapters)).not.toThrow();
+  expect(() => validateTransitionSettings({
     defaults: { style: 'sparkle', speed: 'fast', background: 'none' }, chapters: {},
   }, chapters)).toThrow('deck default');
   expect(() => validateTransitionSettings({
@@ -115,11 +119,20 @@ test('invalid native defaults and chapter names/styles/speeds fail with their sc
   expect(() => validateTransitionSettings({
     ...transitionSettings, chapters: { 'AI loops': { speed: 'warp' } },
   }, chapters)).toThrow('invalid speed');
+  for (const value of ['none-in', 'none-out', 'none-in fade-out', 'fade-in none-out', 'none-in none-out']) {
+    expect(() => validateTransitionSettings({
+      ...transitionSettings, chapters: { 'AI loops': { style: value } },
+    }, chapters), value).toThrow('chapter "AI loops"');
+  }
 });
 
 for (const [value, expected] of [
   ['data-transition="sparkle"', 'invalid style'],
   ['data-transition="slide-in fade-out zoom-out"', 'invalid style'],
+  ['data-transition="none-in"', 'invalid style'],
+  ['data-transition="none-out"', 'invalid style'],
+  ['data-transition="none-in fade-out"', 'invalid style'],
+  ['data-transition="fade-in none-out"', 'invalid style'],
   ['data-transition-speed="warp"', 'invalid speed'],
   ['data-background-transition="sparkle"', 'invalid style'],
 ] as const) {
@@ -136,3 +149,16 @@ for (const [value, expected] of [
     await expect(page.locator('html')).not.toHaveAttribute('data-deck-ready', 'true');
   });
 }
+
+test('whole none remains a valid explicit native slide and background transition', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'One actual native whole-style acceptance regression suffices.');
+  await page.route((url) => url.pathname === '/inside-aspire/', async (route) => {
+    const response = await route.fetch();
+    await route.fulfill({ response, body: (await response.text()).replace(
+      'data-transition="fade-in slide-out"', 'data-transition="none" data-background-transition="none"') });
+  });
+  await ready(page, '?mode=present#/weather');
+  await expect(page.locator('#weather')).toHaveAttribute('data-transition', 'none');
+  await expect(page.locator('#weather')).toHaveAttribute('data-background-transition', 'none');
+  await expect(page.locator('#weather h2')).toHaveText('Start with a healthy app.');
+});
