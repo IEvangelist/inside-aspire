@@ -34,6 +34,16 @@ template-update mechanism. Its source pin and retained differences are in
 
 The unchanged title pairs with David Pine's actual 300px public portrait, displayed proportionally at 260px on the desktop. The 56px presentation bar uses the official 32px Aspire mark without a stretched or overpowering wordmark. One primary advance group and a compact chapter indicator remain visible; secondary controls and chapter navigation live in an accessible dialog/sheet. Controls have 44px targets.
 
+The count is a separate fixed, noninteractive badge rather than a separator
+between Previous and Next. Its visible bottom-left default uses the existing
+opaque `surface-strong`, `ink`, strong border and offset window shadow, with
+Fira Code/tabular text and safe insets. The output's validated `data-position`
+selects one of four corners; `data-visible="false"` fully hides it. Status text
+stacks above a visible bottom-left badge; other placements leave status at its
+normal corner. Print and native presenter previews never show the badge.
+The existing count updates and polite/atomic live label remain tied to the
+original Reveal slide state, not a second navigation system.
+
 ## Semantic accents and package ownership
 
 Purple remains Aspire's primary/action identity. Cyan marks code/reference and

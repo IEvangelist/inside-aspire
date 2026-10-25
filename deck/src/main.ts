@@ -55,6 +55,21 @@ let reading = !printMode && !speakerReceiver && (initialView === 'read' ||
 let currentId = slides[0]?.id ?? 'intro';
 let scrollFrame = 0;
 
+try {
+  const placements = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+  if (!placements.includes(position.dataset.position ?? '')) {
+    throw new Error('#slide-position: data-position must be top-left, top-right, bottom-left, or bottom-right.');
+  }
+  if (position.dataset.visible !== 'true' && position.dataset.visible !== 'false') {
+    throw new Error('#slide-position: data-visible must be true or false.');
+  }
+  position.hidden = position.dataset.visible === 'false';
+} catch (error) {
+  status.textContent = error instanceof Error ? error.message : '#slide-position configuration could not initialize.';
+  console.error('Slide count configuration could not initialize.', error);
+  throw error;
+}
+
 function dimensions() {
   return {
     width: reading ? Math.min(root.clientWidth, 1440) : Math.max(1200, Math.min(1440, root.clientWidth / root.clientHeight * 810)),

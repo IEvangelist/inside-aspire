@@ -56,6 +56,13 @@ node .\deck\node_modules\vite\bin\vite.js preview deck --host 127.0.0.1 --port 4
 
 Open the exact URL printed by Vite, including `/inside-aspire/`. Arrow keys present; `Esc` opens overview; `R` switches reading mode; `T` switches theme; `S` opens speaker notes. Chapter links and slide IDs are stable. Phones default to scrolling. The Print control opens reveal.js's printable view. Reduced motion and light/dark modes are supported.
 
+The slide count is a high-contrast badge outside the Previous/Next controls,
+visible at the bottom-left by default. In `deck/index.html`, edit
+`#slide-position`'s `data-position` to `top-left`, `top-right`, `bottom-left`, or
+`bottom-right`; set `data-visible="false"` to hide it. Invalid values stop
+initialization with an explicit error. Print and speaker-preview frames always
+hide the badge.
+
 The presentation shell additively adopts [Aspire deck template 719b552](https://github.com/IEvangelist/aspire-deck-template/tree/719b552b592c85f31fa5d257a1860117ea785f58):
 official-site typography/surfaces, self-hosted Fira Code, shared window chrome,
 fixed menu controls, numbered navigation and reliable reading/overview/print.

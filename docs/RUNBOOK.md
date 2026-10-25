@@ -265,6 +265,27 @@ JSON is not clipped or squeezed into a projector-sized page.
 
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu leads with exactly the user's three primary areas; smaller direct demo/appendix jumps remain separate. The chapter indicator follows the active area through supporting slides. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
 
+### Slide count badge
+
+The count is outside the toolbar's Previous/Next/menu group. Its default is an
+opaque, noninteractive bottom-left badge with a contrasting background, border
+and shadow. Configure the existing output in `deck/index.html`:
+
+```html
+<output id="slide-position" data-position="bottom-left" data-visible="true"
+  aria-label="Slide 1 of 41" aria-live="polite" aria-atomic="true">1 / 41</output>
+```
+
+`data-position` accepts exactly `top-left`, `top-right`, `bottom-left`, or
+`bottom-right`. `data-visible` accepts only `true` or `false`; `false` removes
+the badge from layout and the accessibility tree. Missing/invalid values fail
+explicitly with the `#slide-position` configuration identity. Top placements
+clear the toolbar, all corners respect safe insets, and the bottom-left status
+message stacks above the badge only when it is visible there. Counts and
+accessible labels still follow the actual slide through fragments and history.
+Print and native speaker receivers always hide it, independent of configuration.
+No animation, extra control, or deck-wide application config is introduced.
+
 ### Native speaker view and complete backward navigation
 
 Open **Speaker notes** from the menu or focus the presentation and press **S**.
