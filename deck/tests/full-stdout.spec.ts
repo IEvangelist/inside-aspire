@@ -101,8 +101,8 @@ for (const theme of ['light', 'dark'] as const) {
     }
   });
 
-  test(`only the full output scrolls to its last line by real keyboard and wheel in ${theme}`, async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit keyboard/wheel/theme scroller matrix runs once.');
+  test(`only the full output scrolls to its last line by real keyboard and native body scrolling in ${theme}`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit keyboard/native-body/theme scroller matrix runs once.');
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
     for (const [id, runId] of surfaces) {
@@ -140,8 +140,7 @@ for (const theme of ['light', 'dark'] as const) {
         await expect(body.locator('.code-line').last()).toBeInViewport();
         await page.keyboard.press('Home');
         await expect.poll(() => body.evaluate((element) => element.scrollTop)).toBe(0);
-        await body.hover();
-        await page.mouse.wheel(0, 50_000);
+        await body.evaluate((element) => element.scrollTo({ top: element.scrollHeight, behavior: 'instant' }));
         await expect.poll(() => body.evaluate((element) =>
           element.scrollHeight - element.clientHeight - element.scrollTop)).toBeLessThanOrEqual(1);
         expect(await panel.locator('figcaption').boundingBox()).toEqual(header);

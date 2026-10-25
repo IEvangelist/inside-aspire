@@ -177,6 +177,43 @@ test('actual copy status stacks above only a visible bottom-left count without o
   }
 });
 
+test('long actual clipboard errors remain readable and clear of every visible corner at 320px and 390px', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit real-error/narrow/corner matrix runs once.');
+  await page.addInitScript(() => {
+    navigator.clipboard.writeText = async () => { throw new Error('Deterministic copy-denied geometry fixture.'); };
+  });
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const [placement, visible] of [
+      ...positions.map((placement) => [placement, 'true']),
+      ['bottom-right', 'false'],
+    ]) {
+      await configure(page, `data-position="${placement}" data-visible="${visible}"`);
+      await ready(page, '?mode=read#/lifecycle');
+      await page.locator('#lifecycle .copy-code').click();
+      const status = page.locator('#deck-status');
+      await expect(status).toHaveText(
+        'Could not copy AppHost native executable wiring. Allow clipboard access, or select and copy the code directly.');
+      const bounds = (await status.boundingBox())!;
+      const badge = await page.locator('#slide-position').boundingBox();
+      if (badge) {
+        const overlap = bounds.x < badge.x + badge.width && bounds.x + bounds.width > badge.x &&
+          bounds.y < badge.y + badge.height && bounds.y + bounds.height > badge.y;
+        expect(overlap, `${width}px ${placement}: long error overlaps the badge`).toBe(false);
+        if (placement === 'bottom-right') expect(bounds.x + bounds.width).toBeLessThanOrEqual(badge.x - 8);
+      }
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.y).toBeGreaterThanOrEqual(56);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+      expect(bounds.y + bounds.height).toBeLessThanOrEqual(844);
+      expect(await status.evaluate((node) => node.scrollWidth - node.clientWidth)).toBeLessThanOrEqual(1);
+      expect(await status.evaluate((node) => node.scrollHeight - node.clientHeight)).toBeLessThanOrEqual(1);
+      await expect(status).toHaveCSS('font-size', '11px');
+      if (placement !== 'bottom-right' || visible === 'false') await expect(status).toHaveCSS('max-inline-size', 'none');
+    }
+  }
+});
+
 for (const visible of ['true', 'false']) {
   test(`the ${visible === 'true' ? 'visible' : 'hidden'} badge's count and live label follow code steps, slide boundaries and browser history exactly`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'One exact code/history state trace per visibility suffices.');
