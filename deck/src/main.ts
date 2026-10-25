@@ -420,12 +420,14 @@ try {
     document.fonts.load('600 18px "Fira Code"'),
   ]);
   await document.fonts.ready;
+  const printReady = printMode
+    ? new Promise<void>((resolve) => deck.on('pdf-ready', () => resolve()))
+    : undefined;
   if (printMode) {
     deck.on('pdf-ready', () => sizePrintPages(root));
     window.addEventListener('beforeprint', () => sizePrintPages(root));
   }
   await deck.initialize();
-  if (printMode) sizePrintPages(root);
   root.removeAttribute('role');
   deck.on('slidechanged', () => {
     if (!reading) viewport.scrollTop = 0;
@@ -444,6 +446,11 @@ try {
   deck.addKeyBinding({ keyCode: 83, key: 'S', description: 'Open speaker notes and presenter view' }, openNotes);
   syncControls();
   updatePrintLink();
+  // Static replay content must settle before measuring the completed native print pages.
+  if (printReady) {
+    await printReady;
+    sizePrintPages(root);
+  }
   document.documentElement.dataset.deckReady = 'true';
 } catch (error) {
   status.textContent = 'The presentation could not initialize. Reload, or read the repository runbook.';

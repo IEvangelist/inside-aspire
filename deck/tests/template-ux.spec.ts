@@ -13,6 +13,26 @@ async function ready(page: Page, query = '?mode=present') {
   await page.evaluate(() => document.fonts.ready);
 }
 
+function observeFirstPrintReady() {
+  const observer = new MutationObserver(() => {
+    if (document.documentElement.dataset.deckReady !== 'true') return;
+    const pages = [...document.querySelectorAll<HTMLElement>('.pdf-page')];
+    document.documentElement.dataset.testFirstPrintReady = JSON.stringify({
+      pages: pages.length,
+      ids: pages.map((page) => page.querySelector('section[id]')?.id),
+      codeBlocks: document.querySelectorAll('.pdf-page pre > code').length,
+      pageRules: document.querySelector<HTMLStyleElement>('#complete-print-pages')?.sheet?.cssRules.length ?? 0,
+      clippedOutputs: [...document.querySelectorAll<HTMLElement>('.pdf-page .replay-output')]
+        .filter((output) => output.getBoundingClientRect().height === 0 ||
+          output.scrollHeight > output.clientHeight + 1 ||
+          output.getBoundingClientRect().bottom > output.closest('.pdf-page')!.getBoundingClientRect().bottom)
+        .map((output) => output.closest('section')!.id),
+    });
+    observer.disconnect();
+  });
+  observer.observe(document, { attributes: true, subtree: true, attributeFilter: ['data-deck-ready'] });
+}
+
 test('the pre-port content, order, notes, code, citations, media, focus steps and paired layouts remain exact', async ({ page }) => {
   const response = await page.request.get('');
   expect(response.status()).toBe(200);
@@ -252,6 +272,57 @@ test('print emits one complete variable-height page per original slide without c
     path: testInfo.outputPath('inside-aspire-complete.pdf') });
   expect((pdf.toString('latin1').match(/\/Type \/Page\b/g) ?? []).length).toBe(41);
   await expect(page.locator('.copy-code:visible')).toHaveCount(0);
+});
+
+test('print readiness waits for native pdf-ready even when the asynchronous print frames are held', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'One controlled native print-startup race regression suffices.');
+  await page.addInitScript(observeFirstPrintReady);
+  await page.addInitScript(() => {
+    const nativeFrame = window.requestAnimationFrame.bind(window);
+    const pending: FrameRequestCallback[] = [];
+    let released = false;
+    window.requestAnimationFrame = (callback) => nativeFrame((time) => {
+      if (!released && document.documentElement.classList.contains('print-pdf')) {
+        pending.push(callback);
+        document.documentElement.dataset.testPrintFrameHeld = 'true';
+      } else callback(time);
+    });
+    document.addEventListener('test-release-print-frames', () => {
+      released = true;
+      for (const callback of pending.splice(0)) nativeFrame(callback);
+    }, { once: true });
+  });
+  await page.goto('?print-pdf', { waitUntil: 'commit' });
+  const root = page.locator('html');
+  await expect(root).toHaveAttribute('data-test-print-frame-held', 'true');
+  await expect(root).not.toHaveAttribute('data-deck-ready', 'true');
+  await expect(page.locator('.pdf-page')).toHaveCount(0);
+  await page.evaluate(() => document.dispatchEvent(new Event('test-release-print-frames')));
+  await expect(root).toHaveAttribute('data-deck-ready', 'true');
+  const firstReady = JSON.parse(await root.getAttribute('data-test-first-print-ready') ?? 'null');
+  expect(firstReady).toEqual({
+    pages: 41, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 32, pageRules: 41, clippedOutputs: [],
+  });
+});
+
+test('forty cold print startups expose the complete original deck at the first readiness signal', async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'A bounded cold-context print stress batch runs once.');
+  test.setTimeout(120_000);
+  for (let attempt = 0; attempt < 40; attempt++) {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+    try {
+      const page = await context.newPage();
+      await page.addInitScript(observeFirstPrintReady);
+      await page.goto(`?print-pdf&cold-print=${attempt}`);
+      await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
+      const firstReady = JSON.parse(await page.locator('html').getAttribute('data-test-first-print-ready') ?? 'null');
+      expect(firstReady, `Cold print load ${attempt + 1}`).toEqual({
+        pages: 41, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 32, pageRules: 41, clippedOutputs: [],
+      });
+    } finally {
+      await context.close();
+    }
+  }
 });
 
 test('one bounded desktop projector and narrow visual batch retains actual rich talk surfaces', async ({ page }, testInfo) => {
