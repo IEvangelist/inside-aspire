@@ -124,7 +124,10 @@ for (const theme of ['light', 'dark'] as const) {
         };
       });
       expect(geometry.horizontal).toBeLessThanOrEqual(1);
-      expect(geometry.height).toBeLessThanOrEqual(330);
+      if (await page.locator(`#${id}`).getAttribute('data-terminal-focus') === 'true') {
+        expect(geometry.height).toBeGreaterThan(330);
+        expect((await body.boundingBox())!.y + (await body.boundingBox())!.height).toBeLessThanOrEqual(608);
+      } else expect(geometry.height).toBeLessThanOrEqual(330);
       expect(geometry.font).toBeGreaterThanOrEqual(22);
       expect(geometry.scrollOwners).toEqual(['replay-output']);
       if (runId !== 'runtime-wait') {

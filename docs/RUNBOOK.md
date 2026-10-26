@@ -23,8 +23,8 @@ the close only when relevant.
 
 The deck now includes presenter-controlled **Recorded CLI run** surfaces. They
 replay genuine captured command results, not browser execution. One command
-stays anchored while Next expands its complete captured stdout in one bounded
-output-only scroller; the following Next proceeds to the next related command.
+stays anchored on ordinary slides while Next expands its complete captured
+stdout in one bounded output-only scroller; the following Next proceeds to the next related command.
 Back restores/collapses correctly. Use the [capture proof](CLI-REPLAY.md) and
 [public-safe fixtures](evidence/cli-replay.json); the animation is not a latency
 benchmark. Reading, print, and reduced motion show recorded commands/results
@@ -32,6 +32,14 @@ immediately. Six JSON commands keep their complete JSON envelopes and escaped
 Markdown content; wait remains plaintext. There is no visible replay status
 row. Reading/print expand all output naturally. Live terminal execution below
 remains a separate option.
+
+The five long responses (`live-cli`, `docs-section`, `api-member`,
+`runtime-state`, `runtime-traces`) use opt-in terminal focus: revealing output
+reclaims the title and marked provenance space for a taller, viewport-safe
+terminal. Header, command, and Copy stay available; only the output scrolls.
+Back restores title, footer links, and original geometry. Native Notes mirrors
+the fragment; reading, print, and no-JavaScript retain all provenance. See
+[the exact authoring attribute and static-mode contract](CLI-REPLAY.md#authoring-terminal-focus).
 
 ## Pre-talk preparation only
 

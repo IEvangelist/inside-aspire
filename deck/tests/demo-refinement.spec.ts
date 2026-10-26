@@ -158,7 +158,7 @@ test('three-area audience surfaces render coherently in one desktop/mobile visua
       'dashboard-standalone', 'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'close']) {
       await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
       const slide = page.locator(`#${id}`);
-      await expect(slide.locator('h1,h2').first()).toBeInViewport();
+      await expect(slide.locator(layout.mode === 'present' && id === 'live-cli' ? '.cli-terminal' : 'h1,h2').first()).toBeInViewport();
       const path = testInfo.outputPath(`${id}-${layout.width}-${layout.theme}.png`);
       await slide.screenshot({ path });
       await testInfo.attach(`${id}-${layout.width}-${layout.theme}`, { path, contentType: 'image/png' });

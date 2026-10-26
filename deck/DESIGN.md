@@ -109,8 +109,20 @@ Padded inline code uses width-constrained boxes so platform monospace difference
 The opening action is sequential: **Start presentation** advances to `thesis`, slide 2; direct chapter navigation remains separate. Image-led slides use the original capture's full aspect, with larger actual weather content and no wide blank contain frame. The live handoff shows direct, copyable Aspire docs/API commands, not a script entry point. The supporting feature story follows real browser runtime configuration through bot drafting, explicit maintainer refinement, publication, and verified CLI retrieval; experimental browser logging is not implied to be enabled in the unchanged weather demo.
 
 The focal motion is command -> short recorded pause -> response expansion.
-The command is anchored; only the result area grows with a short height/clip
-Web Animations sequence. One advance runs the pause and expansion, never
+Ordinary commands stay anchored. Five genuinely long responses opt into
+`data-terminal-focus="true"`: on expansion their semantic heading visually
+collapses and explicitly marked `.terminal-support` provenance becomes hidden
+and inert. The terminal moves into that space, with a readable, single-scroller
+output body filling the safe presentation height. Narrow presentation uses
+the viewport's actual width rather than miniature projector type; counter,
+status, and toolbar clearance remain. The short member-search and readiness
+panels keep their original layout. Back restores the original title, support,
+geometry, and link availability; read/print/overview/no-JavaScript preserve
+title and provenance. Native receivers follow the output fragment and reduced
+motion settles instantly.
+
+The existing short height/clip Web Animations sequence grows the result or
+focused terminal. One advance runs the pause and expansion, never
 autoplaying another command. Interruption, navigation, theme, and viewport
 changes cancel or settle the pending sequence. Continuous recorded-run labels,
 exit status, and complete-public-capture links
@@ -120,7 +132,7 @@ waiting. No visible status/excerpt row or reserved gap remains; announcements
 use the incumbent visually hidden style. Every response is the full immutable
 public-safe stdout, with six actual JSON envelopes/arrays and one plaintext
 wait. Markdown stays escaped inside JSON, rather than being decoded into a
-different response. One bounded output body scrolls below the anchored header
+different response. One bounded output body scrolls below the fixed header
 and command; reading/print/no-JS expand naturally without clipping the last
 line. Exact text/Range copy, JSON values/counts, gap measurements, keyboard/
 wheel/touch scrolling, and retained motion/navigation/geometry are tested.

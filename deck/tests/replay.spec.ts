@@ -106,7 +106,7 @@ for (const theme of ['light', 'dark'] as const) {
       }
     }
   });
-  test(`one command expands to its actual result and rewinds with a stable anchor in ${theme}`, async ({ page }, testInfo) => {
+  test(`one command expands to its actual result and rewinds with its configured anchor in ${theme}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit presenter/theme expansion runs once.');
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: theme });
@@ -129,7 +129,7 @@ for (const theme of ['light', 'dark'] as const) {
         const response = element.querySelector<HTMLElement>('.replay-response')!;
         const observer = new MutationObserver(() => {
           states.push({ phase: element.dataset.replayPhase, hidden: response.hidden,
-            animations: response.getAnimations().length });
+            animations: element.getAnimations({ subtree: true }).length });
           element.dataset.testStates = JSON.stringify(states);
           if (element.dataset.replayPhase === 'expanding') {
             function frame() {
@@ -153,8 +153,13 @@ for (const theme of ['light', 'dark'] as const) {
       expect(heights.some((height) => height > before!.height + 5 && height < after!.height - 5)).toBe(true);
       expect(after!.height - before!.height).toBeGreaterThan(70);
       const finalAnchor = await command.boundingBox();
-      expect(Math.abs(finalAnchor!.x - anchor!.x)).toBeLessThan(0.5);
-      expect(Math.abs(finalAnchor!.y - anchor!.y)).toBeLessThan(0.5);
+      if (await page.locator(`#${id}`).getAttribute('data-terminal-focus') === 'true') {
+        expect(finalAnchor!.y).toBeLessThan(anchor!.y - 30);
+        await expect(page.locator(`#${id} h2`)).toBeHidden();
+      } else {
+        expect(Math.abs(finalAnchor!.x - anchor!.x)).toBeLessThan(0.5);
+        expect(Math.abs(finalAnchor!.y - anchor!.y)).toBeLessThan(0.5);
+      }
       expect(await terminal.locator('.replay-output code').textContent()).toBe(completeStdout(record));
       await expect(terminal.locator('.replay-cue, .replay-excerpt')).toHaveCount(0);
       const output = await terminal.locator('.replay-output').boundingBox();
@@ -169,6 +174,7 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(terminal).toHaveAttribute('data-replay-phase', 'command');
       await expect(response).toBeHidden();
       expect(Math.abs((await terminal.boundingBox())!.height - before!.height)).toBeLessThan(1);
+      expect(Math.abs((await command.boundingBox())!.y - anchor!.y)).toBeLessThan(0.5);
     }
   });
 }

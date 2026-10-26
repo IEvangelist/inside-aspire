@@ -297,6 +297,34 @@ figcaption .window-title > span:last-child:not([data-icon]) { font-size: 14px; c
 .reveal pre.replay-output { min-height: 0; max-height: 330px; padding: 14px 20px; border-top: 1px solid var(--code-line); border-radius: 0 0 12.8px 12.8px; }
 .replay-output .code-line { white-space: break-spaces; }
 .replay-step { position: absolute; width: 0; height: 0; pointer-events: none; }
+.reveal.has-terminal-focus { --terminal-focus-top: max(24px, env(safe-area-inset-top, 0px)); --terminal-focus-bottom: max(112px, calc(env(safe-area-inset-bottom, 0px) + 96px)); }
+.reveal.has-terminal-focus, .reveal.has-terminal-focus .slide-viewport { overflow: clip; }
+.reveal.has-terminal-focus ~ #replay-status { top: 0; left: 0; }
+:root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus { --slide-scale: 1 !important; }
+:root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus .slides { position: absolute; inset: 0 !important; width: 100% !important; height: 100% !important; margin: 0; transform: none !important; }
+:root:not([data-speaker-receiver='true']) body:has(#slide-position[data-visible='true'][data-position^='top-']:not([hidden])) .reveal.has-terminal-focus { --terminal-focus-top: calc(max(12px, env(safe-area-inset-top, 0px)) + 48px); }
+.reveal .slides section.is-terminal-focused { display: flex !important; flex-direction: column; width: 100% !important; height: 100%; min-height: 0; padding: var(--terminal-focus-top) max(24px, env(safe-area-inset-right, 0px)) var(--terminal-focus-bottom) max(24px, env(safe-area-inset-left, 0px)); }
+.reveal .is-terminal-focused > :is(h1, h2, h3, .slide-kicker) { flex: none; height: 0; min-height: 0; margin: 0; padding: 0; overflow: hidden; opacity: 0; }
+.is-terminal-focused > .terminal-support { display: none; }
+.is-terminal-focused > .cli-terminal { flex: none; height: 100%; min-height: 0; }
+.is-terminal-focused .replay-command-line { flex: none; }
+.is-terminal-focused .replay-response { flex: 1; }
+.reveal .is-terminal-focused pre.replay-output { flex: 1; max-height: none; }
+@media (max-width: 999px), (max-height: 649px) {
+  :root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus { --terminal-focus-bottom: max(136px, calc(env(safe-area-inset-bottom, 0px) + 120px)); }
+}
+@media (max-width: 999px) {
+  :root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus { --terminal-focus-top: max(16px, env(safe-area-inset-top, 0px)); }
+  :root:not([data-speaker-receiver='true']) .reveal .slides section.is-terminal-focused { padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
+  :root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus pre,
+  :root:not([data-speaker-receiver='true']) .has-terminal-focus .replay-prompt { font-size: 18px; }
+}
+@media (max-width: 600px) {
+  :root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus pre,
+  :root:not([data-speaker-receiver='true']) .has-terminal-focus .replay-prompt { font-size: 16px; }
+  :root:not([data-speaker-receiver='true']) .reveal.has-terminal-focus .cli-terminal figcaption { grid-template-columns: auto minmax(0, 1fr); padding: 8px 12px; gap: 8px 12px; font-size: 15px; }
+  :root:not([data-speaker-receiver='true']) .has-terminal-focus .window-actions { grid-column: 1 / -1; justify-content: flex-start; }
+}
 :root[data-reading='true'] .reveal pre.replay-output,
 .print-pdf .reveal pre.replay-output { max-height: none; }
 @media print { .reveal pre.replay-output { max-height: none; } }

@@ -99,7 +99,14 @@ for (const link of menu.querySelectorAll<HTMLElement>('[data-slide]')) {
   chip.textContent = String(index + 1);
   link.prepend(chip);
 }
-const replay = createReplayController(root, element('replay-status', HTMLSpanElement));
+let replay: ReturnType<typeof createReplayController>;
+try {
+  replay = createReplayController(root, element('replay-status', HTMLSpanElement));
+} catch (error) {
+  status.textContent = error instanceof Error ? error.message : 'Recorded terminals could not initialize.';
+  console.error('Recorded terminals could not initialize.', error);
+  throw error;
+}
 let transitions: ReturnType<typeof createTransitionPolicy>;
 try {
   transitions = createTransitionPolicy(root, slides, transitionSettings);
@@ -201,7 +208,8 @@ function syncControls(animateReplay = false) {
     link.setAttribute('aria-current', current ? 'step' : 'false');
   });
   if (slide) focusCode(slide, staticContent());
-  replay.sync(slide ?? undefined, staticContent(), animateReplay && !speakerReceiver);
+  replay.sync(slide ?? undefined, staticContent(), animateReplay && !speakerReceiver,
+    !reading && !printMode && !printPreference.matches && !deck.isOverview());
   if (!reading) {
     for (const inactive of root.querySelectorAll<HTMLElement>('section:not(.present)')) {
       inactive.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
@@ -395,11 +403,19 @@ window.addEventListener('resize', () => {
   deck.configure({ ...dimensions(), disableLayout: reading });
   syncControls();
 });
+window.addEventListener('message', (event: MessageEvent<unknown>) => {
+  const message = event.data;
+  if (speakerReceiver || event.origin !== window.location.origin || !message || typeof message !== 'object' ||
+      !('namespace' in message) || message.namespace !== 'aspire-deck' ||
+      !('type' in message) || message.type !== 'receiver-ready') return;
+  // Notes already resends current/upcoming state on resumed; do not mutate the audience state.
+  deck.dispatchEvent({ type: 'resumed', data: undefined });
+});
 window.addEventListener('hashchange', (event) => {
   if (!window.location.hash.startsWith('#/')) return;
   const [slideId, fragment] = window.location.hash.slice(2).split('/');
   const id = decodeURIComponent(slideId);
-  const directSlideJump = !printMode && fragment === undefined &&
+  const directSlideJump = !printMode && !speakerReceiver && fragment === undefined &&
     (id !== currentId || (deck.getIndices().f ?? -1) >= 0);
   if (reading || Object.hasOwn(slideAliases, id) || directSlideJump) {
     // An absent fragment also means -1 when browser Back returns to this slide's initial history entry.
@@ -427,7 +443,11 @@ try {
     deck.on('pdf-ready', () => sizePrintPages(root));
     window.addEventListener('beforeprint', () => sizePrintPages(root));
   }
-  await deck.initialize();
+  const initialized = deck.initialize();
+  const forwardReceiverEvents = speakerReceiver && deck.getConfig().postMessageEvents;
+  // A receiver's initial numeric URL has no audience fragment; don't relay its boot state.
+  if (speakerReceiver) deck.configure({ postMessageEvents: false });
+  await initialized;
   root.removeAttribute('role');
   deck.on('slidechanged', () => {
     if (!reading) viewport.scrollTop = 0;
@@ -435,6 +455,8 @@ try {
   });
   deck.on('fragmentshown', () => syncControls(true));
   deck.on('fragmenthidden', () => syncControls());
+  deck.on('overviewshown', () => syncControls());
+  deck.on('overviewhidden', () => syncControls());
   const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
   if (Object.hasOwn(slideAliases, initialSlideId)) goTo(initialSlideId);
   else if (reading) {
@@ -452,6 +474,13 @@ try {
     sizePrintPages(root);
   }
   document.documentElement.dataset.deckReady = 'true';
+  if (speakerReceiver && window.parent !== window) {
+    if (forwardReceiverEvents) {
+      deck.configure({ postMessageEvents: true });
+      deck.dispatchEvent({ type: 'ready', data: undefined });
+    }
+    window.parent.opener?.postMessage({ namespace: 'aspire-deck', type: 'receiver-ready' }, window.location.origin);
+  }
 } catch (error) {
   status.textContent = 'The presentation could not initialize. Reload, or read the repository runbook.';
   console.error('Presentation initialization failed.', error);

@@ -28,7 +28,8 @@ for (const theme of ['light', 'dark'] as const) {
       const results = [];
       for (const id of ids) {
         await page.evaluate((slideId) => { window.location.hash = `/${slideId}`; }, id);
-        await expect(page.locator(`#${id} h1, #${id} h2`).first()).toBeInViewport();
+        const focused = viewport.mode === 'present' && await page.locator(`#${id}`).getAttribute('data-terminal-focus') === 'true';
+        await expect(page.locator(focused ? `#${id} .cli-terminal` : `#${id} h1, #${id} h2`).first()).toBeInViewport();
         const result = await page.locator(`#${id}`).evaluate((slide) => {
           const issues: string[] = [];
           const reading = document.documentElement.dataset.reading === 'true';
@@ -40,7 +41,7 @@ for (const theme of ['light', 'dark'] as const) {
             }
             return element.getClientRects().length > 0;
           }
-          const heading = slide.querySelector('h1, h2')!;
+          const heading = slide.querySelector(slide.classList.contains('is-terminal-focused') ? '.cli-terminal' : 'h1, h2')!;
           const toolbar = document.querySelector('.toolbar')!.getBoundingClientRect();
           if (heading.getBoundingClientRect().top < toolbar.bottom - tolerance) issues.push('Heading is behind the toolbar.');
           const blocks = slide.querySelectorAll<HTMLElement>(

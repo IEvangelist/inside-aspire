@@ -75,8 +75,15 @@ fragment links and normal Back restore the correct state.
 
 Interruption, theme changes, and viewport changes cancel or settle the short
 sequence. No delayed callback can show a response on another slide. The command
-remains anchored while its result pane expands to a bounded height. Its fixed
-header continuously says **Recorded CLI run**, and source/proof links remain.
+remains anchored on ordinary slides while its result pane expands to a bounded
+height. Five long-response slides opt into terminal focus: `live-cli` (five
+search records), `docs-section` (full guidance), `api-member` (full member
+reference), `runtime-state` (six detailed resources), and `runtime-traces`
+(both traces and their spans). Their title space becomes the terminal's space
+when output appears, and the output body fills the remaining safe height.
+The short `api-search` and `runtime-wait` panels retain their original layout.
+The header continuously says **Recorded CLI run**. Focused presentation hides
+only the marked source footer; Back restores it and its links.
 There is no visible status/excerpt row or reserved space for one; short polite
 status announcements use the existing visually hidden accessibility style.
 Output scrolling belongs to one complete body at the bottom of the rounded
@@ -91,3 +98,20 @@ expand the full output naturally, so print cannot clip scroll-hidden lines.
 Without JavaScript, the static commands, complete stdout, and capture links remain readable;
 there is no claim of live execution. Real live demonstrations remain available
 in the runbook's separate direct-terminal commands.
+
+### Authoring terminal focus
+
+Add `data-terminal-focus="true"` to a leaf `<section>` containing exactly one
+direct recorded terminal. Mark only its supporting provenance/caption with
+`class="terminal-support"` (alongside existing classes). Omit the attribute
+for the original layout; `false`, an empty value, or any other authored value
+fails startup with the slide identity. Nested/layout-column terminals are
+not supported by this full-slide opt-in.
+
+Focus follows the existing output fragment, including deep links, browser
+history, and native Notes current/upcoming previews. Headings remain semantic
+but visually collapse; hidden support is inert and leaves the tab order.
+Rewind restores the original geometry and support. Reduced motion focuses
+immediately without animation. Reading, print, overview, and no-JavaScript
+content retain their headings and provenance; reading/print/no-JavaScript
+still expose all captured output, without internal clipping.
