@@ -58,6 +58,25 @@ jobs:
       - name: Prepare public isolated CLI
         shell: pwsh
         run: ./scripts/Install-Aspire.ps1
+      - name: Discover the published JavaScript API members
+        shell: pwsh
+        run: |
+          # CLI 13.6.1 cold unscoped member search can fan out and hit upstream 403 before JavaScript.
+          # Public ListAsync(scope) prepares genuine members; remove when upstream cold search is fixed.
+          . ./scripts/Show-DocsLoop.ps1
+          $cliName = if ($IsWindows) { 'aspire.exe' } else { 'aspire' }
+          $cli = Join-Path (Join-Path $env:GITHUB_WORKSPACE '.tools/aspire') $cliName
+          $scope = 'csharp/aspire.hosting.javascript/javascripthostingextensions/methods'
+          $capture = New-DocsLoopOutputDirectory '.artifacts/rehearsal/docs-loop-tests/api-discovery'
+          $listing = Invoke-DocsLoopCommand $cli @('docs', 'api', 'list', $scope, '--format', 'Json', '--non-interactive', '--nologo') 'api-scope-list' $capture -Json
+          $member = @($listing.data | Select-Object id, name, language, kind, parentId, memberGroup | Where-Object {
+            $_.id -ceq "$scope#addviteapp" -and
+            $_.name -ceq 'AddViteApp(IDistributedApplicationBuilder, string, string, string)' -and
+            $_.language -ceq 'csharp' -and $_.kind -ceq 'member' -and
+            $_.parentId -ceq $scope -and $_.memberGroup -ceq 'methods'
+          })
+          if ($member.Count -ne 1) { throw 'Published scoped API discovery did not return the unique genuine AddViteApp member.' }
+          Write-Host "Verified genuine published AddViteApp identity from $scope."
       - name: Validate retrieval and command failure contracts
         shell: pwsh
         run: ./scripts/Test-DocsLoop.ps1 -SkipGitHub
