@@ -205,14 +205,16 @@ for (const [name, replacement, expected] of [
 }
 
 test('the optional reference shows real C# top-level AppHost and Go workload boundaries without replacing any original slide or example', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'desktop-dark', 'One actual disclosure/reading/print source path suffices.');
+  test.skip(testInfo.project.name !== 'desktop-dark', 'One actual disclosure/dialog source path suffices.');
   await page.setViewportSize({ width: 1280, height: 720 });
   await ready(page, 'history');
-  const reference = page.locator('.language-examples');
-  await expect(reference).not.toHaveAttribute('open', '');
-  await reference.locator('summary').click();
-  await expect(page.locator('html')).toHaveAttribute('data-reading', 'true');
-  await expect(reference).toHaveAttribute('open', '');
+  const disclosure = page.locator('.language-examples');
+  await expect(disclosure).not.toHaveAttribute('open', '');
+  await disclosure.locator('summary').click();
+  await expect(page.locator('html')).toHaveAttribute('data-reading', 'false');
+  await expect(disclosure).not.toHaveAttribute('open', '');
+  const reference = page.locator('#slide-details');
+  await expect(reference).toBeVisible();
   await expect(reference).toContainText('Go runs as a workload');
   await expect(reference).toContainText('not the weather demo');
   await expect(reference).toContainText('apphost.mts');

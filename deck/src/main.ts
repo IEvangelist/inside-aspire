@@ -16,6 +16,7 @@ import { prepareWindows } from './windows';
 import { sizePrintPages } from './printing';
 import { annotatePackages } from './packages';
 import { createTransitionPolicy, transitionSettings } from './transitions';
+import { createDetailsController } from './details';
 import './style.css';
 
 function element<T extends HTMLElement>(id: string, type: { new(): T }): T {
@@ -32,6 +33,9 @@ const overviewButton = element('overview', HTMLButtonElement);
 const notesButton = element('notes', HTMLButtonElement);
 const menu = element('deck-menu', HTMLDialogElement);
 const menuButton = element('menu-toggle', HTMLButtonElement);
+const detailsDialog = element('slide-details', HTMLDialogElement);
+const detailsScroll = detailsDialog.querySelector<HTMLElement>('.details-scroll')!;
+const detailsStatus = element('details-status', HTMLParagraphElement);
 const chapterButton = element('chapter-toggle', HTMLButtonElement);
 const chapterLabel = element('chapter-label', HTMLSpanElement);
 const previousButton = element('previous', HTMLButtonElement);
@@ -79,8 +83,8 @@ function dimensions() {
 
 renderIcons();
 renderDiagrams();
-prepareWindows(root, (message) => { status.textContent = message; },
-  () => root.focus({ preventScroll: true }));
+prepareWindows(root, (message) => { (detailsDialog.open ? detailsStatus : status).textContent = message; },
+  () => (detailsDialog.open ? detailsScroll : root).focus({ preventScroll: true }));
 highlightCode();
 try {
   annotatePackages(root);
@@ -108,6 +112,14 @@ try {
   throw error;
 }
 let transitions: ReturnType<typeof createTransitionPolicy>;
+let disclosures: ReturnType<typeof createDetailsController>;
+try {
+  disclosures = createDetailsController(root, detailsDialog);
+} catch (error) {
+  status.textContent = error instanceof Error ? error.message : 'Slide details could not initialize.';
+  console.error('Slide details could not initialize.', error);
+  throw error;
+}
 try {
   transitions = createTransitionPolicy(root, slides, transitionSettings);
 } catch (error) {
@@ -165,12 +177,13 @@ const deck = new Reveal(root, {
   showNotes: false,
   fragments: !staticContent(),
   pdfSeparateFragments: false,
-  keyboardCondition: () => !menu.open && !ownsNavigationKeys(document.activeElement),
+  keyboardCondition: (event) => !menu.open && !detailsDialog.open && !ownsNavigationKeys(document.activeElement, event.key),
   plugins: [Notes],
 });
 
-function ownsNavigationKeys(target: Element | null) {
+function ownsNavigationKeys(target: Element | null, key?: string) {
   if (target?.closest('a, button, input, textarea, select, [contenteditable]')) return true;
+  if (target?.closest('summary') && (key === 'Enter' || key === ' ')) return true;
   const region = target?.closest<HTMLElement>('pre, [role="region"][tabindex]');
   return !!region && (region.scrollHeight > region.clientHeight || region.scrollWidth > region.clientWidth);
 }
@@ -185,9 +198,7 @@ function updateModeControls() {
   document.documentElement.dataset.static = String(staticContent());
   document.documentElement.dataset.print = String(printMode);
   document.documentElement.dataset.speakerReceiver = String(speakerReceiver);
-  for (const details of root.querySelectorAll<HTMLDetailsElement>('.language-examples')) {
-    details.open = reading || printMode || printPreference.matches;
-  }
+  disclosures.sync(printMode || printPreference.matches ? 'print' : speakerReceiver ? 'receiver' : reading ? 'read' : 'present');
 }
 
 function syncControls(animateReplay = false) {
@@ -219,6 +230,7 @@ function syncControls(animateReplay = false) {
 }
 
 function goTo(id: string) {
+  disclosures.close(false);
   if (Object.hasOwn(slideAliases, id)) id = slideAliases[id];
   const target = document.getElementById(id);
   if (!target) throw new Error(`Missing slide: ${id}`);
@@ -294,16 +306,9 @@ themeButton.addEventListener('click', toggleTheme);
 readButton.addEventListener('click', () => { closeMenu(); toggleReading(); root.focus({ preventScroll: true }); });
 overviewButton.addEventListener('click', () => { closeMenu(); deck.toggleOverview(); root.focus({ preventScroll: true }); });
 notesButton.addEventListener('click', () => { closeMenu(); openNotes(); });
-for (const details of root.querySelectorAll<HTMLDetailsElement>('.language-examples')) {
-  details.addEventListener('toggle', () => {
-    if (details.open && !reading && !printMode && !printPreference.matches) {
-      toggleReading();
-      details.scrollIntoView({ block: 'start' });
-    }
-  });
-}
 for (const button of [menuButton, chapterButton]) {
   button.addEventListener('click', () => {
+    disclosures.close(false);
     menu.showModal();
     menuButton.setAttribute('aria-expanded', 'true');
     chapterButton.setAttribute('aria-expanded', 'true');
@@ -331,11 +336,13 @@ root.addEventListener('click', (event) => {
   root.focus({ preventScroll: true });
 });
 previousButton.addEventListener('click', () => {
+  if (detailsDialog.open) return;
   if (reading) goTo(slides[Math.max(0, slides.findIndex((slide) => slide.id === currentId) - 1)].id);
   else deck.prev();
   root.focus({ preventScroll: true });
 });
 nextButton.addEventListener('click', () => {
+  if (detailsDialog.open) return;
   if (reading) goTo(slides[Math.min(slides.length - 1, slides.findIndex((slide) => slide.id === currentId) + 1)].id);
   else deck.next();
   root.focus({ preventScroll: true });
@@ -359,8 +366,8 @@ viewport.addEventListener('scroll', () => {
   });
 });
 window.addEventListener('keydown', (event) => {
-  if (!reading || menu.open || event.altKey || event.ctrlKey || event.metaKey ||
-      (event.target instanceof Element && ownsNavigationKeys(event.target))) return;
+  if (!reading || menu.open || detailsDialog.open || event.altKey || event.ctrlKey || event.metaKey ||
+      (event.target instanceof Element && ownsNavigationKeys(event.target, event.key))) return;
   const direction = ['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key) ? 1 :
     ['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key) ? -1 : 0;
   if (direction) {
@@ -382,21 +389,23 @@ reducedMotion.addEventListener('change', () => {
     ...transitions.apply(noMotion()),
     fragments: !staticContent(),
   });
-  let beforePrint: ReturnType<typeof deck.getState> | undefined;
-  printPreference.addEventListener('change', () => {
-    if (printPreference.matches) beforePrint = deck.getState();
-    updateModeControls();
-    deck.configure({ ...transitions.apply(noMotion()), fragments: !staticContent() });
-    deck.sync();
-    if (!printPreference.matches && beforePrint) {
-      deck.setState(beforePrint);
-      beforePrint = undefined;
-    }
-    syncControls();
-  });
   deck.sync();
   syncControls();
 });
+let beforePrint: ReturnType<typeof deck.getState> | undefined;
+printPreference.addEventListener('change', () => {
+  if (printPreference.matches) beforePrint = deck.getState();
+  updateModeControls();
+  deck.configure({ ...transitions.apply(noMotion()), fragments: !staticContent() });
+  deck.sync();
+  if (!printPreference.matches && beforePrint) {
+    deck.setState(beforePrint);
+    beforePrint = undefined;
+  }
+  syncControls();
+});
+window.addEventListener('beforeprint', () => disclosures.sync('print'));
+window.addEventListener('afterprint', updateModeControls);
 window.addEventListener('resize', () => {
   replay.settle();
   updateModeControls();
@@ -409,6 +418,7 @@ window.addEventListener('message', (event: MessageEvent<unknown>) => {
       !('namespace' in message) || message.namespace !== 'aspire-deck' ||
       !('type' in message) || message.type !== 'receiver-ready') return;
   // Notes already resends current/upcoming state on resumed; do not mutate the audience state.
+  disclosures.close(false);
   deck.dispatchEvent({ type: 'resumed', data: undefined });
 });
 window.addEventListener('hashchange', (event) => {
@@ -450,12 +460,13 @@ try {
   await initialized;
   root.removeAttribute('role');
   deck.on('slidechanged', () => {
+    disclosures.close(false);
     if (!reading) viewport.scrollTop = 0;
     syncControls();
   });
-  deck.on('fragmentshown', () => syncControls(true));
-  deck.on('fragmenthidden', () => syncControls());
-  deck.on('overviewshown', () => syncControls());
+  deck.on('fragmentshown', () => { disclosures.close(false); syncControls(true); });
+  deck.on('fragmenthidden', () => { disclosures.close(false); syncControls(); });
+  deck.on('overviewshown', () => { disclosures.close(false); syncControls(); });
   deck.on('overviewhidden', () => syncControls());
   const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
   if (Object.hasOwn(slideAliases, initialSlideId)) goTo(initialSlideId);

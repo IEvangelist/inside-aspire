@@ -98,6 +98,18 @@ The portrait's social row keeps GitHub and adds only the requested X, Bluesky, a
 
 Code panels are flex columns: a fixed caption, then a growing code body ending at the rounded panel bottom. Ordinary lines soft-wrap without changing copyable source text or shrinking type. Required preserved-layout lines use one accessible horizontal body scroller, never a mid-card, token, line, or page scrollbar.
 
+Presentation disclosures use one native `#slide-details` modal, inheriting menu
+surfaces, backdrop, typography and 44px controls. Its fixed title/Close row and
+independently scrolling body keep the underlying slide, URL, mode, stage,
+counter and all outer scroll positions intact. Prepared content nodes move
+without cloning, preserving Copy handlers/state, and return before close,
+navigation, mode changes or print. Native focus containment blocks deck keys;
+Escape restores the summary. Reading/no-JavaScript keep native inline details;
+print exposes complete code and provenance. Receivers never open the modal.
+The hidden replay announcement stays anchored inside the page. A modal reserves
+an existing page scrollbar gutter before locking root scrolling, then restores
+it; it does not permanently narrow reading slides or shift right-hand badges.
+
 The suite exercises six source/JSON syntax languages plus honest plaintext across 30 blocks. All source/structured output retains token/color/contrast checks; reference examples do not claim captured execution. Strict geometry/copy/branding/32-route/76-state checks remain. Replay checks retain fixture hashes/semantic truth, one-command initial states, anchoring/expansion, next/rewind/interruption/hash/static restoration, invisible announcements and output-only scrolling. The approved title/abstract/event, native app, scripts, skills and real PR chain remain unchanged; only the user-directed primary narrative expands.
 
 All 41 slides have active text-range/container audits in both themes across three presentation and four reading viewports. All 31 graph nodes/66 labels retain padded SVG checks after fonts load, icon/title and subtitle clearance, 22px titles and 20px details without truncation or compression. New chapter copy and official imagery inherit the existing identity and spacing, rather than introducing a new visual world.

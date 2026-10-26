@@ -273,6 +273,17 @@ JSON is not clipped or squeezed into a projector-sized page.
 
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu leads with exactly the user's three primary areas; smaller direct demo/appendix jumps remain separate. The chapter indicator follows the active area through supporting slides. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
 
+Slide disclosures, including the optional C# AppHost/Go references on `history`,
+open in one native modal during presentation. Activate the summary by pointer,
+Enter, or Space; the slide stays closed and its URL, mode, stage and scroll
+position do not change. Only the modal content scrolls. Close or Escape returns
+focus to the summary; deck navigation is blocked while it is open. The actual
+prepared nodes and Copy handlers move into the modal and return on close.
+Slide/mode/overview changes and receiver synchronization close it deterministically.
+Reading retains native inline disclosure behavior; print includes all content,
+and no-JavaScript remains a native disclosure. Speaker previews do not open or
+relay an audience disclosure.
+
 ### Slide count badge
 
 The count is outside the toolbar's Previous/Next/menu group. Its default is an

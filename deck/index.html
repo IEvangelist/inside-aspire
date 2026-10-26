@@ -1036,7 +1036,7 @@ builder.AddViteApp("frontend",
           <p class="source-line">Optional appendix. Reusable fetching, parsing, indexing, and retrieval outlive a particular tool surface.</p>
           <aside class="notes">Optional appendix, outside the 60-minute presentation. Use only for a follow-up question about the earlier MCP-first design. The personal article explains history, not today's corpus default or CLI contract. MCP is a protocol, not an extra main takeaway.</aside>
           <details class="language-examples" data-illustrative-addition>
-            <summary>C# AppHost + Go service references (opens reading mode)</summary>
+            <summary>C# AppHost + Go service references</summary>
             <p>Illustrative additions, not the weather demo. C# and TypeScript author AppHosts; Go runs as a workload. These examples were not executed here.</p>
             <div class="language-reference-pair">
               <figure class="code-panel"><figcaption><span data-icon="code"></span>AppHost.cs <span>C# top-level statements</span></figcaption><pre data-label="Illustrative C# AppHost for a Go service" data-pkg-teal="Aspire.Hosting.Go" data-add-teal="go" data-apis-teal="AddGoApp" data-lines-teal="4-6"><code id="go-apphost-code" class="language-csharp">using Aspire.Hosting;
@@ -1101,6 +1101,14 @@ func main() {
         </section>
       </div>
       </div>
+      <dialog id="slide-details" class="deck-menu details-dialog" aria-labelledby="slide-details-title">
+        <div class="menu-heading">
+          <h2 id="slide-details-title">Slide details</h2>
+          <button type="button" data-close-details autofocus><span data-icon="close"></span>Close</button>
+        </div>
+        <div class="details-scroll" role="region" aria-label="Slide detail content" tabindex="0"></div>
+        <p id="details-status" class="details-status" role="status" aria-live="polite"></p>
+      </dialog>
     </main>
     <span id="replay-status" class="visually-hidden" role="status" aria-live="polite"></span>
     <p id="deck-status" class="deck-status" role="status" aria-live="polite"></p>
@@ -1108,7 +1116,7 @@ func main() {
       <style>
         .reveal { height: auto; overflow: visible; }
         .reveal .slides { position: static; width: auto; height: auto; transform: none; }
-        .reveal .slides section { display: block !important; position: static !important; width: auto; height: auto; transform: none !important; opacity: 1; visibility: visible; padding: 28px 24px; }
+        .reveal .slides section { display: block !important; position: static !important; width: auto; height: auto; transform: none !important; opacity: 1; visibility: visible; padding: 28px 24px; pointer-events: auto !important; }
         .reveal pre.replay-output { max-height: none; }
       </style>
       <p>JavaScript is disabled. These are recorded CLI runs, not live execution. Static commands, captured excerpts, complete-output links, and citations are readable; animations and presentation controls are unavailable.</p>
