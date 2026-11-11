@@ -10,21 +10,22 @@ type SourceProof = {
 };
 const proof: SourceProof = JSON.parse(
   readFileSync(resolve('..', 'docs', 'evidence', 'dashboard-deployment.json'), 'utf8'));
+const chapterProof = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'chapter-demos.json'), 'utf8'));
 
 test('plural loops connect real reviewed publication to current narrative and separate versioned API context', async ({ page }) => {
   await page.goto('?mode=present#/stay-current');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('#ai-loops')).toContainText('build Aspire and aspire.dev');
-  await expect(page.locator('#stay-current')).toContainText('per-package-version');
-  await expect(page.locator('#stay-current')).toContainText('separate from the narrative corpus');
-  await expect(page.locator('#stay-current')).toContainText('not automatic CLI-semver matching');
+  await expect(page.locator('#ai-loops .chapter-track h3')).toHaveText(['Product', 'Aspire docs', 'Your app']);
+  await expect(page.locator('#stay-current')).toContainText('Narrative docs');
+  await expect(page.locator('#stay-current')).toContainText('per package version');
+  await expect(page.locator('#stay-current .notes')).toContainText("don't show the CLI matching docs to its own version");
   await expect(page.locator('#stay-current a[href*="PackageJsonGenerator"]')).toHaveAttribute('href',
     new RegExp(`${proof.versionedContext.sourcePin}/src/tools/PackageJsonGenerator/README.md$`));
   await expect(page.locator('#stay-current a[href*="astro.config"]')).toHaveAttribute('href',
     new RegExp(`${proof.versionedContext.sourcePin}/src/frontend/astro.config.mjs$`));
-  await expect(page.locator('#the-loop .notes')).toContainText('skill-guided developer cycle');
-  await expect(page.locator('#docs-supply .notes')).toContainText('not model weights');
-  await expect(page.locator('#docs-supply .notes')).toContainText('publication without review');
+  await expect(page.locator('#the-loop .notes')).toContainText('Skills choose the CLI command');
+  await expect(page.locator('#docs-supply .notes')).toContainText('Nothing here trains a model');
+  await expect(page.locator('#docs-supply .notes')).toContainText('A maintainer reviews and merges');
 });
 
 test('official dashboard screenshots retain exact source hashes and their full aspect in both themes', async ({ page }, testInfo) => {
@@ -65,38 +66,38 @@ test('dashboard references distinguish AppHost resource service, standalone OTLP
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const commands = await page.locator('#dashboard-standalone pre code').allTextContents();
   expect(commands[0]).toBe(proof.dashboard.cli);
-  expect(commands[1]).toContain(proof.dashboard.image);
+  expect(commands[1]).toContain('mcr.microsoft.com/aspire/dashboard:latest');
   for (const ports of ['127.0.0.1:18888:18888', '127.0.0.1:4317:18889', '127.0.0.1:4318:18890']) {
     expect(commands[1]).toContain(ports);
   }
   expect(commands.join('\n')).not.toMatch(/UNSECURED|ALLOW_ANONYMOUS|0\.0\.0\.0|[?&](?:t|token|api[-_]?key)=/i);
-  await expect(page.locator('#dashboard-standalone')).toContainText('not recorded executions');
-  await expect(page.locator('#dashboard-standalone')).toContainText('does not orchestrate your processes');
-  await expect(page.locator('#dashboard-standalone')).toContainText('authentication remains enabled');
-  await expect(page.locator('#dashboard-standalone')).toContainText('foreground/blocking');
-  await expect(page.locator('#dashboard-integrated')).toContainText('resource service supplies state');
-  await expect(page.locator('#dashboard-signals')).toContainText('Instrument code, export OTLP');
-  await expect(page.locator('#dashboard-signals')).toContainText('not unlimited production retention');
-  await expect(page.locator('[data-cli-replay]')).toHaveCount(7);
+  await expect(page.locator('#dashboard-standalone')).toContainText('Reference, not run here');
+  await expect(page.locator('#dashboard-standalone')).toContainText("doesn't start or manage your processes");
+  await expect(page.locator('#dashboard-standalone .notes')).toContainText('Browser authentication stays on');
+  await expect(page.locator('#dashboard-standalone .notes')).toContainText('CLI reference is foreground');
+  await expect(page.locator('#dashboard-integrated')).toContainText('reports state, health, console, configuration, and commands');
+  await expect(page.locator('#dashboard-signals')).toContainText('Instrument your code, export OTLP');
+  await expect(page.locator('#dashboard-signals .notes')).toContainText('not long-term production retention');
+  await expect(page.locator('[data-cli-replay]')).toHaveCount(9);
   await expect(page.locator('[id^="dashboard"] [data-cli-replay], [id^="dashboard"] .replay-output')).toHaveCount(0);
 });
 
-test('deployment is a full primary area with explicit Compose reference, model/publish/deploy distinction and no claimed execution', async ({ page }) => {
+test('deployment uses the actual Compose target and distinguishes publish from deploy', async ({ page }) => {
   await page.goto('?mode=present#/deployment');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('#deployment [data-takeaway]')).toHaveText('Aspire deployment');
+  await expect(page.locator('#deployment [data-takeaway]')).toHaveText('Deploy the model you already run.');
   await expect(page.locator('#deployment-model .language-csharp')).toHaveText(
-    'var environment = builder\n    .AddDockerComposeEnvironment("env")\n    .WithDashboard();');
+    'builder.AddDockerComposeEnvironment("talk-compose")\n    .WithDashboard(dashboard => dashboard\n        .WithImage("aspire/dashboard", "13.6.2")\n        .WithImageRegistry("mcr.microsoft.com"));');
   expect(proof.deployment.apiId).toContain('dockercomposeenvironmentextensions/methods#adddockercomposeenvironment');
   expect(proof.deployment.signature).toBe('AddDockerComposeEnvironment(IDistributedApplicationBuilder, string)');
-  await expect(page.locator('#deployment-model')).toContainText('not a user-chosen target or the weather AppHost');
-  await expect(page.locator('#deployment-model')).toContainText('No integration or graph was changed here');
-  await expect(page.locator('#deployment-publish')).toContainText('does not build images or apply');
-  await expect(page.locator('#deployment-publish')).toContainText('No generated output is presented as a capture');
-  await expect(page.locator('#deployment-deploy')).toContainText('not an old publish folder');
-  await expect(page.locator('#deployment-deploy')).toContainText('declared resources, not the AppHost process');
-  await expect(page.locator('#deployment-deploy')).toContainText('No provisioning or deployment was performed');
-  await expect(page.locator('#deployment-boundaries')).toContainText('Same model does not mean identical target behavior');
+  await expect(page.locator('#deployment-model .notes')).toContainText("no-op in a normal run");
+  await expect(page.locator('#deployment-publish')).toContainText('No images build and no containers start');
+  await expect(page.locator('#deployment-deploy .notes')).toContainText('Deploy evaluates the current model');
+  await expect(page.locator('#deployment-deploy .notes')).toContainText('builds the native image and runs Compose');
+  await expect(page.locator('#deployment-boundaries .notes')).toContainText('One model still needs target-specific packaging and checks');
+  expect(chapterProof.compose.destroyedAfterRehearsal).toBe(true);
+  expect(chapterProof.compose.runtimeNativeAot).toBe(true);
+  expect(chapterProof.compose.dashboardImage).toBe('mcr.microsoft.com/aspire/dashboard:13.6.2');
   for (const id of ['dashboard-standalone', 'deployment-model', 'deployment-publish', 'deployment-deploy']) {
     for (const code of await page.locator(`#${id} pre code`).all()) {
       const text = await code.textContent();
@@ -108,5 +109,5 @@ test('deployment is a full primary area with explicit Compose reference, model/p
       expect(copied).toBe(text);
     }
   }
-  await expect(page.locator('[id^="deployment"] [data-cli-replay], [id^="deployment"] .replay-output')).toHaveCount(0);
+  await expect(page.locator('[id^="deployment"] [data-cli-replay]')).toHaveCount(2);
 });

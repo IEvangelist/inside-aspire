@@ -1,0 +1,65 @@
+{
+  "cliVersion": "13.6.4",
+  "cliRelease": "https://github.com/microsoft/aspire/releases/tag/v13.6.4",
+  "behavior": "The default output is the Markdown content, ready for an assistant to read. In a redirected capture the CLI renders it as text. Add --format Json for the structured record with the same content.",
+  "formatting": "Complete default CLI stdout/stderr; ANSI CSI/BEL removed, CRLF normalized to LF and trailing console padding removed. No content invented or omitted.",
+  "interpretation": "Recorded CLI execution, not a browser command runner or benchmark.",
+  "originalAndComposeCaptureFilesUnchanged": true,
+  "earlierEvidence": [
+    "docs/evidence/cli-replay.json",
+    "docs/evidence/chapter-demos.json"
+  ],
+  "runs": [
+    {
+      "id": "docs-section-default",
+      "slideId": "docs-section",
+      "replayId": "docs-section",
+      "cliVersion": "13.6.4",
+      "capturedAt": "2026-11-06T22:40:15.0246571+00:00",
+      "arguments": [
+        "docs",
+        "get",
+        "browser-logs",
+        "--section",
+        "Configure browser logs",
+        "--non-interactive",
+        "--nologo"
+      ],
+      "exitCode": 0,
+      "outputFormat": "default output (Markdown content rendered as text)",
+      "outputLanguage": "plaintext",
+      "pipeline": false,
+      "stdout": "/inside-aspire/replays/docs-section-default-2026-11-06.stdout.txt",
+      "rawStdoutSha256": "ac14e1eaef02dd6a22e3e935689dad9861f0cdf54a49b6b4486782848b9e5181",
+      "publicStdoutSha256": "c4062255c7c5f63493ba8a102ac73c70ee3bec61d236762dcf0e52baccdc4179",
+      "stderr": "/inside-aspire/replays/docs-section-default-2026-11-06.stderr.txt",
+      "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "api-member-default",
+      "slideId": "api-member",
+      "replayId": "api-member",
+      "cliVersion": "13.6.4",
+      "capturedAt": "2026-11-06T22:40:17.6897834+00:00",
+      "arguments": [
+        "docs",
+        "api",
+        "get",
+        "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs",
+        "--non-interactive",
+        "--nologo"
+      ],
+      "exitCode": 0,
+      "outputFormat": "default output (Markdown content rendered as text)",
+      "outputLanguage": "plaintext",
+      "pipeline": false,
+      "stdout": "/inside-aspire/replays/api-member-default-2026-11-06.stdout.txt",
+      "rawStdoutSha256": "abcaaa42754be8cbac1c0cc7f976922466bfdbf6b7e3015f9dca09f5463d3f80",
+      "publicStdoutSha256": "f3c766ad4e3f55b9f658472073553019b47d19db7e822662efc2a75e59d77a57",
+      "stderr": "/inside-aspire/replays/api-member-default-2026-11-06.stderr.txt",
+      "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

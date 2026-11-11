@@ -5,11 +5,11 @@ type Transition = { style: string; speed: string; background: string };
 type Settings = { defaults: Transition; chapters: Record<string, Partial<Transition>> };
 
 export const transitionSettings: Settings = {
-  defaults: { style: 'fade', speed: 'fast', background: 'none' },
+  defaults: { style: 'slide', speed: 'fast', background: 'none' },
   chapters: {
-    'AI loops': { style: 'fade', speed: 'fast' },
-    'Aspire dashboard': { style: 'fade', speed: 'default', background: 'fade' },
-    'Aspire deployment': { style: 'fade', speed: 'fast', background: 'fade' },
+    'AI loops': { speed: 'fast' },
+    'Aspire dashboard': { speed: 'default', background: 'fade' },
+    'Aspire deployment': { speed: 'fast', background: 'fade' },
   },
 };
 

@@ -44,14 +44,16 @@ test('native speaker console connects real current/upcoming frames, original not
       const id = index < 2 ? 'lifecycle' : 'the-loop';
       await expect(current.locator('.slides section.present')).toHaveAttribute('id', id);
       if (index < 2) {
-        await expect(current.locator('#apphost-code .is-focused')).toHaveCount(index === 0 ? 5 : 6);
+        const lines = index === 0 ? [1, 2, 3, 4, 5] : [7, 8, 9, 10, 11];
+        await expect.poll(() => current.locator('#apphost-code .is-focused').evaluateAll((nodes) =>
+          nodes.map((node) => Number((node as HTMLElement).dataset.line)))).toEqual(lines);
         await expect(upcoming.locator('.slides section.present')).toHaveAttribute('id', index === 0 ? 'lifecycle' : 'the-loop');
-        await expect(upcoming.locator('.present .is-focused')).toHaveCount(index === 0 ? 6 : 0);
+        await expect(upcoming.locator('.present .is-focused')).toHaveCount(index === 0 ? 5 : 0);
       }
       await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
         await page.locator(`#${id} > .notes`).textContent() ?? '');
     }
-    for (const [id, count] of [['lifecycle', 6], ['lifecycle', 5], ['lifecycle', 0], ['compiler', 0]] as const) {
+    for (const [id, count] of [['lifecycle', 5], ['lifecycle', 5], ['lifecycle', 0], ['compiler', 0]] as const) {
       await page.locator('#previous').click();
       await expect(current.locator('.slides section.present')).toHaveAttribute('id', id);
       await expect(current.locator(`#${id} .is-focused`)).toHaveCount(count);
@@ -65,7 +67,7 @@ test('native speaker console connects real current/upcoming frames, original not
     await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'compiler');
     expect(new URL(currentFrame.url()).searchParams.has('receiver')).toBe(true);
     for (const [key, id, count] of [
-      ['ArrowRight', 'lifecycle', 0], ['ArrowRight', 'lifecycle', 5], ['ArrowRight', 'lifecycle', 6],
+      ['ArrowRight', 'lifecycle', 0], ['ArrowRight', 'lifecycle', 5], ['ArrowRight', 'lifecycle', 5],
       ['ArrowLeft', 'lifecycle', 5], ['ArrowLeft', 'lifecycle', 0], ['ArrowLeft', 'compiler', 0],
     ] as const) {
       await popup.keyboard.press(key);
@@ -123,7 +125,7 @@ test('speaker preview receivers stay in presentation mode when the audience open
     await expect(current.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(upcoming.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'parser');
-    await expect(popup.locator('.speaker-controls-notes .value')).toContainText('0:30-0:31.');
+    await expect(popup.locator('.speaker-controls-notes .value')).toContainText('0:31-0:32.');
     await expect(page.locator('html')).toHaveAttribute('data-reading', 'true');
   } finally {
     await popup.close();

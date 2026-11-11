@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=41;
+const slideCount=43;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -173,6 +173,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       const background=luminance(getComputedStyle(code.parentElement!).backgroundColor);
       return {
         language: (code as HTMLElement).dataset.language,
+        terminal: code.parentElement!.hasAttribute('data-terminal-output'),
         highlighted: (code as HTMLElement).dataset.highlighted,
         tokens: tokens.length,
         colors: colors.length,
@@ -184,12 +185,12 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(32);
+  expect(blocks.length).toBe(33);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
-    ['bash','csharp','go','json','plaintext','powershell','typescript','yaml']);
+    ['bash','csharp','go','json','plaintext','powershell','yaml']);
   for(const block of blocks) {
     expect(block.highlighted,block.language).toBe('true');
-    if(block.language==='plaintext') {
+    if(block.language==='plaintext'&&!block.terminal) {
       expect(block.tokens).toBe(0);
       expect(block.colors).toBe(1);
       expect(block.tokenBackgrounds).toEqual([]);
@@ -205,7 +206,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
   await expect(page.locator('#runtime-traces .replay-command code')).toContainText(
     "aspire otel traces api --apphost 'demo\\host\\apphost.cs' --format Json --non-interactive");
   await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
-  await expect(page.locator('#apphost-code .code-line')).toHaveCount(12);
+  await expect(page.locator('#apphost-code .code-line')).toHaveCount(11);
 });
 
 test('rendered inline code has rounded distinct backgrounds and readable contrast',async ({ page }) => {
@@ -376,9 +377,9 @@ for (const width of [320, 390, 790]) {
     await ready(page);
     await expect(page.locator('#slide-viewport')).toHaveCSS('overflow-y', 'auto');
     await page.getByRole('link', { name: 'Start presentation' }).click();
-    await expect(page).toHaveURL(/#\/thesis(?:\/\d+)?$/);
-    await expect(page.locator('#thesis h2')).toBeInViewport();
-    const heading = await page.locator('#thesis h2').boundingBox();
+    await expect(page).toHaveURL(/#\/setup(?:\/\d+)?$/);
+    await expect(page.locator('#setup h2')).toBeInViewport();
+    const heading = await page.locator('#setup h2').boundingBox();
     const bar = await page.locator('.toolbar').boundingBox();
     expect(heading?.y).toBeGreaterThanOrEqual((bar?.height ?? 0) - 1);
     await openMenu(page);

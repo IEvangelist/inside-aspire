@@ -8,14 +8,14 @@ async function ready(page: Page, query: string) {
 
 test('native deck defaults, real chapter settings and explicit slide attributes have independent precedence', async ({ page }) => {
   await ready(page, '?mode=present#/intro');
-  await expect(page.locator('#presentation')).toHaveClass(/fade/);
-  await expect(page.locator('#intro')).toHaveAttribute('data-transition', 'fade');
+  await expect(page.locator('#presentation')).toHaveClass(/slide/);
+  await expect(page.locator('#intro')).toHaveAttribute('data-transition', 'slide');
   await expect(page.locator('#intro')).toHaveAttribute('data-transition-speed', 'fast');
   await expect(page.locator('#intro')).toHaveAttribute('data-background-transition', 'none');
   await expect(page.locator('#dashboard')).toHaveAttribute('data-transition', 'slide-in fade-out');
   await expect(page.locator('#dashboard')).toHaveAttribute('data-transition-speed', 'default');
   await expect(page.locator('#dashboard')).toHaveAttribute('data-background-transition', 'fade');
-  await expect(page.locator('#dashboard-integrated')).toHaveAttribute('data-transition', 'fade');
+  await expect(page.locator('#dashboard-integrated')).toHaveAttribute('data-transition', 'slide');
   await expect(page.locator('#weather')).toHaveAttribute('data-transition', 'fade-in slide-out');
   expect(await page.locator('#dashboard-integrated').evaluate((node) =>
     Math.max(...getComputedStyle(node).transitionDuration.split(',').map(parseFloat)))).toBe(0.8);
@@ -34,7 +34,7 @@ test('an explicit native slide speed and background override chapter and deck va
   await expect(page.locator('#weather')).toHaveAttribute('data-background-transition', 'zoom');
   expect(await page.locator('#weather').evaluate((node) =>
     Math.max(...getComputedStyle(node).transitionDuration.split(',').map(parseFloat)))).toBe(1.2);
-  await expect(page.locator('#weather h2')).toHaveText('Start with a healthy app.');
+  await expect(page.locator('#weather h2')).toHaveText('Our demo: a NativeAOT weather API.');
 });
 
 for (const mode of ['reduce', 'read', 'print', 'receiver'] as const) {
@@ -50,12 +50,12 @@ for (const mode of ['reduce', 'read', 'print', 'receiver'] as const) {
       background: slide.getAttribute('data-background-transition'),
       durations: getComputedStyle(slide).transitionDuration.split(',').map(parseFloat),
     })));
-    expect(actual).toHaveLength(41);
+    expect(actual).toHaveLength(43);
     expect(actual.every((slide) => slide.transition === 'none' && slide.background === 'none' &&
       slide.speed === 'default' && slide.durations.every((duration) => duration === 0))).toBe(true);
     if (mode === 'receiver') {
       await expect(page.locator('html')).toHaveAttribute('data-reading', 'false');
-      await expect(page.locator('#apphost-code .is-focused')).toHaveCount(6);
+      await expect(page.locator('#apphost-code .is-focused')).toHaveCount(5);
       await expect(page.locator('.toolbar')).toBeHidden();
     }
   });
@@ -97,8 +97,8 @@ test('native chapter-entry in/out effects retain exact Back symmetry, fragment r
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(5);
   await page.evaluate(() => { location.hash = '/weather'; location.hash = '/lifecycle/1'; });
   await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'lifecycle');
-  await expect(page.locator('#apphost-code .is-focused')).toHaveCount(6);
-  await expect(page.locator('#slide-position')).toHaveText('27 / 41');
+  await expect(page.locator('#apphost-code .is-focused')).toHaveCount(5);
+  await expect(page.locator('#slide-position')).toHaveText('28 / 43');
 });
 
 test('invalid native defaults and chapter names/styles/speeds fail with their scope', () => {
@@ -160,5 +160,5 @@ test('whole none remains a valid explicit native slide and background transition
   await ready(page, '?mode=present#/weather');
   await expect(page.locator('#weather')).toHaveAttribute('data-transition', 'none');
   await expect(page.locator('#weather')).toHaveAttribute('data-background-transition', 'none');
-  await expect(page.locator('#weather h2')).toHaveText('Start with a healthy app.');
+  await expect(page.locator('#weather h2')).toHaveText('Our demo: a NativeAOT weather API.');
 });

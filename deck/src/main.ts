@@ -223,7 +223,11 @@ function syncControls(animateReplay = false) {
     !reading && !printMode && !printPreference.matches && !deck.isOverview());
   if (!reading) {
     for (const inactive of root.querySelectorAll<HTMLElement>('section:not(.present)')) {
-      inactive.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
+      // Preserve the slide's exit transition while stopping offscreen content animations.
+      const slideAnimations = new Set(inactive.getAnimations());
+      inactive.getAnimations({ subtree: true }).forEach((animation) => {
+        if (!slideAnimations.has(animation)) animation.cancel();
+      });
     }
   }
   if (reading) for (const slide of slides) slide.removeAttribute('aria-hidden');

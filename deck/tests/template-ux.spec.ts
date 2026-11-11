@@ -3,8 +3,10 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
+import { completeStdout, displayedRun } from './replay-fixtures';
 
-const baseline = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'template-ux-baseline.json'), 'utf8'));
+const historical = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'template-ux-baseline.json'), 'utf8'));
+const baseline = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'presentation-baseline.json'), 'utf8'));
 const hash = (value: string) => createHash('sha256').update(value).digest('hex');
 
 async function ready(page: Page, query = '?mode=present') {
@@ -33,7 +35,7 @@ function observeFirstPrintReady() {
   observer.observe(document, { attributes: true, subtree: true, attributeFilter: ['data-deck-ready'] });
 }
 
-test('the pre-port content, order, notes, code, citations, media, focus steps and paired layouts remain exact', async ({ page }) => {
+test('reviewed content, order, notes, code, citations, media, focus steps and paired layouts remain exact', async ({ page }) => {
   const response = await page.request.get('');
   expect(response.status()).toBe(200);
   const actual = await page.evaluate((source) => {
@@ -63,16 +65,26 @@ test('the pre-port content, order, notes, code, citations, media, focus steps an
     codes: codes.map(({ text, language }) => ({ language, sha256: hash(text) })),
   }));
   expect(normalized).toEqual(baseline.slides);
-  expect(normalized).toHaveLength(41);
+  expect(normalized).toHaveLength(43);
 });
 
-test('all 226 protected native, skill, script, abstract, asset and actual-proof blobs match the pre-port inventory', () => {
-  const files: { path: string; gitBlob: string }[] = baseline.protectedFiles;
+test('all 226 protected blobs retain their historical hashes except explicitly reviewed updates', () => {
+  const files: { path: string; gitBlob: string }[] = historical.protectedFiles;
+  const changes: { path: string; historicalGitBlob: string; currentGitBlob: string }[] = baseline.protectedChanges;
   expect(files).toHaveLength(226);
+  expect(changes.map((change) => change.path)).toEqual([
+    'deck/src/diagrams.ts', 'demo/host/apphost.cs', 'scripts/Install-Aspire.ps1',
+    'scripts/Start-Demo.ps1', 'scripts/Test-Native.ps1',
+  ]);
+  for (const change of changes) {
+    expect(files.find((file) => file.path === change.path)?.gitBlob).toBe(change.historicalGitBlob);
+    expect(change.currentGitBlob).not.toBe(change.historicalGitBlob);
+  }
   const actual = execFileSync('git', ['hash-object', '--stdin-paths'], {
     cwd: resolve('..'), encoding: 'utf8', input: files.map((file) => file.path).join('\n') + '\n',
   }).trim().split('\n');
-  expect(actual).toEqual(files.map((file) => file.gitBlob));
+  expect(actual).toEqual(files.map((file) =>
+    changes.find((change) => change.path === file.path)?.currentGitBlob ?? file.gitBlob));
 });
 
 test('template719 fonts, heading tracking, title-only grid, windows and squared actions are actually rendered', async ({ page }, testInfo) => {
@@ -139,7 +151,7 @@ test('the menu keeps heading and every presenter control fixed while only its nu
     const bounds = await menu.boundingBox();
     expect(bounds!.y).toBeGreaterThanOrEqual(0);
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height);
-    await expect(menu.locator('.slide-number')).toHaveCount(11);
+    await expect(menu.locator('.slide-number')).toHaveCount(12);
     for (const button of await controls.locator('button,a').all()) {
       await expect(button).toBeInViewport();
       const box = await button.boundingBox();
@@ -151,7 +163,7 @@ test('the menu keeps heading and every presenter control fixed while only its nu
   }
 });
 
-test('all ten side-by-side surfaces retain desktop columns and natural narrow DOM order', async ({ page }, testInfo) => {
+test('paired surfaces retain their intended desktop and narrow layouts', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One exact desktop/narrow pairs matrix runs once.');
   for (const width of [1280, 617, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
@@ -165,7 +177,7 @@ test('all ten side-by-side surfaces retain desktop columns and natural narrow DO
         nodes.map((node) => node.getBoundingClientRect().toJSON()));
       expect(children).toHaveLength(2);
       expect(children.every((box) => box.width > 0 && box.height > 0)).toBe(true);
-      if (width >= 1000) expect(children[1].left).toBeGreaterThan(children[0].right);
+      if (width >= 1000 && id !== 'deployment-model') expect(children[1].left).toBeGreaterThan(children[0].right);
       else expect(children[1].top).toBeGreaterThan(children[0].bottom);
     }
   }
@@ -202,7 +214,8 @@ test('the new copy actions preserve original highlighted source and whole record
   await output.click();
   const copied = await page.locator('#api-member .replay-output code').textContent() ?? '';
   await expectCopied(copied);
-  expect(JSON.parse(copied).content).toContain('ASPIREBROWSERLOGS001');
+  expect(copied).toBe(completeStdout(displayedRun('api-member')));
+  expect(copied).toContain('ASPIREBROWSERLOGS001');
   await page.locator('#previous').click();
   await expect(output).toBeDisabled();
 });
@@ -218,14 +231,14 @@ for (const width of [1280, 617, 390, 320]) {
     const heading = await page.locator('#api-member h2').boundingBox();
     expect(heading!.y).toBeGreaterThanOrEqual(56);
     expect(heading!.y).toBeLessThan(180);
-    await expect(page.locator('#slide-position')).toHaveText('14 / 41');
+    await expect(page.locator('#slide-position')).toHaveText('10 / 43');
     const start = await viewport.evaluate((node) => node.scrollTop);
     await viewport.hover();
     await page.mouse.wheel(0, 500);
     await expect.poll(() => viewport.evaluate((node) => node.scrollTop)).toBeGreaterThan(start);
     await page.evaluate(() => { location.hash = '/dashboard'; });
     await page.waitForTimeout(1250);
-    await expect(page.locator('#slide-position')).toHaveText('29 / 41');
+    await expect(page.locator('#slide-position')).toHaveText('30 / 43');
     await expect(page.locator('#dashboard h2')).toBeInViewport();
     await expect(page.locator('#chapter-label')).toHaveText('Aspire dashboard');
     expect(await page.locator('#presentation').evaluate((node) => node.scrollTop)).toBe(0);
@@ -239,7 +252,7 @@ test('overview thumbnails are framed, nonzero, clickable and return to the exact
   await page.keyboard.press('Escape');
   await expect(page.locator('#presentation')).toHaveClass(/overview/);
   const slides = page.locator('.slides section[id]');
-  await expect(slides).toHaveCount(41);
+  await expect(slides).toHaveCount(43);
   const boxes = await slides.evaluateAll((slides) => slides.map((slide) => ({
     bounds: slide.getBoundingClientRect().toJSON(), visible: getComputedStyle(slide).visibility,
     background: getComputedStyle(slide).backgroundColor, shadow: getComputedStyle(slide).boxShadow,
@@ -249,16 +262,16 @@ test('overview thumbnails are framed, nonzero, clickable and return to the exact
   await page.locator('#dashboard-standalone').click();
   await expect(page.locator('#presentation')).not.toHaveClass(/overview/);
   await expect(page).toHaveURL(/#\/dashboard-standalone/);
-  await expect(page.locator('#slide-position')).toHaveText('31 / 41');
+  await expect(page.locator('#slide-position')).toHaveText('32 / 43');
 });
 
-test('print emits one complete variable-height page per original slide without clipping recorded stdout', async ({ page }, testInfo) => {
+test('print emits one complete variable-height page per reviewed slide without clipping recorded stdout', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One complete actual PDF verifies page count and unclipped content.');
   test.setTimeout(60_000);
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.emulateMedia({ media: 'print' });
   await ready(page, '?print-pdf&theme=dark');
-  await expect(page.locator('.pdf-page')).toHaveCount(41);
+  await expect(page.locator('.pdf-page')).toHaveCount(43);
   for (const output of await page.locator('.replay-output').all()) {
     const geometry = await output.evaluate((node) => {
       const page = node.closest('.pdf-page')!;
@@ -270,7 +283,7 @@ test('print emits one complete variable-height page per original slide without c
   }
   const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true,
     path: testInfo.outputPath('inside-aspire-complete.pdf') });
-  expect((pdf.toString('latin1').match(/\/Type \/Page\b/g) ?? []).length).toBe(41);
+  expect((pdf.toString('latin1').match(/\/Type \/Page\b/g) ?? []).length).toBe(43);
   await expect(page.locator('.copy-code:visible')).toHaveCount(0);
 });
 
@@ -301,11 +314,11 @@ test('print readiness waits for native pdf-ready even when the asynchronous prin
   await expect(root).toHaveAttribute('data-deck-ready', 'true');
   const firstReady = JSON.parse(await root.getAttribute('data-test-first-print-ready') ?? 'null');
   expect(firstReady).toEqual({
-    pages: 41, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 32, pageRules: 41, clippedOutputs: [],
+    pages: 43, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 33, pageRules: 43, clippedOutputs: [],
   });
 });
 
-test('forty cold print startups expose the complete original deck at the first readiness signal', async ({ browser }, testInfo) => {
+test('forty cold print startups expose the complete reviewed deck at the first readiness signal', async ({ browser }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'A bounded cold-context print stress batch runs once.');
   test.setTimeout(120_000);
   for (let attempt = 0; attempt < 40; attempt++) {
@@ -317,7 +330,7 @@ test('forty cold print startups expose the complete original deck at the first r
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
       const firstReady = JSON.parse(await page.locator('html').getAttribute('data-test-first-print-ready') ?? 'null');
       expect(firstReady, `Cold print load ${attempt + 1}`).toEqual({
-        pages: 41, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 32, pageRules: 41, clippedOutputs: [],
+        pages: 43, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 33, pageRules: 43, clippedOutputs: [],
       });
     } finally {
       await context.close();

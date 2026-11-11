@@ -1,0 +1,104 @@
+🛠️ Executing step deploy
+🛠️ Building AppHost... demo\host\apphost.cs
+12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
+12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+12:42:19 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+12:42:19 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+12:42:19 (validate-docker-compose) → Starting validate-docker-compose...
+12:42:19 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+12:42:19 (before-start) → Starting before-start...
+12:42:19 (before-start) ✓ before-start completed successfully
+12:42:19 (pipeline-execution) → Starting pipeline-execution...
+12:42:19 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+12:42:19 (process-parameters) → Starting process-parameters...
+12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
+12:42:19 (publish-talk-compose) → Starting publish-talk-compose...
+12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+12:42:19 (check-container-runtime) → Starting check-container-runtime...
+12:42:19 (validate-build-only-container-references) → Starting validate-build-only-container-references...
+12:42:19 (push-prereq) → Starting push-prereq...
+12:42:19 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+12:42:19 (validate-build-only-container-references) ✓ validate-build-only-container-references completed successfully
+12:42:19 (push-prereq) ✓ push-prereq completed successfully
+12:42:19 (publish-talk-compose) i [INF] Generating Compose output
+12:42:19 (process-parameters) ✓ process-parameters completed successfully
+12:42:19 (build-prereq) → Starting build-prereq...
+12:42:19 (deploy-prereq) → Starting deploy-prereq...
+12:42:19 (build-prereq) ✓ build-prereq completed successfully
+12:42:19 (deploy-prereq) i [INF] Initializing deployment for environment 'Talk'
+12:42:19 (deploy-prereq) i [INF] Setting default deploy tag 'aspire-deploy-20261105184219' for compute resource(s).
+12:42:19 (deploy-prereq) ✓ deploy-prereq completed successfully
+12:42:19 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+12:42:19 (publish-talk-compose) ✓ Docker Compose file written successfully to
+<WORKTREE>\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
+12:42:19 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+12:42:19 (publish) → Starting publish...
+12:42:19 (publish) ✓ publish completed successfully
+12:42:19 (check-container-runtime) i [INF] Container runtime auto-detected: Docker (docker).
+12:42:19 (check-container-runtime) ✓ check-container-runtime completed successfully
+12:42:19 (build-api) → Starting build-api...
+12:42:19 (build-api) i [INF] Building container image for resource api
+12:42:19 (build-api) i [INF] Building image: api
+12:43:43 (build-api) i [INF] Building image for api completed
+12:43:43 (build-api) ✓ build-api completed successfully
+12:43:43 (build) → Starting build...
+12:43:43 (build) ✓ build completed successfully
+12:43:43 (prepare-talk-compose) → Starting prepare-talk-compose...
+12:43:43 (push-api) → Starting push-api...
+12:43:43 (prepare-talk-compose) ✓ prepare-talk-compose completed successfully
+12:43:43 (push-api) → Tagging api for local use
+12:43:43 (push-api) i [INF] Docker tag for api:a213d6d515beca1dc295332bb130df5e4f913d22 -> api:aspire-deploy-20261105184219 succeeded.
+12:43:43 (push-api) ✓ Successfully tagged api as api:aspire-deploy-20261105184219 (0.2s)
+12:43:43 (push-api) ✓ push-api completed successfully
+12:43:43 (docker-compose-up-talk-compose) → Starting docker-compose-up-talk-compose...
+12:43:43 (docker-compose-up-talk-compose) → Running compose up for talk-compose using Docker
+12:43:43 (docker-compose-up-talk-compose) i [INF] Using container runtime 'docker' for compose operations.
+12:43:51 (docker-compose-up-talk-compose) ✓ Service talk-compose is now running with Docker Compose locally (runtime: Docker) (7.9s)
+12:43:51 (docker-compose-up-talk-compose) ✓ docker-compose-up-talk-compose completed successfully
+12:43:51 (print-api-summary) → Starting print-api-summary...
+12:43:51 (print-talk-compose-dashboard-summary) → Starting print-talk-compose-dashboard-summary...
+12:43:51 (print-talk-compose-dashboard-summary) i [INF] Successfully deployed talk-compose-dashboard to http://localhost:62881.
+12:43:51 (print-talk-compose-dashboard-summary) ✓ print-talk-compose-dashboard-summary completed successfully
+12:43:51 (print-api-summary) i [INF] Successfully deployed api to http://localhost:62880.
+12:43:51 (print-api-summary) ✓ print-api-summary completed successfully
+12:43:51 (deploy) → Starting deploy...
+12:43:51 (deploy) ✓ deploy completed successfully
+12:43:51 (pipeline-execution) ✓ Completed successfully
+------------------------------------------------------------
+✓ 23/23 steps succeeded • Total time: 1m 33s
+
+Steps Summary:
+                Step timeline:                                      0s                      1m 33s
+                                                                    │───────┬──────┬─────┬───────│
+      1.35ms  ✓ validate-compute-environments                       │╴                           │
+      2.76ms  ✓   prepare-deployment-targets-talk-compose           │╴                           │
+      0.36ms  ✓     before-start                                    │╴                           │
+      0.41ms  ✓ validate-docker-compose                             │╴                           │
+      1m 33s  ✓ pipeline-execution                                  │╶──────────────────────────╴│
+      2.95ms  ✓ validate-javascript-dockerfile-run-script-frontend  │╴                           │
+      3.94ms  ✓ process-parameters                                  │╴                           │
+      0.73ms  ✓   build-prereq                                      │╴                           │
+      1m 23s  ✓     build-api                                       │╶────────────────────────╴  │
+      0.53ms  ✓       build                                         │                        ╴   │
+      3.99ms  ✓         prepare-talk-compose                        │                        ╴   │
+       7.91s  ✓           docker-compose-up-talk-compose            │                        ╶──╴│
+       0.63s  ✓             print-api-summary                       │                           ╴│
+      0.46ms  ✓               deploy                                │                           ╴│
+       0.63s  ✓             print-talk-compose-dashboard-summary    │                           ╴│
+       0.20s  ✓       push-api                                      │                        ╴   │
+      1.52ms  ✓   deploy-prereq                                     │╴                           │
+      0.74ms  ✓ validate-compute-environments                       │╴                           │
+      6.77ms  ✓ publish-talk-compose                                │╴                           │
+      0.39ms  ✓   publish                                           │╴                           │
+       0.43s  ✓ check-container-runtime                             │╴                           │
+      1.06ms  ✓ validate-build-only-container-references            │╴                           │
+      1.04ms  ✓ push-prereq                                         │╴                           │
+
+✓ Pipeline succeeded
+
+  talk-compose-dashboard: http://localhost:62881
+  api: http://localhost:62880
+------------------------------------------------------------
+

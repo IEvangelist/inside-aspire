@@ -30,10 +30,10 @@
   </head>
   <body>
     <!--
-    THESIS: Aspire makes AI more efficient through AI loops, a shared dashboard, and deployable application intent.
+    THESIS: Aspire helps assistants check the API, read the app's telemetry, and deploy from its model.
     OWN-WORLD: Official Aspire purple, unmodified SVG marks, self-hosted Poppins, architectural paths and real source images.
-    STORY: Three user-selected areas start with why, prove their value, then explain their machinery. Reviewed docs feed the skill-guided developer loop.
-    FIRST VIEWPORT: The unchanged talk title pairs with David's actual public portrait. Start presentation advances to the three-point roadmap.
+    STORY: Start with the older Aspire assistants learned. Show the CLI answering, follow the page back to its PR, then check the app and deploy from its model.
+    FIRST VIEWPORT: The unchanged talk title pairs with David's public portrait. Start presentation advances to #/setup, then the three-area roadmap.
     FORM: Connected SVG paths reveal with the speaker's advance. Explicit syntax colors, real imagery, and narrow-screen redraws keep evidence readable.
     -->
     <a class="skip-link" href="#presentation">Skip to presentation</a>
@@ -50,7 +50,7 @@
         <button id="menu-toggle" class="icon-button" type="button" aria-label="Open presentation menu" aria-haspopup="dialog" aria-controls="deck-menu" aria-expanded="false"><span data-icon="menu"></span></button>
       </nav>
     </header>
-    <output id="slide-position" data-position="bottom-left" data-visible="true" aria-label="Slide 1 of 41" aria-live="polite" aria-atomic="true">1 / 41</output>
+    <output id="slide-position" data-position="bottom-left" data-visible="true" aria-label="Slide 1 of 43" aria-live="polite" aria-atomic="true">1 / 43</output>
     <dialog id="deck-menu" class="deck-menu" aria-labelledby="menu-title">
       <div class="menu-heading"><h2 id="menu-title">Inside Aspire</h2><form method="dialog"><button class="icon-button" aria-label="Close presentation menu"><span data-icon="close"></span></button></form></div>
       <div class="menu-slides">
@@ -61,12 +61,13 @@
       </nav>
       <nav class="chapter-list direct-jumps" aria-label="Direct demos and optional appendices">
         <a href="#/intro" data-slide="intro"><span data-icon="person"></span><span>Speaker and roadmap</span></a>
-        <a href="#/live-cli" data-slide="live-cli"><span data-icon="code"></span><span>Direct docs and API commands</span></a>
         <a href="#/weather" data-slide="weather"><span data-icon="cpu"></span><span>Healthy native app</span></a>
+        <a href="#/live-cli" data-slide="live-cli"><span data-icon="code"></span><span>Direct docs and API commands</span></a>
+        <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Reviewed docs trail</span></a>
         <a href="#/runtime-wait" data-slide="runtime-wait"><span data-icon="terminal"></span><span>Recorded native results</span></a>
         <a href="#/skills" data-slide="skills"><span data-icon="book"></span><span>Shipped skills</span></a>
         <a href="#/the-loop" data-slide="the-loop"><span data-icon="terminal"></span><span>The CLI inner loop</span></a>
-        <a href="#/evidence" data-slide="evidence"><span data-icon="pr"></span><span>Reviewed docs trail</span></a>
+        <a href="#/takeaways" data-slide="takeaways"><span data-icon="check"></span><span>Key takeaways</span></a>
         <a href="#/sources" data-slide="sources"><span data-icon="file"></span><span>Optional sources appendix</span></a>
       </nav>
       </div>
@@ -86,141 +87,108 @@
           <div class="title-copy">
             <h1>Inside <span class="accent">Aspire</span></h1>
             <p class="subtitle">The Architecture Behind the AI Loop</p>
-            <p class="lede">Ground decisions. Observe outcomes. Ship intent.</p>
-            <a class="primary-link" href="#/thesis">Start presentation <span data-icon="arrowRight"></span></a>
+            <p class="lede">How we help AI assistants get Aspire right.</p>
+            <a class="primary-link" href="#/setup">Start presentation <span data-icon="arrowRight"></span></a>
           </div>
           <figure class="speaker">
             <img class="speaker-portrait" src="/inside-aspire/speaker/david-pine.webp" width="300" height="300" alt="David Pine's actual public profile portrait" fetchpriority="high" decoding="async" />
             <figcaption>
               <div class="speaker-bio"><strong>David Pine</strong><span>Microsoft's Aspire team</span></div>
               <nav class="speaker-socials" aria-label="David Pine's social profiles">
-                <a href="https://github.com/IEvangelist" data-social="github" aria-label="David Pine on GitHub" title="GitHub" target="_blank" rel="noopener noreferrer"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="24" height="24" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="24" height="24" alt="" /></a>
-                <a href="https://x.com/davidpine7" data-social="x" aria-label="David Pine on X" title="X" target="_blank" rel="noopener noreferrer"><span data-icon="socialX"></span></a>
-                <a href="https://bsky.app/profile/davidpine.dev" data-social="bluesky" aria-label="David Pine on Bluesky" title="Bluesky" target="_blank" rel="noopener noreferrer"><span data-icon="socialBluesky"></span></a>
-                <a href="https://www.linkedin.com/in/dpine/" data-social="linkedin" aria-label="David Pine on LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer"><span data-icon="socialLinkedIn"></span></a>
+                <a href="https://github.com/IEvangelist" data-social="github" title="GitHub" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="24" height="24" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="24" height="24" alt="" /></span><span class="social-url">github.com/IEvangelist</span></a>
+                <a href="https://x.com/davidpine7" data-social="x" title="X" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialX"></span></span><span class="social-url">x.com/davidpine7</span></a>
+                <a href="https://bsky.app/profile/davidpine.dev" data-social="bluesky" title="Bluesky" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialBluesky"></span></span><span class="social-url">bsky.app/profile/<wbr />davidpine.dev</span></a>
+                <a href="https://www.linkedin.com/in/dpine/" data-social="linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialLinkedIn"></span></span><span class="social-url">www.linkedin.com/in/dpine</span></a>
               </nav>
             </figcaption>
           </figure>
           <p class="event">Wisconsin .NET UG<br />November 17, 2026 at 6pm Central</p>
-          <aside class="notes">0:00-0:02. Open with the decision problem, not a tour of internals. The title, abstract, and event stay unchanged. This is 60 minutes of presentation; Q&amp;A and networking are separate. The portrait is David's actual public profile image. Advance to the roadmap without skipping it.</aside>
+          <aside class="notes"><p>0:00-0:01. Hi, I'm David. I'm on the Aspire team, and this talk is about one practical problem: how do you help an AI assistant get Aspire right? I'll show what we built, then open the hood on how it works. It's about an hour, with questions after.</p><p>BRIDGE: First, what went wrong.</p></aside>
+        </section>
+
+        <section id="setup" class="statement-slide" data-chapter="Where this started">
+          <h2>Assistants learned an older Aspire.</h2>
+          <div class="contrast">
+            <div><h3>What we kept seeing</h3><ul><li><code>dotnet run</code></li><li>learn.microsoft.com</li><li>Outdated NuGet packages</li><li>APIs that don't exist</li></ul></div>
+            <div><h3>What's true today</h3><ul><li><code>aspire run</code></li><li>aspire.dev</li><li>Current package versions</li><li>Non-hallucinated APIs</li></ul></div>
+          </div>
+          <p>We were .NET Aspire for years. Models learned from those years.</p>
+          <aside class="notes"><p>0:01-0:04. This started with a conversation with David Fowler. We were in the middle of a rebrand and a docs replatform, and I was telling him how we could improve building Aspire apps with AI help. That's when the problem got concrete.</p><p>Assistants told people to run dotnet run, not aspire run. They sent them to learn.microsoft.com. They suggested old packages and APIs that don't exist. We were ".NET Aspire" much longer than we've been Aspire, and models learned from the past. [YOUR STORY: about 20 seconds on a time an assistant got Aspire wrong.]</p><p>BRIDGE: So the question became: how do we put today's docs in front of the assistant?</p><p>IF ASKED: Models have improved since then; the point is that anything newer than a model's training data is a guess, and Aspire keeps shipping.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">From the post that started this: <a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">How I taught AI to read Aspire docs</a>.</p></div></aside>
         </section>
 
         <section id="thesis" class="statement-slide" data-chapter="Three main areas">
           <h2>Aspire makes AI<br />more <span class="accent">efficient.</span></h2>
           <div class="thesis-path" data-three-points>
-            <div data-tone="purple"><span data-icon="agent"></span><strong data-takeaway>AI loops</strong><p>Reviewed facts guide the next move.</p></div>
-            <div data-tone="cyan"><span data-icon="screen"></span><strong data-takeaway>Aspire dashboard</strong><p>Observe with an AppHost or without.</p></div>
-            <div data-tone="teal"><span data-icon="cloud"></span><strong data-takeaway>Aspire deployment</strong><p>Take intent to a configured target.</p></div>
+            <div data-tone="purple"><span data-icon="agent"></span><strong data-takeaway>AI loops</strong><p>Which API? It reads current docs and the exact member from the CLI.</p></div>
+            <div data-tone="cyan"><span data-icon="screen"></span><strong data-takeaway>Aspire dashboard</strong><p>What happened? You and the assistant see the app's state and telemetry.</p></div>
+            <div data-tone="teal"><span data-icon="cloud"></span><strong data-takeaway>Aspire deployment</strong><p>How does it ship? The model you ran is the model you deploy.</p></div>
           </div>
-          <p class="large-copy">Evidence and application intent travel together.</p>
-          <p class="source-line">Three areas. One payoff: precise, inspectable decisions, not invented savings.</p>
-          <aside class="notes">0:02-0:04. Name the user's exact three areas: AI loops, Aspire dashboard, Aspire deployment. The first is plural: an internal product/docs supply loop supports the skill-guided developer inner loop. The dashboard is both integrated with AppHosts and independently available as a container. Deployment is a full third area, not an appendix. Every area starts with why, then source-backed proof, then machinery. The CLI and NativeAOT details support the payoff, not a fourth main point.</aside>
+          <p class="large-copy">Each one replaces a guess with something it can check.</p>
+          <aside class="notes"><p>0:04-0:05. Aspire makes AI more efficient. By efficient I mean fewer wrong turns, not a speed claim. There are three places an assistant would otherwise guess: which API to call, what just happened, and how to ship. Each section of this talk takes one of those guesses away.</p><p>BRIDGE: First guess: the API.</p><p>IF ASKED: I won't put a number on "efficient". The evidence in this talk is concrete artifacts, not benchmarks.</p></aside>
         </section>
 
-        <section id="ai-loops" class="statement-slide" data-chapter="AI loops" data-purpose="why" data-transition="slide-in fade-out">
-          <h2 data-takeaway>AI <span class="accent">loops</span></h2>
-          <p class="large-copy" data-why>A confident answer isn't evidence.</p>
-          <p class="big-support">We use AI to build Aspire and aspire.dev. Reviewed, published facts then ground the developer's next move.</p>
-          <aside class="notes">0:04-0:06. Explain why this is plural before diagrams. The internal product-to-docs loop proposes and reviews updated guidance; the developer inner loop uses shipped skills, CLI docs/API retrieval, and runtime observations to choose an explicit next action. Know what's true, act precisely, and stay current are supporting benefits, not three extra chapters. Neither loop trains model weights or grants unattended production merge authority. Start with the real browser feature and its reviewed PR trail.</aside>
-        </section>
-
-        <section id="browser-evidence" data-chapter="AI loops" data-purpose="proof">
-          <h2>Make browser behavior observable.</h2>
-          <p class="identifier"><code>WithBrowserLogs</code></p>
-          <blockquote>Console output, exceptions, network events, and screenshots become evidence.</blockquote>
-          <p>Configure the tracked browser at runtime. Follow the reviewed guide into the CLI and the developer's next decision.</p>
-          <p class="source-line">Experimental <code>ASPIREBROWSERLOGS001</code> in <code>Aspire.Hosting.Browsers</code>. A documented extra capability, not wired into this weather app.</p>
-          <aside class="notes">0:06-0:07. Show feature value before its provenance: browser diagnostics reach the child browser resource's console log stream, and screenshots are command artifacts. Product PR 16531 adds the runtime configuration dialog and optional persistence, not all browser logging. Follow that real change through the internal reviewed docs loop, then retrieve its published guide with the CLI. WithBrowserLogs remains experimental and is not enabled in the unchanged weather app.</aside>
-        </section>
-
-        <section id="evidence" data-chapter="AI loops" data-purpose="proof">
-          <div class="heading-with-brand"><h2>Browser evidence has a visible trail.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
-          <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>A runtime browser-configuration feature becomes a complete, maintainer-refined guide.</figcaption></figure>
-          <ol class="evidence-chain">
-            <li><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a><span>Configure tracked browser command</span></li>
-            <li><a href="https://github.com/microsoft/aspire/actions/runs/25092695241">pr-docs-check run 25092695241</a><span>Successful existing workflow run</span></li>
-            <li><a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a><span>Bot draft, maintainer refinement, merge</span></li>
-            <li><a href="https://aspire.dev/integrations/devtools/browser-logs.md">browser-logs.md</a><span>Published guide, retrieved by the CLI</span></li>
-          </ol>
-          <aside class="notes">0:07-0:10. Inspect the existing product PR, successful pr-docs-check run, linked docs PR, and published guide. PR775 links both PR16531 and run25092695241. The real header is a public capture, not reconstructed UI. This is the internal product-to-docs AI loop; human refinement and publication supply evidence for the developer loop. No production dispatch, fabricated outcome, or synthetic repair.</aside>
-        </section>
-
-        <section id="writer" data-chapter="AI loops" data-purpose="proof">
-          <h2>Different skills. Visible human <span class="accent" data-tone="pink">review.</span></h2>
-          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>Bot-authored guide, then <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">maintainer refinement</a> and merge. The docs repo's <code>doc-writer</code> is a distinct skill.</figcaption></figure>
-          <div class="code-and-copy">
-            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
-  --repo "microsoft/aspire" --json</code></pre></figure>
-            <div><p><code>doc-writer</code> guides documentation authoring. <code>aspire-orchestration</code> and <code>aspire-monitoring</code> guide precise app operations.</p></div>
+        <section id="ai-loops" class="statement-slide chapter-opener" data-chapter="AI loops" data-purpose="why" data-transition="slide-in fade-out">
+          <h2 data-takeaway data-why>AI <span class="accent">loops</span> turn results into decisions.</h2>
+          <div class="chapter-map" data-tone="purple">
+            <div class="chapter-track">
+              <h3>Product</h3>
+              <div>
+                <ol class="chapter-flow" aria-label="Product development: tests and human review guide the next revision">
+                  <li><strong>Feature</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>AI change</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Test + review</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Merge</strong><span class="chapter-repeat" data-icon="loop" title="Repeat the loop"></span></li>
+                </ol>
+              </div>
+            </div>
+            <div class="chapter-track">
+              <h3>Aspire docs</h3>
+              <div>
+                <ol class="chapter-flow" aria-label="Feature changes become reviewed documentation; the next change starts the cycle again">
+                  <li><strong>Feature PR</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>AI draft</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Human edit</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Publish</strong><span class="chapter-repeat" data-icon="loop" title="Repeat the loop"></span></li>
+                </ol>
+              </div>
+            </div>
+            <div class="chapter-track">
+              <h3>Your app</h3>
+              <div>
+                <ol class="chapter-flow" aria-label="Develop and debug an app: resource state and telemetry guide the next change">
+                  <li><strong>Inspect</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>AI edit</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Run</strong><span class="flow-arrow" data-icon="arrowRight"></span></li>
+                  <li><strong>Verify</strong><span class="chapter-repeat" data-icon="loop" title="Repeat the loop"></span></li>
+                </ol>
+              </div>
+            </div>
           </div>
-          <p class="source-line">Actual refinement commit: moved the guide, corrected scope, configuration precedence, and browser sharing. Nothing is dispatched on stage.</p>
-          <aside class="notes">0:10-0:11. The initial guide commit is bot-authored; David Fowler's49371cfd refinement explicitly addresses feedback before merge. There are zero submitted GitHub review records, not a fabricated formal-review count. The docs repo's doc-writer is distinct from CLI-shipped app skills. Expired workflow artifacts are not reconstructed. This human gate is part of the real internal loop, not unattended production merge.</aside>
-        </section>
-
-        <section id="docs-supply" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Review and publication supply current facts.</h2>
-          <div data-diagram="outer"></div>
-          <p class="diagram-caption"><span data-icon="review"></span> Human review and deployment are barriers. Published context feeds the CLI, not model weights.</p>
-          <aside class="notes">0:11-0:13. Trace the internal product PR -&gt; constrained agentic docs draft -&gt; maintainer review/merge -&gt; release publication -&gt; C# indexing -&gt; CLI retrieval -&gt; next reviewed change. Show this outer overview before YAML. Narrative publication and per-package-version compiler references are separate source paths. Both supply inspectable context, not model weights; product PRs do not guarantee publication without review.</aside>
-        </section>
-
-        <section id="workflow" data-chapter="AI loops" data-purpose="machinery">
-          <div class="heading-with-brand"><h2>Proposals have explicit write boundaries.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
-          <div class="workflow-path">
-            <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
-          </div>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>pr-docs-check.md <span>Excerpts at the actual run head</span></figcaption><pre data-label="Agentic workflow trigger and safe output" data-line-numbers><code class="language-yaml">on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
-      - release/*
-safe-outputs:
-  create-pull-request:
-    title-prefix: "[docs] "
-    draft: true
-    target-repo:
-      "microsoft/aspire.dev"
-    protected-files: blocked</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="check"></span>Actual docs PR response <span>GitHub JSON selected fields</span></figcaption><pre data-label="Verified merged documentation PR"><code class="language-json">{
-  "number": 775,
-  "state": "closed",
-  "merged": true,
-  "merged_by": {
-    "login": "davidfowl"
-  }
-}</code></pre></figure>
-          </div>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md">Actual run's workflow source</a> &middot; <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub blog explanation</a></p>
-          <aside class="notes">0:13-0:14. Only now open the actual policy source at historical run head42e77dc9. Safe outputs constrain proposals; merged-event guards and additional policy remain linked. Human refinement/merge remains explicit. The JSON is selected actual GitHub PR fields, not expired outcome metrics. Preserve the centered compile strip and left-aligned source. Transition to how those published facts ground the developer's next operation.</aside>
-        </section>
-
-        <section id="stay-current" class="statement-slide" data-chapter="AI loops" data-purpose="why">
-          <h2>Facts feed the next loop.</h2>
-          <p class="large-copy" data-why>Correct today can be stale tomorrow.</p>
-          <div class="contrast">
-            <div><h3>Reviewed narrative</h3><p>Release-published Markdown supplies current narrative context.</p></div>
-            <div><h3>Versioned API facts</h3><p>Assemblies generate per-package-version API models and references.</p></div>
-          </div>
-          <p class="source-line">API references are separate from the narrative corpus. These captures use current published context, not automatic CLI-semver matching. <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md">API generator</a> / <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs">corpus boundaries</a>.</p>
-          <aside class="notes">0:14-0:15. Bridge the internal docs loop to the developer loop. Reviewed release publication supplies the narrative corpus; PackageJsonGenerator produces Package.{version}.json from exact assembly assets, with catalog-pinned versions and release feeds. Astro excludes reference/api/** from the narrative corpus. The CLI's ETag/fingerprint refresh retrieves current published context; our13.6.1 captures do not prove matching-semver selection. This is updated evidence, not model training. Next show the healthy app and concrete CLI retrieval/operations.</aside>
+          <aside class="notes"><p>0:05-0:07. These are three examples of AI feedback loops. In product development, an assistant works on a task; tests and human review guide the next revision before merge. A shipped feature can start the docs loop: an agent drafts, a maintainer refines and publishes, then the next product change starts it again. In an application loop, Aspire provides resource state, docs and telemetry so the assistant can inspect, change, run and verify. We'll start by requesting browser logging for the weather app and reviewing the proposal without applying it.</p><p>CUE: Use the shipped aspireify skill to propose browser logging for this Vite frontend. Read current docs and the exact C# API. Do not edit files or install packages. Call out the package and the experimental diagnostic.</p><p>BRIDGE: First, meet the app.</p><p>IF ASKED: Published docs feed the application loop. These are workflow examples; review and verification remain part of the process. No model is retrained.</p></aside>
         </section>
 
         <section id="weather" class="image-slide" data-chapter="AI loops" data-purpose="proof" data-transition="fade-in slide-out">
-          <h2>Start with a healthy app.</h2>
+          <h2>Our demo: a NativeAOT weather API.</h2>
           <figure>
             <img class="proof-image image-for-dark" src="/inside-aspire/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
             <img class="proof-image image-for-light" src="/inside-aspire/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
-            <figcaption>Actual native app and Madison map. Rehearsal capture; conditions change. Provider attribution retained. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
+            <figcaption>Madison, Wisconsin, from the running app. Rehearsal capture; conditions change. Data providers credited in the app. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
           </figure>
-          <aside class="notes">0:15-0:16. Prove the benefit before opening the architecture. Switch to the prepared app, VS Code, and real terminal; code . is optional if installed. Use the exact demo/host/apphost.cs target with direct Aspire start/wait/describe/otel commands from the runbook. Show returned endpoints, Madison search, the forecast/map, and a weather trace/log; keep provider attribution visible. Open demo/Weather.Api/Program.cs and demo/frontend/src only as needed. The displayed image is a prior actual native-artifact capture, not live output. Do not compile, add browser logs, or manufacture a repair during this demo.</aside>
+          <aside class="notes"><p>0:07-0:08. [LIVE: switch to the prepared app, VS Code, and the terminal.] This is our demo: a weather app with a NativeAOT API, a React front end, and a C# AppHost. Search Madison, show the forecast and the map, and keep the data credits visible. All three demos in this talk use this app: the assistant adds to it, the dashboard explains it, and Compose runs it.</p><p>CUE: Use demo/host/apphost.cs and the runbook's start, wait, describe, and otel commands; open demo/Weather.Api/Program.cs and demo/frontend/src only if asked.</p><p>BRIDGE: Say you want browser logs.</p><p>IF ASKED: The image is a rehearsal capture. Don't compile or add browser logs during the demo.</p></aside>
+        </section>
+
+        <section id="browser-evidence" data-chapter="AI loops" data-purpose="proof">
+          <h2>Say you want browser logs in your app.</h2>
+          <p class="identifier"><code>WithBrowserLogs</code></p>
+          <blockquote>Console output, exceptions, network events, and screenshots become evidence.</blockquote>
+          <p>Experimental browser logging can be configured at runtime, without restarting the <a class="term-link" href="https://aspire.dev/get-started/app-host/" target="_blank" rel="noopener noreferrer" title="AppHost: code that declares your app's services and relationships. Open Aspire docs in a new tab.">AppHost</a>.</p>
+          <aside class="notes"><p>0:08-0:09. Say you want browser logs. WithBrowserLogs captures console output, exceptions, network events, and screenshots, and you can change the tracked browser's settings while the app runs. It's experimental, and I haven't wired it into the weather app, so we can read about it without touching the demo. How would an assistant find out this exists?</p><p>BRIDGE: It asks the CLI.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Experimental (<code>ASPIREBROWSERLOGS001</code>) in <code>Aspire.Hosting.Browsers</code>. Not enabled in this talk's weather app.</p></div></aside>
         </section>
 
         <section id="live-cli" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
-          <h2>Find current guidance.</h2>
+          <h2>The assistant asks the CLI to search the docs.</h2>
           <figure class="cli-terminal" data-cli-replay="docs-search" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
             <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded docs-search command"><code class="language-bash">aspire docs search &quot;Configure tracked browser&quot; --format Json</code></pre></div>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded docs-search stdout"><code class="language-json">[
@@ -263,44 +231,45 @@ safe-outputs:
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line terminal-support">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/docs-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:16-0:17. Presenter-controlled recorded CLI run, not execution in GitHub Pages. Initially show one real search command. Next expands the complete actual captured JSON array; all five titles, slugs, content, sections and scores remain genuine. Scroll only the output to the final record; the command stays anchored. Full public stdout/stderr and capture proof are linked. No PowerShell script is required on stage. Next after the result moves deliberately to section retrieval; Back returns to the command. Reading/print/reduced motion show both immediately.</aside>
+          <aside class="notes"><p>0:09-0:10. This is a recorded run of the public CLI, version 13.6.1. The assistant, or you, runs aspire docs search with the feature name. Next reveals the full output: five ranked sections with titles, slugs, and scores. The pause and expansion are illustrative; the output is complete and linked in the speaker notes.</p><p>CUE: Next expands the response into terminal focus. Scroll only the output; Back restores the command and title.</p><p>BRIDGE: Now read the best section.</p><p>IF ASKED: Full stdout, stderr, and capture proof are in the speaker notes.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/docs-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
         </section>
 
         <section id="docs-section" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
-          <h2>Read the actual guidance.</h2>
+          <h2>Then it reads the section it found.</h2>
           <figure class="cli-terminal" data-cli-replay="docs-section" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
-            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded docs-section command"><code class="language-bash">aspire docs get browser-logs --section &quot;Configure browser logs&quot; --format Json</code></pre></div>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded docs-section command"><code class="language-powershell">aspire docs get browser-logs --section &quot;Configure browser logs&quot;</code></pre></div>
             <div class="replay-response">
-              <pre class="replay-output" data-label="Complete recorded docs-section stdout"><code class="language-json">{
-  &quot;title&quot;: &quot;Browser logs&quot;,
-  &quot;slug&quot;: &quot;browser-logs&quot;,
-  &quot;summary&quot;: &quot;Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.&quot;,
-  &quot;content&quot;: &quot;## Configure browser logs\n\nThe **Configure tracked browser** command opens an interactive settings dialog directly in the Aspire dashboard. Use it to adjust the browser session at runtime without restarting the AppHost.\n\nThe dialog presents the following options:\n* **Scope** — Apply changes to the current resource only, or globally to all browser log resources in the AppHost.\n* **Browser** — Choose a detected Chromium browser (Edge or Chrome) or specify a custom executable path.\n* **User data mode** — `Shared` (cross-AppHost persistent data directory) or `Isolated` (per-AppHost persistent data directory).\n* **Profile** — Select a discovered Chromium profile from the Aspire-managed browser hive (available in `Shared` mode only).\n* **Save to user secrets** — Persist the selected settings to the AppHost’s user secrets so they’re restored on the next run. This option is only shown when the AppHost project has a user secrets ID configured. Run [`aspire secret set`](https://aspire.dev/reference/cli/commands/aspire-secret-set/) once in the AppHost project to initialize a user secrets store; subsequent **Save to user secrets** clicks then write the browser configuration into it.\n\nNote\n\nThe **Configure tracked browser** command is only available when the Aspire dashboard’s interaction service is active (that is, when the dashboard is connected to the AppHost). It is disabled in standalone dashboard mode.\n\nAfter confirming the dialog, the new configuration takes effect immediately: the current browser session restarts with the updated settings.&quot;,
-  &quot;sections&quot;: [
-    &quot;Prerequisites&quot;,
-    &quot;Install the package&quot;,
-    &quot;Add browser logs to a resource&quot;,
-    &quot;Optional parameters&quot;,
-    &quot;Configure via app settings&quot;,
-    &quot;Configure browser logs&quot;,
-    &quot;Browser sessions, tabs, and process sharing&quot;,
-    &quot;How browser logs are captured&quot;,
-    &quot;See also&quot;
-  ]
-}</code></pre>
+              <pre class="replay-output" data-label="Complete recorded docs-section stdout"><code class="language-plaintext">Loading documentation...
+Configure browser logs
+
+The Configure tracked browser command opens an interactive settings dialog directly in the Aspire dashboard. Use it to adjust the browser session at runtime without restarting the AppHost.
+
+The dialog presents the following options:
+
+• Scope — Apply changes to the current resource only, or globally to all browser log resources in the AppHost.
+• Browser — Choose a detected Chromium browser (Edge or Chrome) or specify a custom executable path.
+• User data mode — Shared (cross-AppHost persistent data directory) or Isolated (per-AppHost persistent data directory).
+• Profile — Select a discovered Chromium profile from the Aspire-managed browser hive (available in Shared mode only).
+• Save to user secrets — Persist the selected settings to the AppHost’s user secrets so they’re restored on the next run. This option is only shown when the AppHost project has a user secrets ID configured. Run aspire secret set (https://aspire.dev/reference/cli/commands/aspire-secret-set/) once in the AppHost project to initialize a user secrets store; subsequent Save to user secrets clicks then write the browser configuration into it.
+
+Note
+
+The Configure tracked browser command is only available when the Aspire dashboard’s interaction service is active (that is, when the dashboard is connected to the AppHost). It is disabled in standalone dashboard mode.
+
+After confirming the dialog, the new configuration takes effect immediately: the current browser session restarts with the updated settings.
+
+</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line terminal-support">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/docs-section.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-section.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:17-0:18. Replay the recorded get for browser-logs and Configure browser logs. Show the entire JSON envelope; Markdown remains escaped inside its actual content string, not decoded into a different response. Point to runtime configuration without restarting the AppHost. The search result had a different best section; this selected heading came from the retrieved document. The immutable full recorded JSON is also linked. Timing is illustrative, not CLI latency.</aside>
+          <aside class="notes"><p>0:10-0:11. Here, the guide explains how to configure browser logs while the AppHost runs. We asked for that section by name. The default output is the Markdown content, ready for an assistant to read. Add --format Json for the structured record with the same content.</p><p>CUE: Next reveals the complete default response; Back returns to the command.</p><p>BRIDGE: For code, it also needs the exact member.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-06; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/docs-section-default-2026-11-06.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/docs-section-default-2026-11-06.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-06.json" target="_blank" rel="noopener">proof</a>. Earlier <a href="/inside-aspire/replays/docs-section.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/docs-section.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 13.6.4.</p></div></aside>
         </section>
 
         <section id="api-search" class="live-slide" data-chapter="AI loops" data-purpose="proof">
-          <h2>Find an exact C# member.</h2>
+          <h2>For code, it looks up the exact C# member.</h2>
           <figure class="cli-terminal" data-cli-replay="api-search" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
             <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded api-search command"><code class="language-powershell">aspire docs api search WithBrowserLogs --language csharp --format Json</code></pre></div>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded api-search stdout"><code class="language-json">[
@@ -318,68 +287,190 @@ safe-outputs:
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/api-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:18-0:19. Replay the genuine language-filtered API search. The returned ID and signature identify the experimental WithBrowserLogs member. Show one command and the complete one-record JSON array, not four commands at once. The visible and linked stdout preserve parent/member group, summary and score. This is a recorded baseline run; current live search can be run separately in the real terminal.</aside>
+          <aside class="notes"><p>0:11-0:12. For code, an assistant shouldn't guess a method name. aspire docs api search takes the name and a language, C# here, and returns one record: the experimental WithBrowserLogs member, with its ID and signature.</p><p>CUE: Next reveals the one-record JSON array; the following Next goes to member retrieval.</p><p>BRIDGE: Take that ID and ask for the member.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/api-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
         </section>
 
         <section id="api-member" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
-          <h2>Inspect the member, not a guess.</h2>
+          <h2>Then it gets that member's full reference.</h2>
           <figure class="cli-terminal" data-cli-replay="api-member" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
-            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded api-member command"><code class="language-bash">aspire docs api get &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot; --format Json</code></pre></div>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded api-member command"><code class="language-powershell">aspire docs api get &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot;</code></pre></div>
             <div class="replay-response">
-              <pre class="replay-output" data-label="Complete recorded api-member stdout"><code class="language-json">{
-  &quot;id&quot;: &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot;,
-  &quot;name&quot;: &quot;WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)&quot;,
-  &quot;language&quot;: &quot;csharp&quot;,
-  &quot;kind&quot;: &quot;member&quot;,
-  &quot;url&quot;: &quot;https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode&quot;,
-  &quot;parentId&quot;: &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods&quot;,
-  &quot;memberGroup&quot;: &quot;methods&quot;,
-  &quot;content&quot;: &quot;# BrowserLogsBuilderExtensions Methods\n\n- Package: [Aspire.Hosting.Browsers](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers.md)\n- Type: [BrowserLogsBuilderExtensions](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions.md)\n- Kind: `Methods`\n- Members: `1`\n\nExtension methods for adding tracked browser log resources to browser-based application resources.\n\n&lt;a id=\&quot;withbrowserlogs\&quot;&gt;&lt;/a&gt;\n&lt;a id=\&quot;withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode\&quot;&gt;&lt;/a&gt;\n\n## WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)\n\n&gt; **Experimental:** ASPIREBROWSERLOGS001 - [Learn more](https://aspire.dev/diagnostics/aspirebrowserlogs001/)\n\n- Name: `WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)`\n- Modifiers: `extension`\n- Returns: `IResourceBuilder&lt;T&gt;`\n- Source: [GitHub](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)\n\nAdds a child resource that can open the application&#39;s primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.\n\n```csharp\npublic static class BrowserLogsBuilderExtensions\n{\n    public static IResourceBuilder&lt;T&gt; WithBrowserLogs&lt;T&gt;(\n        this IResourceBuilder&lt;T&gt; builder,\n        string? browser = null,\n        string? profile = null,\n        BrowserUserDataMode? userDataMode = null)\n    {\n        // ...\n    }\n}\n```\n\n## Parameters\n\n- `builder` (`IResourceBuilder&lt;T&gt;`)\n  The resource builder.\n- `browser` (`string?`) `optional`\n  The browser to launch. When not specified, the tracked browser uses the configured value from `Aspire:Hosting:BrowserLogs` and otherwise prefers an installed `\&quot;msedge\&quot;` browser in shared user data mode, an installed `\&quot;chrome\&quot;` browser in isolated user data mode, and finally falls back to `\&quot;chrome\&quot;`. Supported values include logical browser names such as `\&quot;msedge\&quot;` and `\&quot;chrome\&quot;`, or an explicit browser executable path.\n- `profile` (`string?`) `optional`\n  Optional Chromium profile name or directory name to use. Only valid when the effective user data mode is [BrowserUserDataMode.Shared](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md). When not specified, the tracked browser uses the configured value from `Aspire:Hosting:BrowserLogs` if present.\n- `userDataMode` ([BrowserUserDataMode?](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md)) `optional`\n  Optional [BrowserUserDataMode](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md) that selects whether the tracked browser launches against a persistent Aspire-managed user data directory shared across all AppHosts on the machine ( [BrowserUserDataMode.Shared](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md), the default) or a per-AppHost persistent user data directory ( [BrowserUserDataMode.Isolated](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md)). Both modes use Aspire-managed paths under `%LocalAppData%\\Aspire\\BrowserData` on Windows (or platform equivalents); the user&#39;s normal browser profile is never used. When not specified, the tracked browser uses the configured value from `Aspire:Hosting:BrowserLogs` and otherwise defaults to [BrowserUserDataMode.Shared](https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md).\n\n## Returns\n\n`IResourceBuilder&lt;T&gt;` -- A reference to the original `ApplicationModel.IResourceBuilder`1` for further chaining.\n\n## Remarks\n\nThis method adds a child browser logs resource beneath the parent resource represented by `builder`. The child resource exposes a dashboard command that launches a Chromium-based browser in a tracked mode, attaches to the browser&#39;s debugging protocol, forwards browser console, error, exception, and network output to the child resource&#39;s console log stream, and can capture screenshots as command artifacts.\n\nThe tracked browser session uses the [Chrome DevTools Protocol (CDP)](https://chromedevtools.github.io/devtools-protocol/) to subscribe to browser runtime, log, page, and network events.\n\nThe parent resource must expose at least one HTTP or HTTPS endpoint. HTTPS endpoints are preferred over HTTP endpoints when selecting the browser target URL.\n\nBrowser, profile, and user data mode settings can also be supplied from configuration using `Aspire:Hosting:BrowserLogs:Browser`, `Aspire:Hosting:BrowserLogs:Profile`, and `Aspire:Hosting:BrowserLogs:UserDataMode`, or scoped to a specific resource with `Aspire:Hosting:BrowserLogs:{ResourceName}:Browser`, `Aspire:Hosting:BrowserLogs:{ResourceName}:Profile`, and `Aspire:Hosting:BrowserLogs:{ResourceName}:UserDataMode`. Explicit method arguments override configuration.\n\n## Examples\n\nAdd tracked browser logs for a web front end:\n\n```csharp\nvar builder = DistributedApplication.CreateBuilder(args);\n\nbuilder.AddProject&lt;Projects.WebFrontend&gt;(\&quot;web\&quot;)\n    .WithExternalHttpEndpoints()\n    .WithBrowserLogs();\n```\n\n## ATS metadata\n\n### ATS export\n\n- Available to Polyglot AppHosts through the Aspire Type System.\n&quot;
-}</code></pre>
+              <pre class="replay-output" data-label="Complete recorded api-member stdout"><code class="language-plaintext">Loading API documentation...
+BrowserLogsBuilderExtensions Methods
+
+• Package: Aspire.Hosting.Browsers (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers.md)
+• Type: BrowserLogsBuilderExtensions (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions.md)
+• Kind: Methods
+• Members: 1
+
+Extension methods for adding tracked browser log resources to browser-based application resources.
+
+WithBrowserLogs(IResourceBuilder, string?, string?, BrowserUserDataMode?)
+
+&gt; Experimental: ASPIREBROWSERLOGS001 - Learn more (https://aspire.dev/diagnostics/aspirebrowserlogs001/)
+
+• Name: WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)
+• Modifiers: extension
+• Returns: IResourceBuilder&lt;T&gt;
+• Source: GitHub (https://github.com/microsoft/aspire/blob/c89352703f78ae46de90fbf751ed8b52b77b89bf/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
+
+Adds a child resource that can open the application's primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.
+
+public static class BrowserLogsBuilderExtensions
+{
+    public static IResourceBuilder&lt;T&gt; WithBrowserLogs&lt;T&gt;(
+        this IResourceBuilder&lt;T&gt; builder,
+        string? browser = null,
+        string? profile = null,
+        BrowserUserDataMode? userDataMode = null)
+    {
+        // ...
+    }
+}
+
+Parameters
+
+• builder (IResourceBuilder&lt;T&gt;)
+  The resource builder.
+• browser (string?) optional
+  The browser to launch. When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs and otherwise prefers an installed &quot;msedge&quot; browser in shared user data mode, an installed &quot;chrome&quot; browser in isolated user data mode, and finally falls back to &quot;chrome&quot;. Supported values include logical browser names such as &quot;msedge&quot; and &quot;chrome&quot;, or an explicit browser executable path.
+• profile (string?) optional
+  Optional Chromium profile name or directory name to use. Only valid when the effective user data mode is BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md). When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs if present.
+• userDataMode (BrowserUserDataMode? (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md)) optional
+  Optional BrowserUserDataMode (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md) that selects whether the tracked browser launches against a persistent Aspire-managed user data directory shared across all AppHosts on the machine ( BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md), the default) or a per-AppHost persistent user data directory ( BrowserUserDataMode.Isolated (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md)). Both modes use Aspire-managed paths under %LocalAppData%\Aspire\BrowserData on Windows (or platform equivalents); the user's normal browser profile is never used. When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs and otherwise defaults to BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md).
+
+Returns
+
+IResourceBuilder&lt;T&gt; -- A reference to the original ApplicationModel.IResourceBuilder1` for further chaining.
+
+Remarks
+
+This method adds a child browser logs resource beneath the parent resource represented by builder. The child resource exposes a dashboard command that launches a Chromium-based browser in a tracked mode, attaches to the browser's debugging protocol, forwards browser console, error, exception, and network output to the child resource's console log stream, and can capture screenshots as command artifacts.
+
+The tracked browser session uses the Chrome DevTools Protocol (CDP) (https://chromedevtools.github.io/devtools-protocol/) to subscribe to browser runtime, log, page, and network events.
+
+The parent resource must expose at least one HTTP or HTTPS endpoint. HTTPS endpoints are preferred over HTTP endpoints when selecting the browser target URL.
+
+Browser, profile, and user data mode settings can also be supplied from configuration using Aspire:Hosting:BrowserLogs:Browser, Aspire:Hosting:BrowserLogs:Profile, and Aspire:Hosting:BrowserLogs:UserDataMode, or scoped to a specific resource with Aspire:Hosting:BrowserLogs:{ResourceName}:Browser, Aspire:Hosting:BrowserLogs:{ResourceName}:Profile, and Aspire:Hosting:BrowserLogs:{ResourceName}:UserDataMode. Explicit method arguments override configuration.
+
+Examples
+
+Add tracked browser logs for a web front end:
+
+var builder = DistributedApplication.CreateBuilder(args);
+
+builder.AddProject&lt;Projects.WebFrontend&gt;(&quot;web&quot;)
+    .WithExternalHttpEndpoints()
+    .WithBrowserLogs();
+
+ATS metadata
+
+ATS export
+
+• Available to Polyglot AppHosts through the Aspire Type System.
+
+</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line terminal-support">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/api-member.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-member.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:19-0:20. Replay the recorded API get following the exact returned ID; get has no language flag. The entire JSON object remains visible/copyable in the output body, including the actual escaped content string with ASPIREBROWSERLOGS001, parameters, source and remarks; it is not standalone Markdown. Scroll to the final line without moving the command. The complete immutable member response is linked. This is a documented extra capability, not wired into the unchanged weather app. The next slide shows selected identity fields and supporting renderer source before the compiler graph.</aside>
+          <aside class="notes"><p>0:12-0:13. Same default output here: Markdown, ready for an assistant to read. This ID returns the member's signature, parameters and remarks, including ASPIREBROWSERLOGS001. Now the assistant can propose Aspire.Hosting.Browsers and WithBrowserLogs on our frontend, with the experimental diagnostic called out. That's a proposal I can review. Browser logging hasn't been installed or enabled.</p><p>CUE: Next expands the full reference. Show the proposed package and frontend call in the editor; do not apply them.</p><p>BRIDGE: Look at what that ID is.</p><p>IF ASKED: Add --format Json for the structured record with the same content. api get follows the returned ID and has no language flag. The selected JSON fields on the next slide come from the unchanged earlier JSON recording.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-06; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/api-member-default-2026-11-06.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/api-member-default-2026-11-06.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-06.json" target="_blank" rel="noopener">proof</a>. Earlier <a href="/inside-aspire/replays/api-member.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/api-member.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 13.6.4.</p></div></aside>
         </section>
 
         <section id="api-code" data-chapter="AI loops" data-purpose="proof">
-          <h2>An exact member, not a plausible guess.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Actual CLI member response <span>JSON selected fields</span></figcaption><pre data-label="Verified returned C# member identity"><code class="language-json">{
+          <h2>The member ID is the page's address.</h2>
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>The CLI's response <span>Selected fields</span></figcaption><pre data-label="Verified returned C# member identity"><code class="language-json">{
   "id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs",
   "name": "WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)",
   "language": "csharp",
   "kind": "member"
 }</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="file"></span>Member Markdown route <span>Actual TypeScript excerpt</span></figcaption><pre data-label="C# reference Markdown rendering"><code class="language-typescript">return markdownResponse(
-  renderCSharpMemberKindMarkdown(
-    routeProps.pkg,
-    routeProps.type,
-    routeProps.memberKind,
-    routeProps.allTypes,
-    base
-  )
-);</code></pre></figure>
+          <p>It spells out the language, package, type, and member kind, then the member.</p>
+          <aside class="notes"><p>0:13-0:14. The ID is an address: csharp, then the package, the type, and the member kind, then the member. It leads to exactly one member on one reference page, so an assistant with the ID asks for that member and gets that member back. That's why this lookup is exact.</p><p>BRIDGE: So where did that guide come from?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode">Returned member</a>. Selected fields from the recorded response.</p></div></aside>
+        </section>
+
+        <section id="evidence" data-chapter="AI loops" data-purpose="proof">
+          <div class="heading-with-brand"><h2>That page started as a pull request.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
+          <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>The feature PR, merged April 29, 2026.</figcaption></figure>
+          <ol class="evidence-chain">
+            <li><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a><span>The feature merges.</span></li>
+            <li><a href="https://github.com/microsoft/aspire/actions/runs/25092695241">pr-docs-check run 25092695241</a><span>3 seconds later, the docs workflow starts.</span></li>
+            <li><a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a><span>9 minutes after the merge, a bot opens the docs pull request. It merges after 2 days.</span></li>
+            <li><a href="https://aspire.dev/integrations/devtools/browser-logs.md">browser-logs.md</a><span>Published. The CLI serves it.</span></li>
+          </ol>
+          <aside class="notes"><p>0:14-0:17. That page started as a pull request. On April 29 the feature PR, 16531, merged. Three seconds later a workflow run started. Nine minutes after the merge, a bot opened a docs pull request on aspire.dev. Two days after the merge, that docs PR was merged and published, and the CLI serves it. Every timestamp comes from the public PRs and the workflow run, all linked.</p><p>CUE: Inspect the linked feature PR, workflow run, docs PR, and published guide.</p><p>BRIDGE: In between, a human fixed the draft. Let me show you that.</p></aside>
+        </section>
+
+        <section id="writer" data-chapter="AI loops" data-purpose="proof">
+          <h2>The feature's author refined the bot's draft.</h2>
+          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>microsoft/aspire.dev#775: drafted by a bot, refined by <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">David Fowler</a>, then merged.</figcaption></figure>
+          <div class="code-and-copy">
+            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
+  --repo "microsoft/aspire" --json</code></pre></figure>
+            <div><p>Under two hours after the merge, David Fowler moved the page and corrected its scope, configuration precedence, and browser sharing.</p></div>
           </div>
-          <p>The response identifies the member and returns its reference content. The renderer preserves that identity in published Markdown.</p>
-          <p class="source-line"><a href="https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode">Actual returned member</a> / <a href="https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts">reference renderer</a>. Selected fields, not fabricated output.</p>
-          <aside class="notes">0:20-0:21. Point to the actual returned identity/signature and the supporting TypeScript renderer excerpt. The preceding full get response retains content, source URL, experimental diagnostic, parameters and CDP remarks. These selected fields are a recorded public CLI response, not a new capture. Get follows the returned ID without a language flag. The compiler-derived API index is separate from narrative-doc ranking.</aside>
+          <aside class="notes"><p>0:17-0:18. The bot's draft wasn't the end. David Fowler wrote the feature, and he moved the page and corrected its scope, configuration precedence, and browser sharing before it merged. There are no formal GitHub review records on this PR, so I call that a refinement, not a review. The human is the gate. You can inspect the run yourself with the command on screen.</p><p>BRIDGE: Zoom out. How does this fit together?</p><p>IF ASKED: doc-writer is a docs-repo skill for writing docs. It's different from the CLI skills we'll see later. Nothing is dispatched on stage.</p></aside>
+        </section>
+
+        <section id="docs-supply" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
+          <h2>Docs reach the CLI after review and release.</h2>
+          <div data-diagram="outer"></div>
+          <p class="diagram-caption"><span data-icon="review"></span> The CLI reads published docs. No model is trained on them.</p>
+          <aside class="notes"><p>0:18-0:20. Here's the whole path. A product PR merges. A constrained workflow drafts the docs. A maintainer reviews and merges. A release publishes them. The CLI indexes the published text and serves it. The next product change starts it over. Two paths feed the CLI: narrative docs from the site, and API reference generated from the shipped assemblies. Nothing here trains a model; the CLI reads what we published.</p><p>CUE: Advance through the product PR, docs draft, maintainer, release, indexing, and CLI retrieval.</p><p>BRIDGE: Before we read the YAML, here's what keeps it safe.</p></aside>
+        </section>
+
+        <section id="workflow" data-chapter="AI loops" data-purpose="machinery">
+          <div class="heading-with-brand"><h2>The workflow drafts. People merge.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
+          <div class="workflow-path">
+            <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
+          </div>
+          <div class="code-pair">
+            <figure class="code-panel"><figcaption><span data-icon="workflow"></span>pr-docs-check.md <span>Excerpt, at the run's commit</span></figcaption><pre data-label="Agentic workflow trigger and safe output" data-line-numbers><code class="language-yaml">on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+      - release/*
+safe-outputs:
+  create-pull-request:
+    title-prefix: "[docs] "
+    draft: true
+    target-repo:
+      "microsoft/aspire.dev"
+    protected-files: blocked</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="check"></span>The docs PR as GitHub returns it <span>Selected fields</span></figcaption><pre data-label="Verified merged documentation PR"><code class="language-json">{
+  "number": 775,
+  "state": "closed",
+  "merged": true,
+  "merged_by": {
+    "login": "davidfowl"
+  }
+}</code></pre></figure>
+          </div>
+          <aside class="notes"><p>0:20-0:21. The workflow drafts; people merge. It can read and propose, and that's it. Its writes go through a short allow-list: draft pull requests into the docs repo, and a fallback issue if that fails. The agent's reasoning is fuzzy; what it's allowed to do is not. Merging stays with people.</p><p>How well does it work? I wrote this up on the GitHub blog with Peli de Halleux. From May 3 to June 2 the workflow ran on 396 merged product PRs and opened 82 docs PRs. All 82 merged, median 44.8 hours. The PR we just walked through took about two days, close to that median. Those are reported numbers, not a promise.</p><p>BRIDGE: And docs only help if they stay current.</p><p>IF ASKED: Why 82 from 396? The workflow runs on every merged PR and the agent decides whether docs are needed; most merged PRs are refactors, test fixes, or dependency bumps. The first version was too generous: 9 of its first 69 docs PRs were closed, so we tightened the prompt.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md">Workflow source at that commit</a> &middot; <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">Our post on the GitHub blog</a></p></div></aside>
+        </section>
+
+        <section id="stay-current" class="statement-slide" data-chapter="AI loops" data-purpose="why">
+          <h2>Docs stay current with every release.</h2>
+          <p class="large-copy" data-why><a href="https://github.com/microsoft/aspire/releases">Ten releases in under ten weeks.</a></p>
+          <div class="contrast">
+            <div><h3>Narrative docs</h3><p>Published as Markdown with each release.</p></div>
+            <div><h3>API reference</h3><p>Generated from the shipped assemblies, per package version.</p></div>
+          </div>
+          <aside class="notes"><p>0:21-0:22. Aspire shipped ten public releases, 13.5.0 through 13.6.4, in under ten weeks. Docs that were right in August can be wrong by October, so narrative docs publish with each release, and the API reference is regenerated from the shipped assemblies for each package version.</p><p>BRIDGE: Now it can read. Can it run something?</p><p>IF ASKED: These captures used CLI 13.6.1 with the docs that were live on October 12. They don't show the CLI choosing docs by its own version.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Two separate sources. These captures used CLI 13.6.1 with the docs live on 2026-10-12; they don't show the CLI matching docs to its own version. <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md">API generator</a> / <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs">corpus boundaries</a>.</p></div></aside>
         </section>
 
         <section id="act-precisely" class="statement-slide" data-chapter="AI loops" data-purpose="why">
-          <h2>Choose scope before action.</h2>
-          <p class="large-copy" data-why>Writing code isn't operating a system.</p>
-          <p class="big-support">The next move needs an exact target, readiness, and a result you can inspect.</p>
-          <aside class="notes">0:21-0:22. Writing code is not operating a system. The developer loop needs an exact resource target, observed health/state and actual telemetry before the next action. This is a supporting why within AI loops, not an additional top-level benefit chapter. The following genuine recorded wait/describe/trace runs use the unchanged native executable AppHost target.</aside>
+          <h2>Pick the exact target before acting.</h2>
+          <p class="large-copy" data-why>It knows the API. Can it run the app?</p>
+          <p class="big-support">It needs the exact <a class="term-link" href="https://aspire.dev/architecture/overview/#app-model-architecture" target="_blank" rel="noopener noreferrer" title="Resource: a service, executable, container, or dependency represented in the app model. Open Aspire docs in a new tab.">resource</a>, proof the resource is ready, and a result it can check.</p>
+          <aside class="notes"><p>0:22-0:23. Reading isn't operating. To act safely, an assistant needs the exact resource, proof that it's ready, and a result it can check. The next three recordings show that against our demo app.</p><p>BRIDGE: Back to the app. First, wait until the API is ready.</p></aside>
         </section>
 
         <section id="runtime-wait" class="live-slide" data-chapter="AI loops" data-purpose="proof">
-          <h2>Wait for the actual native API.</h2>
+          <h2>The CLI waits until the API is ready.</h2>
           <figure class="cli-terminal" data-cli-replay="runtime-wait" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
             <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-wait command"><code class="language-powershell">aspire wait api --apphost &#39;demo\host\apphost.cs&#39; --status healthy --timeout 120 --non-interactive</code></pre></div>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded runtime-wait stdout"><code class="language-plaintext">Waiting for resource &#39;api&#39; to be healthy...
@@ -388,14 +479,13 @@ safe-outputs:
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-wait.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-wait.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:22-0:23. Replay actual public CLI wait against the existing isolated AppHost and resource api. The prepared PE32+ executable had no CLR header; no managed fallback or native rebuild was used. The captured API was already healthy after start, so the reported 0.0s is genuine capture text, not an animation duration or readiness benchmark. One Next expands the actual stdout. The capture-owned AppHost was stopped afterward.</aside>
+          <aside class="notes"><p>0:23-0:24. aspire wait api blocks until the resource is healthy. In this capture the API was already healthy right after start, so the 0.0 seconds is just what it printed. It isn't a benchmark.</p><p>CUE: Next reveals the recorded readiness response; Back returns to the command.</p><p>BRIDGE: Now, what's running?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-wait.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-wait.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
         </section>
 
         <section id="runtime-state" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
-          <h2>Inspect what is running.</h2>
+          <h2>The CLI reports what is running and how healthy it is.</h2>
           <figure class="cli-terminal" data-cli-replay="runtime-describe" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
             <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-describe command"><code class="language-powershell">aspire describe --apphost &#39;demo\host\apphost.cs&#39; --format Json --non-interactive</code></pre></div>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded runtime-describe stdout"><code class="language-json">{
@@ -668,14 +758,13 @@ safe-outputs:
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line terminal-support">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-describe.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-describe.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:23-0:24. Replay the actual describe command and all six safe resource records. The API is Executable, Running, Healthy, while the frontend is Unhealthy and its installer is NotStarted; do not imply every resource was healthy. The visible and linked full public response retains explicit environment, dashboard URL and local-path redactions. Scroll the output alone to the final record. The raw private stdout hash is recorded in provenance. This is the actual native API capture, not fabricated state or browser execution.</aside>
+          <aside class="notes"><p>0:24-0:25. aspire describe lists the app's resources with their state and health. The API is running and healthy. The front end is unhealthy, and its installer hasn't started. That's the capture as recorded, and it's the kind of thing an assistant needs to see. Local paths and environment values are redacted in the public capture.</p><p>CUE: Next shows all six resources. Scroll the output body to the final record while its command and header stay pinned.</p><p>BRIDGE: And what happened to a request?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-describe.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-describe.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
         </section>
 
         <section id="runtime-traces" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
-          <h2>See the request trace come back.</h2>
+          <h2>The CLI returns the request's trace, span by span.</h2>
           <figure class="cli-terminal" data-cli-replay="runtime-traces" data-exit-code="0">
-            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong><span>Public 13.6.1 / exit 0</span></figcaption>
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
             <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Recorded runtime-traces command"><code class="language-powershell">aspire otel traces api --apphost &#39;demo\host\apphost.cs&#39; --format Json --non-interactive</code></pre></div>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded runtime-traces stdout"><code class="language-json">[
@@ -794,39 +883,35 @@ safe-outputs:
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <p class="source-line terminal-support">Captured 2026-10-12. Illustrative replay timing, not a performance claim. <a href="/inside-aspire/replays/runtime-traces.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-traces.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p>
-          <aside class="notes">0:24-0:25. Replay actual nonempty telemetry after a successful Madison weather request through the native API. The complete visible and linked JSON array includes both the health trace and successful GET /api/weather trace with all four spans, real trace IDs and recorded durations. Scroll the single output body to the final span/closing bracket while the command stays anchored. Those numbers are observations, not an animation timing or performance promise. Dashboard URLs remain redacted in the immutable public capture. The runtime was stopped safely after this capture; use real current endpoints if demonstrating live separately.</aside>
+          <aside class="notes"><p>0:25-0:26. aspire otel traces returns the trace for a Madison weather request, span by span, with trace IDs and durations. The response also includes the health trace. Those durations come from one run; they aren't a performance claim. So now the assistant can look things up, run them, and check the result.</p><p>CUE: Next reveals both traces. Scroll the output to the last span and closing bracket.</p><p>BRIDGE: What tells it which command to use?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-traces.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-traces.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
         </section>
 
         <section id="skills-vs-tools" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Guidance chooses. The CLI executes.</h2>
+          <h2>A skill picks the command. The CLI runs it.</h2>
           <div class="contrast">
-            <div><h3>Skill</h3><p>File-based instructions that guide workflow and tool choice.</p><code>aspire-monitoring/SKILL.md</code><p>A skill selects the observation; it does not replace the tool.</p></div>
+            <div><h3>Skill</h3><p>File-based instructions that guide workflow and tool choice.</p><code>aspire-monitoring/SKILL.md</code><p>A skill decides what to check. The CLI does the checking.</p></div>
             <div><h3>CLI tool</h3><p>Executable operations that return current evidence.</p>
               <code>aspire wait api</code><code>aspire describe</code><code>aspire otel traces api</code>
             </div>
           </div>
-          <p class="source-line">Public CLI 13.6.1. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p>
-          <aside class="notes">0:25-0:26. Define skill versus CLI/tool before listing skill names. File-based instructions guide workflow and tool choice; executable operations return current evidence and perform explicit actions. The preceding docs/API/native result pairs show those facts, not an LLM answer invented for the slide. Shipped skills rely on CLI surfaces, which consume reviewed published context and runtime observations. Do not embed an enormous terminal in the taxonomy.</aside>
+          <aside class="notes"><p>0:26-0:27. A skill is a file of instructions: which workflow, which tool. The CLI is the tool, and it returns current evidence. aspire-monitoring, for example, decides what to observe; aspire otel traces does the observing.</p><p>BRIDGE: Here are the skills the CLI generates.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Commands from the public CLI, 13.6.1. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p></div></aside>
         </section>
 
         <section id="skills" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Skills choose the next move.</h2>
+          <h2>The CLI generates the skills your assistant uses.</h2>
           <div class="skills-list">
-            <div><h3><span data-icon="code"></span>Route and create</h3><code>aspire</code><code>aspire-init</code><code>aspireify</code><code>aspire-project-v2-migration</code></div>
-            <div><h3><span data-icon="terminal"></span>Run and inspect</h3><code>aspire-orchestration</code><code>aspire-monitoring</code><code>aspire-deployment</code></div>
+            <div><h3><span data-icon="code"></span>Set up and migrate</h3><code>aspire</code><code>aspire-init</code><code>aspireify</code><code>aspire-project-v2-migration</code></div>
+            <div><h3><span data-icon="terminal"></span>Run, observe, and deploy</h3><code>aspire-orchestration</code><code>aspire-monitoring</code><code>aspire-deployment</code></div>
           </div>
-          <p><code>aspire-orchestration</code> selects the exact start/wait target. <code>aspire-monitoring</code> selects the logs and traces that ground the next decision.</p>
-          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md">CLI generation, provenance, and profile side effects</a></p>
-          <aside class="notes">0:26-0:27. Name the complete unchanged CLI-generated skill trees after the definitions. Orchestration/monitoring guide exact-target operations and inspection; deployment guides supported target workflows. The router chooses the relevant skill. Actual named invocation/provenance is retained. Do not rerun agent init, alter the presenter profile or equate docs-authoring skills with app-operation skills.</aside>
+          <p><code>aspire-orchestration</code> picks the exact resource to start and wait on. <code>aspire-monitoring</code> picks the logs and traces to check next.</p>
+          <aside class="notes"><p>0:27-0:28. The CLI generates these skills for your assistant. Set up and migrate: aspire is the router, then aspire-init, aspireify, and the project migration skill. Run, observe, and deploy: orchestration, monitoring, and deployment. Orchestration picks the exact resource to start and wait on; monitoring picks the logs and traces to check next.</p><p>BRIDGE: That's what the assistant sees. Now let's look at how the CLI is built.</p><p>IF ASKED: Generating skills can change an agent profile. These were generated on a separate runner, not on my presenter profile.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Generated by the CLI (13.6.1). <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md">CLI generation, provenance, and profile side effects</a></p></div></aside>
         </section>
 
         <section id="api-index" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Compiler facts become exact CLI references.</h2>
+          <h2>Assemblies become API reference.</h2>
           <div data-diagram="api"></div>
-          <p class="diagram-caption"><span data-icon="file"></span> DLL + XML + available PDB &rarr; Roslyn canonical model &rarr; C# reference Markdown &rarr; separate API lookup.</p>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p>
-          <aside class="notes">0:27-0:29. Now explain the machinery behind the member we just retrieved. DLL metadata and XML docs feed Roslyn; available PDB source information enriches the model. Generated reference Markdown and its sitemap feed the separate CLI API index. Keep all three fan-in ports distinct. Do not attribute the narrative DocsIndexService weights to this API index.</aside>
+          <p class="diagram-caption"><span data-icon="file"></span> DLL + XML docs + PDB (when available) &rarr; Roslyn model &rarr; reference Markdown &rarr; the CLI's API lookup.</p>
+          <aside class="notes"><p>0:28-0:30. Inside, part one: the API reference. The generator reads the compiled assembly, its XML docs, and the PDB when there is one. Roslyn builds a model, we render reference Markdown, and the CLI's API lookup indexes it. Three inputs, one model. This is the path that produced the member ID we just used.</p><p>CUE: Advance through the DLL/XML/PDB inputs, Roslyn model, Markdown, and CLI API lookup.</p><p>BRIDGE: Narrative docs take a different path.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p></div></aside>
         </section>
 
         <section id="index" data-chapter="AI loops" data-purpose="machinery">
@@ -847,13 +932,12 @@ await _docsCache.SetIndexAsync(
     [.. documents], cancellationToken)
     .ConfigureAwait(false);</code></pre></figure>
           </div>
-          <p>The narrative-docs path obtains the cached ETag, reuses matching fingerprints, and parses only when needed. Default corpus: <code>llms-full.txt</code>.</p>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45">ETag source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210">cache/index source</a>. Selected lines, wrapped for display.</p>
-          <aside class="notes">0:29-0:30. Switch explicitly from compiler-derived API references to narrative documentation. ETags and content/schema fingerprints are different reuse boundaries. The omitted branch checks the cached fingerprint before parsing; the excerpt does not imply unconditional rebuilding. This is current published context reused efficiently, not embeddings or training.</aside>
+          <p>The CLI sends a cached ETag and reuses an index when its content-and-schema fingerprint matches. Default corpus: <code>llms-full.txt</code>.</p>
+          <aside class="notes"><p>0:30-0:31. Narrative docs come from llms-full.txt. The CLI keeps the ETag from the last fetch and asks the server whether anything changed. If the content-and-schema fingerprint matches, it reuses the index. It parses again when the docs or the index schema changes. The linked source includes the fingerprint comparison omitted from this excerpt.</p><p>BRIDGE: Parsing has one trap.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45">ETag source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210">cache/index source</a>. Selected lines, wrapped for display.</p></div></aside>
         </section>
 
         <section id="parser" data-chapter="AI loops" data-purpose="machinery">
-          <h2>The parser knows fences.</h2>
+          <h2>A # inside a code block isn't a heading.</h2>
           <figure class="code-panel"><figcaption><span data-icon="code"></span>LlmsTxtParser.cs <span>C# source excerpt</span></figcaption><pre data-label="Fence-aware document and section parser" data-line-numbers><code id="parser-code" class="language-csharp">var span = content.AsSpan();
 var codeBlocks = FindCodeBlockRegions(span);
 
@@ -865,76 +949,83 @@ var docBoundaries = FindDocumentBoundaries(span, codeBlocks);
 var sectionStarts = FindSectionHeadings(docSpan, codeBlocks);</code></pre></figure>
           <span class="fragment code-step" data-code="parser-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
           <span class="fragment code-step" data-code="parser-code" data-lines="7-9" data-fragment-index="1" aria-hidden="true"></span>
-          <p>Headings inside code fences must not split the document.</p>
-          <p class="source-line">Inspect the actual C# parser excerpt in <a href="https://github.com/IEvangelist/inside-aspire/tree/main/docs/code">docs/code</a>. The rehearsal uses Aspire's parser, not a clone.</p>
-          <aside class="notes">0:30-0:31. The retrieved section depends on correct boundaries. This is a verbatim real-parser excerpt at the retained source pin, not a replacement implementation. Advance to show fence regions protecting both H1 document boundaries and H2+ sections. The purpose is reliable evidence, not a parser lecture disconnected from the command we ran.</aside>
+          <p>The parser tracks code fences, so a # line inside one never splits a document or a section.</p>
+          <aside class="notes"><p>0:31-0:32. The trap: a line that starts with # inside a code block looks like a heading. The parser tracks code fences, so it can't split a document or a section there. This is Aspire's own parser, verbatim at a pinned commit.</p><p>CUE: Advance to highlight fence regions, document splits, then section splits. Back restores the preceding focus group.</p><p>BRIDGE: Once it's parsed, how does search rank?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Verbatim from Aspire's parser at a pinned commit; full excerpt in <a href="https://github.com/IEvangelist/inside-aspire/tree/main/docs/code">docs/code</a>.</p></div></aside>
         </section>
 
         <section id="lexical" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Find the relevant narrative section.</h2>
+          <h2>Titles and headings outrank body text.</h2>
           <div class="code-and-copy">
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Actual narrative-doc weights</span></figcaption><pre data-label="Weighted narrative documentation ranking"><code class="language-csharp">private const float TitleWeight = 10.0f;
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Narrative-doc weights</span></figcaption><pre data-label="Weighted narrative documentation ranking"><code class="language-csharp">private const float TitleWeight = 10.0f;
 private const float SummaryWeight = 8.0f;
 private const float HeadingWeight = 6.0f;
 private const float CodeWeight = 5.0f;
 private const float BodyWeight = 1.0f;</code></pre></figure>
-            <div><p><code>Configure browser logs</code></p><p>Rank prose and sections, then retrieve the content. This is not the separate compiler-derived API index.</p></div>
+            <div><p><code>Configure browser logs</code></p><p>Each doc section, like this one, is scored with these weights, then the best sections come back.</p></div>
           </div>
-          <p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned narrative weights</a>. Local lexical ranking, not embeddings or model training.</p>
-          <aside class="notes">0:31-0:32. Close Know what's true. We used two distinct evidence paths: exact compiler-derived API identity, and fetched/parsed narrative guidance. These are the current narrative DocsIndexService weights only, not the API catalog's weights or historical blog values. The benefit is a grounded next decision.</aside>
+          <aside class="notes"><p>0:32-0:33. Search is a weighted keyword index. Titles, summaries, headings, and code carry more weight than body text. We chose that over embeddings because queries are term-driven and name-exact: when you ask for a method, you mean that method. No embeddings, no model training.</p><p>BRIDGE: One more insider detail: what runs native.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned narrative weights</a>. No embeddings, no model training.</p></div></aside>
         </section>
 
         <section id="compiler" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Know which process is native.</h2>
+          <h2>The CLI, dashboard, and API are NativeAOT.</h2>
           <div data-diagram="runtime"></div>
-          <p class="diagram-caption"><span data-icon="cpu"></span> Native CLI and API. Managed C# AppHost. Browser React. Node only for frontend development/build.</p>
-          <aside class="notes">0:32-0:33. Keep the NativeAOT insider payoff: native CLI and weather API, managed C# AppHost/dashboard, DCP orchestration, browser React and Node/Vite only for frontend dev/build. The binary proof and telemetry/OpenAPI validation already exist; no rebuild or fallback is introduced. Runtime process roles make the operation/evidence loop concrete without invented memory/startup benchmarks.</aside>
+          <p class="diagram-caption"><span data-icon="cpu"></span> The AppHost stays managed .NET. The browser runs React; Node is only for frontend development and build.</p>
+          <aside class="notes"><p>0:33-0:34. The insider detail: the CLI, the dashboard, and the weather API are NativeAOT. The dashboard went NativeAOT in Aspire 13.6. The AppHost stays managed .NET, the browser runs React, and Node only builds the front end or serves it during development. I'm not quoting startup or memory numbers; I don't have a benchmark here.</p><p>BRIDGE: And the AppHost starts that native API directly.</p><p>IF ASKED: The NativeAOT dashboard shipped in 13.6 (microsoft/aspire#19565). AppHosts on 13.5 and earlier still run the managed one.</p></aside>
         </section>
 
         <section id="lifecycle" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Wire an executable, not a fallback.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="code"></span>demo/host/apphost.cs <span>C# source excerpt</span></figcaption><pre data-label="AppHost native executable wiring" data-line-numbers data-pkg-cyan="Aspire.Hosting.JavaScript" data-add-cyan="javascript" data-apis-cyan="AddViteApp WithNpm" data-lines-cyan="7-12"><code id="apphost-code" class="language-csharp">var api = builder.AddExecutable("api", executable, nativeDirectory)
+          <h2>The AppHost runs the native API directly.</h2>
+          <figure class="code-panel"><figcaption><span data-icon="code"></span>demo/host/apphost.cs <span>Simplified C# excerpt</span></figcaption><pre data-label="AppHost native executable wiring" data-line-numbers data-pkg-cyan="Aspire.Hosting.JavaScript" data-add-cyan="javascript" data-apis-cyan="AddViteApp WithNpm"><code id="apphost-code" class="language-csharp">var api = builder.AddExecutable("api", executable, nativeDirectory)
     .WithHttpEndpoint(env: "PORT")
     .WithHttpHealthCheck("/health")
     .WithExternalHttpEndpoints()
     .WithOtlpExporter(OtlpProtocol.HttpProtobuf);
 
-builder.AddViteApp("frontend",
-        Path.Combine(builder.AppHostDirectory, "..", "frontend"))
+builder.AddViteApp("frontend", "../frontend")
     .WithNpm(install: false)
     .WithReference(api.GetEndpoint("http")).WaitFor(api)
     .WithEnvironment("API_HTTP", api.GetEndpoint("http"))
     .WithEnvironment("API_HTTPS", "");</code></pre></figure>
           <span class="fragment code-step" data-code="apphost-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
-          <span class="fragment code-step" data-code="apphost-code" data-lines="7-12" data-fragment-index="1" aria-hidden="true"></span>
-          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo/host/apphost.cs">Actual AppHost</a>: excerpt omits surrounding configuration. Dynamic ports, readiness, references, and OTLP are explicit.</p>
-          <aside class="notes">0:33-0:34. Focus the actual executable wiring and Vite relationship. Dynamic endpoints, health, waits, external-service references and OTLP make scope inspectable. The missing-native-artifact guard still refuses a managed fallback. This is unchanged development-model source, not the later illustrative deployment-ready Compose model. Preparation happened before the talk.</aside>
+          <span class="fragment code-step" data-code="apphost-code" data-lines="7-11" data-fragment-index="1" aria-hidden="true"></span>
+          <aside class="notes"><p>0:34-0:35. In development, the AppHost still starts the native API directly. Dynamic ports, readiness, references and OTLP stay in code. AddViteApp resolves ../frontend from the AppHost directory. Cyan marks only AddViteApp and WithNpm, not the core hosting calls. A missing development artifact still fails. Publish-only packaging supports deployment without changing this development path.</p><p>CUE: Advance through API wiring and the Vite references. Show demo/host/apphost.cs if asked; the runnable file keeps its Path.Combine.</p><p>BRIDGE: Let's put the loop together.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/demo/host/apphost.cs">Current AppHost</a> (simplified excerpt). Dynamic ports, readiness, references and <a class="term-link" href="https://aspire.dev/fundamentals/telemetry/" target="_blank" rel="noopener noreferrer" title="OpenTelemetry Protocol (OTLP): carries logs, traces, and metrics to the dashboard. Open Aspire docs in a new tab.">OTLP</a> are set in code.</p></div></aside>
         </section>
 
         <section id="the-loop" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
-          <h2><span class="accent" data-tone="purple">Reason.</span> Act precisely. <span class="accent" data-tone="cyan">Observe.</span></h2>
+          <h2><span class="accent" data-tone="purple">Look up,</span> act on one resource, <span class="accent" data-tone="cyan">check the result.</span></h2>
           <div data-diagram="inner"></div>
-          <p class="diagram-caption"><span data-icon="terminal"></span> Advance to trace skills &rarr; CLI &rarr; resources &rarr; evidence &rarr; next decision.</p>
-          <aside class="notes">0:34-0:36. Close the plural AI-loops area by tracing the skill-guided developer cycle: shipped instructions -&gt; native CLI -&gt; generated/current published docs and exact API/resource evidence -&gt; scoped operation -&gt; observed results -&gt; next decision. The earlier internal product/docs loop maintains that context through review/release publication. Neither cycle retrains a model or grants automatic production permission. Preserve every endpoint-gated edge and final return leg. Next show the dashboard that makes observed outcomes inspectable.</aside>
+          <p class="diagram-caption"><span data-icon="terminal"></span> skills &rarr; CLI &rarr; resources &rarr; evidence &rarr; next decision</p>
+          <aside class="notes"><p>0:35-0:37. Here's the whole developer loop. Skills choose the CLI command. The CLI returns current docs, exact API facts, and resource state. The assistant acts on one resource, reads the result, and decides the next step. Our docs loop keeps that content current. That's the first guess gone: the API. Neither loop trains a model or merges anything on its own.</p><p>CUE: Advance through each step and the final return leg; Back restores the preceding graph state.</p><p>BRIDGE: Guess two: what happened?</p></aside>
         </section>
 
-        <section id="dashboard" class="statement-slide" data-chapter="Aspire dashboard" data-purpose="why" data-transition="slide-in fade-out">
-          <h2 data-takeaway>Aspire <span class="accent" data-tone="cyan">dashboard</span></h2>
-          <p class="large-copy" data-why>A running process isn't the whole story.</p>
-          <p class="big-support">See resource state and the request's actual path. Share that evidence with the next human or agent decision.</p>
-          <aside class="notes">0:36-0:38. Open the second primary area with why. A process can be running while a dependency, health check, or request is failing. Resource state and telemetry answer different questions. The AppHost bundles a dashboard connected to its resource service; the same OTLP viewer is also available independently as a standalone image. Instrumentation and export are still required. Do not imply a removed dashboard AI assistant or automatic instrumentation.</aside>
+        <section id="dashboard" class="statement-slide chapter-opener" data-chapter="Aspire dashboard" data-purpose="why" data-transition="slide-in fade-out">
+          <h2 data-takeaway>Follow <span class="accent" data-tone="cyan">one request</span> through your app.</h2>
+          <p class="large-copy" data-why>Resource health, traces, logs and metrics in one place.</p>
+          <div class="chapter-split" data-tone="cyan">
+            <div class="chapter-origin"><span data-icon="cpu"></span><strong>Native API</strong><small>GET /api/weather</small></div>
+            <ul class="chapter-destinations" aria-label="The API calls both public providers in parallel">
+              <li><span class="flow-arrow" data-icon="arrowRight"></span><strong>Forecast</strong><small>Parallel provider call</small></li>
+              <li><span class="flow-arrow" data-icon="arrowRight"></span><strong>Reverse geocoding</strong><small>Parallel provider call</small></li>
+            </ul>
+          </div>
+          <dl class="chapter-signals" data-tone="cyan">
+            <div><dt>Traces</dt><dd>Where time went</dd></div>
+            <div><dt>Logs</dt><dd>What happened</dd></div>
+            <div><dt>Metrics</dt><dd>Patterns over time</dd></div>
+          </dl>
+          <p class="chapter-payoff">Find the slow call and the logs that explain it.</p>
+          <aside class="notes"><p>0:37-0:39. One weather request reaches the API and two public providers. Each produces part of the story. The dashboard brings resource state, traces, logs and metrics into a shared view. Traces follow a request, correlated logs explain its events, and metrics show patterns across requests. We'll request Madison, follow the API's two parallel provider calls, filter the logs to that trace and check the weather counter. Our browser isn't instrumented, so the trace begins at the API.</p><p>CUE: Switch to the healthy app, search Madison and select it. Keep the integrated dashboard and exact-target CLI ready. Do not inject a failure.</p><p>BRIDGE: Start with the dashboard attached to this AppHost.</p></aside>
         </section>
 
         <section id="dashboard-integrated" data-chapter="Aspire dashboard" data-purpose="proof">
-          <h2>Observe a running AppHost.</h2>
+          <h2>An AppHost starts its dashboard.</h2>
           <figure class="dashboard-image">
             <img class="image-for-dark" src="/inside-aspire/dashboard/projects-dark.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in dark theme." />
             <img class="image-for-light" src="/inside-aspire/dashboard/projects-light.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in light theme." />
-            <figcaption>Official resource-page screenshot, not this weather run. The AppHost resource service supplies state, health, console, configuration and resource commands.</figcaption>
+            <figcaption>Official Aspire docs screenshot, not this weather run.</figcaption>
           </figure>
-          <p>OTLP adds structured logs, traces and metrics.</p>
-          <p class="source-line"><a href="https://aspire.dev/dashboard/overview/">Official dashboard overview and image source</a>. Starting a C# or TypeScript AppHost launches the integrated dashboard; emitting telemetry still requires instrumentation.</p>
-          <aside class="notes">0:38-0:41. Inspect the real official Resources page in the active theme. This screenshot is from published Aspire documentation, not a fabricated UI or a new weather capture. Explain state/health, resource console/configuration, and start/stop/restart through the connected resource service. The unchanged native app's recorded traces already proved instrumented OTLP emission. Starting an AppHost supplies the integrated dashboard, not instrumentation for arbitrary code. The managed dashboard/native API process distinction remains intact.</aside>
+          <p>The AppHost reports state, health, console, configuration, and commands. <a class="term-link" href="https://aspire.dev/fundamentals/telemetry/" target="_blank" rel="noopener noreferrer" title="OpenTelemetry Protocol (OTLP): carries logs, traces, and metrics to the dashboard. Open Aspire docs in a new tab.">OTLP</a> adds logs, traces, and metrics.</p>
+          <aside class="notes"><p>0:39-0:42. This image is the official Resources page, not our weather run. Switch to our dashboard. Check api and frontend health, then open the latest GET /api/weather trace. There's the API server span and both provider calls. Filter the structured logs to that trace ID, then select weather.requests in Metrics. The code emitted this evidence.</p><p>CUE: Show the request trace, correlated logs and Weather.Native counter. Use Last 1 hour if the request has aged out. The browser isn't instrumented; this trace starts at the API.</p><p>BRIDGE: The same telemetry viewer also works without an AppHost.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">C#, TypeScript, or Go AppHosts; your code emits telemetry. <a href="https://aspire.dev/dashboard/overview/">Official dashboard overview and image source</a>.</p></div></aside>
         </section>
 
         <section id="dashboard-standalone" data-chapter="Aspire dashboard" data-purpose="proof">
@@ -945,108 +1036,284 @@ builder.AddViteApp("frontend",
   -p "127.0.0.1:18888:18888" `
   -p "127.0.0.1:4317:18889" `
   -p "127.0.0.1:4318:18890" `
-  mcr.microsoft.com/dotnet/aspire-dashboard:latest</code></pre></figure>
+  mcr.microsoft.com/aspire/dashboard:latest</code></pre></figure>
           </div>
-          <p>Any instrumented OTLP emitter can send telemetry. A standalone viewer does not orchestrate your processes.</p>
-          <p class="source-line"><a href="https://aspire.dev/dashboard/standalone/">Documented startup options</a>, not recorded executions. Container ports map UI / gRPC / HTTP; loopback binding is a safety adaptation. Browser authentication remains enabled. The CLI command is foreground/blocking.</p>
-          <aside class="notes">0:41-0:44. Show both public startup modes without executing either. The user explicitly requested the independent container image; latest is the documented mutable public tag, not a claimed pinned release. The container listens on18888 for UI and18889/18890 for OTLP, mapped here to host18888/4317/4318 with loopback bindings. CLI defaults are UI18888/OTLP4317+4318 and the command blocks in the foreground. Browser token authentication remains the default; never show a token or enable anonymous access on public interfaces. Standalone telemetry does not add AppHost lifecycle/health/console/terminal capabilities without a connected resource service.</aside>
+          <p>Anything that exports OTLP can send telemetry here. The standalone dashboard shows it; it doesn't start or manage your processes.</p>
+          <aside class="notes"><p>0:42-0:44. Same viewer, no AppHost. These are alternative startup commands. Our deployment demo uses the standalone image through Compose, pinned to 13.6.2 rather than latest. It receives the native API's OTLP, but it doesn't start or manage that API. The integrated resource controls came from the AppHost, not from telemetry. Browser authentication stays on.</p><p>BRIDGE: The evidence is still the same three signals.</p><p>IF ASKED: The rehearsal uses CLI 13.6.4; not every patch publishes a dashboard image. OTLP stays inside the Compose network, with random loopback-only UI ports. The reference commands shown here were not executed directly.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/dashboard/standalone/">Alternative startup commands</a>. Our Compose rehearsal pins image 13.6.2; browser authentication stays on. The CLI reference is foreground.</p></div></aside>
         </section>
 
         <section id="dashboard-signals" data-chapter="Aspire dashboard" data-purpose="machinery">
-          <h2>Instrumentation makes the evidence.</h2>
+          <h2>The dashboard shows what your code reports.</h2>
           <div class="thesis-path">
             <div><span data-icon="file"></span><strong>Logs</strong><p>What happened, with structured context.</p></div>
             <div><span data-icon="graph"></span><strong>Traces</strong><p>Where this request went across boundaries.</p></div>
             <div><span data-icon="database"></span><strong>Metrics</strong><p>How behavior changes over time.</p></div>
           </div>
-          <p>Instrument code, export OTLP, then inspect actual results.</p>
-          <p class="source-line"><a href="https://aspire.dev/dashboard/overview/">Integrated resource service</a> / <a href="https://aspire.dev/dashboard/standalone/">independent telemetry service</a>. Designed for development and short-term diagnostics, not unlimited production retention.</p>
-          <aside class="notes">0:44-0:46. Open the machinery only after the dashboard's real UI and startup options. OTLP emitters produce logs/traces/metrics; the resource service separately contributes process state, health, console and lifecycle. The native API already emitted real telemetry without a CLR, but arbitrary code must still be instrumented. Standalone supports any instrumented runtime; optional persistence is not a promise of unlimited production monitoring. CLI local backchannel resource operations are not remote dashboard orchestration. Connect the observed evidence back to the next AI-loop decision, then carry the application model beyond development.</aside>
+          <p>Instrument your code, export OTLP, then read the results.</p>
+          <aside class="notes"><p>0:44-0:46. We followed one forecast request. Traces showed both provider calls, logs kept the request's context, and the counter recorded the work. That's the demo result: evidence tied to one request. Instrument, export OTLP, then read it. This is development and short-term diagnostics, not long-term production retention.</p><p>CUE: Return to the deck after showing the signals. Stop only the demo AppHost before the deployment chapter's standalone check.</p><p>BRIDGE: We know it works. Now let's run it beyond the development AppHost.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/dashboard/overview/">Integrated resource service</a> / <a href="https://aspire.dev/dashboard/standalone/">independent telemetry service</a>. Built for development and short-term diagnostics, not long-term production retention.</p></div></aside>
         </section>
 
-        <section id="deployment" class="statement-slide" data-chapter="Aspire deployment" data-purpose="why" data-transition="slide-in fade-out">
-          <h2 data-takeaway>Aspire <span class="accent" data-tone="teal">deployment</span></h2>
-          <p class="large-copy" data-why>Application intent should outlive your laptop.</p>
-          <p class="big-support">Keep relationships explicit. Publish target artifacts, deploy configured resources, and verify the actual outcome.</p>
-          <aside class="notes">0:46-0:48. Open the third primary area with why: manually rebuilding development relationships in a deployment script loses inspectable intent. Aspire can carry a model through target-specific publishing and deployment, with explicit integration and configuration boundaries. This is a presentation about that capability, not permission to provision infrastructure. The Windows native executable/Vite weather graph remains a development demo and has not been deployed.</aside>
+        <section id="deployment" class="statement-slide chapter-opener" data-chapter="Aspire deployment" data-purpose="why" data-transition="slide-in fade-out">
+          <h2 data-takeaway><span class="accent" data-tone="teal">Deploy</span> the model you already run.</h2>
+          <p class="large-copy" data-why>Describe services and dependencies once; use them in development and deployment.</p>
+          <div class="chapter-split" data-tone="teal">
+            <div class="chapter-origin"><span data-icon="code"></span><strong>AppHost model</strong><small>Services, configuration, relationships</small></div>
+            <ul class="chapter-destinations" aria-label="Two execution modes for the same application model">
+              <li><span class="flow-arrow" data-icon="arrowRight"></span><strong>Run</strong><small>Local processes: native API + Vite</small></li>
+              <li><span class="flow-arrow" data-icon="arrowRight"></span><strong>Publish + deploy</strong><small>Compose: API / React + dashboard</small></li>
+            </ul>
+          </div>
+          <p class="chapter-payoff">The AppHost produces the deployment; the deployed app runs independently.</p>
+          <aside class="notes"><p>0:46-0:48. The AppHost is an executable model of this app's services, configuration and relationships. Development uses it to start local processes. A deployment target uses the same model to prepare artifacts and run the app elsewhere. Here that target is local Docker Compose. We'll package the NativeAOT API with React, publish the Compose files, then deploy from the model alongside a standalone dashboard. The development AppHost stops before that check. The app code stays the same; packaging and execution change. Nothing is provisioned in the cloud.</p><p>CUE: Switch to demo/host/apphost.cs and host/Dockerfile. Native compilation and the first image build belong in preparation, not the talk's clock.</p><p>BRIDGE: Here's what the target adds.</p></aside>
         </section>
 
         <section id="deployment-model" data-chapter="Aspire deployment" data-purpose="proof">
-          <h2>Start from deployable intent.</h2>
+          <h2>Add the target to the same model.</h2>
           <div class="workflow-path">
             <code>AppHost model</code><span data-icon="arrowRight" aria-hidden="true"></span><code>Target integration</code><span data-icon="arrowRight" aria-hidden="true"></span><code>Environment resource</code>
           </div>
           <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="package"></span>Docker integration <span>Reference, not installed here</span></figcaption><pre data-label="Documented Docker integration addition"><code class="language-powershell">aspire add docker --non-interactive</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="code"></span>Compose environment <span>Documented C# pattern</span></figcaption><pre data-label="Documented Compose environment API pattern" data-pkg-purple="Aspire.Hosting.Docker" data-add-purple="docker" data-apis-purple="AddDockerComposeEnvironment WithDashboard" data-lines-purple="1-3"><code id="compose-environment-code" class="language-csharp">var environment = builder
-    .AddDockerComposeEnvironment("env")
-    .WithDashboard();</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="package"></span>Docker integration</figcaption><pre data-label="Docker integration installation command"><code class="language-powershell">aspire add docker --version 13.6.4 --non-interactive</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="code"></span>Compose environment <span>C# excerpt</span></figcaption><pre data-label="Weather demo Compose environment excerpt" data-pkg-purple="Aspire.Hosting.Docker" data-apis-purple="AddDockerComposeEnvironment WithDashboard"><code id="compose-environment-code" class="language-csharp">builder.AddDockerComposeEnvironment("talk-compose")
+    .WithDashboard(dashboard => dashboard
+        .WithImage("aspire/dashboard", "13.6.2")
+        .WithImageRegistry("mcr.microsoft.com"));</code></pre></figure>
           </div>
-          <p>Declare deployable application resources in that model.</p>
-          <p class="source-line">Explicitly labeled <a href="https://aspire.dev/deployment/docker-compose/">Docker Compose example</a>, not a user-chosen target or the weather AppHost. <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101">AddDockerComposeEnvironment</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180">WithDashboard</a>. No integration or graph was changed here.</p>
-          <aside class="notes">0:48-0:51. Use Docker Compose only as the documented example, not as a target selected by the user. Aspire.Hosting.Docker supplies AddDockerComposeEnvironment(IDistributedApplicationBuilder,string); WithDashboard(bool enabled=true) opts the Compose environment into a dashboard. The snippet is a reference pattern, not the unchanged weather AppHost or a deployment-ready complete app. A real model must declare deployable project/container resources. Target support and setup are explicit; do not imply every runtime or resource graph deploys identically everywhere.</aside>
+          <p>The native API serves the bundled React app.</p>
+          <aside class="notes"><p>0:48-0:51. The target is in the same AppHost. PublishAsDockerFile changes the API's packaging only when publishing; it is a no-op in a normal run. The Dockerfile builds React, then publishes the API with NativeAOT on Linux. That image serves both. Vite remains for development and is excluded from publication. The dashboard image is pinned to 13.6.2 because there's no 13.6.4 image tag, even though the CLI and hosting packages are 13.6.4.</p><p>CUE: Show the publish-only callback, frontend exclusion and Dockerfile. Point out the generated Compose file will be output, not a second hand-written app model.</p><p>BRIDGE: First inspect what publication produces.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Local target: <a href="https://aspire.dev/deployment/docker-compose/">Docker Compose</a>. <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101">AddDockerComposeEnvironment</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180">WithDashboard</a>. Rehearsal ports are random and loopback-only.</p></div></aside>
         </section>
 
-        <section id="deployment-publish" data-chapter="Aspire deployment" data-purpose="proof">
-          <h2>Publish describes the target.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="file"></span>Deployment artifacts <span>Reference with placeholder path</span></figcaption><pre data-label="Documented Aspire publish command syntax"><code class="language-powershell">aspire publish --apphost 'path\to\deployment\AppHost.cs' `
-  --output-path 'publish-output' --non-interactive</code></pre></figure>
-          <p>Compose publishing generates <code>docker-compose.yaml</code> and <code>.env</code>.</p>
-          <p>It does not build images or apply the deployment.</p>
-          <p class="source-line"><a href="https://aspire.dev/deployment/docker-compose/">Documented publish pipeline</a>. Public CLI 13.6.1 syntax; substitute a configured, deployment-ready AppHost. No generated output is presented as a capture.</p>
-          <aside class="notes">0:51-0:54. Distinguish artifact generation from application. Public publish supports apphost, output-path, list-steps and non-interactive. The shown path is explicitly a placeholder; nothing is executed. For the documented Compose environment, publish generates docker-compose.yaml/.env without building images or running the target. These names describe documented artifact shapes, not files emitted by this rehearsal. Model/package/parameter boundaries remain inspectable before an agent is allowed to create side effects.</aside>
+        <section id="deployment-publish" class="live-slide" data-chapter="Aspire deployment" data-purpose="proof" data-terminal-focus="true">
+          <h2>Publish writes the deployment files.</h2>
+          <figure class="cli-terminal" data-cli-replay="compose-publish" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Actual weather Compose publish command"><code class="language-powershell">aspire publish --apphost demo\host\apphost.cs `
+  --environment Talk --output-path .artifacts\chapter-demos\compose `
+  --non-interactive</code></pre></div>
+            <div class="replay-response"><pre class="replay-output" data-preserve-layout data-terminal-output data-label="Complete recorded Compose publish stdout"><code class="language-plaintext">🛠️ Executing step publish
+🛠️ Building AppHost... demo\host\apphost.cs
+12:40:16 (validate-compute-environments) → Starting validate-compute-environments...
+12:40:16 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+12:40:16 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+12:40:16 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+12:40:16 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+12:40:16 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+12:40:16 (validate-docker-compose) → Starting validate-docker-compose...
+12:40:16 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+12:40:16 (before-start) → Starting before-start...
+12:40:16 (before-start) ✓ before-start completed successfully
+12:40:16 (pipeline-execution) → Starting pipeline-execution...
+12:40:16 (publish-talk-compose) → Starting publish-talk-compose...
+12:40:16 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+12:40:16 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+12:40:16 (publish-talk-compose) i [INF] Generating Compose output
+12:40:16 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+12:40:16 (publish-talk-compose) ✓ Docker Compose file written successfully to
+&lt;WORKTREE&gt;\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
+12:40:16 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+12:40:16 (publish) → Starting publish...
+12:40:16 (publish) ✓ publish completed successfully
+12:40:16 (pipeline-execution) ✓ Completed successfully
+------------------------------------------------------------
+✓ 8/8 steps succeeded • Total time: 36.98ms
+
+Steps Summary:
+                Step timeline:                                      0ms                    10.82ms
+                                                                    │───────┬──────┬─────┬───────│
+      1.11ms  ✓ validate-compute-environments                       │╶──╴                        │
+      2.72ms  ✓   prepare-deployment-targets-talk-compose           │   ╶───────╴                │
+      0.40ms  ✓     before-start                                    │                ╴           │
+      0.40ms  ✓ validate-docker-compose                             │              ╴             │
+      3.80ms  ✓ pipeline-execution                                  │                 ╶─────────╴│
+      2.44ms  ✓ publish-talk-compose                                │                  ╶──────╴  │
+      0.32ms  ✓   publish                                           │                          ╴ │
+      0.35ms  ✓ validate-javascript-dockerfile-run-script-frontend  │                    ╴       │
+
+✓ Pipeline succeeded
+------------------------------------------------------------
+
+</code></pre></div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="terminal-support">The output is <code>docker-compose.yaml</code> and <code>.env</code> placeholders. No images build and no containers start.</p>
+          <aside class="notes"><p>0:51-0:54. Run publish against this AppHost, then open the generated YAML and .env. There are two services: our API and the dashboard. The API image is a placeholder until deployment prepares it. No images were built and nothing started. We can inspect the ports, provider URLs and OTLP wiring before doing anything with Docker. The recording is the complete output of that run.</p><p>CUE: Run the command or expand the recorded result. Open generated docker-compose.yaml and .env; never show resolved secrets. Return to the deck.</p><p>BRIDGE: Now apply the model.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-05. <a href="/inside-aspire/replays/compose-publish-2026-11-05.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-publish-2026-11-05.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">publish pipeline</a>.</p><p><strong>Recording:</strong> Public 13.6.4 / exit 0.</p></div></aside>
         </section>
 
-        <section id="deployment-deploy" data-chapter="Aspire deployment" data-purpose="proof">
-          <h2>Deploy applies the model.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="cloud"></span>Target application <span>Reference with placeholders</span></figcaption><pre data-label="Documented Aspire deploy command syntax"><code class="language-powershell">aspire deploy --apphost 'path\to\deployment\AppHost.cs' `
-  --environment '&lt;environment&gt;' --non-interactive</code></pre></figure>
-          <p>Deploy works from the AppHost model, not an old publish folder.</p>
-          <p>Compose fills parameters, builds images, and runs Compose up.</p>
-          <p class="source-line"><a href="https://aspire.dev/deployment/docker-compose/">Documented deploy pipeline</a>. It deploys declared resources, not the AppHost process. No provisioning or deployment was performed for this presentation.</p>
-          <aside class="notes">0:54-0:56. Public deploy supports apphost, environment, list-steps and non-interactive; placeholders require real target configuration. Deploy evaluates the configured target pipeline from the model, not a previously published output folder, and deploys declared resources rather than the AppHost process. The documented Compose pipeline resolves parameters, builds images and invokes Compose up. Cloud targets require their own packages, authentication and providers. No deployment, billable infrastructure, or production workflow is triggered on stage or during this implementation.</aside>
+        <section id="deployment-deploy" class="live-slide" data-chapter="Aspire deployment" data-purpose="proof" data-terminal-focus="true">
+          <h2>Deploy runs the app, not the AppHost.</h2>
+          <figure class="cli-terminal" data-cli-replay="compose-deploy" data-exit-code="0">
+            <figcaption><span data-icon="terminal"></span><strong>Recorded CLI run</strong></figcaption>
+            <div class="replay-command-line"><span class="replay-prompt" aria-hidden="true">$</span><pre class="replay-command" data-label="Actual weather Compose deploy command"><code class="language-powershell">aspire deploy --apphost demo\host\apphost.cs `
+  --environment Talk --output-path .artifacts\chapter-demos\compose `
+  --non-interactive</code></pre></div>
+            <div class="replay-response"><pre class="replay-output" data-preserve-layout data-terminal-output data-label="Complete recorded Compose deploy stdout"><code class="language-plaintext">🛠️ Executing step deploy
+🛠️ Building AppHost... demo\host\apphost.cs
+12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
+12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+12:42:19 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+12:42:19 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+12:42:19 (validate-docker-compose) → Starting validate-docker-compose...
+12:42:19 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+12:42:19 (before-start) → Starting before-start...
+12:42:19 (before-start) ✓ before-start completed successfully
+12:42:19 (pipeline-execution) → Starting pipeline-execution...
+12:42:19 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+12:42:19 (process-parameters) → Starting process-parameters...
+12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
+12:42:19 (publish-talk-compose) → Starting publish-talk-compose...
+12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+12:42:19 (check-container-runtime) → Starting check-container-runtime...
+12:42:19 (validate-build-only-container-references) → Starting validate-build-only-container-references...
+12:42:19 (push-prereq) → Starting push-prereq...
+12:42:19 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+12:42:19 (validate-build-only-container-references) ✓ validate-build-only-container-references completed successfully
+12:42:19 (push-prereq) ✓ push-prereq completed successfully
+12:42:19 (publish-talk-compose) i [INF] Generating Compose output
+12:42:19 (process-parameters) ✓ process-parameters completed successfully
+12:42:19 (build-prereq) → Starting build-prereq...
+12:42:19 (deploy-prereq) → Starting deploy-prereq...
+12:42:19 (build-prereq) ✓ build-prereq completed successfully
+12:42:19 (deploy-prereq) i [INF] Initializing deployment for environment 'Talk'
+12:42:19 (deploy-prereq) i [INF] Setting default deploy tag 'aspire-deploy-20261105184219' for compute resource(s).
+12:42:19 (deploy-prereq) ✓ deploy-prereq completed successfully
+12:42:19 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+12:42:19 (publish-talk-compose) ✓ Docker Compose file written successfully to
+&lt;WORKTREE&gt;\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
+12:42:19 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+12:42:19 (publish) → Starting publish...
+12:42:19 (publish) ✓ publish completed successfully
+12:42:19 (check-container-runtime) i [INF] Container runtime auto-detected: Docker (docker).
+12:42:19 (check-container-runtime) ✓ check-container-runtime completed successfully
+12:42:19 (build-api) → Starting build-api...
+12:42:19 (build-api) i [INF] Building container image for resource api
+12:42:19 (build-api) i [INF] Building image: api
+12:43:43 (build-api) i [INF] Building image for api completed
+12:43:43 (build-api) ✓ build-api completed successfully
+12:43:43 (build) → Starting build...
+12:43:43 (build) ✓ build completed successfully
+12:43:43 (prepare-talk-compose) → Starting prepare-talk-compose...
+12:43:43 (push-api) → Starting push-api...
+12:43:43 (prepare-talk-compose) ✓ prepare-talk-compose completed successfully
+12:43:43 (push-api) → Tagging api for local use
+12:43:43 (push-api) i [INF] Docker tag for api:a213d6d515beca1dc295332bb130df5e4f913d22 -&gt; api:aspire-deploy-20261105184219 succeeded.
+12:43:43 (push-api) ✓ Successfully tagged api as api:aspire-deploy-20261105184219 (0.2s)
+12:43:43 (push-api) ✓ push-api completed successfully
+12:43:43 (docker-compose-up-talk-compose) → Starting docker-compose-up-talk-compose...
+12:43:43 (docker-compose-up-talk-compose) → Running compose up for talk-compose using Docker
+12:43:43 (docker-compose-up-talk-compose) i [INF] Using container runtime 'docker' for compose operations.
+12:43:51 (docker-compose-up-talk-compose) ✓ Service talk-compose is now running with Docker Compose locally (runtime: Docker) (7.9s)
+12:43:51 (docker-compose-up-talk-compose) ✓ docker-compose-up-talk-compose completed successfully
+12:43:51 (print-api-summary) → Starting print-api-summary...
+12:43:51 (print-talk-compose-dashboard-summary) → Starting print-talk-compose-dashboard-summary...
+12:43:51 (print-talk-compose-dashboard-summary) i [INF] Successfully deployed talk-compose-dashboard to http://localhost:62881.
+12:43:51 (print-talk-compose-dashboard-summary) ✓ print-talk-compose-dashboard-summary completed successfully
+12:43:51 (print-api-summary) i [INF] Successfully deployed api to http://localhost:62880.
+12:43:51 (print-api-summary) ✓ print-api-summary completed successfully
+12:43:51 (deploy) → Starting deploy...
+12:43:51 (deploy) ✓ deploy completed successfully
+12:43:51 (pipeline-execution) ✓ Completed successfully
+------------------------------------------------------------
+✓ 23/23 steps succeeded • Total time: 1m 33s
+
+Steps Summary:
+                Step timeline:                                      0s                      1m 33s
+                                                                    │───────┬──────┬─────┬───────│
+      1.35ms  ✓ validate-compute-environments                       │╴                           │
+      2.76ms  ✓   prepare-deployment-targets-talk-compose           │╴                           │
+      0.36ms  ✓     before-start                                    │╴                           │
+      0.41ms  ✓ validate-docker-compose                             │╴                           │
+      1m 33s  ✓ pipeline-execution                                  │╶──────────────────────────╴│
+      2.95ms  ✓ validate-javascript-dockerfile-run-script-frontend  │╴                           │
+      3.94ms  ✓ process-parameters                                  │╴                           │
+      0.73ms  ✓   build-prereq                                      │╴                           │
+      1m 23s  ✓     build-api                                       │╶────────────────────────╴  │
+      0.53ms  ✓       build                                         │                        ╴   │
+      3.99ms  ✓         prepare-talk-compose                        │                        ╴   │
+       7.91s  ✓           docker-compose-up-talk-compose            │                        ╶──╴│
+       0.63s  ✓             print-api-summary                       │                           ╴│
+      0.46ms  ✓               deploy                                │                           ╴│
+       0.63s  ✓             print-talk-compose-dashboard-summary    │                           ╴│
+       0.20s  ✓       push-api                                      │                        ╴   │
+      1.52ms  ✓   deploy-prereq                                     │╴                           │
+      0.74ms  ✓ validate-compute-environments                       │╴                           │
+      6.77ms  ✓ publish-talk-compose                                │╴                           │
+      0.39ms  ✓   publish                                           │╴                           │
+       0.43s  ✓ check-container-runtime                             │╴                           │
+      1.06ms  ✓ validate-build-only-container-references            │╴                           │
+      1.04ms  ✓ push-prereq                                         │╴                           │
+
+✓ Pipeline succeeded
+
+  talk-compose-dashboard: http://localhost:62881
+  api: http://localhost:62880
+------------------------------------------------------------
+
+</code></pre></div>
+          </figure>
+          <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
+          <p class="terminal-support">The current model builds the native image, resolves parameters and starts Compose. The API still serves the React app.</p>
+          <aside class="notes"><p>0:54-0:56. Deploy evaluates the current model, not the files we just inspected. It resolves parameters, builds the native image and runs Compose. With the development AppHost stopped, open the deployed API's discovered port. Search Madison, then check its provider trace in the deployed dashboard. Same app, now running as containers. The recorded output is the complete successful run; the build time isn't a benchmark.</p><p>CUE: Use the warm image prepared offstage. Discover ports with docker compose port, not a guessed localhost address. Open the dashboard privately so no login token is shared.</p><p>BRIDGE: What did we have to decide?</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-05: local deployment, then cleanup. <a href="/inside-aspire/replays/compose-deploy-2026-11-05.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-deploy-2026-11-05.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">deploy pipeline</a>.</p><p><strong>Recording:</strong> Public 13.6.4 / exit 0.</p></div></aside>
         </section>
 
         <section id="deployment-boundaries" data-chapter="Aspire deployment" data-purpose="machinery">
-          <h2>Same intent. Explicit <span class="accent" data-tone="teal">boundaries.</span></h2>
+          <h2>Each target needs three decisions.</h2>
           <div class="thesis-path">
-            <div><span data-icon="package"></span><strong>Target</strong><p>Choose the supported integration and environment.</p></div>
-            <div><span data-icon="review"></span><strong>Permission</strong><p>Resolve parameters, secrets, authentication and allowed side effects.</p></div>
-            <div><span data-icon="check"></span><strong>Verification</strong><p>Inspect the deployed resources and observed health.</p></div>
+            <div><span data-icon="package"></span><strong>Target</strong><p>Pick a supported integration and environment.</p></div>
+            <div><span data-icon="review"></span><strong>Permission</strong><p>Provide parameters, secrets, and credentials, and approve side effects.</p></div>
+            <div><span data-icon="check"></span><strong>Verification</strong><p>Check the deployed resources and their health.</p></div>
           </div>
-          <p><code>aspire-deployment</code> guides the workflow; the CLI and target provider perform it.</p>
-          <p class="source-line"><a href="https://aspire.dev/deployment/docker-compose/">Documented target setup</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/.github/skills/aspire-deployment/SKILL.md">unchanged shipped deployment skill</a>. Same model does not mean identical target behavior.</p>
-          <aside class="notes">0:56-0:58. Explain deployment machinery and guardrails after the source-backed model/publish/deploy examples. The shipped deployment skill selects supported target workflow and scope; the CLI/provider executes explicit operations. Configuration, secrets, auth and resources vary by target. Appropriate providers handle deployed diagnostics; local backchannel commands are not universal remote operations. This closes the AI payoff: documented intent, observable effects, and approved actions stay inspectable. No skill/profile/native/source changes or actual deployment were needed for this chapter.</aside>
+          <p>The <code>aspire-deployment</code> skill guides the steps. The CLI and the target's provider carry them out.</p>
+          <aside class="notes"><p>0:56-0:58. The target was local Compose. Permission covered only this rehearsal, with loopback-only ports and no cloud resources. Verification meant the running app, its native artifact and its telemetry. Then we destroyed the exact Compose project and removed only our images and build cache. The aspire-deployment skill guides that sequence. One model still needs target-specific packaging and checks. That's the third guess gone: how to ship.</p><p>CUE: Return to the deck after the deployed request. Teardown uses the exact AppHost, Talk environment and recorded project, never a global prune.</p><p>BRIDGE: Let's recap.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/deployment/docker-compose/">Documented target setup</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/.github/skills/aspire-deployment/SKILL.md">shipped deployment skill</a>. One model doesn't mean identical behavior on every target.</p></div></aside>
+        </section>
+
+        <section id="takeaways" class="statement-slide" data-chapter="Key takeaways">
+          <h2>Key takeaways</h2>
+          <div class="thesis-path" data-three-points>
+            <div data-tone="purple"><span data-icon="agent"></span><strong data-takeaway>Aspire makes AI more efficient.</strong></div>
+            <div data-tone="cyan"><span data-icon="screen"></span><strong data-takeaway>Aspire improves the dev inner loop.</strong></div>
+            <div data-tone="teal"><span data-icon="cloud"></span><strong data-takeaway>Aspire carries one app model into deployment.</strong></div>
+          </div>
+          <aside class="notes"><p>0:58-0:59. Three things to take home. Aspire makes AI more efficient: current context and tool results help the assistant choose the next step. Aspire improves the dev inner loop: run the app, see what happened, and make the next change with feedback. Aspire carries one app model into deployment: keep the services and relationships in code, add the target-specific packaging and verify the result. Those are the three capabilities we've used with the same weather app.</p><p>CUE: Pause after each takeaway.</p><p>BRIDGE: Here's the code so you can try it.</p></aside>
         </section>
 
         <section id="close" class="closing-slide" data-chapter="Aspire makes AI more efficient.">
           <h2>Aspire makes AI<br />more <span class="accent">efficient.</span></h2>
-          <p class="big-support" data-three-points><span data-takeaway>AI loops</span><br /><span data-takeaway>Aspire dashboard</span><br /><span data-takeaway>Aspire deployment</span></p>
+          <div class="thesis-path" data-three-points>
+            <div data-tone="purple"><strong data-takeaway>AI loops</strong><p>The API: it reads current docs.</p></div>
+            <div data-tone="cyan"><strong data-takeaway>Aspire dashboard</strong><p>What happened: it reads the telemetry.</p></div>
+            <div data-tone="teal"><strong data-takeaway>Aspire deployment</strong><p>How to ship: it deploys the model.</p></div>
+          </div>
+          <div class="try-it">
+            <p class="source-line">Try it</p>
+            <ul class="try-it-commands source-line"><li><code>aspire docs search "browser logs"</code></li><li><code>aspire describe</code> (with an AppHost running)</li><li><code>aspire publish</code></li></ul>
+          </div>
           <a class="primary-link" href="https://github.com/IEvangelist/inside-aspire"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="28" height="28" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="28" height="28" alt="" />Get the code <span data-icon="arrowRight"></span></a>
-          <p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Presenter runbook</a> &middot; <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md">Docs rehearsal</a></p>
-          <aside class="notes">0:58-1:00. End the full60-minute presentation here and repeat exactly the user's three areas: AI loops, Aspire dashboard, Aspire deployment. Reviewed current docs and versioned API facts feed skill-guided CLI decisions; integrated/independent dashboard evidence makes outcomes inspectable; the configured deployment model carries intent into actual target operations. Together Aspire makes AI more efficient, without invented savings, training claims or unattended permissions. Q&amp;A and networking follow separately. Optional history/metrics/sources remain after the close, not a fourth main topic.</aside>
+          <aside class="notes"><p>0:59-1:00. We started with an assistant that says dotnet run. The goal is one that says aspire run because it checked. Aspire makes AI more efficient: three places an assistant would otherwise guess. The API: it reads current docs. What happened: it reads the telemetry. How to ship: it deploys the model. Three things to try: aspire docs search, aspire describe against a running AppHost, and aspire publish. The code, the runbook, and the docs rehearsal are linked. That's the 60 minutes. Q&amp;A and networking follow separately, and the appendix comes after this slide.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Presenter runbook</a> &middot; <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md">Docs rehearsal</a></p></div></aside>
         </section>
 
         <section id="history" data-chapter="Optional appendix" data-appendix="true">
-          <h2>Earlier architecture.<br />Current surface.</h2>
+          <h2>From MCP tools to CLI commands.</h2>
           <div class="contrast">
-            <div><h3>Personal post</h3><p><code>llms-small.txt</code> and MCP-first list/search/get tools.</p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">The C# architecture story</a></div>
-            <div><h3>This rehearsal</h3><p><code>llms-full.txt</code>, CLI docs commands, and a separate API-reference index.</p><a href="https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation">Current pinned implementation</a></div>
+            <div><h3>Earlier post</h3><p><code>llms-small.txt</code> and MCP-first list/search/get tools.</p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">The C# architecture story</a></div>
+            <div><h3>This talk</h3><p><code>llms-full.txt</code>, CLI docs commands, and a separate API-reference index.</p><a href="https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation">Current pinned implementation</a></div>
           </div>
-          <p class="source-line">Optional appendix. Reusable fetching, parsing, indexing, and retrieval outlive a particular tool surface.</p>
-          <aside class="notes">Optional appendix, outside the 60-minute presentation. Use only for a follow-up question about the earlier MCP-first design. The personal article explains history, not today's corpus default or CLI contract. MCP is a protocol, not an extra main takeaway.</aside>
+          <p class="source-line">The fetching, parsing, indexing, and retrieval carried over to the new surface.</p>
+          <p class="source-line">The first step: <a href="https://github.com/microsoft/aspire/pull/14028">microsoft/aspire#14028</a>, merged in January 2026.</p>
+          <aside class="notes"><p>Optional appendix, outside the 60-minute presentation. In January PR 14028 merged. It gave the Aspire CLI's MCP server three docs tools: list, search, and get over llms-small.txt. This talk's version uses llms-full.txt, CLI commands, and a separate API index. The retrieval pieces carried over; the tool surface changed. MCP is a protocol, not an extra main point.</p></aside>
           <details class="language-examples" data-illustrative-addition>
-            <summary>C# AppHost + Go service references</summary>
-            <p>Illustrative additions, not the weather demo. C# and TypeScript author AppHosts; Go runs as a workload. These examples were not executed here.</p>
+            <summary>C# AppHost running a Go service</summary>
+            <p>AppHosts can be authored in C#, TypeScript, or Go. Here, a C# AppHost runs a Go HTTP service. Workloads can use other languages too.</p>
             <div class="language-reference-pair">
-              <figure class="code-panel"><figcaption><span data-icon="code"></span>AppHost.cs <span>C# top-level statements</span></figcaption><pre data-label="Illustrative C# AppHost for a Go service" data-pkg-teal="Aspire.Hosting.Go" data-add-teal="go" data-apis-teal="AddGoApp" data-lines-teal="4-6"><code id="go-apphost-code" class="language-csharp">using Aspire.Hosting;
+              <figure class="code-panel"><figcaption><span data-icon="code"></span>AppHost.cs <span>C# AppHost</span></figcaption><pre data-label="Illustrative C# AppHost for a Go service" data-pkg-teal="Aspire.Hosting.Go" data-add-teal="go" data-apis-teal="AddGoApp"><code id="go-apphost-code" class="language-csharp">using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 builder.AddGoApp("api", "../go-api")
     .WithHttpEndpoint(port: 8080, env: "PORT")
     .WithExternalHttpEndpoints();
 builder.Build().Run();</code></pre></figure>
-              <figure class="code-panel"><figcaption><span data-icon="code"></span>main.go <span>Go workload, not a Go AppHost</span></figcaption><pre data-label="Illustrative Go HTTP service"><code id="go-service-code" class="language-go">package main
+              <figure class="code-panel"><figcaption><span data-icon="code"></span>main.go <span>Go HTTP service</span></figcaption><pre data-label="Illustrative Go HTTP service"><code id="go-service-code" class="language-go">package main
 
 import (
     "fmt"
@@ -1064,30 +1331,32 @@ func main() {
     log.Fatal(http.ListenAndServe(":"+port, nil))
 }</code></pre></figure>
             </div>
-            <p class="source-line">Requires a configured C# AppHost with <code>Aspire.Hosting.Go</code>, the Go toolchain, and a Go module at the illustrative path. <a href="https://aspire.dev/languages-and-runtimes/">Authoring versus workload languages</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Go/README.md">pinned integration source</a>. A TypeScript AppHost remains <code>apphost.mts</code>, not <code>apphost.ts</code>.</p>
-            <aside class="notes">Optional reference outside the timed talk. Point to the top-level C# AppHost and the separate Go main entry point. Teal identifies AddGoApp's Aspire.Hosting.Go package; endpoint/environment/reference/build operations remain neutral. The workload reads the injected PORT. Neither sample replaces or changes the native weather demo, and neither was run for these slides.</aside>
+            <p class="source-line">This example needs a C# AppHost with <code>Aspire.Hosting.Go</code>, the Go toolchain, and a Go module at the illustrative path. <a href="https://aspire.dev/languages-and-runtimes/">Authoring versus workload languages</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Go/README.md">pinned integration source</a>. A TypeScript AppHost is <code>apphost.mts</code>. Illustrative; not executed here.</p>
+            <aside class="notes"><p>Optional reference, outside the 60-minute presentation. AppHosts can be authored in C#, TypeScript, or Go and can orchestrate workloads in other languages. This example uses a C# AppHost to launch a Go HTTP service; the Go service reads the injected PORT. Neither sample changes the weather demo, and neither was run for these slides.</p></aside>
           </details>
         </section>
 
         <section id="historical-evidence" data-chapter="Optional appendix" data-appendix="true">
-          <h2>Reported documentation outcomes</h2>
+          <h2>Reported outcomes, May 3 to June 2, 2026.</h2>
           <div class="historical-metrics">
             <p><strong>82</strong><span>feature-docs PRs merged</span></p>
             <p><strong>44.8h</strong><span>median docs time-to-merge</span></p>
           </div>
-          <p>Reported window: May 3-June 2, 2026.<br />Historical human-reviewed data, not a fresh SLA.</p>
-          <p class="source-line">Optional appendix. <a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">Source and measurement context</a></p>
-          <aside class="notes">Optional appendix, outside the 60-minute presentation. These historical cohort metrics are not a promise, a new measurement, the selected PR's duration, or a fourth main point. Keep them after the emotional close and show only if relevant to a separate question.</aside>
+          <p>Historical, human-reviewed figures as reported, not a service-level promise.</p>
+          <p class="source-line"><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">Source and measurement context</a></p>
+          <aside class="notes"><p>Optional appendix, outside the 60-minute presentation. These are the figures as reported in the post I wrote on the GitHub blog, for May 3 to June 2, 2026: 82 docs PRs merged, median 44.8 hours after the product PR. They're historical, not a promise. The PR we walked through took 48 hours 51 minutes, close to that median.</p></aside>
         </section>
 
         <section id="sources" class="sources-slide" data-chapter="Optional appendix" data-appendix="true">
           <h2>Sources and reuse</h2>
           <div class="source-columns">
-            <div><h3>Real loop</h3>
+            <div><h3>The docs loop</h3>
               <p><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub: cross-repo docs automation</a></p>
               <p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">David Pine: C# docs architecture</a></p>
               <p><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a> / <a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a></p>
               <p><a href="https://aspire.dev/llms-full.txt">Corpus</a> / <a href="https://aspire.dev/dashboard/overview/">dashboard</a> / <a href="https://aspire.dev/deployment/docker-compose/">deployment</a></p>
+              <p><a href="https://github.com/microsoft/aspire/pull/14028">microsoft/aspire#14028</a></p>
+              <p><a href="https://github.com/microsoft/aspire/releases">Public Aspire releases</a></p>
             </div>
             <div><h3>Application and brand</h3>
               <p><a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Pinned MIT weather sample</a></p>
@@ -1097,7 +1366,7 @@ func main() {
               <p><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md">Actual portrait, official GitHub artwork, Octicons, and code-excerpt provenance</a></p>
             </div>
           </div>
-          <aside class="notes">Optional appendix, outside the 60-minute presentation. Public citations and notices remain accessible without interrupting the close. Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement. The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</aside>
+          <aside class="notes"><p>Optional appendix, outside the 60-minute presentation. Public citations and notices remain accessible without interrupting the close. Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement. The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</p></aside>
         </section>
       </div>
       </div>

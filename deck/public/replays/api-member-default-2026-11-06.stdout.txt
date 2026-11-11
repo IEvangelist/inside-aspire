@@ -1,0 +1,74 @@
+Loading API documentation...
+BrowserLogsBuilderExtensions Methods
+
+• Package: Aspire.Hosting.Browsers (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers.md)
+• Type: BrowserLogsBuilderExtensions (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions.md)
+• Kind: Methods
+• Members: 1
+
+Extension methods for adding tracked browser log resources to browser-based application resources.
+
+WithBrowserLogs(IResourceBuilder, string?, string?, BrowserUserDataMode?)
+
+> Experimental: ASPIREBROWSERLOGS001 - Learn more (https://aspire.dev/diagnostics/aspirebrowserlogs001/)
+
+• Name: WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)
+• Modifiers: extension
+• Returns: IResourceBuilder<T>
+• Source: GitHub (https://github.com/microsoft/aspire/blob/c89352703f78ae46de90fbf751ed8b52b77b89bf/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
+
+Adds a child resource that can open the application's primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.
+
+public static class BrowserLogsBuilderExtensions
+{
+    public static IResourceBuilder<T> WithBrowserLogs<T>(
+        this IResourceBuilder<T> builder,
+        string? browser = null,
+        string? profile = null,
+        BrowserUserDataMode? userDataMode = null)
+    {
+        // ...
+    }
+}
+
+Parameters
+
+• builder (IResourceBuilder<T>)
+  The resource builder.
+• browser (string?) optional
+  The browser to launch. When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs and otherwise prefers an installed "msedge" browser in shared user data mode, an installed "chrome" browser in isolated user data mode, and finally falls back to "chrome". Supported values include logical browser names such as "msedge" and "chrome", or an explicit browser executable path.
+• profile (string?) optional
+  Optional Chromium profile name or directory name to use. Only valid when the effective user data mode is BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md). When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs if present.
+• userDataMode (BrowserUserDataMode? (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md)) optional
+  Optional BrowserUserDataMode (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode.md) that selects whether the tracked browser launches against a persistent Aspire-managed user data directory shared across all AppHosts on the machine ( BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md), the default) or a per-AppHost persistent user data directory ( BrowserUserDataMode.Isolated (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md)). Both modes use Aspire-managed paths under %LocalAppData%\Aspire\BrowserData on Windows (or platform equivalents); the user's normal browser profile is never used. When not specified, the tracked browser uses the configured value from Aspire:Hosting:BrowserLogs and otherwise defaults to BrowserUserDataMode.Shared (https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browseruserdatamode/fields.md).
+
+Returns
+
+IResourceBuilder<T> -- A reference to the original ApplicationModel.IResourceBuilder1` for further chaining.
+
+Remarks
+
+This method adds a child browser logs resource beneath the parent resource represented by builder. The child resource exposes a dashboard command that launches a Chromium-based browser in a tracked mode, attaches to the browser's debugging protocol, forwards browser console, error, exception, and network output to the child resource's console log stream, and can capture screenshots as command artifacts.
+
+The tracked browser session uses the Chrome DevTools Protocol (CDP) (https://chromedevtools.github.io/devtools-protocol/) to subscribe to browser runtime, log, page, and network events.
+
+The parent resource must expose at least one HTTP or HTTPS endpoint. HTTPS endpoints are preferred over HTTP endpoints when selecting the browser target URL.
+
+Browser, profile, and user data mode settings can also be supplied from configuration using Aspire:Hosting:BrowserLogs:Browser, Aspire:Hosting:BrowserLogs:Profile, and Aspire:Hosting:BrowserLogs:UserDataMode, or scoped to a specific resource with Aspire:Hosting:BrowserLogs:{ResourceName}:Browser, Aspire:Hosting:BrowserLogs:{ResourceName}:Profile, and Aspire:Hosting:BrowserLogs:{ResourceName}:UserDataMode. Explicit method arguments override configuration.
+
+Examples
+
+Add tracked browser logs for a web front end:
+
+var builder = DistributedApplication.CreateBuilder(args);
+
+builder.AddProject<Projects.WebFrontend>("web")
+    .WithExternalHttpEndpoints()
+    .WithBrowserLogs();
+
+ATS metadata
+
+ATS export
+
+• Available to Polyglot AppHosts through the Aspire Type System.
+

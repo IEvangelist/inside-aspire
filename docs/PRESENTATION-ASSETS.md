@@ -44,9 +44,10 @@ New source-window legends follow the shared package contract, not arbitrary
 syntax colors. Exact identifiers, labels, underlines and group rails agree;
 core APIs remain neutral. [Pinned source mappings](evidence/package-accents.json)
 cover JavaScript/Docker and the two explicitly illustrative C#/Go reference
-blocks. The original 30 source/output blocks and all seven captured responses
-remain byte-semantically unchanged. Go is a workload, not a new AppHost
-language; no demo or toolchain was rebuilt to produce these references.
+blocks. The optional example is specifically a C# AppHost running a Go
+workload, distinct from the AppHost's authoring language. Its code was not
+run or used to produce the weather rehearsal. Current draft source/output
+changes are explicitly identified below; original capture files are immutable.
 
 The navigation uses the unchanged official Aspire compact mark. GitHub branding is secondary and identifies the GitHub-hosted workflow, PRs, and repository lineage; it does not replace Aspire or imply sponsorship.
 
@@ -63,27 +64,31 @@ No fills, proportions, effects, or paths are modified. The permitted marks link 
 
 Semantic toolbar/resource/review icons use only individual SVGs from [`@primer/octicons` 19.40.0](https://www.npmjs.com/package/@primer/octicons), under its [original MIT license](../deck/public/licenses/octicons-MIT.txt). The whole catalog is not bundled, and no replacement icon paths are hand-drawn.
 
-Under the portrait, the existing GitHub link is joined by only the three requested current public profiles: [X](https://x.com/davidpine7), [Bluesky](https://bsky.app/profile/davidpine.dev), and [LinkedIn](https://www.linkedin.com/in/dpine/). There is no email, Mastodon, stale Bluesky domain, or extra profile. Each link has a platform label, visible focus, a 44px rendered target, and safe new-tab attributes.
+Under the portrait, the GitHub, [X](https://x.com/davidpine7), [Bluesky](https://bsky.app/profile/davidpine.dev), and [LinkedIn](https://www.linkedin.com/in/dpine/) links form a vertical list. Their unchanged icons sit in left-aligned 44px tiles, with 20px visible URLs to the right. Visible text omits the scheme and trailing slash; full HTTPS hrefs and safe new-tab attributes are unchanged. Each whole row is a keyboard-focusable link named by its visible URL; the icons are decorative. No other profiles are added.
 
 Those three brand glyphs come from maintained [`@fortawesome/free-brands-svg-icons` 7.1.0](https://www.npmjs.com/package/@fortawesome/free-brands-svg-icons), imported individually rather than drawing substitute symbols. [The original license](../deck/public/licenses/fontawesome-brands.txt) identifies icons as CC BY 4.0 and code as MIT. Trademark rights are unchanged. This brand-only set is separate from the single Octicons family used for semantic operation/resource icons.
 
 ## Actual code, not invented API calls
 
-The deck explicitly labels snippets as excerpts, selected fields, or commands. Long source expressions are line-wrapped and noncontiguous sections are labeled; the complete source is always linked.
+The deck labels snippets as excerpts, selected fields, or commands. Long
+source expressions are line-wrapped and noncontiguous sections are labeled.
+Complete source links, capture versions/dates and verification context are
+preserved in speaker notes and the sources appendix, not repeated on stage.
 
-- `demo/host/apphost.cs`: the [verified application/resource-model source](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo), unchanged by this presentation refinement.
+- `demo/host/apphost.cs`: the linked [published development baseline](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo) predates the 13.6.4 update and publish-only Compose packaging. Service source and development semantics remain unchanged.
 - `Weather.Api.csproj`, `WeatherJsonContext.cs`, native-summary evidence, and compile/compatibility probes remain in the repository and [pre-talk runbook](RUNBOOK.md), not build/proof cards in the audience deck.
 - CLI lifecycle/wait/describe/trace operations run directly in the prepared real terminal. The terminal's process-local PATH selects the public executable, and `$apphost` holds the exact target; no `.ps1` entry point is required on stage.
 - `pr-docs-check.md` YAML: trigger and safe-output fields from [the selected run's actual workflow head](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md). The full source retains merged-event guards, deterministic target resolution, and additional policy.
 - Docs PR JSON: selected actual GitHub REST fields for merged PR 775, including merger `davidfowl`. Its old gh-aw artifacts are expired; no accepted/strong outcome or fabricated review count is shown. The explicit maintainer refinement commit is linked.
 - Conditional HTTP code: [CachedHttpDocumentFetcher.cs, lines 37-45](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45).
 - Parser/cache/weights: the [existing pinned C# excerpts](code/) and [source citations](SOURCES.md).
-- The live-command slide contains actual, copyable `aspire docs search/get` and `aspire docs api search/get` commands. Slug `browser-logs`, section `Configure browser logs`, and the exact experimental `WithBrowserLogs` member ID were returned by public CLI 13.6.1. [Evidence and scope](evidence/browser-logs.json) distinguish this documented extra capability from the unchanged native app.
-- API Markdown TypeScript: the [actual compiler-derived C# member route](https://github.com/microsoft/aspire.dev/blob/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/frontend/src/pages/reference/api/csharp/%5Bpackage%5D/%5Btype%5D/%5BmemberKind%5D.md.ts).
+- The docs/API commands use the actual returned slug, section and experimental member ID. [Original 13.6.1 evidence](evidence/browser-logs.json) remains intact. Plain get commands return the Markdown content by default; the [November 6 captures](evidence/default-markdown-2026-11-06.json) contain that content rendered as text. JSON stays useful for discovery. Browser logging is still an unapplied proposal.
 
-The deck has 30 command/output/source blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core with explicit C#, PowerShell, shell, YAML, JSON, TypeScript and plaintext, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). Existing structured output keeps real tokens and exact copy. The six new dashboard/deployment blocks are clearly source-backed references, not recorded executions or fictional generated output; they introduce no new terminal replay.
+The deck has 33 command/output/source blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core with explicit C#, PowerShell, shell, YAML, JSON, Go and plaintext, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). The Markdown recordings show the CLI's default rendering. Publish/deploy have complete recordings; alternative standalone startup commands remain labeled references.
 
 Soft wrapping leaves literal/copied source text intact. The panel header stays fixed outside the scrollable code body, and the body grows to the rounded panel bottom. Only a line explicitly requiring preserved horizontal layout uses `data-preserve-layout`; its accessible body scrolls without clipping content or introducing token/line/page scrollbars.
+
+The publish/deploy recordings retain their original plaintext and receive terminal-style status, duration and timeline highlighting in the deck. Their redirected captures have no ANSI color codes. System monospace glyphs, fixed one-cell checkmarks and unwrapped timeline rows preserve the terminal columns; long log lines still wrap. No recording bytes or timings are changed.
 
 ## Connected architecture and accessible motion
 
@@ -91,7 +96,7 @@ The main SVG cycle is agent/shipped skills -> native CLI -> managed AppHost/nati
 
 The supporting docs cycle shows reviewed PR -> gh-aw/doc-writer -> safe-output draft -> human review/merge -> publish Markdown -> C# fetch/parse/cache/index -> CLI lookup -> shipped guidance -> next reviewed change. Human review and publication are explicit barriers; nothing trains the model or auto-merges.
 
-The runtime and compiler-reference diagrams are separate. The former distinguishes native CLI/API, managed C# AppHost, DCP orchestration, Node/Vite, browser React, providers, and OTLP/dashboard. The latter shows DLL/XML/available PDB -> Roslyn canonical model -> deterministic schema/C# Markdown -> sitemap/API lookup.
+The runtime and compiler-reference diagrams are separate. The former distinguishes native CLI/dashboard/API, managed C# AppHost, DCP orchestration, Node/Vite, browser React, providers, and OTLP/dashboard. The dashboard is published with NativeAOT in the demo's pinned public release. The latter shows DLL/XML/available PDB -> Roslyn canonical model -> deterministic schema/C# Markdown -> sitemap/API lookup.
 
 Edges and selective code emphasis advance with the speaker, reverse correctly, and restore from deep links. There are no infinite decorative loops. Reading, print, and reduced motion expose the complete information immediately. Narrow layouts redraw stage/resource relationships with text and semantic icons instead of minuscule SVGs. Public speaker notes and original citations remain available.
 
@@ -107,13 +112,13 @@ Rendered connector checks measure all 32 routes across both themes, projector/as
 
 ## Sequential opening and actual image area
 
-**Start presentation** goes to the second slide, `thesis`; chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
+In the local story draft, **Start presentation** goes to the second slide, `setup`; `thesis` follows as slide 3. Chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
 
 The original 1440x1000 native captures are unchanged. Presentation uses a larger 580px proportional image footprint instead of a 500px contain box; reading uses full available width. The image's box matches its actual painted aspect, so increasing layout space increases real map/weather content rather than blank side bands. PR header captures also retain their intrinsic aspect and full available width. Rendered tests measure painted area, not a CSS size string, and preserve attribution and viewport containment.
 
 ## Three benefits, proof before internals
 
-The roadmap, primary entries and close repeat the user's **AI loops**, **Aspire dashboard**, **Aspire deployment**. Why-first copy is visible. The earlier benefit phrases support the content, not additional chapters. The selected CLI member JSON still matches genuine `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
+The roadmap, primary entries and close repeat **AI loops**, **Aspire dashboard**, **Aspire deployment**. The draft introduces the older guidance assistants learned, reads the CLI response, then follows the page back to its PR and human refinement. The selected CLI member JSON keeps its `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
 
 The three operations use the existing exact `demo\host\apphost.cs` target for
 `wait`, `describe`, and `otel traces`. Public CLI 13.6.1 was executed against
@@ -122,20 +127,22 @@ weather telemetry. Dedicated recorded replay surfaces follow the unchanged
 weather image before the skill/tool definition, not inside a half-width
 taxonomy column or on new build/test slides. [Capture proof](CLI-REPLAY.md)
 records hashes, privacy redactions, native format, and safe runtime cleanup.
-AppHost/parser/renderer/workflow excerpts, native/PR imagery, and connector
+AppHost/parser/workflow excerpts, native/PR imagery, and connector
 geometry remain intact.
 
-The 41-slide order has 38 timed main slides and three optional appendices after
+The local 43-slide draft has 40 timed main slides and three optional appendices after
 the close. Notes cover exactly 60 presentation minutes with Q&A/networking
-separate. No approved abstract, runtime source, skill tree, brand asset, or
-verified PR chain changed. Seven genuine captured command/result pairs are
-continuously labeled recorded; no browser command bridge or fake output exists.
-All seven panels render their unchanged, complete public-safe stdout. The six
-JSON responses preserve full envelopes/arrays and escaped Markdown strings,
-not decoded excerpts. The visible status/excerpt rows are removed; the single
-output body owns bounded presentation scrolling while header/command stay
-anchored. Read/print/no-JS show the full response naturally. No capture hashes,
-privacy redactions, command text, native proof, or source imagery changed.
+separate. Approved abstract, service source, official skill trees, brand assets
+and verified PR chain are unchanged. The AppHost is explicitly updated to
+public 13.6.4 and gains publish-only native packaging. Nine genuine recorded
+surfaces retain one bounded output scroller; header and command stay anchored.
+Read/print/no-JS expose complete responses. All 14 original capture files and
+their frozen hashes remain intact. November 6 default-output captures replace
+the displayed get responses; the Compose captures remain unchanged.
+[Default-output provenance](evidence/default-markdown-2026-11-06.json) and
+[deployment provenance](evidence/chapter-demos.json) record exact commands, hashes,
+normalization, native format, image digest and scoped cleanup; it does not
+rewrite the historical inventory.
 
 ## Dashboard and deployment reference boundaries
 
@@ -149,11 +156,15 @@ The independent dashboard examples preserve browser authentication and use
 explicitly labeled loopback container-port bindings. `latest` is the documented
 mutable public image tag, not a pinned-version claim. Instrumentation/OTLP is
 required; standalone is not automatic AppHost orchestration or unlimited
-production retention. No dashboard command was run here.
+production retention. Those direct standalone startup commands remain
+references; the actual rehearsal ran the dashboard through the Compose target.
 
-Compose is a documented example, not a user-chosen deployment target or a
-change to the weather graph. The public API pattern and placeholder
-publish/deploy references are source-backed and were not executed. Publish
-and deploy are distinct; no generated output is invented. Source pins for
-the versioned API generator, separate narrative corpus, Compose environment
-and dashboard opt-in are in the provenance JSON.
+Compose is now David's selected local target. The same AppHost publishes a
+Linux NativeAOT API/React image and an authenticated standalone dashboard.
+The new environment snippet reflects the local source, with image tag
+13.6.2 distinct from CLI/SDK/integration 13.6.4. The real deploy used project
+`aspire-talk-compose-5ea99390`, random loopback ports and private OTLP.
+Actual map/Scalar/provider traces/correlated logs/weather metrics were observed.
+Exact target teardown and owned cache/image removal restored the original
+0 containers, 2 images, 13 volumes and 3 default networks. No cloud
+resources, anonymous public dashboard or production workflow were enabled.

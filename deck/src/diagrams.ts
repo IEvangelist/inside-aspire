@@ -11,6 +11,7 @@ type DiagramNode = {
   h: number;
   step: number;
   kind?: 'hub' | 'gate';
+  documentation?: { url: string; description: string };
 };
 type DiagramEdge = {
   from: string;
@@ -77,13 +78,15 @@ const diagrams: Record<string, Diagram> = {
   },
   runtime: {
     title: 'Native runtime and managed orchestration are distinct',
-    description: 'The native Aspire CLI starts the managed C# AppHost. The AppHost uses the DCP process-orchestration helper to launch the prebuilt NativeAOT API and Vite Node development server. React runs in the browser. Production browser traffic goes directly to the native API for static files and API routes; dev traffic uses Vite and its API proxy. The API calls Open-Meteo, geocoding, and BigDataCloud and exports OTLP to the .NET Aspire dashboard. The dashboard and AppHost are not claimed to be NativeAOT.',
+    description: 'The native Aspire CLI starts the managed C# AppHost. The AppHost uses the DCP process-orchestration helper to launch the prebuilt NativeAOT API and Vite Node development server. React runs in the browser. Production browser traffic goes directly to the native API for static files and API routes; dev traffic uses Vite and its API proxy. The API calls Open-Meteo, geocoding, and BigDataCloud and exports OTLP to the Aspire dashboard. The Aspire CLI, the dashboard, and the weather API are NativeAOT; the AppHost is managed .NET.',
     width: 1280, height: 510,
     nodes: [
       { id: 'cli', title: 'Aspire CLI', detail: ['NativeAOT executable'], icon: 'terminal', x: 20, y: 35, w: 265, h: 100, step: 0, kind: 'hub' },
       { id: 'host', title: 'C# AppHost', detail: ['Managed .NET model'], icon: 'code', x: 350, y: 35, w: 275, h: 100, step: 1 },
-      { id: 'dcp', title: 'DCP helper', detail: ['Process launch'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1 },
-      { id: 'dashboard', title: 'Dashboard', detail: ['Aspire telemetry UI'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
+      { id: 'dcp', title: 'DCP helper', detail: ['Process launch'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1,
+        documentation: { url: 'https://aspire.dev/architecture/overview/#developer-control-plane',
+          description: 'Developer Control Plane (DCP): launches and manages local processes and containers.' } },
+      { id: 'dashboard', title: 'Dashboard', detail: ['NativeAOT executable'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
       { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: runtimeVite.y, w: 265, h: runtimeVite.h, step: 2 },
       runtimeVite,
       { id: 'api', title: 'Weather API', detail: ['NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: centerY(runtimeVite) - 125 / 2, w: 280, h: 125, step: 2, kind: 'hub' },
@@ -160,6 +163,14 @@ function escape(value: string): string {
   }[character] ?? character));
 }
 
+function documentationLink(node: DiagramNode, content: string, svg = false): string {
+  if (!node.documentation) return content;
+  const hint = `${node.documentation.description} Open Aspire docs in a new tab.`;
+  return `<a class="term-link${svg ? ' diagram-doc' : ''}" href="${escape(node.documentation.url)}"
+    target="_blank" rel="noopener noreferrer" aria-label="${escape(`${node.title}: ${hint}`)}"
+    ${svg ? '' : `title="${escape(hint)}"`}>${svg ? `<title>${escape(hint)}</title>` : ''}${content}</a>`;
+}
+
 export function renderDiagrams() {
   for (const mount of document.querySelectorAll<HTMLElement>('[data-diagram]')) {
     const key = mount.dataset.diagram ?? '';
@@ -183,17 +194,20 @@ export function renderDiagrams() {
           <path class="edge-path" d="${edge.path}" pathLength="1" marker-end="url(#${key}-arrow)" />
           ${edge.label ? `<text class="edge-label" x="${edge.x}" y="${edge.y}">${escape(edge.label)}</text>` : ''}
         </g>`).join('');
-      const nodes = diagram.nodes.filter((node) => node.step === step).map((node) => `
-        <g class="graph-node ${node.kind ?? ''}" data-node="${node.id}" transform="translate(${node.x} ${node.y})">
+      const nodes = diagram.nodes.filter((node) => node.step === step).map((node) => {
+        const content = `
           <rect width="${node.w}" height="${node.h}" rx="12" />
           <g transform="translate(18 18)">${icon(node.icon)}</g>
           <text class="node-title" x="54" y="36">${escape(node.title)}</text>
-          ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${70 + index * 30}">${escape(line)}</text>`).join('')}
-        </g>`).join('');
+          ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${70 + index * 30}">${escape(line)}</text>`).join('')}`;
+        return `<g class="graph-node ${node.kind ?? ''}" data-node="${node.id}" transform="translate(${node.x} ${node.y})">
+          ${documentationLink(node, content, true)}
+        </g>`;
+      }).join('');
       return `<g class="graph-stage${step > 0 ? ' fragment' : ''}" ${step > 0 ? `data-fragment-index="${step - 1}"` : ''} data-stage="${step}">${edges}${nodes}</g>`;
     }).join('');
     mount.innerHTML = `
-      <svg class="architecture-svg" data-graph="${key}" viewBox="0 0 ${diagram.width} ${diagram.height}" role="img"
+      <svg class="architecture-svg" data-graph="${key}" viewBox="0 0 ${diagram.width} ${diagram.height}" role="${diagram.nodes.some((node) => node.documentation) ? 'group' : 'img'}"
         aria-labelledby="${key}-title ${key}-description" xmlns="http://www.w3.org/2000/svg">
         <title id="${key}-title">${escape(diagram.title)}</title>
         <desc id="${key}-description">${escape(diagram.description)}</desc>
@@ -201,7 +215,7 @@ export function renderDiagrams() {
         ${stages}
       </svg>
       <ol class="architecture-mobile" aria-label="${escape(diagram.title)}">
-        ${diagram.nodes.map((node) => `<li class="${node.kind ?? ''}" data-mobile-node="${node.id}"><span class="stage-icon">${icon(node.icon)}</span><div><strong>${escape(node.title)}</strong><p>${escape(node.detail.join('. '))}</p><small>${diagram.edges.filter((edge) => edge.from === node.id).map((edge) => `To ${escape(diagram.nodes.find((target) => target.id === edge.to)?.title ?? edge.to)}`).join('; ')}</small></div></li>`).join('')}
+        ${diagram.nodes.map((node) => `<li class="${node.kind ?? ''}" data-mobile-node="${node.id}"><span class="stage-icon">${icon(node.icon)}</span><div>${documentationLink(node, `<strong>${escape(node.title)}</strong>`)}<p>${escape(node.detail.join('. '))}</p><small>${diagram.edges.filter((edge) => edge.from === node.id).map((edge) => `To ${escape(diagram.nodes.find((target) => target.id === edge.to)?.title ?? edge.to)}`).join('; ')}</small></div></li>`).join('')}
         ${diagram.edges.some((edge) => edge.kind === 'return') ? '<li class="cycle-return"><span class="stage-icon">' + icon('arrowRight') + '</span><div><strong>Close the loop</strong><p>Current evidence informs the next reviewed decision, not model training.</p></div></li>' : ''}
       </ol>`;
     mount.dataset.steps = String(steps);

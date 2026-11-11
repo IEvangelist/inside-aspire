@@ -1,0 +1,1130 @@
+{
+  "description": "Reviewed 43-slide source after the talk and demo updates; the historical template-ux baseline remains unchanged.",
+  "normalization": "Authored slide text collapses whitespace only; code and notes retain exact text. Added data-ux-decoration controls/chrome are excluded. Existing content, IDs, order, links, images, code focus steps and pairs must match.",
+  "slides": [
+    {
+      "id": "intro",
+      "chapter": "Inside Aspire",
+      "purpose": null,
+      "appendix": null,
+      "links": [
+        "#/setup",
+        "https://github.com/IEvangelist",
+        "https://x.com/davidpine7",
+        "https://bsky.app/profile/davidpine.dev",
+        "https://www.linkedin.com/in/dpine/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/speaker/david-pine.webp",
+          "alt": "David Pine's actual public profile portrait",
+          "width": "300",
+          "height": "300"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-black.svg",
+          "alt": "",
+          "width": "24",
+          "height": "24"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-white.svg",
+          "alt": "",
+          "width": "24",
+          "height": "24"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "4800e700536400838516191493a869f252bca388e696048bf937da5e90071340",
+      "notesSha256": "2ec920746aa7677c4056267e7139bb22ce1bd565eaf696bb64795eb030349f7a",
+      "codes": []
+    },
+    {
+      "id": "setup",
+      "chapter": "Where this started",
+      "purpose": null,
+      "appendix": null,
+      "links": [
+        "https://davidpine.dev/posts/aspire-docs-mcp-tools/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "43823161ce7e3f92ccfeb789ec28e5944742caeb88a2d265c207df48900573bc",
+      "notesSha256": "da77296a4f9ae9ea8c29c3553040606a45475ad67432f7dbf379e9d97c83d685",
+      "codes": []
+    },
+    {
+      "id": "thesis",
+      "chapter": "Three main areas",
+      "purpose": null,
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "8455a8bbbc1dfd577ceefcd01a638eef3af48dc28e833f8ac0c08783749c21e5",
+      "notesSha256": "e85003954e0209851d99af65de672ff9dbaa6f23c7efb9eaeebfa45553d323f5",
+      "codes": []
+    },
+    {
+      "id": "ai-loops",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "09873ba553cbc2ae456d54b6892722e051b6e569d4aff998a8969562955782cc",
+      "notesSha256": "68385bc93ab3a9d64266a258df107048c8a7f466c347dc486fea36fa921115f0",
+      "codes": []
+    },
+    {
+      "id": "weather",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/proof/native-map-dark.webp",
+          "alt": "The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode.",
+          "width": "1440",
+          "height": "1000"
+        },
+        {
+          "src": "/inside-aspire/proof/native-map-light.webp",
+          "alt": "The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode.",
+          "width": "1440",
+          "height": "1000"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "e170f8075947564e027e1cb4420abe64e7f4c9a6a7744cb26ad62752ca443a1f",
+      "notesSha256": "43d29ad21b6e4ca84d27a5eeb776b113d74a8e76d64fbf1fae7ba840b6fef197",
+      "codes": []
+    },
+    {
+      "id": "browser-evidence",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/get-started/app-host/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "931e871d43e55660ac540b787867ec95843763124038bb679c34235ea27fde5a",
+      "notesSha256": "ebf104eccf3d7d822422231776777211059c9b6b5191ac6936e447d5812cceb5",
+      "codes": []
+    },
+    {
+      "id": "live-cli",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/docs-search.stdout.txt",
+        "/inside-aspire/replays/docs-search.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "docs-search",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "06fb43b663ab9f8d15fec48a8dacda7ea60ac3e33e10b6089ecd12fcdcc23e62",
+      "notesSha256": "39012b75d94ad04843d31b026be46a568b44ab7f18e9456e595c7d53ca1fafff",
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "955bb794469dcc973eea36a9f69faf12c2a88e985ad6c7319550653f056383a5"
+        },
+        {
+          "language": "language-json",
+          "sha256": "e8e29391258e0a57bb977f0ef3e08ca74827a95152e9d1e3e9e7901ab4550e68"
+        }
+      ]
+    },
+    {
+      "id": "docs-section",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/docs-section-default-2026-11-06.stdout.txt",
+        "/inside-aspire/replays/docs-section-default-2026-11-06.stderr.txt",
+        "/inside-aspire/replays/default-markdown-2026-11-06.json",
+        "/inside-aspire/replays/docs-section.stdout.txt",
+        "/inside-aspire/replays/docs-section.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "docs-section",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "14b3ab80e23288d827d4c1a9efb6fe9796c1bf1df4ba43f80c3bd13a90356b31",
+      "notesSha256": "a816988c1c7a54ecbbd9c038a3a2a6e01ff5332578c08245c4b8b1882308a128",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "6154f8d7763c7bed4a7b62566df9dcdc6c2966a763975e6b544708279d117d91"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "c4062255c7c5f63493ba8a102ac73c70ee3bec61d236762dcf0e52baccdc4179"
+        }
+      ]
+    },
+    {
+      "id": "api-search",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/api-search.stdout.txt",
+        "/inside-aspire/replays/api-search.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "api-search",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "2d905fc4038659e428820afa56ab402d47e50cec0c4319e08b6456fa1723973f",
+      "notesSha256": "b8bbc414c9c602e310a71fa5105e65c3f04df94b231e21246a3943a5ef7d470b",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "de0e64a0ebf8c8ea4068fd5e5063797412f7b76cef344bdf5acbb2c0b64b1970"
+        },
+        {
+          "language": "language-json",
+          "sha256": "b9cf40e2fba167f2a5ccad8554ad3ef872c90eef7c86e503284cdea41190b4af"
+        }
+      ]
+    },
+    {
+      "id": "api-member",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/api-member-default-2026-11-06.stdout.txt",
+        "/inside-aspire/replays/api-member-default-2026-11-06.stderr.txt",
+        "/inside-aspire/replays/default-markdown-2026-11-06.json",
+        "/inside-aspire/replays/api-member.stdout.txt",
+        "/inside-aspire/replays/api-member.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "api-member",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "1eed7fa8290407a9f277f51622fc14673d3221c44a8199b3ead1a54cbf6766ee",
+      "notesSha256": "8ee057655a05ec6152e0b286875bb219cbf5ff415803107c0eaa3ab2f0c4c8b3",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "b07943b500f3823ddd28ee241e9355402aa72c9011161359f975cb8c0728f997"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "f3c766ad4e3f55b9f658472073553019b47d19db7e822662efc2a75e59d77a57"
+        }
+      ]
+    },
+    {
+      "id": "api-code",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/reference/api/csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs-iresourcebuilder-t-string-string-browseruserdatamode"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "5854b2423ef87c2842bcf5a1f6c15952d8bee2b0050ce996171f98ee0e9f462b",
+      "notesSha256": "42be8115f72be654509263144032fae4646d23fe04ac543605c23c129be21dbc",
+      "codes": [
+        {
+          "language": "language-json",
+          "sha256": "a29995344b6e2e77251c4601d59a7c95d66c92e925b3ecd6be94ad91ebbe28fa"
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire/actions/runs/25092695241",
+        "https://github.com/microsoft/aspire.dev/pull/775",
+        "https://aspire.dev/integrations/devtools/browser-logs.md"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/github-black.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/github/github-white.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/proof/product-pr.webp",
+          "alt": "Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command.",
+          "width": "1268",
+          "height": "235"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "fa5b50f77ccb0404b81b18b0e83e7e028bf30de0c8f77c6dc16b85d3b3ad1ce2",
+      "notesSha256": "4c9b0789a41057481d9effec113b606bb52956523f1a6b6bf5d94a5be11606e2",
+      "codes": []
+    },
+    {
+      "id": "writer",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/proof/docs-pr.webp",
+          "alt": "Actual GitHub header for merged docs PR 775: Add browser logs documentation.",
+          "width": "1268",
+          "height": "235"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-and-copy",
+          "children": 2
+        }
+      ],
+      "textSha256": "9c7817ee6320f8f1a837337213cc165cf7b9198c0d8015081da668b82a6b750a",
+      "notesSha256": "b55ae015bb7e67bf3a6b75d8f3d92fbe2410cd72dc953475e2b5602e317cb236",
+      "codes": [
+        {
+          "language": "language-bash",
+          "sha256": "870befb134c923cd3c02ad20686401d7cc37a9a783dc0c6af8df6fd82c87eff9"
+        }
+      ]
+    },
+    {
+      "id": "docs-supply",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "outer"
+      ],
+      "pairs": [],
+      "textSha256": "097e214d436240711d6d5931189097a4f3fc8034237fdddd3baf3a21d9c7e92b",
+      "notesSha256": "7316887f8f614c5c3bdc94a9a89c5bef13c1f96377499a9ad4b13da2fffdac79",
+      "codes": []
+    },
+    {
+      "id": "workflow",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md",
+        "https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md",
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/github-black.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        },
+        {
+          "src": "/inside-aspire/github/github-white.svg",
+          "alt": "GitHub",
+          "width": null,
+          "height": null
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "f613162f33fc052527a9bd217e46972bab71dd8f62280ebde569ca3cb509afe5",
+      "notesSha256": "5ab0a37a2f9c6f87b95bce6a636b7619e28ac2e6d81720c75482f1d9b2486f09",
+      "codes": [
+        {
+          "language": "language-yaml",
+          "sha256": "b4a65bde5ed430cddf0c1e22603d2096179db38f4db3b81b8eb0702a54132929"
+        },
+        {
+          "language": "language-json",
+          "sha256": "ca59c7aa70e9a79fb856a5e798814c566ddb95ea1f4e60bfb934caaea8a9ccca"
+        }
+      ]
+    },
+    {
+      "id": "stay-current",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire/releases",
+        "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md",
+        "https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "fcdfd1a7d924fec7adb08373634d161199e15efedfd03f07c03661609b527461",
+      "notesSha256": "ec6d9769269cbd7c75a37a9b8c57cdececb01a4d2901ab308f8acd008d1fd7c6",
+      "codes": []
+    },
+    {
+      "id": "act-precisely",
+      "chapter": "AI loops",
+      "purpose": "why",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/architecture/overview/#app-model-architecture"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "49a986592550420784ea339f852786da323f514746c006f0c5f7b3baf3a2641c",
+      "notesSha256": "1d95b1e87b6cc187287e52b3da3e8c111e43b80f967d4090981d9b12bc2fceb0",
+      "codes": []
+    },
+    {
+      "id": "runtime-wait",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/runtime-wait.stdout.txt",
+        "/inside-aspire/replays/runtime-wait.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-wait",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "1a00d913f41f5ef3d271525bd16e1236ba0a1c3011783957fe91c00b15660231",
+      "notesSha256": "daf1e2fbd8df009bd668a2cf555201ee87ee492bf7f63a86f9ab086b6b1b637d",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "2e59e70c675d3daf93bd70e3b62b17a8e2d88a2b656143c157aa71f3ac565e05"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "82fecc67667d07744b54f82c3118ca8d30a7b4f62c52bcdd9c8fb9285b565528"
+        }
+      ]
+    },
+    {
+      "id": "runtime-state",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/runtime-describe.stdout.txt",
+        "/inside-aspire/replays/runtime-describe.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-describe",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "03b44eac16790e9c2585de0741af88aa3152840bc77fef1378a3d373b84405c9",
+      "notesSha256": "2d7bf6ccc51641110bcc707a35fb57ab33c59aec269b3f6371f0bca8a7260795",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "44b527851234d8b76c83974d3aacea5e88651dc4755a0f0bb51ae7c0335560f4"
+        },
+        {
+          "language": "language-json",
+          "sha256": "f9b815985decee676447bfc56d3e5f6d5900dee8c97d2a552fe0d81aa369233b"
+        }
+      ]
+    },
+    {
+      "id": "runtime-traces",
+      "chapter": "AI loops",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/runtime-traces.stdout.txt",
+        "/inside-aspire/replays/runtime-traces.stderr.txt",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "runtime-traces",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "28dba3b3de17a26f680a34b26088bd9583146dedb48ec7def673d778ccd169a7",
+      "notesSha256": "e8d32bbb259ea77ce3697e95b9432a3121f3ffaccc7bcfef32ee4742b1e40c5d",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "2358fae8b37495105957834b5688039d7c49c6a236afddeade24def83936f9ce"
+        },
+        {
+          "language": "language-json",
+          "sha256": "4eda438901fd461613dc0ddea279a224256ee926aa1709699858d4f00f033359"
+        }
+      ]
+    },
+    {
+      "id": "skills-vs-tools",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "c41fe0ff4b7670927dffdaa367cf18960dc4ad4e152a861dee9dae62b228bd84",
+      "notesSha256": "33e6127b5168ed1a5a2318ed4a5c1d533ab99bae65bb9d180c2a4843207155b6",
+      "codes": []
+    },
+    {
+      "id": "skills",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/SKILLS.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "b84cc925cc5cfd812a1caf79b876c7ac9aa1eb1aec4a97ba4f8947a286de8ca6",
+      "notesSha256": "36a31502643ead3198eda69aeb8f983a6ab0d3016fdfeca8b1da1b178f2d2a34",
+      "codes": []
+    },
+    {
+      "id": "api-index",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "api"
+      ],
+      "pairs": [],
+      "textSha256": "79e2f2c36bfd0ba0d05ee3c0730aa5c2e0de60c7934d4a64fef8a6cbaf42e1b7",
+      "notesSha256": "b0b0a35b132257e35a65d22f86cb617e43493a57f2d8857e1b4ff3998eed3d2c",
+      "codes": []
+    },
+    {
+      "id": "index",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45",
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "cb8bf3e87671bdeff3f048051fb045c7d13d77a3e50b86ff4c44d268e3d4d409",
+      "notesSha256": "42a5f27137f7e839d30f2c8274efee852f6677a1d88b46e5e40421bca37c9e7d",
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "f9604a399fb580fcff54debffee90ae0f134925e7cbba8fb5ab9484e95dce108"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "6785c286744783cf2cb1f36075174c641cae8bf8435064892a057834181dc4ee"
+        }
+      ]
+    },
+    {
+      "id": "parser",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/tree/main/docs/code"
+      ],
+      "images": [],
+      "steps": [
+        {
+          "code": "parser-code",
+          "lines": "1-5",
+          "index": "0"
+        },
+        {
+          "code": "parser-code",
+          "lines": "7-9",
+          "index": "1"
+        }
+      ],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "7f74d5ccd47d662a743aaacaa1d54549b4d50360dfaf4fd07eb4062e48c52a23",
+      "notesSha256": "5261fbd1d323d3298067008031b01d63b9e5c10221064e515659641490e71948",
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "572b62eed9069e41280289e3651dca2399aa90cfad5e3735555397842367fe9a"
+        }
+      ]
+    },
+    {
+      "id": "lexical",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-and-copy",
+          "children": 2
+        }
+      ],
+      "textSha256": "7ee69465eb75ed3aec9b4491220baa520ed39dc78a9faae284b30ae496a8d982",
+      "notesSha256": "a5bf2d02f0fbacda38b8239ce8eeeff49d5797e4cee5c2af9acb833d14e0be5d",
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "9a6144598d4f924c753d10c2d21c82854650afa9024604f3ffc5fed0caa91798"
+        }
+      ]
+    },
+    {
+      "id": "compiler",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "runtime"
+      ],
+      "pairs": [],
+      "textSha256": "d0abc2c0eecee596a01a6b04b98e683bd365cd2305eb866f08e67827afdab098",
+      "notesSha256": "fa740f9aa9cb384dab83baad60513a561933d553b9e7999a6d5a0d83ba0f3af1",
+      "codes": []
+    },
+    {
+      "id": "lifecycle",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire/blob/main/demo/host/apphost.cs",
+        "https://aspire.dev/fundamentals/telemetry/"
+      ],
+      "images": [],
+      "steps": [
+        {
+          "code": "apphost-code",
+          "lines": "1-5",
+          "index": "0"
+        },
+        {
+          "code": "apphost-code",
+          "lines": "7-11",
+          "index": "1"
+        }
+      ],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "1a82e8b821fb1964b6a8a41e0e98df043de8ac514081deb9fb77fbd38ff11a2d",
+      "notesSha256": "cb09748970a11b2fbd890da4c5bc838e2ac7cdac7054294a50c5148482da6881",
+      "codes": [
+        {
+          "language": "language-csharp",
+          "sha256": "694687056b86fec80a13afbe4f0bcb38855df86f901a3c4dc06537c573607d38"
+        }
+      ]
+    },
+    {
+      "id": "the-loop",
+      "chapter": "AI loops",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [
+        "inner"
+      ],
+      "pairs": [],
+      "textSha256": "2f1a5d3884228e34c1323b6a825db0a05a5584a41426c7844fb0e74b1f646cc6",
+      "notesSha256": "49eddc98dc5a96e2640e1ad95184cadab084423b0919c230d1e095135df1ddc6",
+      "codes": []
+    },
+    {
+      "id": "dashboard",
+      "chapter": "Aspire dashboard",
+      "purpose": "why",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "bd568adb2a752d1d51a182ac4fc09957b5e7c9e1090f39a28921949c02b2c417",
+      "notesSha256": "1a37e15e0920ce8ea9cb4d60f5cf74d7754e8f1d1a5839c9ad293d43fcd77b8d",
+      "codes": []
+    },
+    {
+      "id": "dashboard-integrated",
+      "chapter": "Aspire dashboard",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/fundamentals/telemetry/",
+        "https://aspire.dev/dashboard/overview/"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/dashboard/projects-dark.webp",
+          "alt": "Official Aspire documentation screenshot of the integrated dashboard Resources page in dark theme.",
+          "width": "2560",
+          "height": "800"
+        },
+        {
+          "src": "/inside-aspire/dashboard/projects-light.webp",
+          "alt": "Official Aspire documentation screenshot of the integrated dashboard Resources page in light theme.",
+          "width": "2560",
+          "height": "800"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "aade94e3c637908191f6e282a3cd764be343029dad59dd74655fc43e781aaa3c",
+      "notesSha256": "f61e3fe8939a3e40778f7d575dace36395f41679698068c14b85c402f5d5ae0e",
+      "codes": []
+    },
+    {
+      "id": "dashboard-standalone",
+      "chapter": "Aspire dashboard",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/dashboard/standalone/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "55010c5d823008c3910ae2eeb3e824d940850959225c6bfc78a0e6953d525693",
+      "notesSha256": "728938ade662759c5adc7e1cbbbb52a518c66fbc8e4a0951f491e4db3224f8c8",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "76bf1f3d9be6fb3a05550429b0400f3bfa4dabfe9da8e63bc2720a1e0ded0e6a"
+        },
+        {
+          "language": "language-powershell",
+          "sha256": "6c75fb231bd5940a19035bd72df358255269d8c168436d8c02cc1e8e7e695018"
+        }
+      ]
+    },
+    {
+      "id": "dashboard-signals",
+      "chapter": "Aspire dashboard",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/dashboard/overview/",
+        "https://aspire.dev/dashboard/standalone/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "af3d9e266f68afb4eb6e0c1c6f1eaab2ad425ef52e0898c8ddc8ad644c221551",
+      "notesSha256": "b5e16654caf943b1d1313c010b88f4638f62b43db60824ed4562db9734c6415c",
+      "codes": []
+    },
+    {
+      "id": "deployment",
+      "chapter": "Aspire deployment",
+      "purpose": "why",
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "066161237afbcebc015f418e4f38f17e0d4ca514e1c9cd02d7c1b8527414b97f",
+      "notesSha256": "0940c4cb339c93faa2f47959efe33bb9bf096783a59075cc0f94e08fa7fba34b",
+      "codes": []
+    },
+    {
+      "id": "deployment-model",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101",
+        "https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "code-pair",
+          "children": 2
+        }
+      ],
+      "textSha256": "32249f71dacf3204f56187e8d5e329f414c04633730b70c1c7e26c014137dc10",
+      "notesSha256": "462290be94aa4588977e08b607e86ae94c3c34a6a1b44b94bf3f238172f9ba64",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "9351161c9cd3f3a5198a8811abb191219eaf60c7c2e7247fcb21172c984f7764"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "ce9601c3620d7d7ca6b6fbd5b82ad9bfd54fc9e07a61ee06556cabc14a2552ca"
+        }
+      ]
+    },
+    {
+      "id": "deployment-publish",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/compose-publish-2026-11-05.stdout.txt",
+        "/inside-aspire/replays/compose-publish-2026-11-05.stderr.txt",
+        "/inside-aspire/replays/chapter-demos.json",
+        "https://aspire.dev/deployment/docker-compose/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "compose-publish",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "f373a1b9a3f2fde7ed8df2d625724ac4281689509139e2a0bb0756f460d03e11",
+      "notesSha256": "a9eed0d54ce8515b93e419ed0443a33d629b011ef947ca599671c77366b924f7",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "ed7def4e4f2826bc847b7d53f14f382aac07aca0c4782bf8377f1de6e0a35610"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "b0814f2130f5db22c9de507ea260b029f6bbd3b772839707bdd6a6dc8c828e50"
+        }
+      ]
+    },
+    {
+      "id": "deployment-deploy",
+      "chapter": "Aspire deployment",
+      "purpose": "proof",
+      "appendix": null,
+      "links": [
+        "/inside-aspire/replays/compose-deploy-2026-11-05.stdout.txt",
+        "/inside-aspire/replays/compose-deploy-2026-11-05.stderr.txt",
+        "/inside-aspire/replays/chapter-demos.json",
+        "https://aspire.dev/deployment/docker-compose/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": "compose-deploy",
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "e97af619a472377f0c8eb1820cc8d84cb93eeff808c752b85f25c66b4edc75be",
+      "notesSha256": "4d08f262934ac8ea4496e748fc3dd0ac10ffdd0c82b114639311ae0bdb7e7824",
+      "codes": [
+        {
+          "language": "language-powershell",
+          "sha256": "53718d00021ea6812cc087f5c437d50a71d6e2002112d248c51a6df21e5c5124"
+        },
+        {
+          "language": "language-plaintext",
+          "sha256": "4d59daa1c7f807f59acd60ac6bd82bbd073b80d5dfce3bc87aedcdb207d8c3b2"
+        }
+      ]
+    },
+    {
+      "id": "deployment-boundaries",
+      "chapter": "Aspire deployment",
+      "purpose": "machinery",
+      "appendix": null,
+      "links": [
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/.github/skills/aspire-deployment/SKILL.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "dc4d82656fca18c1f7e22d764188e742137b3e2c1fe57fa8cf6befc3bea112eb",
+      "notesSha256": "ca9846e691078d84f4c8bab7e2162ee492f0bfcdf2bff8c16712ade0c85830f0",
+      "codes": []
+    },
+    {
+      "id": "takeaways",
+      "chapter": "Key takeaways",
+      "purpose": null,
+      "appendix": null,
+      "links": [],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "9061cea6a6a360d94302304d66f06159848e216953b2996b940b0559a53b0312",
+      "notesSha256": "dbf1df9db42e29787d91e07dab1cf15d74baac6f8754ecd93e0e78c5f776bfeb",
+      "codes": []
+    },
+    {
+      "id": "close",
+      "chapter": "Aspire makes AI more efficient.",
+      "purpose": null,
+      "appendix": null,
+      "links": [
+        "https://github.com/IEvangelist/inside-aspire",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/DOCS-LOOP.md"
+      ],
+      "images": [
+        {
+          "src": "/inside-aspire/github/invertocat-black.svg",
+          "alt": "",
+          "width": "28",
+          "height": "28"
+        },
+        {
+          "src": "/inside-aspire/github/invertocat-white.svg",
+          "alt": "",
+          "width": "28",
+          "height": "28"
+        }
+      ],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "dfa77e9e3aefd5ef57c442f706c6ba44033e00a682d602b4d37fc8e81c566868",
+      "notesSha256": "9d9f36e28d9d7836935a23051b6ad15cdbf84bad7ac99ec462ca933adfa12da5",
+      "codes": []
+    },
+    {
+      "id": "history",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "links": [
+        "https://davidpine.dev/posts/aspire-docs-mcp-tools/",
+        "https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation",
+        "https://github.com/microsoft/aspire/pull/14028"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [
+        {
+          "className": "contrast",
+          "children": 2
+        }
+      ],
+      "textSha256": "e12fb7975682d477603ac1bc0da0fa8b99f9ec7559bfe296c40bf13336dc32c7",
+      "notesSha256": "140b3ca56c5fa8b4c8cf989dfa1bb435026c3e9359016b1e6994556bda8ab0c8",
+      "codes": []
+    },
+    {
+      "id": "historical-evidence",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "links": [
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "f0782c5133bbfe23388ef76c2de35f0dd8b0d17aa1cc0fdffc11b76d17029834",
+      "notesSha256": "01eb7dc8c5ca38b8c4a1639db4e102211bd26c62f2efa6ffdb588fe9654fbb21",
+      "codes": []
+    },
+    {
+      "id": "sources",
+      "chapter": "Optional appendix",
+      "purpose": null,
+      "appendix": "true",
+      "links": [
+        "https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/",
+        "https://davidpine.dev/posts/aspire-docs-mcp-tools/",
+        "https://github.com/microsoft/aspire/pull/16531",
+        "https://github.com/microsoft/aspire.dev/pull/775",
+        "https://aspire.dev/llms-full.txt",
+        "https://aspire.dev/dashboard/overview/",
+        "https://aspire.dev/deployment/docker-compose/",
+        "https://github.com/microsoft/aspire/pull/14028",
+        "https://github.com/microsoft/aspire/releases",
+        "https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node",
+        "https://aka.ms/aspire/brand",
+        "https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/NOTICE.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/SOURCES.md",
+        "https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md"
+      ],
+      "images": [],
+      "steps": [],
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "2f806cb2469b9f8aadb261a7edfa8650d029e034cfde05388c39bcbfa5a76578",
+      "notesSha256": "6ca5a03aba6419b1495886d033e0bfa2bdb1c646e26b2d86ee2bfa2549afa21f",
+      "codes": []
+    }
+  ],
+  "protectedChanges": [
+    {
+      "path": "deck/src/diagrams.ts",
+      "historicalGitBlob": "b5b9aae1ea4f709848e4cb465905acfb0e812afa",
+      "currentGitBlob": "17ddde428c8555c6b8196162eed7fc3c7f3584b9"
+    },
+    {
+      "path": "demo/host/apphost.cs",
+      "historicalGitBlob": "3b6815e14ada912dcb05f641b6035e938dc4a300",
+      "currentGitBlob": "38a01eaf6a3c90304ba3e9420f980e0f62bd8b33"
+    },
+    {
+      "path": "scripts/Install-Aspire.ps1",
+      "historicalGitBlob": "824ed4bcd6607231b8873120fd15f298b93ea9a0",
+      "currentGitBlob": "f0a42c638a7c239f36c052cd84f58e528d67c4bc"
+    },
+    {
+      "path": "scripts/Start-Demo.ps1",
+      "historicalGitBlob": "34a24ec874b419b03b5d1fb72638831a3e9ed1ba",
+      "currentGitBlob": "d376477a8539b648818a38c4d09c069e51c8ea24"
+    },
+    {
+      "path": "scripts/Test-Native.ps1",
+      "historicalGitBlob": "73685a40f75cd532ae545e246e5916070b0375d4",
+      "currentGitBlob": "375f219d0ea2011edfa1d9847730922cea8004be"
+    }
+  ]
+}

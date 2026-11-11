@@ -6,17 +6,25 @@ Wisconsin .NET UG, November 17, 2026 at 6pm Central. All 60 minutes are presenta
 
 Use the prepared app and actual repository in VS Code for the application demo, and a real terminal for CLI decisions and results. The audience deck explains architecture rather than narrating compilation or test checks. Keep the app healthy; inspect the existing PR/run without production dispatch or a failure/repair scenario.
 
-The user-directed story has exactly three primary areas, repeated verbatim on the opening roadmap, chapter entries, and close:
+The opening starts with the older Aspire assistants learned, then introduces three questions the talk will answer:
 
 | Main point | Why first | Concrete proof, then supporting machinery |
 | --- | --- | --- |
-| **AI loops** | A confident answer isn't evidence. | Internal product/docs proposal -> maintainer review/release publication, feeding the skill-guided developer loop through current docs, versioned API references, exact CLI operations and observed results |
-| **Aspire dashboard** | A running process isn't the whole story. | Official integrated resource-page imagery, independent CLI/container references, then the resource-service versus instrumented OTLP boundary |
-| **Aspire deployment** | Application intent should outlive your laptop. | Explicitly labeled Compose model/API pattern and separate publish/deploy references, then target/configuration/permission/verification boundaries |
+| **AI loops** | Propose browser logging without guessing the API. | Invoke `aspireify`, retrieve the guide and exact member, read Markdown, inspect a proposal without applying it. Return after `api-member`. |
+| **Aspire dashboard** | Explain one Madison forecast request. | Select Madison in the healthy app, find that API trace and both providers, filter its logs, select the weather counter. Return at `dashboard-signals`. |
+| **Aspire deployment** | Run the same app without the development AppHost. | Inspect publish-only packaging, publish the real YAML, deploy local Compose and request Madison again. Return at `deployment-boundaries`. |
 
-The 41-slide deck has 38 timed main slides and three untimed appendices.
-Opening/roadmap use 0:00-0:04; AI loops 0:04-0:36; dashboard 0:36-0:46;
-deployment 0:46-0:58; close 0:58-1:00. NativeAOT, C#, Roslyn, DCP and
+Open each chapter with its definition and visual model. The AI opener
+shows three feedback-loop examples: product development, feature-driven
+documentation updates, and application development/debugging with Aspire.
+The dashboard joins resource state with
+request traces, correlated logs and aggregate metrics. Deployment uses
+one application model for local processes and a target's deployment
+pipeline. The practical tasks in the table follow those definitions.
+
+The 43-slide deck has 40 timed main slides and three untimed appendices.
+Opening/setup/roadmap use 0:00-0:05; AI loops 0:05-0:37; dashboard 0:37-0:46;
+deployment 0:46-0:58; takeaways 0:58-0:59; close 0:59-1:00. NativeAOT, C#, Roslyn, DCP and
 gh-aw support these areas, not extra chapters. The former benefit phrases
 remain supporting ideas. History/MCP, historical metrics and sources follow
 the close only when relevant.
@@ -28,66 +36,124 @@ stdout in one bounded output-only scroller; the following Next proceeds to the n
 Back restores/collapses correctly. Use the [capture proof](CLI-REPLAY.md) and
 [public-safe fixtures](evidence/cli-replay.json); the animation is not a latency
 benchmark. Reading, print, and reduced motion show recorded commands/results
-immediately. Six JSON commands keep their complete JSON envelopes and escaped
-Markdown content; wait remains plaintext. There is no visible replay status
-row. Reading/print expand all output naturally. Live terminal execution below
-remains a separate option.
+immediately. The deck has nine recorded surfaces: four JSON discovery/runtime
+responses, two default-output responses, wait and two genuine Compose runs.
+The original seven 13.6.1 capture files remain unchanged. The displayed guide
+and member now use November 6 default-output captures; the November 5
+publish/deploy recordings are retained. There is no
+visible replay status row. [New capture and cleanup proof](evidence/chapter-demos.json)
+is separate from the historical inventory.
 
-The five long responses (`live-cli`, `docs-section`, `api-member`,
-`runtime-state`, `runtime-traces`) use opt-in terminal focus: revealing output
-reclaims the title and marked provenance space for a taller, viewport-safe
+Audience slides do not display the verification footers. Each affected
+slide's speaker notes has a **Sources and recording details** section with
+the original links, dates, versions and context. The sources appendix and
+repository retain the complete evidence. The short Recorded CLI run label
+stays visible on every recorded terminal.
+
+The seven long responses (`live-cli`, `docs-section`, `api-member`,
+`runtime-state`, `runtime-traces`, `deployment-publish`, `deployment-deploy`) use opt-in terminal focus: revealing output
+reclaims the title and marked supporting-copy space for a taller, viewport-safe
 terminal. Header, command, and Copy stay available; only the output scrolls.
-Back restores title, footer links, and original geometry. Native Notes mirrors
-the fragment; reading, print, and no-JavaScript retain all provenance. See
+Back restores the title, supporting copy and original geometry. Native Notes
+mirrors the fragment; source details remain in notes and the appendix. See
 [the exact authoring attribute and static-mode contract](CLI-REPLAY.md#authoring-terminal-focus).
 
 ## Pre-talk preparation only
 
 Use PowerShell 7, a released .NET 10 SDK, and Node 22.12+ (or 20.19+) on Windows/Linux x64. Windows needs existing Visual Studio C++ x64 tools and a Windows SDK. Linux needs clang and zlib development headers. The publish script checks these and does not install global tools.
 
+### Public CLI 13.6.4
+
+The AppHost uses the public 13.6.4 CLI/SDK/integrations; its package graph
+includes patched MessagePack 2.5.307. No audit or warning policy is suppressed.
+Old recordings and official skill trees retain their original 13.6.1 provenance.
+
+Install the checksum-pinned CLI side-by-side with the historical 13.6.1 CLI:
+
 ```powershell
-$aspire = & .\scripts\Install-Aspire.ps1
+$aspire = & .\scripts\Install-Aspire.ps1 -Version '13.6.4'
+& $aspire --version
 $env:PATH = (Split-Path $aspire) + [IO.Path]::PathSeparator + $env:PATH
+$env:ASPIRE_HOME = Join-Path $PWD '.artifacts\chapter-demos\aspire-home-13.6.4'
 $apphost = Join-Path $PWD 'demo\host\apphost.cs'
 pwsh -NoProfile -File .\scripts\Publish-Native.ps1
-pwsh -NoProfile -File .\scripts\Test-Native.ps1
 pwsh -NoProfile -File .\scripts\Verify-Skills.ps1
-pwsh -NoProfile -File .\scripts\Test-DocsLoop.ps1
 ```
 
-The installer verifies a pinned public release archive digest in gitignored `.tools`. It never replaces the presenter's global CLI. Publishing compiles the React bundle, native API, and native provider fixture into `demo/.artifacts/native/<rid>`. A missing artifact produces an explicit prep error; there is no managed API fallback.
+The side-by-side archive is checksum-verified in gitignored `.tools`; it never
+replaces the global CLI or writes agent profile hooks. `Publish-Native.ps1`
+compiles React, the native API and the native fixture into
+`demo/.artifacts/native/<rid>`. A missing development artifact still fails.
+Publish mode instead compiles the Linux native image from source; neither path
+falls back to a managed API.
 
-The PATH change above belongs only to this terminal process, so bare `aspire` resolves the prepared public 13.6.1 executable instead of any global prerelease. Confirm `aspire --version` before screen sharing. Preparation scripts are optional automation before the talk; no `.ps1` entry point is required on stage. The unchanged docs test retains its historical timeout regression, not the new audience feature story.
+PATH and `ASPIRE_HOME` above belong only to this terminal. Confirm public
+13.6.4 before screen sharing. No `.ps1` entry point is required on stage.
+The docs test retains its historical timeout regression and original
+13.6.1 gate; it is not the new audience feature story.
 
 Native compilation is preparation, not AppHost lifecycle. The Windows script runs `vcvars64.bat` and the compiler in the same process. Keep the publish step off the presentation clock.
 
 All raw captures, telemetry, downloaded gh-aw usage, browser screenshots, and private configuration stay gitignored. Do not commit them or expose dashboard login tokens on public slides.
 
-## AI loops: reviewed publication feeds direct evidence (0:04-0:36)
+## AI loops: read the answer, then follow the page (0:05-0:37)
 
-Follow the real browser feature through product/docs PRs, maintainer refinement,
-the outer loop and safe-output policy. Then replay these genuine captured
-commands before the compiler graph/parser excerpts. Live terminal execution
-remains a separate option:
+**Task:** propose browser logging for the healthy weather frontend, without
+changing it. **Entry:** `ai-loops`, then meet the app at `weather` (0:07-0:08)
+before the browser-logs question at `browser-evidence` (0:08-0:09). In Copilot, ask:
+
+> Use the shipped aspireify skill to propose browser logging for this Vite
+> frontend. Read current docs and the exact C# API. Do not edit files or install
+> packages. Call out the package and the experimental diagnostic.
+
+Warm the exact public member scope in preparation, not by an unscoped cold
+member crawl:
+
+```powershell
+aspire docs api list csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods --format Json --non-interactive
+```
+
+Then show the commands. Search stays JSON for machine-readable slugs/IDs;
+get returns the Markdown content by default, rendered for reading:
 
 ```powershell
 aspire docs search "Configure tracked browser" --format Json --non-interactive
-aspire docs get browser-logs --section "Configure browser logs" --format Json --non-interactive
+aspire docs get browser-logs --section "Configure browser logs" --non-interactive
 aspire docs api search WithBrowserLogs --language csharp --format Json --non-interactive
-aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --format Json --non-interactive
+aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs" --non-interactive
 ```
+
+Use the plain get commands in the demo. Their default output is the Markdown
+content, ready for an assistant to read; add `--format Json` for the structured
+record with the same content. In these redirected captures the CLI renders
+the Markdown as text. The November 6 recordings contain the complete output,
+including the initial Loading message. Original JSON captures are unchanged.
+
+**Visible result:** a reviewable proposal to add `Aspire.Hosting.Browsers` and
+`WithBrowserLogs()` on the frontend, with `ASPIREBROWSERLOGS001` explicitly
+acknowledged. Do not install/apply it in this demo. **Exit:** return after
+`api-member`; `api-code` explains its address, then follow the guide back to
+the product/docs PR and human refinement. The takeaway is checked API facts,
+not automatic permission to change the app.
 
 If you want to inspect the catalog and available section names, use `aspire docs list --format Json --non-interactive` and `aspire docs get browser-logs --format Json --non-interactive`. The verified search returns `browser-logs`, but its best section can be `Add browser logs to a resource`; do not assume that is the requested configuration section.
 
 Show the actual returned content: runtime configuration, browser/profile/user-data options, optional persistence, interaction-service requirement, and immediate apply. Then point to the exact C# member ID and signature. Only API search accepts `--language`; get follows the current returned ID. A zero exit, empty result, or name-only hit is not the payoff.
 
-The four recorded surfaces are `live-cli` (0:16-0:17), `docs-section`
-(0:17-0:18), `api-search` (0:18-0:19), and `api-member` (0:19-0:20). Each
+The four recorded surfaces are `live-cli` (0:09-0:10), `docs-section`
+(0:10-0:11), `api-search` (0:11-0:12), and `api-member` (0:12-0:13). Each
 initially shows only its command. A single Next runs the bounded replay cue and
 expansion; no typing loop or automatic command progression occurs. Complete
 public stdout/stderr is linked, and excerpts are labeled honestly.
 
-The `#/api-code` JSON is explicitly selected fields from a recorded public CLI response, not a new live capture. Its renderer excerpt supports the identity just shown. Explain the DLL/XML/available-PDB -> Roslyn -> reference Markdown/API-index machinery afterward at `#/api-index`. Then switch explicitly to narrative docs at `#/index`, `#/parser`, and `#/lexical`: `llms-full.txt`, ETag/fingerprint reuse, fence-aware boundaries, and the narrative index's own lexical weights. Do not attribute those weights to the separate API catalog.
+The `#/api-code` JSON selects fields from the unchanged earlier JSON recording,
+not from the displayed default-output response. Its language, package, type
+and member-kind parts are the same path segments as the member's page at
+`aspire.dev/reference/api/csharp/...`. Follow with
+`evidence` -> `writer` -> `docs-supply` -> `workflow` -> `stay-current`.
+Explain the DLL/XML/available-PDB -> Roslyn -> reference Markdown/API-index
+machinery later at `#/api-index`. Narrative `llms-full.txt` parsing and lexical
+weights at `index`/`parser`/`lexical` belong to a separate index.
 
 ## AI loops: healthy app and exact operations
 
@@ -114,19 +180,24 @@ aspire wait frontend --apphost $apphost --status healthy --timeout 120 --non-int
 aspire describe --apphost $apphost --format Json --non-interactive
 ```
 
-Then use the exact `wait`, `describe`, and `otel` commands here to show readiness, returned endpoints, and actual traces/logs. `Start-Demo.ps1` remains an optional preparation convenience; do not run it as well as direct start for the same AppHost. The `#/live-cli` slide contains real CLI commands to copy, not a wrapper or simulated terminal.
+Use the direct commands above, not the older 13.6.1-gated `Start-Demo.ps1`.
+In current discovery JSON, match a resource's stable `displayName` and read
+its `urls` array; its runtime `name` can have a generated suffix. Use those
+returned URLs, not a fixed port. `#/live-cli` remains a genuine recorded
+command, not a browser shell.
 
 The weather demo and dedicated native command/result replays are the proof,
 before the process graph and wiring. At `#/skills-vs-tools`, define skill
 guidance versus CLI execution before listing names at `#/skills`; do not put
-an enormous animated terminal in that half-width definition. The actual
+an enormous animated terminal in that half-width definition. The earlier
 wait/describe/trace capture uses `demo\host\apphost.cs` and the public 13.6.1
-contracts. Then explain the native CLI/API, managed AppHost/dashboard, DCP,
+contracts. Then explain the native CLI/dashboard/API, managed AppHost, DCP,
 explicit resource wiring, and main inner loop at `#/the-loop`.
 
-Keep the weather image unchanged and uncluttered. Follow it with dedicated
-`runtime-wait` (0:22-0:23), `runtime-state` (0:23-0:24), and `runtime-traces`
-(0:24-0:25) replay surfaces, before the skill/tool definition. Their results
+At 0:22-0:23, `act-precisely` returns to the app introduced at 0:07-0:08.
+Then show `runtime-wait` (0:23-0:24),
+`runtime-state` (0:24-0:25), and `runtime-traces` (0:25-0:26)
+before the skill/tool definition. Their results
 come from the actual prepared native artifact and owned isolated AppHost, not
 fixture provider output or a managed API. The capture reused the native binary
 and stopped the exact AppHost afterward. The API was already healthy when wait
@@ -165,10 +236,11 @@ Show the actual native process, a weather/provider trace, a correlated log, and 
 
 ## AI loops: internal product/docs publication
 
-After the primary why at `#/ai-loops`, show the browser feature's value at
-`#/browser-evidence` and how the current guide becomes available to the next
-CLI decision. Later retrieve that actual guide and exact API member. This is
-the internal docs loop feeding the developer inner loop, not model training.
+After `#/ai-loops`, meet the app at `#/weather`, then introduce the browser
+feature at `#/browser-evidence` and retrieve its guide and exact API member.
+At 0:14, follow the page back through
+`#/evidence` and `#/writer`, then show the docs loop at `#/docs-supply`.
+This is the internal docs loop feeding the developer inner loop, not model training.
 [Public-safe provenance and exact commands](evidence/browser-logs.json) remain
 separate from gitignored raw captures.
 
@@ -193,77 +265,165 @@ produces `Package.{version}.json`; [Astro corpus configuration](https://github.c
 excludes `reference/api/**` from the narrative corpus. Current CLI captures
 use published context, not a proven automatic matching-semver selection.
 
-## Aspire dashboard: integrated and independent (0:36-0:46)
+## Aspire dashboard: integrated and independent (0:37-0:46)
 
-Start with why state and actual request behavior are different questions.
-Use the unchanged official light/dark resource-page screenshots, clearly
-attributed to the documentation rather than the weather run. An AppHost starts
-the integrated dashboard and connects its resource service for state, health,
-console, configuration and lifecycle. Code still needs instrumentation and OTLP
-export for structured logs/traces/metrics.
+**Task:** explain the Madison forecast that just loaded. **Entry:** `dashboard`.
+The development AppHost must already be healthy from preparation; do not build
+or start it on this chapter's clock.
 
-The next slide shows two **documented references, not executed commands**:
-`aspire dashboard run --non-interactive` and the official
-`mcr.microsoft.com/dotnet/aspire-dashboard:latest` image. The CLI is foreground/
-blocking. Container UI/OTLP ports are 18888/18889/18890, mapped to loopback
-host 18888/4317/4318; CLI defaults are 18888/4317/4318. The documented mutable
-tag is not a pinned-release claim. Keep browser authentication; never display
-login tokens or enable anonymous access on public interfaces.
+1. In the actual app, search Madison and select the Wisconsin result. Keep its
+   request time in view. This is live provider data, not a fixture or the deck's
+   older weather screenshot.
+2. In the integrated dashboard, check `api`/`frontend` health and open the latest
+   `GET /api/weather` trace. Show the API server span, `weather.forecast`, and the
+   parallel Open-Meteo/BigDataCloud calls. The browser has no OTel instrumentation;
+   the trace starts at the API, not at a fictitious browser span.
+3. Filter structured logs by that trace ID. In Metrics select
+   `Weather.Native` -> `weather.requests`; choose **Last 1 hour** if an older
+   request has aged out. Show the real operation/outcome values, not a latency
+   or memory claim.
 
-Standalone receives any instrumented OTLP emitter without an AppHost. It does
-not automatically gain process health, console capture, lifecycle or terminals
-without a resource-service connection. Optional persistence does not make it
-unlimited production telemetry retention. Local CLI backchannels are not remote
-dashboard orchestration. No new dashboard/native runtime is needed to tell this
-source-backed story.
+The assistant can read the same evidence with exact-target `aspire otel traces`
+and `aspire otel logs`. The 13.6.4 rehearsal used the original Windows native
+artifact and real providers, verified native/Vite React maps and Scalar, and
+stopped that exact AppHost afterward. **Visible result:** one request linked
+to its provider calls, logs and meter data. **Exit:** return at
+`dashboard-signals`; no failure injection or repair story.
+
+The unchanged light/dark Resources screenshots remain clearly attributed
+official imagery, not the new weather run. AppHost resource-service state,
+health, console and commands are separate from instrumented OTLP signals.
+
+At `dashboard-standalone`, the CLI and `:latest` Docker commands remain
+**alternative reference commands**, not direct recordings. The deployment
+demo instead runs the canonical image pinned to `13.6.2`, with a recorded
+digest. Not every CLI patch publishes a dashboard image. Keep browser token
+authentication; never put the login URL in a public capture.
+
+Standalone receives OTLP without an AppHost, but does not automatically gain
+resource lifecycle, health or console capture. Our Compose target publishes
+only random loopback UI ports; unauthenticated OTLP ingestion stays inside
+its private Compose network. The dashboard's unsecured-ingestion warning is
+not permission to expose it publicly. This is short-term diagnostics, not
+unlimited production retention or remote AppHost orchestration.
 
 ## Aspire deployment: model, publish, deploy (0:46-0:58)
 
-Explain why application relationships should survive a move beyond development.
-Docker Compose is an **explicitly labeled documented example**, not a target
-chosen by the user or configured in this weather AppHost. The `Aspire.Hosting.Docker`
-integration adds `AddDockerComposeEnvironment("env")`; `WithDashboard()` is an
-explicit Compose opt-in. A real model still needs deployable application
-resources. No package, AppHost, script or graph is changed for these slides.
+**Task:** run the same weather app without the development AppHost.
+**Entry:** `deployment`. David selected real **local Docker Compose**; no cloud
+resources or production automation are involved. Invoke `aspire-deployment`.
 
-Reference syntax uses placeholder AppHost/environment values. `aspire publish`
-generates target artifacts; the documented Compose shape is
-`docker-compose.yaml`/`.env`, without building images or applying deployment.
-`aspire deploy` evaluates the configured target pipeline from the current
-AppHost model, not an old output directory, and deploys declared resources
-rather than the AppHost process. Compose resolves parameters, builds images,
-and runs Compose up. No fake generated output or new replay is shown.
+The current `demo\host\apphost.cs` pins SDK/JavaScript/Docker to 13.6.4 and adds
+`AddDockerComposeEnvironment("talk-compose")`. The dashboard uses the existing
+public `mcr.microsoft.com/aspire/dashboard:13.6.2` tag, not a nonexistent 13.6.4
+image. Its exact recorded digest is in [the new provenance](evidence/chapter-demos.json).
 
-Appropriate integrations, providers, authentication, parameters, secrets and
-verification vary by target. `aspire-deployment` guides that workflow; it is
-not permission to provision billable infrastructure. The actual NativeAOT
-weather development graph has not been deployed. [Verified sources and image
-hashes](evidence/dashboard-deployment.json) record these reference boundaries.
+Show the publish-only changes before switching to the terminal:
+
+- `PublishAsDockerFile` is a no-op in run mode. Its callback selects the
+  Dockerfile, removes the development `PORT` injection and adds a standard
+  Kestrel endpoint on the container interface. `Weather.Api\Program.cs` keeps
+  its original localhost default; no service code changed.
+- `demo\host\Dockerfile` builds React, then compiles the API as Linux NativeAOT
+  using the official AOT SDK image. Only the native executable and production
+  static files enter the runtime-deps image; Node/Vite are not production
+  processes. `demo\.dockerignore` keeps native/local/private artifacts out of
+  the build context.
+- Vite is excluded from publication, not from development. The generated
+  services are `api` and `talk-compose-dashboard`, with random loopback-only
+  host ports. OTLP wiring and public provider URLs come from the AppHost.
+
+Prepare the first image build **offstage**. A warm deployment may reuse it;
+neither the recording's timings nor replay animation is a benchmark. Inspect
+the real pipeline before applying:
+
+```powershell
+aspire deploy --apphost $apphost --environment Talk --list-steps --non-interactive
+aspire publish --apphost $apphost --environment Talk `
+    --output-path .artifacts\chapter-demos\compose --non-interactive
+```
+
+At `deployment-publish`, open the generated `docker-compose.yaml` and `.env`.
+`API_IMAGE` is a placeholder. Publish neither builds images nor starts services.
+Do not expose a resolved `.env.Talk` or dashboard login token.
+
+Before the standalone check, stop only the development AppHost:
+
+```powershell
+aspire stop --apphost $apphost --non-interactive
+aspire deploy --apphost $apphost --environment Talk `
+    --output-path .artifacts\chapter-demos\compose --non-interactive
+```
+
+Deploy evaluates the **current model**, not a previously published output
+directory. It builds the image, resolves values and runs Compose up; it does
+not deploy the AppHost process. Use the actual project name from deployment
+output/container labels. This recorded checkout used
+`aspire-talk-compose-5ea99390`; another checkout can have a different hash.
+Discover ports rather than copying the rehearsal's temporary ports:
+
+```powershell
+$compose = Join-Path $PWD '.artifacts\chapter-demos\compose\docker-compose.yaml'
+$environment = Join-Path $PWD '.artifacts\chapter-demos\compose\.env.Talk'
+# $projectName must be the exact project discovered for this deployment.
+docker compose --file $compose --env-file $environment --project-name $projectName port api 8080
+docker compose --file $compose --env-file $environment --project-name $projectName port talk-compose-dashboard 18888
+```
+
+At `deployment-deploy`, open the discovered API URL, search Madison, and check
+the request in the deployed dashboard. **Visible result:** the same app runs
+with its development AppHost stopped. The real rehearsal also verified ELF64,
+no managed `Weather.Api.dll`, NativeAOT true/reflection false, rendered
+React/map/Scalar, provider spans, correlated logs and received weather metrics.
+**Exit:** return at `deployment-boundaries`; then explain target, permission and
+verification.
+
+The two new recorded surfaces contain complete genuine publish/deploy stdout,
+with complete stderr linked, rather than a fabricated Compose example.
+The [historical reference/image inventory](evidence/dashboard-deployment.json)
+is unchanged and remains historical.
+
+### Exact rehearsal teardown
+
+```powershell
+aspire destroy --apphost $apphost --environment Talk `
+    --output-path .artifacts\chapter-demos\compose --yes --non-interactive
+```
+
+This executes Compose down for the exact target. Remove only images and cache
+that this rehearsal created; never run global prune or delete another
+project's resources. The recorded run used an isolated buildx builder without
+changing the default builder, then removed that builder/state and the proven
+native image tags. The final comparison matched the original **0 containers,
+2 images, 13 volumes and 3 default networks**. The deck preview on 4180 was
+never stopped or restarted.
 
 ## Deck and pacing
 
-Open [the published deck](https://ievangelist.github.io/inside-aspire/). **Start presentation** advances to slide 2, `#/thesis`, without skipping the three-area roadmap. Core entries are `#/ai-loops`, `#/dashboard`, and `#/deployment`. Direct demos remain available; legacy `#/know-truth` resolves to `#/ai-loops`, while `#/act-precisely` and `#/stay-current` remain supporting AI-loop surfaces.
+Open the [published deck](https://ievangelist.github.io/inside-aspire/) or preview it locally at `http://127.0.0.1:4180/inside-aspire/?mode=present`. **Start presentation** advances to slide 2, `#/setup`, then slide 3, `#/thesis`, introduces the three questions. Core entries are `#/ai-loops`, `#/dashboard`, and `#/deployment`. Direct demos remain available; legacy `#/know-truth` resolves to `#/ai-loops`, while `#/act-precisely` and `#/stay-current` remain supporting AI-loop surfaces.
 
 The CLI remains the main inner-loop enabler: current docs/API/state -> precise actions -> runtime evidence -> next grounded decision. The richer browser-configuration PR story supplies context at `#/docs-supply`; it does not turn docs automation into the whole AI loop. The title, exact approved abstract, event, and native facts are unchanged.
 
 | Time | Segment and exact slide order |
 | --- | --- |
-| 0:00-0:04 | `intro` -> `thesis`: speaker and user-selected three-area roadmap |
-| 0:04-0:11 | `ai-loops` -> `browser-evidence` -> `evidence` -> `writer`: why, feature, real PR/run/guide and human refinement |
-| 0:11-0:15 | `docs-supply` -> `workflow` -> `stay-current`: outer loop/policy and current narrative versus versioned API bridge |
-| 0:15-0:21 | `weather` -> `live-cli` -> `docs-section` -> `api-search` -> `api-member` -> `api-code`: healthy context and full recorded retrieval |
-| 0:21-0:25 | `act-precisely` -> `runtime-wait` -> `runtime-state` -> `runtime-traces`: exact scope and real native observations |
-| 0:25-0:32 | `skills-vs-tools` -> `skills` -> `api-index` -> `index` -> `parser` -> `lexical`: definitions and distinct reference/narrative machinery |
-| 0:32-0:36 | `compiler` -> `lifecycle` -> `the-loop`: native/managed model, explicit wiring and complete developer cycle |
-| 0:36-0:46 | `dashboard` -> `dashboard-integrated` -> `dashboard-standalone` -> `dashboard-signals`: why, actual official UI, startup references and telemetry boundary |
+| 0:00-0:05 | `intro` -> `setup` -> `thesis`: speaker (one minute), the older Aspire assistants learned (three minutes), then the three questions (one minute) |
+| 0:05-0:09 | `ai-loops` -> `weather` -> `browser-evidence`: give the assistant a task, meet the app, ask for browser logs |
+| 0:09-0:14 | `live-cli` -> `docs-section` -> `api-search` -> `api-member` -> `api-code`: read the guide and exact member |
+| 0:14-0:18 | `evidence` -> `writer`: follow the page to its feature PR, docs draft and human refinement |
+| 0:18-0:22 | `docs-supply` -> `workflow` -> `stay-current`: review/release, allowed writes and current docs |
+| 0:22-0:26 | `act-precisely` -> `runtime-wait` -> `runtime-state` -> `runtime-traces`: return to the app, wait, inspect resources, read the trace |
+| 0:26-0:33 | `skills-vs-tools` -> `skills` -> `api-index` -> `index` -> `parser` -> `lexical`: instructions, tools and separate API/narrative machinery |
+| 0:33-0:37 | `compiler` -> `lifecycle` -> `the-loop`: native/managed processes, executable wiring and the developer loop |
+| 0:37-0:46 | `dashboard` -> `dashboard-integrated` -> `dashboard-standalone` -> `dashboard-signals`: what happened, integrated resources, standalone startup, telemetry |
 | 0:46-0:58 | `deployment` -> `deployment-model` -> `deployment-publish` -> `deployment-deploy` -> `deployment-boundaries`: why, documented pipeline and explicit guardrails |
-| 0:58-1:00 | `close`: AI loops. Aspire dashboard. Aspire deployment. |
+| 0:58-0:59 | `takeaways`: Aspire makes AI more efficient; improves the dev inner loop; carries one app model into deployment |
+| 0:59-1:00 | `close`: try the commands and get the code |
 
-The speaker notes have contiguous, nonoverlapping ranges covering exactly 60 minutes. Stop at the main close. The 41-slide deck has 38 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
+The speaker notes have 40 contiguous, nonoverlapping ranges covering exactly 60 minutes. Each is a spoken talk track, with separate CUE, BRIDGE and IF ASKED paragraphs where needed. David's bracketed 20-second example on `setup` remains for him to fill in. Stop at the main close. The 43-slide deck has 40 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
 
-The shell's manual [template 719 UX sync](evidence/template-ux.json) does not change
-that content or timing. Existing line-highlight fragments, all ten paired
-layouts, seven recorded replays and endpoint-gated graphs remain. New window
+The shell's manual [template 719 UX sync](evidence/template-ux.json) is unchanged;
+the current story changes the opening, order and talk track. Existing line-highlight fragments, the remaining paired
+layouts, recorded replays and endpoint-gated graphs remain. New window
 copy controls copy exact source/command/full stdout. The menu heading and
 presenter tools remain fixed while navigation alone scrolls. Reading uses its
 own inner viewport; it should remain aligned after more than 1.2 seconds, not
@@ -273,7 +433,14 @@ JSON is not clipped or squeezed into a projector-sized page.
 
 The 56px bar uses the unchanged compact Aspire mark and a single prioritized advance group. The menu leads with exactly the user's three primary areas; smaller direct demo/appendix jumps remain separate. The chapter indicator follows the active area through supporting slides. Arrow keys advance slides and graph/code steps; `Esc` closes an open menu and restores focus, or opens overview outside it. `R` changes reading mode, `T` changes theme, and `S` opens public-safe notes. Focus a scrollable code region to use its arrow-key scrolling without advancing slides.
 
-Slide disclosures, including the optional C# AppHost/Go references on `history`,
+Dotted term links provide short native hover descriptions and open Aspire
+documentation in a new tab. AppHost, resource, and OTLP links sit in prose,
+not inside copyable code or captured output. The DCP node links to the
+architecture guide in both the SVG and narrow reading graph; its tooltip
+spells out Developer Control Plane. Links remain keyboard-focusable and
+leave the presentation's slide and fragment state unchanged.
+
+Slide disclosures, including the optional C# AppHost/Go service example on `history`,
 open in one native modal during presentation. Activate the summary by pointer,
 Enter, or Space; the slide stays closed and its URL, mode, stage and scroll
 position do not change. Only the modal content scrolls. Close or Escape returns
@@ -292,7 +459,7 @@ and shadow. Configure the existing output in `deck/index.html`:
 
 ```html
 <output id="slide-position" data-position="bottom-left" data-visible="true"
-  aria-label="Slide 1 of 41" aria-live="polite" aria-atomic="true">1 / 41</output>
+  aria-label="Slide 1 of 43" aria-live="polite" aria-atomic="true">1 / 43</output>
 ```
 
 `data-position` accepts exactly `top-left`, `top-right`, `bottom-left`, or
@@ -317,7 +484,7 @@ presentation layout, even though they are narrow. A blocked popup reports an
 actionable error instead of claiming success.
 
 Speaker notes are public source, not confidential presenter-only storage. The
-38 original main-slide note ranges still cover exactly 60 minutes; optional
+39 draft main-slide note ranges cover exactly 60 minutes; optional
 language references do not extend the timed talk.
 
 After walking a code block forward and leaving its slide, **Previous** and
@@ -339,28 +506,40 @@ preview state reloadable; the template's base-specific workaround is not copied.
 
 Source windows opt into the template's package-ownership convention with
 `data-pkg-cyan="Aspire.Hosting.JavaScript"`,
-`data-add-cyan="javascript"`, `data-apis-cyan="AddViteApp WithNpm"` and
-`data-lines-cyan="7-12"` on their `pre`. Valid accents are purple/cyan/pink/teal.
+`data-add-cyan="javascript"` and `data-apis-cyan="AddViteApp WithNpm"`
+on their `pre`. Valid accents are purple/cyan/pink/teal.
 At least one package/add label and exact APIs are required. Without line ranges,
 only lines with an owned API get a rail. Do not overlap ranges or assign one
 API to multiple packages. Unknown/missing/non-code mappings fail visibly.
 Strings/comments and common endpoint/reference/environment/build operations
 remain neutral; legends and rails never enter copied source.
 
-The original native executable/Vite excerpt remains exact. Cyan identifies
-JavaScript APIs; purple identifies the documented Docker environment; teal
+The legend separates **Package** from **CLI command**; the command is a
+code-styled instruction, not a package subtitle. Omit `data-add-*` when a
+neighboring panel already shows that command, as on the Docker model slide.
+The lifecycle slide's
+simplified `AddViteApp("frontend", "../frontend")` resolves from the AppHost
+directory, matching the public integration's path-resolution behavior.
+Only `AddViteApp` and `WithNpm` receive cyan rails, now lines 7 and 8.
+The development wiring still has the same behavior; the local AppHost now
+adds publish-only packaging and the approved 13.6.4 update. Cyan identifies
+JavaScript APIs; purple identifies the actual Docker environment; teal
 identifies the optional official `Aspire.Hosting.Go` / `aspire add go` API.
-The old deprecated Toolkit Golang package and unsupported Go AppHost authoring
-are not presented. All focus bands have square interior joins and round only
+AppHost authoring languages and workload languages are separate: an AppHost
+can be authored in C#, TypeScript, or Go and can run workloads in other
+languages. This example uses the C# Go integration to launch a Go HTTP service.
+All focus bands have square interior joins and round only
 the ends of each contiguous group.
 
-In the optional `history` appendix, open **C# AppHost + Go service references**
-to switch to natural reading. It shows an illustrative top-level `AppHost.cs`
-and a separate `main.go` reading `PORT`; module/toolchain setup is identified
-rather than silently implied. Both are reference additions, not runs or changes
-to this weather app. Reading/print show them completely. Their separate notes
-are optional cues, not extra minutes in the timed talk. Existing TypeScript
-AppHost names remain correctly `apphost.mts`.
+In the optional `history` appendix, open **C# AppHost running a Go service**.
+Presentation opens the wider native modal; reading keeps an inline disclosure.
+It shows `AppHost.cs` (the C# orchestration) and `main.go` (the Go HTTP service
+reading `PORT`), not two competing AppHosts. The modal uses up to 1600px of
+safe width and stacks the panels below 1400px viewports. Module/toolchain setup
+is identified. Both are reference additions, not runs or changes to the weather
+app. Reading/print show them completely. Their separate notes are optional
+cues, not extra minutes in the timed talk. TypeScript AppHost names remain
+`apphost.mts`.
 
 ### Social cards
 
@@ -396,8 +575,8 @@ style. For an explicit slide override, author normal Reveal attributes:
 ```
 
 Unknown chapter names, invalid styles/speeds and malformed directional pairs
-fail explicitly with their chapter/slide identity. Ordinary slides retain a
-quiet fade; primary chapter entries use a restrained distinct entrance, and
+fail explicitly with their chapter/slide identity. Ordinary slides move in the
+navigation direction; primary chapter entries use a distinct entrance, and
 the existing weather proof has one explicit in/out override. There is no new
 View Transition API wrapper, navigation runtime or animation dependency.
 
@@ -418,14 +597,14 @@ The blog's 82 PRs/44.8-hour median is explicitly historical May 3-June 2, 2026 d
 
 [Windows/Linux native CI 38025689486](https://github.com/IEvangelist/inside-aspire/actions/runs/38025689486) passed: 50 parity tests, warning-as-error native compilation, Windows 280/Linux 273 native assertions, OpenAPI 3.1.1, rendered Scalar/native/Vite browsers, and actual traces/logs/metrics. The native format and runtime flags prove AOT; they do not establish a startup or memory benchmark.
 
-The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The 41-slide deck retains David's actual portrait, unchanged branding/PR/native images and exact four social links; the new dashboard images are attributed official documentation screenshots. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
+The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The 43-slide draft retains David's actual portrait, unchanged branding/PR/native images and exact four social destinations. The intro presents those links vertically, with left-aligned 44px icon tiles and visible scheme-free URLs; each whole row is a link. The dashboard images are attributed official documentation screenshots. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
 
 The build/native-proof/operational-result slides are removed from the audience deck. Their real source and verified evidence stay in this repository and in pre-talk preparation. Old `#/aot` and `#/native-proof` links resolve to `#/compiler`; `#/commands` resolves to `#/live-cli`.
 
 The weather image displays the entire original 1440x1000 capture at a larger proportional footprint, not in a letterboxed wide box. Reading uses the available width. PR images also use their actual aspect ratio. The former `#/timeout` audience link resolves to the browser-evidence explanation at `#/browser-evidence`.
 
 The browser gate checks actual syntax tokens for six source/JSON languages and
-honest plain-text stdout across 30 command/output/source blocks, rounded inline
+honest plain-text stdout across the draft's 33 command/output/source blocks, rounded inline
 code, graph/code fragments, and static modes. Replay tests verify fixture
 hashes/semantics/privacy, one-command initial state, real expanding geometry,
 matched output, rewind/interruption/hash restoration, exact copy, accessible

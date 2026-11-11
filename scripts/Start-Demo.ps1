@@ -11,14 +11,14 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $cliName = if ($IsWindows) { 'aspire.exe' } else { 'aspire' }
-$cli = Join-Path $root ".tools\aspire\$cliName"
+$cli = Join-Path $root ".tools\aspire-13.6.4\$cliName"
 $apphost = Join-Path $root 'demo\host\apphost.cs'
 if (!(Test-Path $cli)) {
-    throw 'The private public Aspire CLI is missing. Run scripts\Install-Aspire.ps1 first.'
+    throw 'The private public Aspire CLI is missing. Run scripts\Install-Aspire.ps1 -Version 13.6.4 first.'
 }
 $version = (& $cli --version | Out-String).Trim()
-if ($LASTEXITCODE -ne 0 -or $version -notmatch '^13\.6\.1(?:\+.*)?$') {
-    throw 'This demo requires the repository-private public Aspire CLI 13.6.1; the global CLI is never used.'
+if ($LASTEXITCODE -ne 0 -or $version -notmatch '^13\.6\.4(?:\+.*)?$') {
+    throw 'This demo requires the repository-private public Aspire CLI 13.6.4; the global CLI is never used.'
 }
 $fixtureFlag = $UseFixtures.IsPresent.ToString().ToLowerInvariant()
 & $cli start --apphost $apphost --isolated --non-interactive --launch-profile http --format $Format -- `

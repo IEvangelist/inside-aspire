@@ -10,8 +10,18 @@ import go from 'highlight.js/lib/languages/go';
 
 const languages = { csharp, powershell, bash, yaml, json, typescript, plaintext, go };
 for (const [name, definition] of Object.entries(languages)) hljs.registerLanguage(name, definition);
+hljs.registerLanguage('terminal-output', () => ({
+  contains: [
+    { scope: 'comment', match: /^\d{2}:\d{2}:\d{2}/m },
+    { scope: 'title', match: /Steps Summary:|Step timeline:/ },
+    { scope: 'string', match: /✓|[╶╴─]+|\b(?:Pipeline succeeded|Completed successfully|\d+\/\d+ steps succeeded)\b/ },
+    { scope: 'meta', match: /→|\[INF\]/ },
+    { scope: 'number', match: /\b\d+(?:\.\d+)?(?:ms|s|m)\b/ },
+    { scope: 'comment', match: /[│┬]/ },
+  ],
+}));
 
-function lineMarkup(markup: string): DocumentFragment {
+function lineMarkup(markup: string, terminal = false): DocumentFragment {
   const highlighted = document.createElement('div');
   highlighted.innerHTML = markup;
   const result = document.createDocumentFragment();
@@ -37,13 +47,25 @@ function lineMarkup(markup: string): DocumentFragment {
           container.appendChild(clone);
           container = clone;
         }
-        container.appendChild(document.createTextNode(part));
+        for (const text of terminal ? part.split(/(✓)/u) : [part]) {
+          if (terminal && text === '✓') {
+            const cell = document.createElement('span');
+            cell.className = 'terminal-cell';
+            cell.textContent = text;
+            container.appendChild(cell);
+          } else container.appendChild(document.createTextNode(text));
+        }
       });
     } else if (node instanceof Element) {
       for (const child of node.childNodes) visit(child, [...parents, node]);
     }
   }
   for (const child of highlighted.childNodes) visit(child, []);
+  if (terminal) {
+    for (const row of result.querySelectorAll<HTMLElement>('.code-line')) {
+      if (/│|Step timeline:/.test(row.textContent ?? '')) row.classList.add('terminal-row');
+    }
+  }
   return result;
 }
 
@@ -51,14 +73,18 @@ export function highlightCode() {
   for (const code of document.querySelectorAll<HTMLElement>('pre > code')) {
     const language = [...code.classList].find((name) => name.startsWith('language-'))?.slice(9);
     if (!language || !hljs.getLanguage(language)) throw new Error(`Unsupported code language: ${language}`);
+    const pre = code.parentElement;
+    const terminal = pre?.hasAttribute('data-terminal-output') ?? false;
+    if (terminal && (language !== 'plaintext' || !pre?.classList.contains('replay-output'))) {
+      throw new Error('Terminal output styling requires a plaintext replay output.');
+    }
     const source = code.textContent ?? '';
-    const result = hljs.highlight(source, { language, ignoreIllegals: false });
+    const result = hljs.highlight(source, { language: terminal ? 'terminal-output' : language, ignoreIllegals: false });
     if (result.illegal) throw new Error(`Code excerpt is invalid for its explicit language: ${language}`);
-    code.replaceChildren(lineMarkup(result.value));
+    code.replaceChildren(lineMarkup(result.value, terminal));
     code.classList.add('hljs');
     code.dataset.language = language;
     code.dataset.highlighted = 'true';
-    const pre = code.parentElement;
     if (pre) {
       pre.tabIndex = 0;
       pre.setAttribute('role', 'region');

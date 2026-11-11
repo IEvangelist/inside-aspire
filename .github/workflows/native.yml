@@ -58,7 +58,7 @@ jobs:
           fi
       - name: Prepare public isolated CLI
         shell: pwsh
-        run: ./scripts/Install-Aspire.ps1
+        run: ./scripts/Install-Aspire.ps1 -Version '13.6.4'
       - name: Compile the actual native artifacts with warnings as errors
         shell: pwsh
         run: ./scripts/Publish-Native.ps1 -RuntimeIdentifier '${{ matrix.rid }}'

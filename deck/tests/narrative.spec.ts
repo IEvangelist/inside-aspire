@@ -4,26 +4,27 @@ import { expect, test } from '@playwright/test';
 
 const points = ['AI loops', 'Aspire dashboard', 'Aspire deployment'];
 const order = [
-  'intro', 'thesis', 'ai-loops', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow',
-  'stay-current', 'weather', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code', 'act-precisely',
+  'intro', 'setup', 'thesis', 'ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section',
+  'api-search', 'api-member', 'api-code', 'evidence', 'writer', 'docs-supply', 'workflow',
+  'stay-current', 'act-precisely',
   'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'api-index', 'index', 'parser', 'lexical',
   'compiler', 'lifecycle', 'the-loop', 'dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals',
-  'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries', 'close',
+  'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries', 'takeaways', 'close',
   'history', 'historical-evidence', 'sources',
 ];
 const chapters = [
-  { point: points[0], why: "A confident answer isn't evidence.",
-    slides: ['ai-loops', 'browser-evidence', 'evidence', 'writer', 'docs-supply', 'workflow',
-      'stay-current', 'weather', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code',
+  { point: points[0], why: 'AI loops turn results into decisions.',
+    slides: ['ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code',
+      'evidence', 'writer', 'docs-supply', 'workflow', 'stay-current',
       'act-precisely', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills',
       'api-index', 'index', 'parser', 'lexical', 'compiler', 'lifecycle', 'the-loop'],
-    purposes: ['why', 'proof', 'proof', 'proof', 'machinery', 'machinery', 'why', 'proof',
-      'proof', 'proof', 'proof', 'proof', 'proof', 'why', 'proof', 'proof', 'proof',
+    purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'proof', 'proof', 'proof',
+      'proof', 'proof', 'machinery', 'machinery', 'why', 'why', 'proof', 'proof', 'proof',
       'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
-  { point: points[1], why: "A running process isn't the whole story.",
+  { point: points[1], why: 'Resource health, traces, logs and metrics in one place.',
     slides: ['dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals'],
     purposes: ['why', 'proof', 'proof', 'machinery'] },
-  { point: points[2], why: 'Application intent should outlive your laptop.',
+  { point: points[2], why: 'Describe services and dependencies once; use them in development and deployment.',
     slides: ['deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries'],
     purposes: ['why', 'proof', 'proof', 'proof', 'machinery'] },
 ];
@@ -36,9 +37,11 @@ test('exactly the user-directed three areas drive roadmap, chapter entries, and 
   const actualOrder = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
   expect(actualOrder).toEqual(order);
   expect(await page.locator('#thesis [data-takeaway]').allTextContents()).toEqual(points);
-  expect(await page.locator('section[data-purpose="why"] [data-takeaway]').allTextContents()).toEqual(points);
+  expect(await page.locator('section[data-purpose="why"] [data-takeaway]').allTextContents()).toEqual([
+    'AI loops turn results into decisions.', 'Follow one request through your app.', 'Deploy the model you already run.',
+  ]);
   expect(await page.locator('#close [data-takeaway]').allTextContents()).toEqual(points);
-  await expect(page.locator('[data-takeaway]')).toHaveCount(9);
+  await expect(page.locator('[data-takeaway]')).toHaveCount(12);
   await expect(page.locator('[data-core-chapter]')).toHaveCount(3);
   await expect(page.locator('#thesis h2')).toContainText('Aspire makes AI');
   await expect(page.locator('#close h2')).toContainText('more efficient.');
@@ -54,7 +57,7 @@ test('each chapter shows why and concrete proof before its supporting machinery'
     expect(slides.map((slide) => slide.id)).toEqual(chapter.slides);
     expect(slides.map((slide) => slide.purpose)).toEqual(chapter.purposes);
     await expect(page.locator(`#${chapter.slides[0]} [data-why]`)).toHaveText(chapter.why);
-    await expect(page.locator(`#${chapter.slides[0]} .big-support`)).not.toBeEmpty();
+    await expect(page.locator(`#${chapter.slides[0]} .chapter-map, #${chapter.slides[0]} .chapter-split`)).not.toBeEmpty();
   }
   expect(order.indexOf('live-cli')).toBeLessThan(order.indexOf('api-index'));
   expect(order.indexOf('api-code')).toBeLessThan(order.indexOf('parser'));
@@ -62,12 +65,12 @@ test('each chapter shows why and concrete proof before its supporting machinery'
   expect(order.indexOf('skills-vs-tools')).toBeLessThan(order.indexOf('skills'));
   expect(order.indexOf('browser-evidence')).toBeLessThan(order.indexOf('evidence'));
   expect(order.indexOf('docs-supply')).toBeLessThan(order.indexOf('workflow'));
-  expect(order.indexOf('workflow')).toBeLessThan(order.indexOf('live-cli'));
+  expect(order.indexOf('api-code')).toBeLessThan(order.indexOf('evidence'));
   expect(order.indexOf('the-loop')).toBeLessThan(order.indexOf('dashboard'));
   expect(order.indexOf('dashboard-signals')).toBeLessThan(order.indexOf('deployment'));
-  await expect(page.locator('#index')).toContainText('narrative-docs');
-  await expect(page.locator('#lexical')).toContainText('not the separate compiler-derived API index');
-  await expect(page.locator('#api-index .notes')).toContainText('Do not attribute the narrative');
+  await expect(page.locator('#index')).toContainText('llms-full.txt');
+  await expect(page.locator('#lexical')).toContainText('Narrative-doc weights');
+  await expect(page.locator('#api-index .notes')).toContainText('Narrative docs take a different path');
 });
 
 test('early API response and scoped operations are actual copyable evidence, not wrappers', async ({ page }) => {
@@ -75,8 +78,7 @@ test('early API response and scoped operations are actual copyable evidence, not
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const response = JSON.parse(await page.locator('#api-code .language-json').textContent() ?? 'null');
   expect(response).toEqual({ id: evidence.cli.apiId, name: evidence.cli.signature, language: 'csharp', kind: 'member' });
-  await expect(page.locator('#api-code .notes')).toContainText('recorded public CLI response');
-  await expect(page.locator('#api-code .language-typescript')).toContainText('renderCSharpMemberKindMarkdown');
+  await expect(page.locator('#api-code .notes')).toContainText('Selected fields from the recorded response');
   const commands = (await page.locator('#runtime-wait .replay-command code, #runtime-state .replay-command code, #runtime-traces .replay-command code').allTextContents()).join('\n');
   expect(commands).toBe([
     "aspire wait api --apphost 'demo\\host\\apphost.cs' --status healthy --timeout 120 --non-interactive",
@@ -86,14 +88,14 @@ test('early API response and scoped operations are actual copyable evidence, not
   expect(commands).not.toMatch(/pwsh|\.ps1|--force|\$aspire/);
   await expect(page.locator('#skills-vs-tools')).toContainText('File-based instructions');
   await expect(page.locator('#skills-vs-tools')).toContainText('Executable operations');
-  await expect(page.locator('#weather .notes')).toContainText('Prove the benefit before opening the architecture');
+  await expect(page.locator('#weather .notes')).toContainText('All three demos in this talk use this app');
 });
 
 test('speaker notes cover a contiguous full-hour presentation with untimed appendices after the close', async ({ page }) => {
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const main = await page.locator('section:not([data-appendix]) > .notes').allTextContents();
-  expect(main).toHaveLength(38);
+  expect(main).toHaveLength(40);
   const spans = main.map((note) => {
     const match = note.match(/^(\d):(\d{2})-(\d):(\d{2})\./);
     expect(match, `A main slide is missing its explicit time range: ${note.slice(0, 90)}`).not.toBeNull();
@@ -163,7 +165,7 @@ for (const mode of ['present', 'read'] as const) {
         await expect(page.locator(`#${first} h2`)).toBeInViewport();
         await expect(page.locator(`#${first} [data-why]`)).toBeVisible();
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
-        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 41`);
+        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 43`);
         await page.locator('#next').click();
         await expect(page).toHaveURL(new RegExp(`#/${chapter.slides[1]}(?:/\\d+)?$`));
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
@@ -174,9 +176,11 @@ for (const mode of ['present', 'read'] as const) {
         await expect(page.locator('#menu-toggle')).toBeFocused();
       }
       if (mode === 'read') {
-        for (const id of ['thesis', 'api-code', 'skills-vs-tools']) {
+        for (const [id, selector] of [
+          ['thesis', '.large-copy'], ['api-code', '> p'], ['skills-vs-tools', '.contrast > div:last-child p'],
+        ]) {
           await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
-          const ending = page.locator(`#${id} > .source-line`).last();
+          const ending = page.locator(`#${id} ${selector}`).last();
           await ending.scrollIntoViewIfNeeded();
           await expect(ending).toBeInViewport();
           const bounds = await ending.boundingBox();

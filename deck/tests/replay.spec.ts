@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
+import { completeStdout, displayedRun, displayedRuns, surfaces } from './replay-fixtures';
 
 type CapturedRun = {
   id: string; command: string; arguments: string[]; exitCode: number; capturedAt: string;
@@ -11,17 +12,6 @@ type CapturedRun = {
 const evidence: { cliVersion: string; native: { format: string; clrHeader: boolean; resource: string;
   sha256: string; stoppedAfterCapture: boolean; fixtureProviders: boolean }; runs: CapturedRun[] } =
   JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'cli-replay.json'), 'utf8'));
-const surfaces = [
-  ['live-cli', 'docs-search'], ['docs-section', 'docs-section'], ['api-search', 'api-search'],
-  ['api-member', 'api-member'], ['runtime-wait', 'runtime-wait'], ['runtime-state', 'runtime-describe'],
-  ['runtime-traces', 'runtime-traces'],
-] as const;
-
-function completeStdout(run: CapturedRun): string {
-  return readFileSync(resolve('public', 'replays', run.stdout.split('/').at(-1)!), 'utf8')
-    .replace(/\r\n/g, '\n').replace(/\n$/, '');
-}
-
 async function open(page: Page, id: string, theme = 'dark', mode = 'present') {
   await page.goto(`?theme=${theme}&mode=${mode}#/${id}`);
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
@@ -30,7 +20,7 @@ async function open(page: Page, id: string, theme = 'dark', mode = 'present') {
 
 test('public replay files match capture hashes, exact semantic output, native provenance, and privacy rules', () => {
   expect(evidence.cliVersion).toBe('13.6.1');
-  expect(evidence.runs.map((run) => run.id)).toEqual(surfaces.map((surface) => surface[1]));
+  expect(evidence.runs.map((run) => run.id)).toEqual(surfaces.slice(0, 7).map((surface) => surface[1]));
   expect(evidence.native).toMatchObject({
     format: 'PE32+ x64', clrHeader: false, resource: 'api', stoppedAfterCapture: true, fixtureProviders: false,
   });
@@ -77,6 +67,32 @@ test('public replay files match capture hashes, exact semantic output, native pr
     trace.title === 'GET /api/weather' && !trace.hasError && trace.spans.length === 4)).toBe(true);
 });
 
+test('new default-output and Compose recordings retain exact hashes, provenance and privacy', () => {
+  const defaults = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'default-markdown-2026-11-06.json'), 'utf8'));
+  const chapter = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'chapter-demos.json'), 'utf8'));
+  expect(defaults.cliVersion).toBe('13.6.4');
+  expect(chapter.cliVersion).toBe('13.6.4');
+  expect(chapter.compose.destroyedAfterRehearsal).toBe(true);
+  for (const id of ['docs-section', 'api-member', 'compose-publish', 'compose-deploy']) {
+    const run = displayedRuns.find((record) => record.id === id)!;
+    expect(run.exitCode).toBe(0);
+    expect(run.outputLanguage).toBe('plaintext');
+    expect(run.arguments).toContain('--non-interactive');
+    expect(run.arguments).toContain('--nologo');
+    for (const [url, digest] of [[run.stdout, run.publicStdoutSha256], [run.stderr, run.publicStderrSha256]]) {
+      const content = readFileSync(resolve('public', 'replays', url.split('/').at(-1)!));
+      expect(createHash('sha256').update(content).digest('hex')).toBe(digest);
+      expect(content.toString()).not.toMatch(/\x1b|\b[A-Z]:[\\/]|[?&](?:t|token|api[-_]?key)=/i);
+    }
+    expect(run.rawStdoutSha256).toMatch(/^[a-f0-9]{64}$/);
+    expect(run.rawStderrSha256).toMatch(/^[a-f0-9]{64}$/);
+  }
+  expect(completeStdout(displayedRun('docs-section'))).toContain('without restarting the AppHost');
+  expect(completeStdout(displayedRun('api-member'))).toContain('ASPIREBROWSERLOGS001');
+  expect(completeStdout(displayedRun('compose-publish'))).toContain('Pipeline succeeded');
+  expect(completeStdout(displayedRun('compose-deploy'))).toContain('Pipeline succeeded');
+});
+
 for (const theme of ['light', 'dark'] as const) {
   test(`actual replay result stages fit projector and short aspect layouts in ${theme}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit projector/aspect/theme stage matrix runs once.');
@@ -94,13 +110,16 @@ for (const theme of ['light', 'dark'] as const) {
           const output = element.querySelector<HTMLElement>('.replay-output')!;
           return { left: box.left, right: box.right, bottom: box.bottom,
             overflow: output.scrollWidth - output.clientWidth,
+            overflowX: getComputedStyle(output).overflowX,
             gap: box.bottom - output.getBoundingClientRect().bottom,
             font: parseFloat(getComputedStyle(output).fontSize) };
         });
         expect(geometry.left).toBeGreaterThanOrEqual(0);
         expect(geometry.right).toBeLessThanOrEqual(viewport.width + 1);
         expect(geometry.bottom).toBeLessThanOrEqual(viewport.height - 1);
-        expect(geometry.overflow).toBeLessThanOrEqual(1);
+        if (id.startsWith('deployment-') && geometry.overflow > 1) {
+          expect(geometry.overflowX).toMatch(/auto|scroll/);
+        } else expect(geometry.overflow).toBeLessThanOrEqual(1);
         expect(geometry.gap).toBeLessThanOrEqual(2);
         expect(geometry.font).toBeGreaterThanOrEqual(22);
       }
@@ -112,7 +131,7 @@ for (const theme of ['light', 'dark'] as const) {
     await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: theme });
     for (const [id, runId] of surfaces) {
       await open(page, id, theme);
-      const record = evidence.runs.find((run) => run.id === runId)!;
+      const record = displayedRun(runId);
       const terminal = page.locator(`#${id} [data-cli-replay]`);
       const command = terminal.locator('.replay-command code');
       const response = terminal.locator('.replay-response');
@@ -121,6 +140,9 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(response).toBeHidden();
       await expect(terminal.locator('figcaption')).toContainText('Recorded CLI run');
       expect(await page.locator('.slides section.present .replay-command:visible').count()).toBe(1);
+      await page.locator(`#${id}`).evaluate(async (slide) => {
+        await Promise.all(slide.getAnimations().map((animation) => animation.finished));
+      });
       const before = await terminal.boundingBox();
       const anchor = await command.boundingBox();
       await terminal.evaluate((element) => {
@@ -237,7 +259,7 @@ for (const theme of ['light', 'dark'] as const) {
         if (mode === 'print') await panel.scrollIntoViewIfNeeded();
         await expect(panel).toHaveAttribute('data-replay-phase', 'complete');
         await expect(panel.locator('.replay-response')).toBeVisible();
-        expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(evidence.runs.find((run) => run.id === runId)!));
+        expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(displayedRun(runId)));
         expect(await panel.locator('.replay-response').evaluate((element) => element.getAnimations().length)).toBe(0);
         if (mode === 'print' || mode === 'read') {
           expect(await panel.locator('.replay-output').evaluate((element) =>
@@ -247,9 +269,8 @@ for (const theme of ['light', 'dark'] as const) {
           await expect(finalLine).toBeInViewport();
         }
         if (mode === 'read') {
-          const footer = page.locator(`#${id} > .source-line`);
-          await footer.scrollIntoViewIfNeeded();
-          await expect(footer).toBeInViewport();
+          await expect(page.locator(`#${id} .notes a[href*="/replays/"]`).first())
+            .toHaveAttribute('href', displayedRun(runId).stdout);
         }
       }
     });
@@ -318,7 +339,7 @@ test.describe('honest static no-JavaScript fallback', () => {
       const panel = page.locator(`#${id} [data-cli-replay]`);
       await expect(panel.locator('figcaption')).toContainText('Recorded CLI run');
       await expect(panel.locator('.replay-response')).toBeVisible();
-      expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(evidence.runs.find((run) => run.id === runId)!));
+      expect(await panel.locator('.replay-output code').textContent()).toBe(completeStdout(displayedRun(runId)));
       expect(await panel.locator('.replay-output').evaluate((element) =>
         element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
     }

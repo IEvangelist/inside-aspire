@@ -1,7 +1,8 @@
-#:sdk Aspire.AppHost.Sdk@13.6.1
+#:sdk Aspire.AppHost.Sdk@13.6.4
 #:property AspireUseCliBundle=true
 #:property TreatWarningsAsErrors=true
-#:package Aspire.Hosting.JavaScript@13.6.1
+#:package Aspire.Hosting.JavaScript@13.6.4
+#:package Aspire.Hosting.Docker@13.6.4
 
 using System.Runtime.InteropServices;
 using Aspire.Hosting;
@@ -18,7 +19,7 @@ if (rid is not ("win-x64" or "linux-x64")
 var nativeDirectory = Path.GetFullPath(Path.Combine(builder.AppHostDirectory, "..", ".artifacts", "native", rid));
 var extension = OperatingSystem.IsWindows() ? ".exe" : "";
 var executable = Path.Combine(nativeDirectory, $"Weather.Api{extension}");
-if (!File.Exists(executable))
+if (!builder.ExecutionContext.IsPublishMode && !File.Exists(executable))
 {
     throw new FileNotFoundException(
         $"Native weather artifact is missing: {executable}. Prepare it with " +
@@ -35,6 +36,31 @@ var api = builder.AddExecutable("api", executable, nativeDirectory)
     .WithEnvironment("OTEL_METRIC_EXPORT_INTERVAL", "1000")
     .WithEnvironment("OTEL_BSP_SCHEDULE_DELAY", "500")
     .WithEnvironment("OTEL_BLRP_SCHEDULE_DELAY", "500");
+
+builder.AddDockerComposeEnvironment("talk-compose")
+    .WithDashboard(dashboard => dashboard
+        .WithImage("aspire/dashboard", "13.6.2")
+        .WithImageRegistry("mcr.microsoft.com")
+        .PublishAsDockerComposeService((_, service) =>
+        {
+            service.Ports.Clear();
+            service.Ports.Add("127.0.0.1::18888");
+        }));
+
+api.PublishAsDockerFile(image =>
+{
+    image.WithDockerfile("..", "host/Dockerfile")
+        .WithEndpoint("http", endpoint => endpoint.TargetPort = 8080)
+        .WithEnvironment(context => context.EnvironmentVariables.Remove("PORT"))
+        // Add a public container listener without changing the app's local-run binding.
+        .WithEnvironment("Kestrel__Endpoints__Container__Url",
+            ReferenceExpression.Create($"http://0.0.0.0:{image.GetEndpoint("http").Property(EndpointProperty.TargetPort)}"))
+        .PublishAsDockerComposeService((_, service) =>
+        {
+            service.Ports.Clear();
+            service.Ports.Add("127.0.0.1::8080");
+        });
+});
 
 if (bool.TryParse(builder.Configuration["UseFixtures"], out var useFixtures) && useFixtures)
 {
@@ -82,5 +108,6 @@ builder.AddViteApp("frontend", Path.Combine(builder.AppHostDirectory, "..", "fro
     .WithEnvironment("API_HTTP", api.GetEndpoint("http"))
     .WithEnvironment("API_HTTPS", "")
     .WithHttpHealthCheck("/")
-    .WithExternalHttpEndpoints();
+    .WithExternalHttpEndpoints()
+    .ExcludeFromManifest();
 builder.Build().Run();

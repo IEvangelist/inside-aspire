@@ -1,16 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test } from '@playwright/test';
+import { completeStdout, displayedRun, surfaces } from './replay-fixtures';
 
-type RecordedRun = { id: string; command: string; stdout: string; outputLanguage: string };
-const runs: RecordedRun[] = JSON.parse(
-  readFileSync(resolve('..', 'docs', 'evidence', 'cli-replay.json'), 'utf8')).runs;
-const surfaces = [
-  ['live-cli', 'docs-search'], ['docs-section', 'docs-section'], ['api-search', 'api-search'],
-  ['api-member', 'api-member'], ['runtime-wait', 'runtime-wait'], ['runtime-state', 'runtime-describe'],
-  ['runtime-traces', 'runtime-traces'],
-] as const;
-const normalize = (text: string) => text.replace(/\r\n/g, '\n').replace(/\n$/, '');
+const normalize = (text: string) => text.replace(/\r\n/g, '\n');
 
 test('every displayed full response and Range copy matches its linked immutable stdout and command format', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -18,11 +11,12 @@ test('every displayed full response and Range copy matches its linked immutable 
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   let jsonResponses = 0;
   for (const [id, runId] of surfaces) {
-    const run = runs.find((record) => record.id === runId)!;
+    const run = displayedRun(runId);
     const response = await page.request.get(run.stdout);
     expect(response.status()).toBe(200);
-    const expected = normalize(await response.text());
-    expect(expected).toBe(normalize(readFileSync(resolve('public', 'replays', run.stdout.split('/').at(-1)!), 'utf8')));
+    const recorded = normalize(await response.text());
+    expect(recorded).toBe(normalize(readFileSync(resolve('public', 'replays', run.stdout.split('/').at(-1)!), 'utf8')));
+    const expected = completeStdout(run);
     await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
     const panel = page.locator(`#${id} [data-cli-replay]`);
     const output = panel.locator('.replay-output code');
@@ -50,20 +44,17 @@ test('every displayed full response and Range copy matches its linked immutable 
         expect(value).toHaveLength(2);
         expect(value.map((trace: { spans: unknown[] }) => trace.spans.length)).toEqual([1, 4]);
       }
-      if (runId === 'docs-section' || runId === 'api-member') {
-        expect(typeof value.content).toBe('string');
-        expect(value.content).toContain('## ');
-        expect(copied).toContain('"content": "');
-        expect(copied).toContain('\\n');
-        expect(copied).not.toMatch(/^## /);
-      }
-    } else await expect(output).toHaveAttribute('data-language', 'plaintext');
+    } else {
+      await expect(output).toHaveAttribute('data-language', 'plaintext');
+      if (runId === 'docs-section') expect(copied).toContain('Configure browser logs');
+      if (runId === 'api-member') expect(copied).toContain('ASPIREBROWSERLOGS001');
+    }
   }
-  expect(jsonResponses).toBe(6);
+  expect(jsonResponses).toBe(4);
 });
 
 for (const theme of ['light', 'dark'] as const) {
-  test(`all seven ${theme} panels have no visible status or excerpt row and no reserved gap`, async ({ page }, testInfo) => {
+  test(`all nine ${theme} panels have no visible status or excerpt row and no reserved gap`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit full-response theme geometry runs once.');
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ colorScheme: theme, reducedMotion: 'no-preference' });
@@ -118,12 +109,14 @@ for (const theme of ['light', 'dark'] as const) {
         return {
           height: body.clientHeight, overflow: body.scrollHeight - body.clientHeight,
           horizontal: body.scrollWidth - body.clientWidth, font: parseFloat(getComputedStyle(body).fontSize),
+          preservesLayout: body.hasAttribute('data-preserve-layout'), overflowX: getComputedStyle(body).overflowX,
           scrollOwners: [...element.querySelectorAll<HTMLElement>('*'), element].filter((child) =>
             ['auto', 'scroll'].includes(getComputedStyle(child).overflowY) ||
             ['auto', 'scroll'].includes(getComputedStyle(child).overflowX)).map((child) => child.className),
         };
       });
-      expect(geometry.horizontal).toBeLessThanOrEqual(1);
+      if (geometry.preservesLayout && geometry.horizontal > 1) expect(geometry.overflowX).toMatch(/auto|scroll/);
+      else expect(geometry.horizontal).toBeLessThanOrEqual(1);
       if (await page.locator(`#${id}`).getAttribute('data-terminal-focus') === 'true') {
         expect(geometry.height).toBeGreaterThan(330);
         expect((await body.boundingBox())!.y + (await body.boundingBox())!.height).toBeLessThanOrEqual(608);
@@ -162,7 +155,7 @@ for (const theme of ['light', 'dark'] as const) {
   });
 }
 
-test('touch reading can scroll the complete JSON envelope without an internal hidden result', async ({ page }, testInfo) => {
+test('touch reading can scroll the complete reference without an internal hidden result', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'A real browser touch gesture is exercised in the mobile project.');
   await page.goto('?theme=dark&mode=read#/api-member');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');

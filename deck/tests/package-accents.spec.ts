@@ -25,7 +25,7 @@ test('contiguous code focus bands have square interior joins and only their oute
   for (const theme of ['light', 'dark']) {
     for (const [slide, code, ranges] of [
       ['parser', 'parser-code', [[1, 5], [7, 9]]],
-      ['lifecycle', 'apphost-code', [[1, 5], [7, 12]]],
+      ['lifecycle', 'apphost-code', [[1, 5], [7, 11]]],
     ] as const) {
       await page.goto(`?theme=${theme}&mode=present#/${slide}`);
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
@@ -110,7 +110,7 @@ test('package legends identify only real mapped APIs while common operations and
     expect(rails.every((rail) => rail.width === '4px' && rail.text !== null)).toBe(true);
   }
   await expect(page.locator('[data-cli-replay] .pkg-api, [data-cli-replay] .package-legend')).toHaveCount(0);
-  await expect(page.locator('[data-cli-replay]')).toHaveCount(7);
+  await expect(page.locator('[data-cli-replay]')).toHaveCount(9);
 });
 
 test('semantic roles, mapped identifiers, labels and rails retain theme and print contrast without a color-only dependency', async ({ page }, testInfo) => {
@@ -185,14 +185,14 @@ for (const [name, replacement, expected] of [
   ['out of range', 'data-pkg-cyan="Aspire.Hosting.JavaScript" data-apis-cyan="AddViteApp" data-lines-cyan="7-99"', 'exceeds the block'],
   ['API outside rail', 'data-pkg-cyan="Aspire.Hosting.JavaScript" data-apis-cyan="AddViteApp" data-lines-cyan="1-5"', 'outside its package'],
   ['duplicate ownership', 'data-pkg-cyan="One" data-apis-cyan="AddViteApp" data-pkg-pink="Two" data-apis-pink="AddViteApp"', 'owned by more than one'],
-  ['overlapping rails', 'data-pkg-cyan="One" data-apis-cyan="AddViteApp" data-lines-cyan="7-12" data-pkg-pink="Two" data-apis-pink="WithNpm" data-lines-pink="9-12"', 'ranges overlap'],
+  ['overlapping rails', 'data-pkg-cyan="One" data-apis-cyan="AddViteApp" data-lines-cyan="7-10" data-pkg-pink="Two" data-apis-pink="WithNpm" data-lines-pink="8-11"', 'ranges overlap'],
 ] as const) {
   test(`invalid package ${name} produces a visible slide/block error rather than a partial successful deck`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'The exact source-validation matrix runs once.');
     await page.route((url) => url.pathname === '/inside-aspire/', async (route) => {
       const response = await route.fetch();
       const html = (await response.text()).replace(
-        'data-pkg-cyan="Aspire.Hosting.JavaScript" data-add-cyan="javascript" data-apis-cyan="AddViteApp WithNpm" data-lines-cyan="7-12"',
+        'data-pkg-cyan="Aspire.Hosting.JavaScript" data-add-cyan="javascript" data-apis-cyan="AddViteApp WithNpm"',
         replacement);
       await route.fulfill({ response, body: html });
     });
@@ -215,8 +215,9 @@ test('the optional reference shows real C# top-level AppHost and Go workload bou
   await expect(disclosure).not.toHaveAttribute('open', '');
   const reference = page.locator('#slide-details');
   await expect(reference).toBeVisible();
-  await expect(reference).toContainText('Go runs as a workload');
-  await expect(reference).toContainText('not the weather demo');
+  await expect(reference).toContainText('a C# AppHost runs a Go HTTP service');
+  await expect(reference).toContainText('Illustrative; not executed here.');
+  await expect(reference.locator('.notes')).toContainText('Neither sample changes the weather demo');
   await expect(reference).toContainText('apphost.mts');
   await expect(page.locator('#go-apphost-code')).toContainText('var builder = DistributedApplication.CreateBuilder(args);');
   await expect(page.locator('#go-apphost-code')).toContainText('.WithHttpEndpoint(port: 8080, env: "PORT")');
@@ -234,9 +235,9 @@ test('the optional reference shows real C# top-level AppHost and Go workload bou
     });
     expect(copied).toBe(await code.textContent());
   }
-  await expect(page.locator('.slides section[id]')).toHaveCount(41);
-  await expect(page.locator('pre code')).toHaveCount(32);
-  await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(30);
+  await expect(page.locator('.slides section[id]')).toHaveCount(43);
+  await expect(page.locator('pre code')).toHaveCount(33);
+  await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(31);
 });
 
 test('one bounded package/language visual batch keeps all labels, rails, source and optional references readable', async ({ page }, testInfo) => {

@@ -36,8 +36,8 @@ async function inspectConnectors(page: Page, id: string) {
           point.y < bounds.top - 0.1 || point.y > bounds.bottom + 0.1) return undefined;
       return sides.find((side) => side.matches)?.normal;
     }
-    const nodes = new Map([...svg.querySelectorAll<SVGRectElement>('.graph-node > rect')]
-      .map((rect) => [rect.parentElement!.getAttribute('data-node')!, box(rect)]));
+    const nodes = new Map([...svg.querySelectorAll<SVGRectElement>('.graph-node > rect, .graph-node > a > rect')]
+      .map((rect) => [rect.closest('.graph-node')!.getAttribute('data-node')!, box(rect)]));
     const edges = [...svg.querySelectorAll<SVGGElement>('.graph-edge')].map((edge) => {
       const from = edge.getAttribute('data-from')!;
       const to = edge.getAttribute('data-to')!;

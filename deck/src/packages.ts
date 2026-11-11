@@ -120,15 +120,29 @@ export function annotatePackages(root: HTMLElement) {
       const swatch = document.createElement('span');
       swatch.className = 'package-swatch';
       swatch.setAttribute('aria-hidden', 'true');
-      const name = document.createElement('span');
-      name.className = 'package-name';
-      name.textContent = annotation.label;
-      label.append(swatch, name);
+      if (annotation.label) {
+        const owner = document.createElement('span');
+        owner.className = 'package-owner';
+        const kind = document.createElement('span');
+        kind.className = 'package-kind';
+        kind.textContent = 'Package';
+        const name = document.createElement('code');
+        name.className = 'package-name';
+        name.textContent = annotation.label;
+        owner.append(swatch, kind, name);
+        label.append(owner);
+      } else label.append(swatch);
       if (annotation.add) {
-        const add = document.createElement('span');
+        const command = document.createElement('span');
+        command.className = 'package-install';
+        const kind = document.createElement('span');
+        kind.className = 'package-kind';
+        kind.textContent = 'CLI command';
+        const add = document.createElement('code');
         add.className = 'package-add';
         add.textContent = `aspire add ${annotation.add}`;
-        label.append(add);
+        command.append(kind, add);
+        label.append(command);
       }
       legend.append(label);
       for (const number of annotation.lines) {

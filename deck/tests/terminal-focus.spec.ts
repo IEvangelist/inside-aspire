@@ -1,14 +1,22 @@
 import { expect, test, type Page } from '@playwright/test';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { completeStdout, displayedRun, surfaces } from './replay-fixtures';
 
-const focusedIds = ['live-cli', 'docs-section', 'api-member', 'runtime-state', 'runtime-traces'];
+const focusedIds = ['live-cli', 'docs-section', 'api-member', 'runtime-state', 'runtime-traces',
+  'deployment-publish', 'deployment-deploy'];
 const compactIds = ['api-search', 'runtime-wait'];
-const runIds: Record<string, string> = { 'live-cli': 'docs-search', 'docs-section': 'docs-section',
-  'api-member': 'api-member', 'runtime-state': 'runtime-describe', 'runtime-traces': 'runtime-traces' };
+const runIds: Record<string, string> = Object.fromEntries(surfaces);
 
 function stdout(id: string) {
-  return readFileSync(resolve('public', 'replays', `${runIds[id]}.stdout.txt`), 'utf8').replace(/\n$/, '');
+  return completeStdout(displayedRun(runIds[id]));
+}
+
+async function addSupportFixture(page: Page) {
+  await page.route((url) => url.pathname === '/inside-aspire/', async (route) => {
+    const response = await route.fetch();
+    const html = (await response.text()).replace(/<section id="docs-section"[\s\S]*?<\/section>/, (section) =>
+      section.replace('</figure>', '</figure><p class="terminal-support"><a href="#/weather">Evidence</a></p>'));
+    await route.fulfill({ response, body: html });
+  });
 }
 
 async function ready(page: Page, id: string, mode = 'present', theme = 'dark', fragment = '') {
@@ -21,15 +29,7 @@ test('the configured guidance replay reclaims actual title/footer space instead 
   test.skip(testInfo.project.name !== 'desktop-dark', 'One real pre-fix/final geometry regression suffices.');
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.route((url) => url.pathname === '/inside-aspire/', async (route) => {
-    const response = await route.fetch();
-    const html = (await response.text()).replace(
-      /<section id="docs-section"[\s\S]*?<\/section>/,
-      (section) => section.includes('data-terminal-focus=')
-        ? section : section.replace('<section ', '<section data-terminal-focus="true" ')
-          .replace('class="source-line"', 'class="source-line terminal-support"'));
-    await route.fulfill({ response, body: html });
-  });
+  await addSupportFixture(page);
   await ready(page, 'docs-section');
   const slide = page.locator('#docs-section');
   const heading = (await slide.locator('h2').boundingBox())!;
@@ -40,15 +40,15 @@ test('the configured guidance replay reclaims actual title/footer space instead 
   const output = (await slide.locator('.replay-output').boundingBox())!;
   expect(output.height, 'The actual output viewport must grow, not only receive a focus class.').toBeGreaterThan(330);
   await expect(slide.locator('h2')).toBeHidden();
-  await expect(slide.locator('.terminal-support')).toBeHidden();
+  await expect(slide.locator(':scope > .terminal-support')).toBeHidden();
   await expect(slide.locator('figcaption')).toContainText('Recorded CLI run');
 });
 
-test('authored focus opts in only the five long responses; invalid values and structures fail visibly with slide identity', async ({ page }, testInfo) => {
+test('authored focus opts in the seven long responses; invalid values and structures fail visibly with slide identity', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'Strict authoring/startup validation is viewport independent.');
   await ready(page, 'docs-section');
   expect(await page.locator('[data-terminal-focus]').evaluateAll((slides) => slides.map((slide) => slide.id))).toEqual(focusedIds);
-  await expect(page.locator('.terminal-support')).toHaveCount(5);
+  await expect(page.locator('section[data-terminal-focus] > .terminal-support')).toHaveCount(2);
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   for (const change of ['false', '', 'TRUE', '1', 'nested', 'duplicate', 'stack']) {
@@ -74,7 +74,7 @@ test('authored focus opts in only the five long responses; invalid values and st
 for (const theme of ['light', 'dark'] as const) {
   test(`all configured outputs gain real safe height, copy exactly, scroll fully and rewind in ${theme}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'Explicit all-slide/theme/desktop/narrow geometry matrix runs once.');
-    test.setTimeout(120_000);
+    test.setTimeout(240_000);
     await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: theme });
     await page.addInitScript(() => {
       Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
@@ -90,10 +90,12 @@ for (const theme of ['light', 'dark'] as const) {
         const terminal = slide.locator('.cli-terminal');
         const before = (await terminal.boundingBox())!;
         const heading = await slide.locator('h2').textContent();
-        const support = await slide.locator('.terminal-support').textContent();
+        const support = slide.locator(':scope > .terminal-support');
+        const hasSupport = await support.count() === 1;
+        const supportText = hasSupport ? await support.textContent() : null;
         const scale = await page.evaluate(() => parseFloat(document.documentElement.style.getPropertyValue('--slide-scale')));
         await expect(slide.locator('h2')).toBeVisible();
-        await expect(slide.locator('.terminal-support')).toBeVisible();
+        if (hasSupport) await expect(support).toBeVisible();
         await page.locator('#next').click();
         await expect(terminal).toHaveAttribute('data-replay-phase', 'complete');
         await expect(slide).toHaveClass(/is-terminal-focused/);
@@ -107,6 +109,7 @@ for (const theme of ['light', 'dark'] as const) {
           return { panel: panel.toJSON(), output: output.toJSON(), caption: caption.toJSON(),
             toolbarBottom: toolbar.bottom, badgeTop: badge.top,
             horizontal: body.scrollWidth - body.clientWidth, font: parseFloat(getComputedStyle(body).fontSize),
+            preservesLayout: body.hasAttribute('data-preserve-layout'), overflowX: getComputedStyle(body).overflowX,
             owners: [...element.querySelectorAll('*'), element].filter((child) =>
               ['auto', 'scroll'].includes(getComputedStyle(child).overflowY) ||
               ['auto', 'scroll'].includes(getComputedStyle(child).overflowX)).map((child) => child.className) };
@@ -120,17 +123,20 @@ for (const theme of ['light', 'dark'] as const) {
         expect(geometry.output.height).toBeGreaterThan(160);
         expect(geometry.panel.bottom - geometry.output.bottom).toBeLessThanOrEqual(2);
         expect(geometry.caption.top).toBeGreaterThanOrEqual(geometry.panel.top);
-        expect(geometry.horizontal).toBeLessThanOrEqual(1);
+        if (geometry.preservesLayout && geometry.horizontal > 1) expect(geometry.overflowX).toMatch(/auto|scroll/);
+        else expect(geometry.horizontal).toBeLessThanOrEqual(1);
         expect(geometry.font).toBeGreaterThanOrEqual(viewport.width >= 1000 ? 22 : viewport.width > 600 ? 18 : 16);
         expect(geometry.owners).toEqual(['replay-output']);
         expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(viewport.height);
         await expect(slide.locator('h2')).toBeHidden();
         expect(await slide.locator('h2').evaluate((element) => element.hidden)).toBe(false);
         await expect(slide.locator('h2')).toHaveText(heading ?? '');
-        await expect(slide.locator('.terminal-support')).toHaveText(support ?? '');
-        expect(await slide.locator('.terminal-support').evaluate((element) => element.inert && element.hidden)).toBe(true);
-        for (const link of await slide.locator('.terminal-support a').all()) {
-          expect(await link.evaluate((element) => { element.focus(); return document.activeElement === element; })).toBe(false);
+        if (hasSupport) {
+          await expect(support).toHaveText(supportText ?? '');
+          expect(await support.evaluate((element) => element.inert && element.hidden)).toBe(true);
+          for (const link of await support.locator('a').all()) {
+            expect(await link.evaluate((element) => { element.focus(); return document.activeElement === element; })).toBe(false);
+          }
         }
         const body = terminal.locator('.replay-output');
         const anchors = [await terminal.locator('figcaption').boundingBox(), await terminal.locator('.replay-command-line').boundingBox()];
@@ -151,8 +157,10 @@ for (const theme of ['light', 'dark'] as const) {
         await page.locator('#previous').click();
         await expect(terminal).toHaveAttribute('data-replay-phase', 'command');
         await expect(slide.locator('h2')).toBeVisible();
-        await expect(slide.locator('.terminal-support')).toBeVisible();
-        expect(await slide.locator('.terminal-support').evaluate((element) => element.inert || element.hidden)).toBe(false);
+        if (hasSupport) {
+          await expect(support).toBeVisible();
+          expect(await support.evaluate((element) => element.inert || element.hidden)).toBe(false);
+        }
         expect((await terminal.boundingBox())!.y).toBeCloseTo(before.y, 0);
         expect((await terminal.boundingBox())!.height).toBeCloseTo(before.height, 0);
       }
@@ -172,7 +180,7 @@ test('compact unconfigured replays keep their title, support and command anchor'
     await expect(slide.locator('.cli-terminal')).toHaveAttribute('data-replay-phase', 'complete');
     expect(await slide.locator('.replay-command').boundingBox()).toEqual(before);
     await expect(slide.locator('h2')).toBeVisible();
-    await expect(slide.locator('.source-line')).toBeVisible();
+    await expect(slide.locator('.notes a[href*="/replays/"]').first()).toHaveAttribute('href', displayedRun(runIds[id]).stdout);
     await expect(slide).not.toHaveClass(/is-terminal-focused/);
     await expect(page.locator('#presentation')).not.toHaveClass(/has-terminal-focus/);
   }
@@ -181,15 +189,16 @@ test('compact unconfigured replays keep their title, support and command anchor'
 test('focused fragment deep links, Back/Forward, overview and hidden-link focus restore exact audience state', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One real browser history/focus/overview path suffices.');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await addSupportFixture(page);
   await ready(page, 'docs-section');
   const slide = page.locator('#docs-section');
-  const link = slide.locator('.terminal-support a').first();
+  const link = slide.locator(':scope > .terminal-support a');
   await link.focus();
   await page.evaluate(() => { location.hash = '/docs-section/0'; });
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await expect(slide.locator('.cli-terminal')).toHaveAttribute('data-replay-phase', 'complete');
   await expect(slide.locator('.replay-command')).toBeFocused();
-  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 12 of 41');
+  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 8 of 43');
   await page.goBack();
   await expect(slide).not.toHaveClass(/is-terminal-focused/);
   await expect(link).toBeFocused();
@@ -197,14 +206,14 @@ test('focused fragment deep links, Back/Forward, overview and hidden-link focus 
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await page.locator('#next').click();
   await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'api-search');
-  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 13 of 41');
+  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 9 of 43');
   await page.goBack();
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await page.locator('#presentation').focus();
   await page.keyboard.press('Escape');
   await expect(page.locator('#presentation')).toHaveClass(/overview/);
   await expect(slide).not.toHaveClass(/is-terminal-focused/);
-  await expect(slide.locator('.terminal-support')).toBeVisible();
+  await expect(slide.locator(':scope > .terminal-support')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await page.reload();
@@ -269,19 +278,24 @@ test('reading, print and no-JavaScript retain titles, provenance links and every
     for (const id of focusedIds) {
       const slide = page.locator(`#${id}`);
       await expect(slide.locator('h2')).toBeVisible();
-      await expect(slide.locator('.terminal-support')).toBeVisible();
-      expect(await slide.locator('.terminal-support').evaluate((element) => element.inert || element.hidden)).toBe(false);
+      const support = slide.locator(':scope > .terminal-support');
+      if (await support.count()) {
+        await expect(support).toBeVisible();
+        expect(await support.evaluate((element) => element.inert || element.hidden)).toBe(false);
+      }
+      await expect(slide.locator('.notes a[href*="/replays/"]').first()).toHaveAttribute('href', displayedRun(runIds[id]).stdout);
       expect(await slide.locator('.replay-output').evaluate((element) => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(1);
       expect(await slide.locator('.replay-output code').textContent()).toBe(stdout(id));
     }
   }
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('.pdf-page')).toHaveCount(41);
-  await expect(page.locator('pre code')).toHaveCount(32);
+  await expect(page.locator('.pdf-page')).toHaveCount(43);
+  await expect(page.locator('pre code')).toHaveCount(33);
   for (const id of focusedIds) {
     await expect(page.locator(`#${id} h2`)).toBeVisible();
-    await expect(page.locator(`#${id} .terminal-support`)).toBeVisible();
+    const support = page.locator(`#${id} > .terminal-support`);
+    if (await support.count()) await expect(support).toBeVisible();
     expect(await page.locator(`#${id} .replay-output code`).textContent()).toBe(stdout(id));
   }
   await expect(page.locator('.is-terminal-focused')).toHaveCount(0);
@@ -291,7 +305,8 @@ test('reading, print and no-JavaScript retain titles, provenance links and every
     await staticPage.goto(testInfo.project.use.baseURL ?? process.env.DECK_URL ?? 'http://127.0.0.1:4173/inside-aspire/');
     for (const id of focusedIds) {
       await expect(staticPage.locator(`#${id} h2`)).toBeVisible();
-      await expect(staticPage.locator(`#${id} .terminal-support`)).toBeVisible();
+      const support = staticPage.locator(`#${id} > .terminal-support`);
+      if (await support.count()) await expect(support).toBeVisible();
       expect(await staticPage.locator(`#${id} .replay-output code`).textContent()).toBe(stdout(id));
     }
   } finally { await context.close(); }
@@ -327,7 +342,8 @@ test('native Notes opened repeatedly mid-result retains audience focus and mirro
       await page.locator('#previous').click();
       await expect(current.locator('#docs-section')).not.toHaveClass(/is-terminal-focused/);
       await expect(current.locator('#docs-section h2')).toBeVisible();
-      await expect(current.locator('#docs-section .terminal-support')).toBeVisible();
+      await expect(current.locator('#docs-section .notes a[href*="/replays/"]').first())
+        .toHaveAttribute('href', displayedRun('docs-section').stdout);
       await expect(upcoming.locator('#docs-section')).toHaveClass(/is-terminal-focused/);
       await page.locator('#next').click();
       await expect(current.locator('#docs-section')).toHaveClass(/is-terminal-focused/);

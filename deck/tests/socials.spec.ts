@@ -9,24 +9,34 @@ for (const width of [320, 390, 1440]) {
     const links = page.locator('.speaker-socials a');
     await expect(links).toHaveCount(4);
     const expected = [
-      ['github', 'https://github.com/IEvangelist', 'GitHub'],
-      ['x', 'https://x.com/davidpine7', 'X'],
-      ['bluesky', 'https://bsky.app/profile/davidpine.dev', 'Bluesky'],
-      ['linkedin', 'https://www.linkedin.com/in/dpine/', 'LinkedIn'],
+      ['github', 'https://github.com/IEvangelist', 'GitHub', 'github.com/IEvangelist'],
+      ['x', 'https://x.com/davidpine7', 'X', 'x.com/davidpine7'],
+      ['bluesky', 'https://bsky.app/profile/davidpine.dev', 'Bluesky', 'bsky.app/profile/davidpine.dev'],
+      ['linkedin', 'https://www.linkedin.com/in/dpine/', 'LinkedIn', 'www.linkedin.com/in/dpine'],
     ];
     const portrait = await page.locator('.speaker-portrait').boundingBox();
-    for (const [name, url, title] of expected) {
+    let previousBottom = 0;
+    let iconLeft: number | undefined;
+    for (const [name, url, title, display] of expected) {
       const link = page.locator(`[data-social="${name}"]`);
       await expect(link).toHaveAttribute('href', url);
-      await expect(link).toHaveAttribute('aria-label', `David Pine on ${title}`);
+      await expect(link.locator('.social-url')).toHaveText(display);
+      await expect(link).toHaveAccessibleName(display);
       await expect(link).toHaveAttribute('title', title);
       await expect(link).toHaveAttribute('rel', /noopener/);
       await expect(link).toBeVisible();
       const bounds = await link.boundingBox();
+      const icon = await link.locator('.social-icon').boundingBox();
+      const text = await link.locator('.social-url').boundingBox();
       expect(bounds!.width).toBeGreaterThanOrEqual(43.9);
       expect(bounds!.height).toBeGreaterThanOrEqual(43.9);
       expect(bounds!.y).toBeGreaterThanOrEqual(portrait!.y + portrait!.height);
       expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
+      expect(bounds!.y).toBeGreaterThanOrEqual(previousBottom);
+      if (iconLeft !== undefined) expect(icon!.x).toBeCloseTo(iconLeft, 1);
+      expect(text!.x).toBeGreaterThanOrEqual(icon!.x + icon!.width);
+      previousBottom = bounds!.y + bounds!.height;
+      iconLeft = icon!.x;
       await link.focus();
       await expect(link).toBeFocused();
     }

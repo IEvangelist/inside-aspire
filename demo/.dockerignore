@@ -1,0 +1,13 @@
+**
+!Weather.Api/
+!Weather.Api/**
+!frontend/
+!frontend/**
+!host/
+!host/Dockerfile
+**/bin
+**/obj
+**/node_modules
+**/dist
+**/.env
+**/.env.*

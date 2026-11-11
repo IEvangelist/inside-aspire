@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test } from '@playwright/test';
+import { displayedRun } from './replay-fixtures';
 
 const evidence = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', 'browser-logs.json'), 'utf8'));
 
@@ -14,16 +15,16 @@ for (const theme of ['light', 'dark'] as const) {
         await page.goto(`?theme=${theme}&mode=${mode}`);
         await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
         const start = page.getByRole('link', { name: 'Start presentation' });
-        await expect(start).toHaveAttribute('href', '#/thesis');
+        await expect(start).toHaveAttribute('href', '#/setup');
         if (input === 'pointer') await start.click();
         else {
           await start.focus();
           await page.keyboard.press('Enter');
         }
-        await expect(page).toHaveURL(/#\/thesis$/);
-        await expect(page.locator('#thesis h2')).toBeInViewport();
-        await expect(page.locator('#slide-position')).toHaveText('2 / 41');
-        const bounds = await page.locator('#thesis h2').boundingBox();
+        await expect(page).toHaveURL(/#\/setup$/);
+        await expect(page.locator('#setup h2')).toBeInViewport();
+        await expect(page.locator('#slide-position')).toHaveText('2 / 43');
+        const bounds = await page.locator('#setup h2').boundingBox();
         const toolbar = await page.locator('.toolbar').boundingBox();
         expect(bounds!.y).toBeGreaterThanOrEqual(toolbar!.y + toolbar!.height - 1);
         await page.locator('#menu-toggle').click();
@@ -84,7 +85,7 @@ for (const theme of ['light', 'dark'] as const) {
           if (viewport.mode === 'present') {
             expect(geometry.paintedArea / geometry.previousWeatherArea).toBeGreaterThanOrEqual(1.3);
           } else if (viewport.mode === 'read') expect(geometry.width).toBeGreaterThanOrEqual(geometry.parentWidth - 1);
-          await expect(page.locator('#weather figcaption')).toContainText('Provider attribution retained');
+          await expect(page.locator('#weather figcaption')).toContainText('Data providers credited in the app');
           if (viewport.width === 1280) {
             const path = testInfo.outputPath(`weather-${theme}.png`);
             await page.screenshot({ path });
@@ -100,7 +101,8 @@ for (const theme of ['light', 'dark'] as const) {
 test('audience command text is directly copyable Aspire CLI with verified identities', async ({ page }) => {
   await page.goto('#/live-cli');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  const commands = evidence.cli.commands.join('\n');
+  const commands = ['docs-search', 'docs-section', 'api-search', 'api-member']
+    .map((id) => displayedRun(id).command).join('\n');
   const codes = page.locator('#live-cli .replay-command code, #docs-section .replay-command code, #api-search .replay-command code, #api-member .replay-command code');
   expect((await codes.allTextContents()).join('\n')).toBe(commands);
   const selected = await codes.evaluateAll((elements) => elements.map((element) => {
@@ -119,7 +121,7 @@ test('audience command text is directly copyable Aspire CLI with verified identi
     expect(command).toContain(evidence.cli.apiId);
   }
   await expect(page.locator('#api-code code').first()).toContainText(evidence.cli.apiId);
-  await expect(page.locator('#live-cli .notes')).toContainText('No PowerShell script is required');
+  await expect(page.locator('#live-cli .notes')).toContainText('recorded run of the public CLI');
 });
 
 test('feature story preserves real links, experimental scope, and explicit maintainer refinement', async ({ page }) => {
@@ -135,11 +137,11 @@ test('feature story preserves real links, experimental scope, and explicit maint
   expect(pr).toEqual({ number: 775, state: 'closed', merged: true, merged_by: { login: 'davidfowl' } });
   await expect(page.locator('#browser-evidence')).toContainText(evidence.scope.experimentalDiagnostic);
   await expect(page.locator('#browser-evidence')).toContainText(evidence.scope.package);
-  await expect(page.locator('#browser-evidence')).toContainText('not wired into this weather app');
-  await expect(page.locator('#browser-evidence .notes')).toContainText('child browser resource');
+  await expect(page.locator('#browser-evidence')).toContainText("haven't wired it into the weather app");
+  await expect(page.locator('#browser-evidence .notes')).toContainText('WithBrowserLogs captures console output');
   const audience = await page.locator('section[id]').allTextContents();
   expect(audience.join('\n')).not.toMatch(/19478|33887017276|1619|human_reviews|outcome_status|Show-DocsLoop\.ps1/);
-  await expect(page.locator('section[id]')).toHaveCount(41);
+  await expect(page.locator('section[id]')).toHaveCount(43);
 });
 
 test('three-area audience surfaces render coherently in one desktop/mobile visual batch', async ({ page }, testInfo) => {
