@@ -86,7 +86,7 @@ const diagrams: Record<string, Diagram> = {
       { id: 'dcp', title: 'DCP helper', detail: ['Process launch'], icon: 'workflow', x: 725, y: 35, w: 240, h: 100, step: 1,
         documentation: { url: 'https://aspire.dev/architecture/overview/#developer-control-plane',
           description: 'Developer Control Plane (DCP): launches and manages local processes and containers.' } },
-      { id: 'dashboard', title: 'Dashboard', detail: ['NativeAOT executable'], icon: 'graph', x: 1005, y: 35, w: 255, h: 100, step: 3 },
+      { id: 'dashboard', title: 'Dashboard', detail: ['NativeAOT executable'], icon: 'graph', x: 985, y: 35, w: 275, h: 100, step: 3 },
       { id: 'browser', title: 'Browser / React', detail: ['Map, radar, forecasts'], icon: 'screen', x: 20, y: runtimeVite.y, w: 265, h: runtimeVite.h, step: 2 },
       runtimeVite,
       { id: 'api', title: 'Weather API', detail: ['NativeAOT binary', '/api + static bundle'], icon: 'cpu', x: 725, y: centerY(runtimeVite) - 125 / 2, w: 280, h: 125, step: 2, kind: 'hub' },

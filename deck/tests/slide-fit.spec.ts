@@ -8,6 +8,24 @@ async function openDeck(page: Page, theme: 'light' | 'dark', width: number, heig
   await page.evaluate(() => document.fonts.ready);
 }
 
+test('the dashboard label fits wider platform font metrics', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'One wider-font regression exercises the shared diagram.');
+  await openDeck(page, 'dark', 1280, 720, 'present');
+  await page.addStyleTag({ content: '[data-graph="runtime"] [data-node="dashboard"] .node-detail { letter-spacing: 0.4px; }' });
+  await page.evaluate(() => { window.location.hash = '/compiler'; });
+  await expect(page.locator('#compiler h2')).toBeInViewport();
+  const label = page.locator('[data-graph="runtime"] [data-node="dashboard"] .node-detail');
+  await expect(label).toBeVisible();
+  const geometry = await label.evaluate((element) => {
+    const text = (element as SVGTextElement).getBBox();
+    const node = element.closest('.graph-node')!.querySelector('rect')!.getBBox();
+    return { right: text.x + text.width, limit: node.x + node.width - 18,
+      font: parseFloat(getComputedStyle(element).fontSize) };
+  });
+  expect(geometry.right).toBeLessThanOrEqual(geometry.limit + 1);
+  expect(geometry.font).toBeGreaterThanOrEqual(20);
+});
+
 for (const theme of ['light', 'dark'] as const) {
   for (const viewport of [
     { width: 1280, height: 720, mode: 'present' },

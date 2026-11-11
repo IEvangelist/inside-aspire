@@ -126,8 +126,14 @@ for (const theme of ['light', 'dark'] as const) {
       if (runId !== 'runtime-wait') {
         expect(geometry.overflow).toBeGreaterThan(0);
         await body.focus();
+        await body.evaluate((element) => {
+          element.dataset.testScrollSettled = 'false';
+          element.addEventListener('scrollend', () => { element.dataset.testScrollSettled = 'true'; }, { once: true });
+        });
         await page.keyboard.press('ArrowDown');
         await expect.poll(() => body.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+        await expect(body).toHaveAttribute('data-test-scroll-settled', 'true');
+        await expect(body).toBeFocused();
         await page.keyboard.press('End');
         await expect.poll(() => body.evaluate((element) =>
           element.scrollHeight - element.clientHeight - element.scrollTop)).toBeLessThanOrEqual(1);
