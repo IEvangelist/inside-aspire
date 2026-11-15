@@ -65,7 +65,7 @@ test('reviewed content, order, notes, code, citations, media, focus steps and pa
     codes: codes.map(({ text, language }) => ({ language, sha256: hash(text) })),
   }));
   expect(normalized).toEqual(baseline.slides);
-  expect(normalized).toHaveLength(43);
+  expect(normalized).toHaveLength(46);
 });
 
 test('all 226 protected blobs retain their historical hashes except explicitly reviewed updates', () => {
@@ -169,7 +169,7 @@ test('paired surfaces retain their intended desktop and narrow layouts', async (
     await page.setViewportSize({ width, height: 900 });
     await ready(page, `?mode=${width < 1000 ? 'read' : 'present'}`);
     const pairs = await page.locator('.code-pair,.code-and-copy,.contrast').count();
-    expect(pairs).toBe(10);
+    expect(pairs).toBe(13);
     for (const pair of await page.locator('.code-pair,.code-and-copy,.contrast').all()) {
       const id = await pair.evaluate((node) => node.closest('section')!.id);
       await page.evaluate((id) => { location.hash = `/${id}`; }, id);
@@ -231,14 +231,14 @@ for (const width of [1280, 617, 390, 320]) {
     const heading = await page.locator('#api-member h2').boundingBox();
     expect(heading!.y).toBeGreaterThanOrEqual(56);
     expect(heading!.y).toBeLessThan(180);
-    await expect(page.locator('#slide-position')).toHaveText('10 / 43');
+    await expect(page.locator('#slide-position')).toHaveText('10 / 46');
     const start = await viewport.evaluate((node) => node.scrollTop);
     await viewport.hover();
     await page.mouse.wheel(0, 500);
     await expect.poll(() => viewport.evaluate((node) => node.scrollTop)).toBeGreaterThan(start);
     await page.evaluate(() => { location.hash = '/dashboard'; });
     await page.waitForTimeout(1250);
-    await expect(page.locator('#slide-position')).toHaveText('30 / 43');
+    await expect(page.locator('#slide-position')).toHaveText('33 / 46');
     await expect(page.locator('#dashboard h2')).toBeInViewport();
     await expect(page.locator('#chapter-label')).toHaveText('Aspire dashboard');
     expect(await page.locator('#presentation').evaluate((node) => node.scrollTop)).toBe(0);
@@ -252,7 +252,7 @@ test('overview thumbnails are framed, nonzero, clickable and return to the exact
   await page.keyboard.press('Escape');
   await expect(page.locator('#presentation')).toHaveClass(/overview/);
   const slides = page.locator('.slides section[id]');
-  await expect(slides).toHaveCount(43);
+  await expect(slides).toHaveCount(46);
   const boxes = await slides.evaluateAll((slides) => slides.map((slide) => ({
     bounds: slide.getBoundingClientRect().toJSON(), visible: getComputedStyle(slide).visibility,
     background: getComputedStyle(slide).backgroundColor, shadow: getComputedStyle(slide).boxShadow,
@@ -262,7 +262,7 @@ test('overview thumbnails are framed, nonzero, clickable and return to the exact
   await page.locator('#dashboard-standalone').click();
   await expect(page.locator('#presentation')).not.toHaveClass(/overview/);
   await expect(page).toHaveURL(/#\/dashboard-standalone/);
-  await expect(page.locator('#slide-position')).toHaveText('32 / 43');
+  await expect(page.locator('#slide-position')).toHaveText('35 / 46');
 });
 
 test('print emits one complete variable-height page per reviewed slide without clipping recorded stdout', async ({ page }, testInfo) => {
@@ -271,7 +271,7 @@ test('print emits one complete variable-height page per reviewed slide without c
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.emulateMedia({ media: 'print' });
   await ready(page, '?print-pdf&theme=dark');
-  await expect(page.locator('.pdf-page')).toHaveCount(43);
+  await expect(page.locator('.pdf-page')).toHaveCount(46);
   for (const output of await page.locator('.replay-output').all()) {
     const geometry = await output.evaluate((node) => {
       const page = node.closest('.pdf-page')!;
@@ -283,7 +283,7 @@ test('print emits one complete variable-height page per reviewed slide without c
   }
   const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true,
     path: testInfo.outputPath('inside-aspire-complete.pdf') });
-  expect((pdf.toString('latin1').match(/\/Type \/Page\b/g) ?? []).length).toBe(43);
+  expect((pdf.toString('latin1').match(/\/Type \/Page\b/g) ?? []).length).toBe(46);
   await expect(page.locator('.copy-code:visible')).toHaveCount(0);
 });
 
@@ -314,7 +314,7 @@ test('print readiness waits for native pdf-ready even when the asynchronous prin
   await expect(root).toHaveAttribute('data-deck-ready', 'true');
   const firstReady = JSON.parse(await root.getAttribute('data-test-first-print-ready') ?? 'null');
   expect(firstReady).toEqual({
-    pages: 43, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 33, pageRules: 43, clippedOutputs: [],
+    pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 40, pageRules: 46, clippedOutputs: [],
   });
 });
 
@@ -330,7 +330,7 @@ test('forty cold print startups expose the complete reviewed deck at the first r
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
       const firstReady = JSON.parse(await page.locator('html').getAttribute('data-test-first-print-ready') ?? 'null');
       expect(firstReady, `Cold print load ${attempt + 1}`).toEqual({
-        pages: 43, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 33, pageRules: 43, clippedOutputs: [],
+        pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 40, pageRules: 46, clippedOutputs: [],
       });
     } finally {
       await context.close();

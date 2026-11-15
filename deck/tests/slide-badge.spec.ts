@@ -33,8 +33,8 @@ test('the default opaque bottom-left count is outside the toolbar and leaves Pre
   await expect(badge).toHaveAttribute('data-visible', 'true');
   await expect(badge).toHaveAttribute('aria-live', 'polite');
   await expect(badge).toHaveAttribute('aria-atomic', 'true');
-  await expect(badge).toHaveAttribute('aria-label', 'Slide 1 of 43');
-  await expect(badge).toHaveText('1 / 43');
+  await expect(badge).toHaveAttribute('aria-label', 'Slide 1 of 46');
+  await expect(badge).toHaveText('1 / 46');
   const actual = await badge.evaluate((element) => {
     const style = getComputedStyle(element);
     const bounds = element.getBoundingClientRect();
@@ -91,7 +91,7 @@ for (const theme of ['light', 'dark'] as const) {
           const badge = page.locator('#slide-position');
           await expect(badge).toHaveAttribute('data-position', placement);
           await expect(badge).toBeVisible();
-          await expect(badge).toHaveText('28 / 43');
+          await expect(badge).toHaveText('31 / 46');
           const bounds = (await badge.boundingBox())!;
           const toolbar = (await page.locator('.toolbar').boundingBox())!;
           const height = width >= 1280 ? 900 : 844;
@@ -125,8 +125,8 @@ test('data-visible=false fully hides any valid position while the count remains 
     await expect(badge).toBeHidden();
     expect(await badge.boundingBox()).toBeNull();
     expect(await badge.evaluate((element) => element.hidden)).toBe(true);
-    await expect(badge).toHaveText('30 / 43');
-    await expect(badge).toHaveAttribute('aria-label', 'Slide 30 of 43');
+    await expect(badge).toHaveText('33 / 46');
+    await expect(badge).toHaveAttribute('aria-label', 'Slide 33 of 46');
   }
 });
 
@@ -220,23 +220,23 @@ for (const visible of ['true', 'false']) {
     await configure(page, `data-position="bottom-left" data-visible="${visible}"`);
     await ready(page, '?mode=present#/parser');
     const badge = page.locator('#slide-position');
-    for (const expected of [25, 25, 26]) {
+    for (const expected of [27, 27, 28]) {
       await page.locator('#next').click();
-      await expect(badge).toHaveText(`${expected} / 43`);
-      await expect(badge).toHaveAttribute('aria-label', `Slide ${expected} of 43`);
+      await expect(badge).toHaveText(`${expected} / 46`);
+      await expect(badge).toHaveAttribute('aria-label', `Slide ${expected} of 46`);
     }
     for (const hash of ['#/parser/1', '#/parser/0', '#/parser']) {
       await page.goBack();
       await expect(page).toHaveURL(new RegExp(`${hash}$`));
-      await expect(badge).toHaveText('25 / 43');
-      await expect(badge).toHaveAttribute('aria-label', 'Slide 25 of 43');
+      await expect(badge).toHaveText('27 / 46');
+      await expect(badge).toHaveAttribute('aria-label', 'Slide 27 of 46');
     }
     await page.goForward();
     await expect(page).toHaveURL(/#\/parser\/0$/);
-    await expect(badge).toHaveText('25 / 43');
+    await expect(badge).toHaveText('27 / 46');
     await page.evaluate(() => { location.hash = '/deployment'; });
-    await expect(badge).toHaveText('34 / 43');
-    await expect(badge).toHaveAttribute('aria-label', 'Slide 34 of 43');
+    await expect(badge).toHaveText('37 / 46');
+    await expect(badge).toHaveAttribute('aria-label', 'Slide 37 of 46');
   });
 }
 
@@ -277,7 +277,7 @@ test.describe('static slide count fallback', () => {
   test('the initial badge is useful without JavaScript and declarative hiding still works', async ({ page }) => {
     await page.goto('');
     await expect(page.locator('#slide-position')).toBeVisible();
-    await expect(page.locator('#slide-position')).toHaveText('1 / 43');
+    await expect(page.locator('#slide-position')).toHaveText('1 / 46');
     await expect(page.locator('.toolbar #slide-position')).toHaveCount(0);
     await configure(page, 'data-position="bottom-left" data-visible="false"');
     await page.goto('');

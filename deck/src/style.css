@@ -404,6 +404,14 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
 .primary-link { display: inline-flex; align-items: center; gap: 16px; min-height: max(52px, calc(52px / var(--slide-scale, 1))); margin-top: 22px; padding: 10px 24px; border: 1px solid transparent; border-radius: 10.4px; background: var(--action); color: var(--action-ink) !important; font-size: 27px; font-weight: 700; text-decoration: none; box-shadow: 0 11px 27px rgb(81 43 212 / 0.22); }
 .primary-link:hover { background: var(--action-hover); }
 .primary-link img { margin: 0; width: 28px; height: 28px; }
+.take-home-terminal { margin-top: 8px; }
+.take-home-output { display: grid; gap: 4px; margin: 0; padding: 10px 20px 14px; color: var(--code-ink); font: 18px/1.45 var(--font-code); }
+.take-home-output > div { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 20px; min-width: 0; }
+.take-home-output dt { color: var(--syntax-keyword); }
+.take-home-output dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.take-home-output a { color: var(--syntax-string); text-decoration: underline; text-decoration-color: currentColor; text-underline-offset: 3px; }
+.take-home-output a:hover { color: var(--code-ink); }
+.take-home-output a:focus-visible { outline: 2px solid var(--syntax-keyword); outline-offset: 3px; }
 .reveal .statement-slide h2, .reveal .closing-slide h2 { font-size: 78px; margin-bottom: 38px; }
 .reveal .big-support { font-size: 43px; line-height: 1.55; color: var(--secondary); }
 .reveal .large-copy { font-size: 36px; line-height: 1.45; }
@@ -448,6 +456,7 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
 @container (max-width: 600px) {
   .chapter-split { grid-template-columns: 1fr; gap: 16px; }
   .reveal .chapter-destinations { padding-left: 32px; }
+  .take-home-output > div { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; }
 }
 .reveal figure { margin: 0; }
 .reveal .proof-image { display: block; width: auto; height: auto; max-width: 100%; max-height: 580px; margin: 0 auto; border-radius: 10px; }

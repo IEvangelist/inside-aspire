@@ -50,7 +50,7 @@ for (const mode of ['reduce', 'read', 'print', 'receiver'] as const) {
       background: slide.getAttribute('data-background-transition'),
       durations: getComputedStyle(slide).transitionDuration.split(',').map(parseFloat),
     })));
-    expect(actual).toHaveLength(43);
+    expect(actual).toHaveLength(46);
     expect(actual.every((slide) => slide.transition === 'none' && slide.background === 'none' &&
       slide.speed === 'default' && slide.durations.every((duration) => duration === 0))).toBe(true);
     if (mode === 'receiver') {
@@ -98,7 +98,7 @@ test('native chapter-entry in/out effects retain exact Back symmetry, fragment r
   await page.evaluate(() => { location.hash = '/weather'; location.hash = '/lifecycle/1'; });
   await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'lifecycle');
   await expect(page.locator('#apphost-code .is-focused')).toHaveCount(5);
-  await expect(page.locator('#slide-position')).toHaveText('28 / 43');
+  await expect(page.locator('#slide-position')).toHaveText('31 / 46');
 });
 
 test('invalid native defaults and chapter names/styles/speeds fail with their scope', () => {

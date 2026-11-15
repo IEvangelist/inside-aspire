@@ -235,9 +235,9 @@ test('the optional reference shows real C# top-level AppHost and Go workload bou
     });
     expect(copied).toBe(await code.textContent());
   }
-  await expect(page.locator('.slides section[id]')).toHaveCount(43);
-  await expect(page.locator('pre code')).toHaveCount(33);
-  await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(31);
+  await expect(page.locator('.slides section[id]')).toHaveCount(46);
+  await expect(page.locator('pre code')).toHaveCount(40);
+  await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(38);
 });
 
 test('one bounded package/language visual batch keeps all labels, rails, source and optional references readable', async ({ page }, testInfo) => {

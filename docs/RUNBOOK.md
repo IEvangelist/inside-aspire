@@ -23,8 +23,8 @@ one application model for local processes and a target's deployment
 pipeline. The practical tasks in the table follow those definitions.
 
 The 43-slide deck has 40 timed main slides and three untimed appendices.
-Opening/setup/roadmap use 0:00-0:05; AI loops 0:05-0:37; dashboard 0:37-0:46;
-deployment 0:46-0:58; takeaways 0:58-0:59; close 0:59-1:00. NativeAOT, C#, Roslyn, DCP and
+Opening/setup/roadmap use 0:00-0:05; AI loops 0:05-0:40; dashboard 0:40-0:48;
+deployment 0:48-0:58; takeaways 0:58-0:59; close 0:59-1:00. NativeAOT, C#, Roslyn, DCP and
 gh-aw support these areas, not extra chapters. The former benefit phrases
 remain supporting ideas. History/MCP, historical metrics and sources follow
 the close only when relevant.
@@ -96,7 +96,7 @@ Native compilation is preparation, not AppHost lifecycle. The Windows script run
 
 All raw captures, telemetry, downloaded gh-aw usage, browser screenshots, and private configuration stay gitignored. Do not commit them or expose dashboard login tokens on public slides.
 
-## AI loops: read the answer, then follow the page (0:05-0:37)
+## AI loops: read the answer, then follow the page (0:05-0:40)
 
 **Task:** propose browser logging for the healthy weather frontend, without
 changing it. **Entry:** `ai-loops`, then meet the app at `weather` (0:07-0:08)
@@ -137,6 +137,40 @@ the product/docs PR and human refinement. The takeaway is checked API facts,
 not automatic permission to change the app.
 
 If you want to inspect the catalog and available section names, use `aspire docs list --format Json --non-interactive` and `aspire docs get browser-logs --format Json --non-interactive`. The verified search returns `browser-logs`, but its best section can be `Add browser logs to a resource`; do not assume that is the requested configuration section.
+
+### Docs internals: ETag, cache and fingerprint (0:29-0:36)
+
+The C# behind these slides is in [`docs/code`](code), pinned to `microsoft/aspire@213aa53`. At `index`, prove the conditional GET (`--compressed` matters: the ETag varies by encoding):
+
+```powershell
+$etag = (curl.exe -sI --compressed https://aspire.dev/llms-full.txt | Select-String '^etag:').Line.Split(': ',2)[1].Trim()
+curl.exe -s -o NUL --compressed -H "If-None-Match: $etag" -w '%{http_code} %{size_download} bytes' https://aspire.dev/llms-full.txt
+```
+
+Expect `304 0 bytes`. At `cache`, show the files behind the two caches:
+
+```powershell
+Get-ChildItem "$env:USERPROFILE\.aspire\cache\docs" | Select-Object Name, Length
+```
+
+At `docs-cache-demo`, run the same search with Debug logging. The logs go to stderr, so merge and filter them (this also keeps the CLI version off screen):
+
+```powershell
+aspire docs search "browser logs" --log-level Debug --non-interactive --nologo 2>&1 | Select-String 'DocsFetcher|DocsIndexService|Found'
+```
+
+Expect a 304 and `Loaded ... documents from cache`. If the network is down, stay on the slide's captured 200/304 panels.
+
+### Audience docs question (promised in the event listing)
+
+The listing asks attendees to bring a question they'd normally open the Aspire docs to answer. The intro notes ask them to hold it; at `live-cli` (0:09), before Next, take one question and answer it in the prepared terminal:
+
+```powershell
+aspire docs search "<their words>" --non-interactive
+aspire docs get <top-slug> --non-interactive
+```
+
+Run one search before doors open so the docs index is already cached. Time-box the answer to about 90 seconds and recover it in `docs-section`. If no one has a question or the network is down, stay on the recording. The point to land: this is the same lookup the shipped skills tell an assistant to run.
 
 Show the actual returned content: runtime configuration, browser/profile/user-data options, optional persistence, interaction-service requirement, and immediate apply. Then point to the exact C# member ID and signature. Only API search accepts `--language`; get follows the current returned ID. A zero exit, empty result, or name-only hit is not the payoff.
 
@@ -265,7 +299,7 @@ produces `Package.{version}.json`; [Astro corpus configuration](https://github.c
 excludes `reference/api/**` from the narrative corpus. Current CLI captures
 use published context, not a proven automatic matching-semver selection.
 
-## Aspire dashboard: integrated and independent (0:37-0:46)
+## Aspire dashboard: integrated and independent (0:40-0:48)
 
 **Task:** explain the Madison forecast that just loaded. **Entry:** `dashboard`.
 The development AppHost must already be healthy from preparation; do not build
@@ -307,7 +341,7 @@ its private Compose network. The dashboard's unsecured-ingestion warning is
 not permission to expose it publicly. This is short-term diagnostics, not
 unlimited production retention or remote AppHost orchestration.
 
-## Aspire deployment: model, publish, deploy (0:46-0:58)
+## Aspire deployment: model, publish, deploy (0:48-0:58)
 
 **Task:** run the same weather app without the development AppHost.
 **Entry:** `deployment`. David selected real **local Docker Compose**; no cloud
@@ -412,14 +446,15 @@ The CLI remains the main inner-loop enabler: current docs/API/state -> precise a
 | 0:14-0:18 | `evidence` -> `writer`: follow the page to its feature PR, docs draft and human refinement |
 | 0:18-0:22 | `docs-supply` -> `workflow` -> `stay-current`: review/release, allowed writes and current docs |
 | 0:22-0:26 | `act-precisely` -> `runtime-wait` -> `runtime-state` -> `runtime-traces`: return to the app, wait, inspect resources, read the trace |
-| 0:26-0:33 | `skills-vs-tools` -> `skills` -> `api-index` -> `index` -> `parser` -> `lexical`: instructions, tools and separate API/narrative machinery |
-| 0:33-0:37 | `compiler` -> `lifecycle` -> `the-loop`: native/managed processes, executable wiring and the developer loop |
-| 0:37-0:46 | `dashboard` -> `dashboard-integrated` -> `dashboard-standalone` -> `dashboard-signals`: what happened, integrated resources, standalone startup, telemetry |
-| 0:46-0:58 | `deployment` -> `deployment-model` -> `deployment-publish` -> `deployment-deploy` -> `deployment-boundaries`: why, documented pipeline and explicit guardrails |
+| 0:26-0:29 | `skills-vs-tools` -> `skills` -> `api-index`: instructions, tools and the separate API index |
+| 0:29-0:36 | `docs-command` -> `index` -> `cache` -> `parser` -> `lexical` -> `docs-cache-demo`: one index behind every docs command, ETag/304, two caches and a fingerprint, parsing, ranking, then the live debug log |
+| 0:36-0:40 | `compiler` -> `lifecycle` -> `the-loop`: native/managed processes, executable wiring and the developer loop |
+| 0:40-0:48 | `dashboard` -> `dashboard-integrated` -> `dashboard-standalone` -> `dashboard-signals`: what happened, integrated resources, standalone startup, telemetry |
+| 0:48-0:58 | `deployment` -> `deployment-model` -> `deployment-publish` -> `deployment-deploy` -> `deployment-boundaries`: why, documented pipeline and explicit guardrails |
 | 0:58-0:59 | `takeaways`: Aspire makes AI more efficient; improves the dev inner loop; carries one app model into deployment |
 | 0:59-1:00 | `close`: try the commands and get the code |
 
-The speaker notes have 40 contiguous, nonoverlapping ranges covering exactly 60 minutes. Each is a spoken talk track, with separate CUE, BRIDGE and IF ASKED paragraphs where needed. David's bracketed 20-second example on `setup` remains for him to fill in. Stop at the main close. The 43-slide deck has 40 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
+The speaker notes have 40 contiguous, nonoverlapping ranges covering exactly 60 minutes. Every note uses the same labels: **SAY** (key points to make in your own words, not a script), **DO** (on-screen actions), **RUN** (exact commands; click a box in the speaker view to select it), **PROMPT** (text to paste into Copilot Chat), **CLICK** (what Next does on that slide), **NEXT SLIDE** (a one-line lead-in), **DON'T** (guardrails) and **IF ASKED** (only if someone asks). David's **YOUR STORY** 20-second example on `setup` remains for him to fill in. Stop at the main close. The 43-slide deck has 40 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
 
 The shell's manual [template 719 UX sync](evidence/template-ux.json) is unchanged;
 the current story changes the opening, order and talk track. Existing line-highlight fragments, the remaining paired

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=43;
+const slideCount=46;
 
 async function ready(page: Page,path='') {
   await page.goto(path);
@@ -185,7 +185,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(33);
+  expect(blocks.length).toBe(40);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
     ['bash','csharp','go','json','plaintext','powershell','yaml']);
   for(const block of blocks) {

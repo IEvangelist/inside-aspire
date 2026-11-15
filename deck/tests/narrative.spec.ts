@@ -7,7 +7,8 @@ const order = [
   'intro', 'setup', 'thesis', 'ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section',
   'api-search', 'api-member', 'api-code', 'evidence', 'writer', 'docs-supply', 'workflow',
   'stay-current', 'act-precisely',
-  'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'api-index', 'index', 'parser', 'lexical',
+  'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'api-index', 'docs-command', 'index', 'cache', 'parser', 'lexical',
+  'docs-cache-demo',
   'compiler', 'lifecycle', 'the-loop', 'dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals',
   'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'deployment-boundaries', 'takeaways', 'close',
   'history', 'historical-evidence', 'sources',
@@ -17,10 +18,10 @@ const chapters = [
     slides: ['ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code',
       'evidence', 'writer', 'docs-supply', 'workflow', 'stay-current',
       'act-precisely', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills',
-      'api-index', 'index', 'parser', 'lexical', 'compiler', 'lifecycle', 'the-loop'],
+      'api-index', 'docs-command', 'index', 'cache', 'parser', 'lexical', 'docs-cache-demo', 'compiler', 'lifecycle', 'the-loop'],
     purposes: ['why', 'proof', 'proof', 'proof', 'proof', 'proof', 'proof', 'proof',
       'proof', 'proof', 'machinery', 'machinery', 'why', 'why', 'proof', 'proof', 'proof',
-      'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery'] },
+      'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'machinery', 'proof', 'machinery', 'machinery', 'machinery'] },
   { point: points[1], why: 'Resource health, traces, logs and metrics in one place.',
     slides: ['dashboard', 'dashboard-integrated', 'dashboard-standalone', 'dashboard-signals'],
     purposes: ['why', 'proof', 'proof', 'machinery'] },
@@ -95,7 +96,7 @@ test('speaker notes cover a contiguous full-hour presentation with untimed appen
   await page.goto('');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const main = await page.locator('section:not([data-appendix]) > .notes').allTextContents();
-  expect(main).toHaveLength(40);
+  expect(main).toHaveLength(43);
   const spans = main.map((note) => {
     const match = note.match(/^(\d):(\d{2})-(\d):(\d{2})\./);
     expect(match, `A main slide is missing its explicit time range: ${note.slice(0, 90)}`).not.toBeNull();
@@ -165,7 +166,7 @@ for (const mode of ['present', 'read'] as const) {
         await expect(page.locator(`#${first} h2`)).toBeInViewport();
         await expect(page.locator(`#${first} [data-why]`)).toBeVisible();
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
-        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 43`);
+        await expect(page.locator('#slide-position')).toHaveText(`${order.indexOf(first) + 1} / 46`);
         await page.locator('#next').click();
         await expect(page).toHaveURL(new RegExp(`#/${chapter.slides[1]}(?:/\\d+)?$`));
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);

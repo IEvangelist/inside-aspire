@@ -23,7 +23,7 @@ for (const theme of ['light', 'dark'] as const) {
         }
         await expect(page).toHaveURL(/#\/setup$/);
         await expect(page.locator('#setup h2')).toBeInViewport();
-        await expect(page.locator('#slide-position')).toHaveText('2 / 43');
+        await expect(page.locator('#slide-position')).toHaveText('2 / 46');
         const bounds = await page.locator('#setup h2').boundingBox();
         const toolbar = await page.locator('.toolbar').boundingBox();
         expect(bounds!.y).toBeGreaterThanOrEqual(toolbar!.y + toolbar!.height - 1);
@@ -137,11 +137,11 @@ test('feature story preserves real links, experimental scope, and explicit maint
   expect(pr).toEqual({ number: 775, state: 'closed', merged: true, merged_by: { login: 'davidfowl' } });
   await expect(page.locator('#browser-evidence')).toContainText(evidence.scope.experimentalDiagnostic);
   await expect(page.locator('#browser-evidence')).toContainText(evidence.scope.package);
-  await expect(page.locator('#browser-evidence')).toContainText("haven't wired it into the weather app");
+  await expect(page.locator('#browser-evidence')).toContainText("isn't wired into the weather app");
   await expect(page.locator('#browser-evidence .notes')).toContainText('WithBrowserLogs captures console output');
   const audience = await page.locator('section[id]').allTextContents();
   expect(audience.join('\n')).not.toMatch(/19478|33887017276|1619|human_reviews|outcome_status|Show-DocsLoop\.ps1/);
-  await expect(page.locator('section[id]')).toHaveCount(43);
+  await expect(page.locator('section[id]')).toHaveCount(46);
 });
 
 test('three-area audience surfaces render coherently in one desktop/mobile visual batch', async ({ page }, testInfo) => {

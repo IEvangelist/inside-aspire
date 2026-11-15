@@ -18,8 +18,8 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     for (const [previous, id, next, counter, second] of [
-      ['index', 'parser', 'lexical', '25 / 43', [7, 8, 9]],
-      ['compiler', 'lifecycle', 'the-loop', '28 / 43', [7, 8, 9, 10, 11]],
+      ['cache', 'parser', 'lexical', '27 / 46', [7, 8, 9]],
+      ['compiler', 'lifecycle', 'the-loop', '31 / 46', [7, 8, 9, 10, 11]],
     ] as const) {
       await page.goto(`?mode=present#/${previous}`);
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
@@ -80,11 +80,11 @@ for (const interaction of ['pointer copy', 'non-scrolling code body'] as const) 
     }
     await page.keyboard.press('ArrowLeft');
     await expect.poll(() => state(page)).toEqual({
-      slide: 'lifecycle', counter: '28 / 43', hash: '#/lifecycle/0', lines: [1, 2, 3, 4, 5],
+      slide: 'lifecycle', counter: '31 / 46', hash: '#/lifecycle/0', lines: [1, 2, 3, 4, 5],
     });
     await page.keyboard.press('ArrowLeft');
     await expect.poll(() => state(page)).toEqual({
-      slide: 'lifecycle', counter: '28 / 43', hash: '#/lifecycle', lines: [],
+      slide: 'lifecycle', counter: '31 / 46', hash: '#/lifecycle', lines: [],
     });
     await page.keyboard.press('ArrowLeft');
     await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'compiler');

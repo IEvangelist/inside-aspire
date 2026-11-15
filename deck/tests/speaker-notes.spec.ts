@@ -125,7 +125,7 @@ test('speaker preview receivers stay in presentation mode when the audience open
     await expect(current.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(upcoming.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'parser');
-    await expect(popup.locator('.speaker-controls-notes .value')).toContainText('0:31-0:32.');
+    await expect(popup.locator('.speaker-controls-notes .value')).toContainText('0:32-0:33.');
     await expect(page.locator('html')).toHaveAttribute('data-reading', 'true');
   } finally {
     await popup.close();

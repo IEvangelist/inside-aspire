@@ -198,7 +198,7 @@ test('focused fragment deep links, Back/Forward, overview and hidden-link focus 
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await expect(slide.locator('.cli-terminal')).toHaveAttribute('data-replay-phase', 'complete');
   await expect(slide.locator('.replay-command')).toBeFocused();
-  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 8 of 43');
+  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 8 of 46');
   await page.goBack();
   await expect(slide).not.toHaveClass(/is-terminal-focused/);
   await expect(link).toBeFocused();
@@ -206,7 +206,7 @@ test('focused fragment deep links, Back/Forward, overview and hidden-link focus 
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await page.locator('#next').click();
   await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'api-search');
-  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 9 of 43');
+  await expect(page.locator('#slide-position')).toHaveAttribute('aria-label', 'Slide 9 of 46');
   await page.goBack();
   await expect(slide).toHaveClass(/is-terminal-focused/);
   await page.locator('#presentation').focus();
@@ -290,8 +290,8 @@ test('reading, print and no-JavaScript retain titles, provenance links and every
   }
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('.pdf-page')).toHaveCount(43);
-  await expect(page.locator('pre code')).toHaveCount(33);
+  await expect(page.locator('.pdf-page')).toHaveCount(46);
+  await expect(page.locator('pre code')).toHaveCount(40);
   for (const id of focusedIds) {
     await expect(page.locator(`#${id} h2`)).toBeVisible();
     const support = page.locator(`#${id} > .terminal-support`);

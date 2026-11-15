@@ -37,6 +37,9 @@ The public source snapshot and the released CLI baseline are distinct provenance
 ## Architecture anchors
 
 - [`DocsFetcher.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsFetcher.cs): default corpus, conditional HTTP/ETag fetching and cache behavior.
+- [`DocsSearchCommand.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Commands/DocsSearchCommand.cs): the `aspire docs search` command handing off to the shared index.
+- [`CachedHttpDocumentFetcher.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs): `If-None-Match`, 304 reuse, 200 storage and offline fallback.
+- [`FileBackedDocumentContentCache.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/FileBackedDocumentContentCache.cs) and [`SourceContentFingerprint.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/SourceContentFingerprint.cs): memory/disk content cache and the schema-salted XxHash3 index fingerprint.
 - [`LlmsTxtParser.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/LlmsTxtParser.cs): fenced-code-aware H1 document and H2+ section parsing.
 - [`DocsIndexService.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs): fingerprint/cached indexing and local weighted lexical ranking.
 - [`ApiDocsIndexService.cs`](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/ApiDocs/ApiDocsIndexService.cs): separate API-reference index.

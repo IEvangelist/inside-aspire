@@ -14,8 +14,9 @@ hljs.registerLanguage('terminal-output', () => ({
   contains: [
     { scope: 'comment', match: /^\d{2}:\d{2}:\d{2}/m },
     { scope: 'title', match: /Steps Summary:|Step timeline:/ },
-    { scope: 'string', match: /✓|[╶╴─]+|\b(?:Pipeline succeeded|Completed successfully|\d+\/\d+ steps succeeded)\b/ },
-    { scope: 'meta', match: /→|\[INF\]/ },
+    { scope: 'string', match: /✓|[╶╴─]+|\b(?:Pipeline succeeded|Completed successfully|\d+\/\d+ steps succeeded|304 Not Modified)\b/ },
+    { scope: 'meta', match: /→|\[INF\]|\[(?:dbug|info)\]/ },
+    { scope: 'title', match: /\b(?:DocsFetcher|DocsCache|DocsIndexService):/ },
     { scope: 'number', match: /\b\d+(?:\.\d+)?(?:ms|s|m)\b/ },
     { scope: 'comment', match: /[│┬]/ },
   ],
@@ -75,8 +76,8 @@ export function highlightCode() {
     if (!language || !hljs.getLanguage(language)) throw new Error(`Unsupported code language: ${language}`);
     const pre = code.parentElement;
     const terminal = pre?.hasAttribute('data-terminal-output') ?? false;
-    if (terminal && (language !== 'plaintext' || !pre?.classList.contains('replay-output'))) {
-      throw new Error('Terminal output styling requires a plaintext replay output.');
+    if (terminal && (language !== 'plaintext' || !(pre?.classList.contains('replay-output') || pre?.closest('.code-panel')))) {
+      throw new Error('Terminal output styling requires a plaintext replay output or code panel.');
     }
     const source = code.textContent ?? '';
     const result = hljs.highlight(source, { language: terminal ? 'terminal-output' : language, ignoreIllegals: false });

@@ -141,8 +141,8 @@ for (const theme of ['light', 'dark'] as const) {
       const scroller = dialog.locator('.details-scroll');
       await expect(dialog).toBeVisible();
       expect(await nodes.evaluate((nodes) => nodes.every((node) => node.isConnected && !!node.closest('#slide-details')))).toBe(true);
-      await expect(page.locator('pre code')).toHaveCount(33);
-      await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(31);
+      await expect(page.locator('pre code')).toHaveCount(40);
+      await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(38);
       const geometry = await dialog.evaluate((element) => {
         const box = element.getBoundingClientRect();
         const body = element.querySelector<HTMLElement>('.details-scroll')!;
@@ -215,7 +215,7 @@ test('slide, overview, explicit mode changes and page teardown close and restore
   for (const method of ['slide', 'toggleOverview'] as const) {
     await page.locator('#history summary').click();
     await page.evaluate((method) => {
-      window.postMessage(JSON.stringify({ method, args: method === 'slide' ? [39] : [true] }), location.origin);
+      window.postMessage(JSON.stringify({ method, args: method === 'slide' ? [42] : [true] }), location.origin);
     }, method);
     await expect(page.locator('#slide-details')).toBeHidden();
     await expect(page.locator('#history #go-apphost-code')).toHaveCount(1);
@@ -269,8 +269,8 @@ test('reading disclosures stay native, print restores all original code, and no-
   expect(await snapshot(page)).toEqual(before);
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('.pdf-page')).toHaveCount(43);
-  await expect(page.locator('pre code')).toHaveCount(33);
+  await expect(page.locator('.pdf-page')).toHaveCount(46);
+  await expect(page.locator('pre code')).toHaveCount(40);
   await expect(page.locator('#history #go-apphost-code')).toBeVisible();
   await expect(page.locator('#history #go-service-code')).toBeVisible();
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -336,7 +336,7 @@ test('speaker current/upcoming state and actual native indices stay unchanged wh
     }));
     const before = await snapshot(page);
     const revealState = await nativeState();
-    expect(revealState).toMatchObject({ indexh: 40, indexv: 0, paused: false });
+    expect(revealState).toMatchObject({ indexh: 43, indexv: 0, paused: false });
     expect(revealState).not.toHaveProperty('indexf');
     await page.locator('#history summary').click();
     await expect(page.locator('#slide-details')).toBeVisible();

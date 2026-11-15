@@ -41,7 +41,7 @@ test('default and chapter transitions visibly animate both outgoing and incoming
       .getAnimations().every((animation) => animation.playState !== 'running'));
     const allTransitions = await page.locator('.slides > section[id]').evaluateAll((slides) =>
       slides.map((slide) => slide.getAttribute('data-transition')));
-    expect(allTransitions).toHaveLength(43);
+    expect(allTransitions).toHaveLength(46);
     expect(allTransitions.every((transition) => transition && transition !== 'none')).toBe(true);
     const result = await page.evaluate(async ({ from, to }) => {
       const outgoing = document.getElementById(from)!;
