@@ -24,7 +24,7 @@ test('contiguous code focus bands have square interior joins and only their oute
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   for (const theme of ['light', 'dark']) {
     for (const [slide, code, ranges] of [
-      ['parser', 'parser-code', [[1, 5], [7, 9]]],
+      ['docs-command', 'docs-command-code', [[1, 3], [5, 7]]],
       ['lifecycle', 'apphost-code', [[1, 5], [7, 11]]],
     ] as const) {
       await page.goto(`?theme=${theme}&mode=present#/${slide}`);
@@ -47,7 +47,8 @@ test('contiguous code focus bands have square interior joins and only their oute
         await expect(page).toHaveURL(new RegExp(`#/${slide}/${index}$`));
       }
       await page.locator('#previous').click();
-      expect((await focusedCorners(page, code)).map((line) => line.number)).toEqual([1, 2, 3, 4, 5]);
+      expect((await focusedCorners(page, code)).map((line) => line.number)).toEqual(
+        Array.from({ length: ranges[0][1] - ranges[0][0] + 1 }, (_, offset) => ranges[0][0] + offset));
       const path = testInfo.outputPath(`${slide}-${theme}-connected-focus-band.png`);
       await page.screenshot({ path });
       await testInfo.attach(`${slide}-${theme}-connected-focus-band`, { path, contentType: 'image/png' });
@@ -236,7 +237,7 @@ test('the optional reference shows real C# top-level AppHost and Go workload bou
     expect(copied).toBe(await code.textContent());
   }
   await expect(page.locator('.slides section[id]')).toHaveCount(46);
-  await expect(page.locator('pre code')).toHaveCount(40);
+  await expect(page.locator('pre code')).toHaveCount(55);
   await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(38);
 });
 

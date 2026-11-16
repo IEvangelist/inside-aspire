@@ -40,9 +40,11 @@ test('default and chapter transitions visibly animate both outgoing and incoming
     await page.waitForFunction(() => document.querySelector('.slides > section.present')!
       .getAnimations().every((animation) => animation.playState !== 'running'));
     const allTransitions = await page.locator('.slides > section[id]').evaluateAll((slides) =>
-      slides.map((slide) => slide.getAttribute('data-transition')));
+      slides.map((slide) => ({ id: slide.id, transition: slide.getAttribute('data-transition') })));
     expect(allTransitions).toHaveLength(46);
-    expect(allTransitions.every((transition) => transition && transition !== 'none')).toBe(true);
+    expect(allTransitions.filter(({ transition }) => transition === 'none').map(({ id }) => id))
+      .toEqual(['docs-command', 'index', 'cache', 'parser', 'lexical', 'docs-cache-demo']);
+    expect(allTransitions.every(({ transition }) => transition)).toBe(true);
     const result = await page.evaluate(async ({ from, to }) => {
       const outgoing = document.getElementById(from)!;
       const incoming = document.getElementById(to)!;

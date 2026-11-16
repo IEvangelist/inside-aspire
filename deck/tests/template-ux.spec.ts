@@ -314,7 +314,7 @@ test('print readiness waits for native pdf-ready even when the asynchronous prin
   await expect(root).toHaveAttribute('data-deck-ready', 'true');
   const firstReady = JSON.parse(await root.getAttribute('data-test-first-print-ready') ?? 'null');
   expect(firstReady).toEqual({
-    pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 40, pageRules: 46, clippedOutputs: [],
+    pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 55, pageRules: 46, clippedOutputs: [],
   });
 });
 
@@ -330,7 +330,7 @@ test('forty cold print startups expose the complete reviewed deck at the first r
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
       const firstReady = JSON.parse(await page.locator('html').getAttribute('data-test-first-print-ready') ?? 'null');
       expect(firstReady, `Cold print load ${attempt + 1}`).toEqual({
-        pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 40, pageRules: 46, clippedOutputs: [],
+        pages: 46, ids: baseline.slides.map((slide: { id: string }) => slide.id), codeBlocks: 55, pageRules: 46, clippedOutputs: [],
       });
     } finally {
       await context.close();

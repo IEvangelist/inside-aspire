@@ -21,6 +21,31 @@ test('native deck defaults, real chapter settings and explicit slide attributes 
     Math.max(...getComputedStyle(node).transitionDuration.split(',').map(parseFloat)))).toBe(0.8);
 });
 
+test('the request walkthrough changes slides without moving either slide, in both directions', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'One presentation-mode transition regression suffices.');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  for (const [from, lastStep, to] of [
+    ['docs-command', 7, 'index'],
+    ['index', 7, 'cache'],
+    ['cache', 4, 'parser'],
+    ['parser', 1, 'lexical'],
+    ['lexical', 4, 'docs-cache-demo'],
+  ] as const) {
+    await ready(page, `?mode=present#/${from}/${lastStep}`);
+    for (const id of [from, to]) {
+      const slide = page.locator(`#${id}`);
+      await expect(slide).toHaveAttribute('data-transition', 'none');
+      expect(await slide.evaluate((element) => getComputedStyle(element).transitionProperty)).toBe('none');
+    }
+    await page.locator('#next').click();
+    await expect(page).toHaveURL(new RegExp(`#/${to}$`));
+    await expect(page.locator(`#${to}`)).toHaveClass(/present/);
+    await page.locator('#previous').click();
+    await expect(page).toHaveURL(new RegExp(`#/${from}/${lastStep}$`));
+    await expect(page.locator(`#${from}`)).toHaveClass(/present/);
+  }
+});
+
 test('an explicit native slide speed and background override chapter and deck values without changing source text', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One actual native-attribute override fixture suffices.');
   await page.route((url) => url.pathname === '/inside-aspire/', async (route) => {

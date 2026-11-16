@@ -30,6 +30,15 @@ test('loads local assets, actual slide content, and readable mobile text',async 
   await expect(page.locator('#api-index')).toContainText('Roslyn');
   await expect.poll(() => page.locator('.brand-link img').evaluateAll((images) =>
     images.every((image) => image instanceof HTMLImageElement&&image.complete&&image.naturalWidth>0))).toBe(true);
+  const images = await page.locator('img').evaluateAll(async (nodes) => {
+    const images = nodes as HTMLImageElement[];
+    await Promise.all(images.map(async (image) => {
+      image.loading = 'eager';
+      await image.decode();
+    }));
+    return images.map((image) => ({ path: new URL(image.src).pathname, width: image.naturalWidth }));
+  });
+  expect(images.every((image) => image.width > 0 && !image.path.includes('/inside-aspire/inside-aspire/'))).toBe(true);
   if(testInfo.project.name==='mobile') {
     await expect(page.locator('html')).toHaveAttribute('data-reading','true');
     const title=await page.locator('#intro h1').boundingBox();
@@ -185,7 +194,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(40);
+  expect(blocks.length).toBe(55);
   expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
     ['bash','csharp','go','json','plaintext','powershell','yaml']);
   for(const block of blocks) {
@@ -288,11 +297,11 @@ test('speaker advance and back restore graph and code emphasis without backgroun
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(4);
   await ready(page,'?mode=present#/parser');
   await page.locator('#next').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(5);
+  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
   await page.locator('#next').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(3);
+  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
   await page.locator('#previous').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(5);
+  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
   await ready(page,'?mode=present#/the-loop/2');
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(3);
   await page.evaluate(() => { window.location.hash='/weather'; });

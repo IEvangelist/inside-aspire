@@ -17,9 +17,9 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
     test.skip(testInfo.project.name === 'mobile', 'Actual two desktop themes exercise presentation controls; mobile retains natural reading.');
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    for (const [previous, id, next, counter, second] of [
-      ['cache', 'parser', 'lexical', '27 / 46', [7, 8, 9]],
-      ['compiler', 'lifecycle', 'the-loop', '31 / 46', [7, 8, 9, 10, 11]],
+    for (const [previous, id, next, counter, second, first] of [
+      ['cache', 'parser', 'lexical', '27 / 46', [5, 9], [1, 2]],
+      ['compiler', 'lifecycle', 'the-loop', '31 / 46', [7, 8, 9, 10, 11], [1, 2, 3, 4, 5]],
     ] as const) {
       await page.goto(`?mode=present#/${previous}`);
       await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
@@ -34,7 +34,7 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
         await expect(page.locator('.slides section.present')).toHaveAttribute('id', index < 2 ? id : next);
         trace.push(await state(page));
       }
-      for (const [index, lines] of [[0, [...second]], [1, [1, 2, 3, 4, 5]], [2, []]] as const) {
+      for (const [index, lines] of [[0, [...second]], [1, [...first]], [2, []]] as const) {
         if (method === 'history') await page.goBack();
         else if (method === 'keyboard') await page.keyboard.press('ArrowLeft');
         else await page.locator('#previous').click();
@@ -47,7 +47,8 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
       else if (method === 'keyboard') await page.keyboard.press('ArrowLeft');
       else await page.locator('#previous').click();
       await expect(page.locator('.slides section.present')).toHaveAttribute('id', previous);
-      expect((await state(page)).lines).toEqual([]);
+      expect((await state(page)).lines).toEqual(previous === 'cache' && method !== 'history'
+        ? [3, 4, 5, 6, 7, 8, 9, 10, 11] : []);
       trace.push(await state(page));
       await testInfo.attach(`${id}-${method}-complete-back-navigation`, {
         body: JSON.stringify(trace, null, 2), contentType: 'application/json',
@@ -56,7 +57,7 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
         await page.goForward();
         await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}`, lines: [] });
         await page.goForward();
-        await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}/0`, lines: [1, 2, 3, 4, 5] });
+        await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}/0`, lines: [...first] });
       }
     }
   });

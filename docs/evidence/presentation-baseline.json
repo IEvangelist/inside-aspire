@@ -616,25 +616,81 @@
         "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L151-L220"
       ],
       "images": [],
-      "steps": [],
-      "replay": null,
-      "diagrams": [],
-      "pairs": [
+      "steps": [
         {
-          "className": "code-pair",
-          "children": 2
+          "code": "docs-command-code",
+          "lines": "1-3",
+          "index": "0"
+        },
+        {
+          "code": "docs-command-code",
+          "lines": "5-7",
+          "index": "1"
+        },
+        {
+          "code": "docs-search-code",
+          "lines": "1-2",
+          "index": "2"
+        },
+        {
+          "code": "docs-ensure-code",
+          "lines": "1",
+          "index": "3"
+        },
+        {
+          "code": "docs-lock-code",
+          "lines": "6,9-12",
+          "index": "4"
+        },
+        {
+          "code": "docs-load-code",
+          "lines": "1-4",
+          "index": "5"
+        },
+        {
+          "code": "docs-index-cache-code",
+          "lines": "2-4,7-8",
+          "index": "6"
+        },
+        {
+          "code": "docs-fetch-code",
+          "lines": "4-6",
+          "index": "7"
         }
       ],
-      "textSha256": "e0f8af2cefcf66d22a8247199f866afc94fe4024a3b78dc91ad2e38112efddc1",
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "c907e70075469313dc1a67d128c9ec48eafea4c924d36aa2553d3a567268e647",
       "notesSha256": "7258565a00c0f6b3197fae6b109f34c04c9ca7534588f2722e84cd800cf37b23",
       "codes": [
         {
           "language": "language-csharp",
-          "sha256": "07144d368cfb300374b38c6303e0f5d3f9d4b2aeedc55f1001ef7ca7ac54f36b"
+          "sha256": "a0d309dbfb6a1164b3ac3a9cee9f4436f65c39a1615c8994633be385e561b520"
         },
         {
           "language": "language-csharp",
-          "sha256": "720075071b6818b5f786a256bc4582332a440f021fc73fb1b90fd49de7d17d82"
+          "sha256": "b52f539609bb7ce0c4dd379556bc712afc33072727a16b685acd55326176b313"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "b9a61b2b59148cf7470e50e3f8186baba585c3f30ae6f4409145190ab2bc4cfb"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "1cc4027d04ce7da486a56e2b76ed6adc224c05c46c2f5b42a43d7cd9892b03ca"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "165fab5c9f302f0d2e11089f4b107a7be39b72d27c5186d8144dbfe8db36d9bc"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "5491309f07984fb64c055e1694d967f92fba0de852f8547c2ff767725504b725"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "318dd2d1d0edd1a4f68112148a9ddc3de73fe53262e2ae4b8d28bd6e211022cd"
         }
       ]
     },
@@ -648,25 +704,81 @@
         "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L48-L86"
       ],
       "images": [],
-      "steps": [],
-      "replay": null,
-      "diagrams": [],
-      "pairs": [
+      "steps": [
         {
-          "className": "code-pair",
-          "children": 2
+          "code": "docs-etag-cache-code",
+          "lines": "2",
+          "index": "0"
+        },
+        {
+          "code": "docs-request-code",
+          "lines": "5-10",
+          "index": "1"
+        },
+        {
+          "code": "docs-not-modified-code",
+          "lines": "1,3,6",
+          "index": "2"
+        },
+        {
+          "code": "docs-text-cache-code",
+          "lines": "2",
+          "index": "3"
+        },
+        {
+          "code": "docs-content-cache-code",
+          "lines": "1-4",
+          "index": "4"
+        },
+        {
+          "code": "docs-content-cache-code",
+          "lines": "6-12",
+          "index": "5"
+        },
+        {
+          "code": "docs-refresh-code",
+          "lines": "2-6",
+          "index": "6"
+        },
+        {
+          "code": "docs-offline-code",
+          "lines": "4-9",
+          "index": "7"
         }
       ],
-      "textSha256": "bb8ab94b3c7fcb324e9f0160df4ccb846d241dbadc67721672d121a4ae950dcb",
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "0a073ba908abd031980ad7fce46d3e1627815f6efd5751644b7003e8894dc33b",
       "notesSha256": "8feac88507f6904dcf33fc4cbefb33c3d82ae5bfece9c901b5448cbcf01a0fcb",
       "codes": [
         {
           "language": "language-csharp",
-          "sha256": "f9604a399fb580fcff54debffee90ae0f134925e7cbba8fb5ab9484e95dce108"
+          "sha256": "918fdd0d6758a620daa09e94ac1cfbb967d7c653c10ac5c0217404046ff9305f"
         },
         {
           "language": "language-csharp",
-          "sha256": "7e10ed0569fce3521304b9aa6d4250f468c6ee54dd6e29296d57434a87150cc0"
+          "sha256": "d78c6e96c6ca9af79fe9f007a425802e7345cddb64e6e26e1afd944e050338e2"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "52dad24672585c08ec824cd2f6d3b7ace7946c115af5bbcb6f74741000948be9"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "56f98e26a68ac3a75a006252b31f521dea685461b9240df52049dd7a3d34b184"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "968f71895c51c343e37f538787dfa0d4c2a092a5e1ba728523386e70a63b7505"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "58d09c5b37062f243f95b48e37c3d7ec8ff122001fb8e8a196fa6cf4beadf1c0"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "16b8615d980be8cfd004f817ef149ac3304bf1a876b6ce734673085a7f652d56"
         }
       ]
     },
@@ -681,25 +793,54 @@
         "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210"
       ],
       "images": [],
-      "steps": [],
-      "replay": null,
-      "diagrams": [],
-      "pairs": [
+      "steps": [
         {
-          "className": "code-pair",
-          "children": 2
+          "code": "docs-fingerprint-code",
+          "lines": "3-5",
+          "index": "0"
+        },
+        {
+          "code": "docs-reuse-code",
+          "lines": "2-8",
+          "index": "1"
+        },
+        {
+          "code": "docs-rebuild-code",
+          "lines": "1-3",
+          "index": "2"
+        },
+        {
+          "code": "docs-rebuild-code",
+          "lines": "5-7",
+          "index": "3"
+        },
+        {
+          "code": "docs-index-offline-code",
+          "lines": "3-11",
+          "index": "4"
         }
       ],
-      "textSha256": "bd5853548a1352d4bdc003210f49e56becaa07eb59b3a3ae1db5b30403559d9b",
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "6fdabc77e897786573855a74e89b19b53c54c0f16fdc7b2043889c6851c1625b",
       "notesSha256": "63a4362e6aca274f20edb8efd3517ab857faab0ff62a8094d7ce95df04064827",
       "codes": [
         {
           "language": "language-csharp",
-          "sha256": "c766a8a7dbef1cdfb0308703ee13f415fd99ac4d4e31ade3b93d68bdadf7985e"
+          "sha256": "48dce10419bbe4c4ad1bdf1aef93a1bd1cb92453b4629c27beb2ade2817ac3e2"
         },
         {
           "language": "language-csharp",
-          "sha256": "59c6c45f56cd7d8e4747b0e65ce9aab7dc7c574f4f6c517bdb4239f4340d2127"
+          "sha256": "97feb78f7f91902bc791caf0a7dc11cb5a9b2afea7665dd664feab5928870034"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "660b1a162114f4c7b3c16032de27ee07ac039fc7e7b4141568e8a587a77e3c93"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "96c71770209b2c4d5e15f6d5210e77383413a2251d21a1dbf7f2869254d98ec9"
         }
       ]
     },
@@ -715,19 +856,19 @@
       "steps": [
         {
           "code": "parser-code",
-          "lines": "1-5",
+          "lines": "1-2",
           "index": "0"
         },
         {
           "code": "parser-code",
-          "lines": "7-9",
+          "lines": "5,9",
           "index": "1"
         }
       ],
       "replay": null,
       "diagrams": [],
       "pairs": [],
-      "textSha256": "fda8f4a43b74bfbc38144808f187ae35443ec8c9aa42e99a3fb82be0bf51c3e3",
+      "textSha256": "d328978921ff504a39a65152201e3429db9d9eaa9386d74ab3300c83bd708c44",
       "notesSha256": "fa15eaed67910ad50d648b6a8ece1ebf22cf423848dcd0d7cfcd9990be60baf8",
       "codes": [
         {
@@ -746,17 +887,38 @@
         "https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L266-L284"
       ],
       "images": [],
-      "steps": [],
-      "replay": null,
-      "diagrams": [],
-      "pairs": [
+      "steps": [
         {
-          "className": "code-pair",
-          "children": 2
+          "code": "docs-weights-code",
+          "lines": "",
+          "index": "0"
+        },
+        {
+          "code": "docs-idf-code",
+          "lines": "4-5",
+          "index": "1"
+        },
+        {
+          "code": "docs-rank-code",
+          "lines": "1-2,6-7",
+          "index": "2"
+        },
+        {
+          "code": "docs-map-code",
+          "lines": "1-8",
+          "index": "3"
+        },
+        {
+          "code": "docs-output-code",
+          "lines": "3-6",
+          "index": "4"
         }
       ],
-      "textSha256": "907e7b0f3a60da74e0f6e12bd07057617ebab5ad1166d849b9354927febbd2ea",
-      "notesSha256": "473a856d4b2d0e4b280a8ee67fc885016994cfc3f299b991e1401b77bcb7cf01",
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "4eb83892c752044347d041b3d2912d3f5055f1738ec1bd3acb24d8a61f67f405",
+      "notesSha256": "140d2bc71b8919c7b26b47df8b38850cec5a58b8d710157bc4753dbb1e1b4290",
       "codes": [
         {
           "language": "language-csharp",
@@ -764,7 +926,19 @@
         },
         {
           "language": "language-csharp",
-          "sha256": "16601d58891b01202d83cc5f7fccd08c07bf384d6b7bf70d17a0cd8746144e09"
+          "sha256": "226b6e16453bbdb671893697abf13291877dd7a7eaeb7485c07148792d03c460"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "6db5074ac5815b4b2a4b4ea7515495ad63814ddc7b6cc04402815ff4329d273e"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "d765951d4c8f44af9bc8f62c677947b879bd94e0409b7f05a92b3ea826bd84d8"
+        },
+        {
+          "language": "language-csharp",
+          "sha256": "ef031807e8e07824f54765a05ae258dfc0bcd11ba8b9c7758d40654759192f6a"
         }
       ]
     },
@@ -775,25 +949,31 @@
       "appendix": null,
       "links": [],
       "images": [],
-      "steps": [],
-      "replay": null,
-      "diagrams": [],
-      "pairs": [
+      "steps": [
         {
-          "className": "code-pair",
-          "children": 2
+          "code": "docs-changed-log",
+          "lines": "2,4",
+          "index": "0"
+        },
+        {
+          "code": "docs-unchanged-log",
+          "lines": "1,3-4",
+          "index": "1"
         }
       ],
-      "textSha256": "7fbffb86b34114742e7acb56d2719680d006ddb5247712540535f2594533d587",
-      "notesSha256": "aa7de189e6d403dc60334f6c0dbbcf3d39a96feab7cf290706f8a86fa1fc846f",
+      "replay": null,
+      "diagrams": [],
+      "pairs": [],
+      "textSha256": "24d7567bfd31d7f733051235812c292f979f2ea8e69da848157a0da16c0f9e49",
+      "notesSha256": "a34cb743f63e051b7db01651c468b2a26dad9d247243b6c2d7cada7986fd7fab",
       "codes": [
         {
           "language": "language-plaintext",
-          "sha256": "b0259e92e6ff0aa1f4ea11d60892ee93da829144079f2ccaa37db84a45c00da0"
+          "sha256": "4062cd3278c3ecec5ea96702b57ddefd6216ef415247bd5a42e087eb7fedf267"
         },
         {
           "language": "language-plaintext",
-          "sha256": "f3f7c80c168c0dcf38114d2b139d31d24efab1b0e633db51621aa25284ecd664"
+          "sha256": "51456d8508ec8bdb5542a92ca51b752202e26bb88c70722f60ea2ad004b815e9"
         }
       ]
     },

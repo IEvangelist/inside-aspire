@@ -50,6 +50,27 @@ the original links, dates, versions and context. The sources appendix and
 repository retain the complete evidence. The short Recorded CLI run label
 stays visible on every recorded terminal.
 
+The CLI code walkthrough keeps the existing `docs-command`, `index`, `cache`,
+`parser`, `lexical` and `docs-cache-demo` slide URLs. A nine-stage route stays
+visible while Next highlights the current source, states what that code does,
+and animates a service handoff in one full-width panel. Back restores the
+previous route stage, explanation, file and highlight. Follow the same search
+from parsed arguments through `DocsSearchService`, `DocsIndexService`,
+`DocsCache`, `DocsFetcher`, `CachedHttpDocumentFetcher` and
+`FileBackedDocumentContentCache`, then return
+through the fingerprint/parser, ranking, response mapping and JSON stdout.
+The 304, 200 and offline excerpts are alternative branches, not consecutive
+requests. Same-process index reuse avoids a fetch; a new process still
+revalidates the source before reusing its saved parsed index. Reduced motion
+keeps manual code steps; reading, print and no-JavaScript show all excerpts
+without presenter instructions.
+These are selected, display-wrapped excerpts from
+[Aspire CLI at the existing source pin](https://github.com/microsoft/aspire/tree/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli).
+Panel labels identify the file; explanatory comments mark omitted plumbing.
+The fetcher's cancellation guard precedes the displayed exception fallback.
+JSON uses the existing source-generated result-array context; plain output
+uses a table, and an empty result displays the command's no-results message.
+
 The seven long responses (`live-cli`, `docs-section`, `api-member`,
 `runtime-state`, `runtime-traces`, `deployment-publish`, `deployment-deploy`) use opt-in terminal focus: revealing output
 reclaims the title and marked supporting-copy space for a taller, viewport-safe

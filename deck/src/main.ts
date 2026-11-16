@@ -201,10 +201,13 @@ function updateModeControls() {
   disclosures.sync(printMode || printPreference.matches ? 'print' : speakerReceiver ? 'receiver' : reading ? 'read' : 'present');
 }
 
-function syncControls(animateReplay = false) {
+function syncControls(animateReplay = false, animateCode = false) {
   if (!reading) currentId = deck.getCurrentSlide()?.id ?? currentId;
   const index = slides.findIndex((slide) => slide.id === currentId);
   const slide = document.getElementById(currentId);
+  const walkingCode = !reading && !printMode && !printPreference.matches && !!slide?.querySelector('.code-walk');
+  const fragments = !staticContent() || walkingCode;
+  if (deck.getConfig().fragments !== fragments) deck.configure({ fragments });
   document.documentElement.dataset.intro = String(index === 0);
   document.documentElement.style.setProperty('--slide-scale', String(reading ? 1 : deck.getScale()));
   position.value = `${index + 1} / ${slides.length}`;
@@ -218,7 +221,7 @@ function syncControls(animateReplay = false) {
       : link.getAttribute('data-slide') === currentId;
     link.setAttribute('aria-current', current ? 'step' : 'false');
   });
-  if (slide) focusCode(slide, staticContent());
+  if (slide) focusCode(slide, walkingCode ? false : staticContent(), animateCode);
   replay.sync(slide ?? undefined, staticContent(), animateReplay && !speakerReceiver,
     !reading && !printMode && !printPreference.matches && !deck.isOverview());
   if (!reading) {
@@ -468,8 +471,8 @@ try {
     if (!reading) viewport.scrollTop = 0;
     syncControls();
   });
-  deck.on('fragmentshown', () => { disclosures.close(false); syncControls(true); });
-  deck.on('fragmenthidden', () => { disclosures.close(false); syncControls(); });
+  deck.on('fragmentshown', () => { disclosures.close(false); syncControls(true, true); });
+  deck.on('fragmenthidden', () => { disclosures.close(false); syncControls(false, true); });
   deck.on('overviewshown', () => { disclosures.close(false); syncControls(); });
   deck.on('overviewhidden', () => syncControls());
   const targetId = window.location.hash.startsWith('#/') ? window.location.hash.slice(2).split('/')[0] : '';
