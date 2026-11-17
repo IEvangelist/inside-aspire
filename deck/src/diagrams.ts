@@ -23,6 +23,7 @@ type DiagramEdge = {
   y?: number;
   kind?: 'return' | 'telemetry' | 'context';
 };
+type DiagramZone = { label: string; x: number; y: number; w: number; h: number; step: number };
 type Diagram = {
   title: string;
   description: string;
@@ -30,6 +31,7 @@ type Diagram = {
   height: number;
   nodes: DiagramNode[];
   edges: DiagramEdge[];
+  zones?: DiagramZone[];
 };
 
 const centerX = (node: DiagramNode) => node.x + node.w / 2;
@@ -56,7 +58,7 @@ const apiModelTop = centerY(apiXml) - apiModelHeight / 2;
 const diagrams: Record<string, Diagram> = {
   inner: {
     title: 'The CLI is the inner-loop enabler',
-    description: 'Shipped skills guide the agent. The native Aspire CLI retrieves current docs and exact API members, discovers the AppHost model and endpoints, waits for readiness, and takes targeted lifecycle actions. The managed C# AppHost runs the native weather resources. Observed logs, traces, and results feed the CLI and the next precise agent decision, closing the loop. No model training is implied.',
+    description: 'Shipped skills guide the agent. The native Aspire CLI retrieves current docs and exact API members, discovers the AppHost model and endpoints, waits for readiness, and takes targeted lifecycle actions. The C# AppHost runs the weather resources. Observed logs, traces, and results feed the CLI and the next precise agent decision, closing the loop. No model training is implied.',
     width: 1280, height: 530,
     nodes: [
       { id: 'agent', title: 'Agent + AI skills', detail: ['Choose the next action'], icon: 'agent', x: 40, y: 45, w: 295, h: 105, step: 0 },
@@ -131,6 +133,36 @@ const diagrams: Record<string, Diagram> = {
       { from: 'next', to: 'product', path: 'M1245 465 H1260 V8 H12 V75 H35', step: 5, kind: 'return' },
     ],
   },
+  ghaw: {
+    title: 'Inside the docs workflow: the agent reads, a separate job writes',
+    description: 'pr-docs-check.md compiles with gh aw compile into a lock workflow with six jobs and fixed permissions. A merged product PR passes a team check and renders the prompt. The agent job runs GitHub Copilot CLI inside the AWF network firewall with read-only permissions and read-only MCP tools; it can only propose outputs. A second, tool-less agent scans the patch and proposed outputs for threats. Only after detection passes does the safe-outputs job, the only job with write permissions, apply allow-listed actions: a draft docs PR in microsoft/aspire.dev that requests the product PR author as reviewer. A human reviews and merges it.',
+    width: 1280, height: 550,
+    zones: [
+      { label: 'read-only', x: 450, y: 172, w: 815, h: 161, step: 2 },
+      { label: 'write', x: 885, y: 382, w: 380, h: 161, step: 4 },
+    ],
+    nodes: [
+      { id: 'source', title: 'Workflow source', detail: ['pr-docs-check.md'], icon: 'file', x: 35, y: 20, w: 335, h: 90, step: 0 },
+      { id: 'compile', title: 'gh aw compile', detail: ['Pin actions + permissions'], icon: 'terminal', x: 470, y: 20, w: 335, h: 90, step: 0 },
+      { id: 'lock', title: 'Compiled lock file', detail: ['6 jobs, fixed permissions'], icon: 'workflow', x: 905, y: 20, w: 340, h: 90, step: 0 },
+      { id: 'trigger', title: 'Merged product PR', detail: ['Team check', 'Render the prompt'], icon: 'pr', x: 35, y: 190, w: 335, h: 125, step: 1, kind: 'gate' },
+      { id: 'agent', title: 'Agent job', detail: ['Copilot CLI in AWF firewall', 'Read-only MCP tools'], icon: 'agent', x: 470, y: 190, w: 335, h: 125, step: 2, kind: 'hub' },
+      { id: 'detection', title: 'Threat detection', detail: ['Second agent, no tools', 'Scans patch + outputs'], icon: 'shield', x: 905, y: 190, w: 340, h: 125, step: 3 },
+      { id: 'safe', title: 'Safe outputs job', detail: ['Only job that writes', 'Allow-listed actions'], icon: 'check', x: 905, y: 400, w: 340, h: 125, step: 4, kind: 'gate' },
+      { id: 'draft', title: 'Draft docs PR', detail: ['microsoft/aspire.dev#775', 'Author asked to review'], icon: 'pr', x: 470, y: 400, w: 335, h: 125, step: 4 },
+      { id: 'human', title: 'Human review + merge', detail: ['Maintainer merges', 'Back to the docs loop'], icon: 'review', x: 35, y: 400, w: 335, h: 125, step: 5, kind: 'gate' },
+    ],
+    edges: [
+      { from: 'source', to: 'compile', path: centerline, step: 0 },
+      { from: 'compile', to: 'lock', path: centerline, step: 0 },
+      { from: 'lock', to: 'trigger', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V150 H${centerX(target)} V${target.y}`, step: 1, label: 'runs on merge', x: 640, y: 140 },
+      { from: 'trigger', to: 'agent', path: centerline, step: 2, label: 'prompt', x: 420, y: 238 },
+      { from: 'agent', to: 'detection', path: centerline, step: 3, label: 'patch', x: 855, y: 238, kind: 'context' },
+      { from: 'detection', to: 'safe', path: (source, target) => `M${centerX(source)} ${source.y + source.h} V${target.y}`, step: 4, label: 'passed', x: 1130, y: 365 },
+      { from: 'safe', to: 'draft', path: centerline, step: 4 },
+      { from: 'draft', to: 'human', path: centerline, step: 5, kind: 'return' },
+    ],
+  },
   api: {
     title: 'Compiler-derived API information feeds a separate CLI index',
     description: 'Assembly DLL metadata and XML documentation feed a Roslyn canonical model; available PDB source locations enrich it. The deterministic canonical API JSON feeds the C# reference Markdown renderer. Published reference pages and their sitemap feed the separate CLI API index, which returns exact C# member IDs. Only search accepts the language filter; get follows the returned ID.',
@@ -171,53 +203,114 @@ function documentationLink(node: DiagramNode, content: string, svg = false): str
     ${svg ? '' : `title="${escape(hint)}"`}>${svg ? `<title>${escape(hint)}</title>` : ''}${content}</a>`;
 }
 
-export function renderDiagrams() {
-  for (const mount of document.querySelectorAll<HTMLElement>('[data-diagram]')) {
-    const key = mount.dataset.diagram ?? '';
-    const diagram = diagrams[key];
-    if (!diagram) throw new Error(`Unknown architecture diagram: ${key}`);
-    const nodesById = new Map(diagram.nodes.map((node) => [node.id, node]));
-    const connections = diagram.edges.map((edge) => {
-      const source = nodesById.get(edge.from);
-      const target = nodesById.get(edge.to);
-      if (!source || !target) throw new Error(`Missing endpoint for ${key}: ${edge.from} -> ${edge.to}`);
-      return {
-        ...edge,
-        path: typeof edge.path === 'function' ? edge.path(source, target) : edge.path,
-        step: Math.max(edge.step, source.step, target.step),
-      };
-    });
-    const steps = Math.max(...diagram.nodes.map((node) => node.step), ...connections.map((edge) => edge.step));
-    const stages = Array.from({ length: steps + 1 }, (_, step) => {
-      const edges = connections.filter((edge) => edge.step === step).map((edge) => `
-        <g class="graph-edge ${edge.kind ?? ''}" data-from="${edge.from}" data-to="${edge.to}">
-          <path class="edge-path" d="${edge.path}" pathLength="1" marker-end="url(#${key}-arrow)" />
-          ${edge.label ? `<text class="edge-label" x="${edge.x}" y="${edge.y}">${escape(edge.label)}</text>` : ''}
-        </g>`).join('');
-      const nodes = diagram.nodes.filter((node) => node.step === step).map((node) => {
-        const content = `
-          <rect width="${node.w}" height="${node.h}" rx="12" />
-          <g transform="translate(18 18)">${icon(node.icon)}</g>
-          <text class="node-title" x="54" y="36">${escape(node.title)}</text>
-          ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${70 + index * 30}">${escape(line)}</text>`).join('')}`;
-        return `<g class="graph-node ${node.kind ?? ''}" data-node="${node.id}" transform="translate(${node.x} ${node.y})">
-          ${documentationLink(node, content, true)}
-        </g>`;
-      }).join('');
-      return `<g class="graph-stage${step > 0 ? ' fragment' : ''}" ${step > 0 ? `data-fragment-index="${step - 1}"` : ''} data-stage="${step}">${edges}${nodes}</g>`;
+function renderSvg(key: string, diagram: Diagram, fragmentOffset: number, className: string): { svg: string; steps: number } {
+  const nodesById = new Map(diagram.nodes.map((node) => [node.id, node]));
+  const connections = diagram.edges.map((edge) => {
+    const source = nodesById.get(edge.from);
+    const target = nodesById.get(edge.to);
+    if (!source || !target) throw new Error(`Missing endpoint for ${key}: ${edge.from} -> ${edge.to}`);
+    return {
+      ...edge,
+      path: typeof edge.path === 'function' ? edge.path(source, target) : edge.path,
+      step: Math.max(edge.step, source.step, target.step),
+    };
+  });
+  const steps = Math.max(...diagram.nodes.map((node) => node.step), ...connections.map((edge) => edge.step));
+  const stages = Array.from({ length: steps + 1 }, (_, step) => {
+    const zones = (diagram.zones ?? []).filter((zone) => zone.step === step).map((zone) => `
+      <g class="graph-zone"><rect x="${zone.x}" y="${zone.y}" width="${zone.w}" height="${zone.h}" rx="18" />
+        <text class="zone-label" x="${zone.x + zone.w - 12}" y="${zone.y - 8}">${escape(zone.label)}</text></g>`).join('');
+    const edges = connections.filter((edge) => edge.step === step).map((edge) => `
+      <g class="graph-edge ${edge.kind ?? ''}" data-from="${edge.from}" data-to="${edge.to}">
+        <path class="edge-path" d="${edge.path}" pathLength="1" marker-end="url(#${key}-arrow)" />
+        ${edge.label ? `<text class="edge-label" x="${edge.x}" y="${edge.y}">${escape(edge.label)}</text>` : ''}
+      </g>`).join('');
+    const nodes = diagram.nodes.filter((node) => node.step === step).map((node) => {
+      const content = `
+        <rect width="${node.w}" height="${node.h}" rx="12" />
+        <g transform="translate(18 18)">${icon(node.icon)}</g>
+        <text class="node-title" x="54" y="36">${escape(node.title)}</text>
+        ${node.detail.map((line, index) => `<text class="node-detail" x="18" y="${70 + index * 30}">${escape(line)}</text>`).join('')}`;
+      return `<g class="graph-node ${node.kind ?? ''}" data-node="${node.id}" transform="translate(${node.x} ${node.y})">
+        ${documentationLink(node, content, true)}
+      </g>`;
     }).join('');
-    mount.innerHTML = `
-      <svg class="architecture-svg" data-graph="${key}" viewBox="0 0 ${diagram.width} ${diagram.height}" role="${diagram.nodes.some((node) => node.documentation) ? 'group' : 'img'}"
+    return `<g class="graph-stage${step > 0 ? ' fragment' : ''}" ${step > 0 ? `data-fragment-index="${fragmentOffset + step - 1}"` : ''} data-stage="${step}">${zones}${edges}${nodes}</g>`;
+  }).join('');
+  return {
+    steps,
+    svg: `
+      <svg class="${className}" data-graph="${key}" viewBox="0 0 ${diagram.width} ${diagram.height}" role="${diagram.nodes.some((node) => node.documentation) ? 'group' : 'img'}"
         aria-labelledby="${key}-title ${key}-description" xmlns="http://www.w3.org/2000/svg">
         <title id="${key}-title">${escape(diagram.title)}</title>
         <desc id="${key}-description">${escape(diagram.description)}</desc>
         <defs><marker id="${key}-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L8 5 L1 9" class="arrow-head" /></marker></defs>
         ${stages}
-      </svg>
-      <ol class="architecture-mobile" aria-label="${escape(diagram.title)}">
-        ${diagram.nodes.map((node) => `<li class="${node.kind ?? ''}" data-mobile-node="${node.id}"><span class="stage-icon">${icon(node.icon)}</span><div>${documentationLink(node, `<strong>${escape(node.title)}</strong>`)}<p>${escape(node.detail.join('. '))}</p><small>${diagram.edges.filter((edge) => edge.from === node.id).map((edge) => `To ${escape(diagram.nodes.find((target) => target.id === edge.to)?.title ?? edge.to)}`).join('; ')}</small></div></li>`).join('')}
-        ${diagram.edges.some((edge) => edge.kind === 'return') ? '<li class="cycle-return"><span class="stage-icon">' + icon('arrowRight') + '</span><div><strong>Close the loop</strong><p>Current evidence informs the next reviewed decision, not model training.</p></div></li>' : ''}
-      </ol>`;
-    mount.dataset.steps = String(steps);
+      </svg>`,
+  };
+}
+
+function renderMobile(diagram: Diagram): string {
+  return `
+    <ol class="architecture-mobile" aria-label="${escape(diagram.title)}">
+      ${diagram.nodes.map((node) => `<li class="${node.kind ?? ''}" data-mobile-node="${node.id}"><span class="stage-icon">${icon(node.icon)}</span><div>${documentationLink(node, `<strong>${escape(node.title)}</strong>`)}<p>${escape(node.detail.join('. '))}</p><small>${diagram.edges.filter((edge) => edge.from === node.id).map((edge) => `To ${escape(diagram.nodes.find((target) => target.id === edge.to)?.title ?? edge.to)}`).join('; ')}</small></div></li>`).join('')}
+      ${diagram.edges.some((edge) => edge.kind === 'return') ? '<li class="cycle-return"><span class="stage-icon">' + icon('arrowRight') + '</span><div><strong>Close the loop</strong><p>Current evidence informs the next reviewed decision, not model training.</p></div></li>' : ''}
+    </ol>`;
+}
+
+const percent = (value: number) => `${(value * 100).toFixed(3)}%`;
+
+export function renderDiagrams() {
+  for (const mount of document.querySelectorAll<HTMLElement>('[data-diagram]')) {
+    const key = mount.dataset.diagram ?? '';
+    const diagram = diagrams[key];
+    if (!diagram) throw new Error(`Unknown architecture diagram: ${key}`);
+    const parent = renderSvg(key, diagram, 0, 'architecture-svg');
+    mount.dataset.steps = String(parent.steps);
+    const drillKey = mount.dataset.drillDiagram;
+    if (!drillKey) {
+      mount.innerHTML = parent.svg + renderMobile(diagram);
+      continue;
+    }
+    // A drill zooms the parent into one node, then grows the child diagram out of that node's box.
+    const child = diagrams[drillKey];
+    const node = diagram.nodes.find((candidate) => candidate.id === mount.dataset.drillNode);
+    if (!child || !node) throw new Error(`Invalid drill for ${key}: ${mount.dataset.drillNode} -> ${drillKey}`);
+    if (child.width !== diagram.width || child.height !== diagram.height) throw new Error(`Drill ${drillKey} must match ${key}'s viewBox`);
+    // The child sits on the node at the node's width, and both zoom together so the child stays attached.
+    const seed = node.w / diagram.width;
+    const left = centerX(node) / diagram.width - seed / 2;
+    const top = centerY(node) / diagram.height - seed / 2;
+    const nested = renderSvg(drillKey, child, parent.steps + 1, 'drill-svg');
+    mount.innerHTML = `
+      <div class="drill-frame">
+        <div class="drill-stage" style="--zoom-s: ${1 / seed}; --zoom-x: ${percent(-left / seed)}; --zoom-y: ${percent(-top / seed)};
+          --seed-x: ${percent(left)}; --seed-y: ${percent(top)}; --seed-w: ${percent(seed)};">
+          ${parent.svg}${nested.svg}
+        </div>
+        <span class="fragment drill-trigger" data-fragment-index="${parent.steps}" aria-hidden="true"></span>
+      </div>
+      ${renderMobile(diagram)}${renderMobile(child)}`;
+    mount.dataset.drillSteps = String(nested.steps + 1);
+  }
+}
+
+const drillText = new WeakMap<HTMLElement, { heading: string; caption: string }>();
+
+export function syncDrills() {
+  for (const mount of document.querySelectorAll<HTMLElement>('[data-drill-diagram]')) {
+    const frame = mount.querySelector<HTMLElement>('.drill-frame');
+    const trigger = mount.querySelector<HTMLElement>('.drill-trigger');
+    const slide = mount.closest('section');
+    const heading = slide?.querySelector<HTMLElement>('h2');
+    const caption = slide?.querySelector<HTMLElement>('.diagram-caption');
+    if (!frame || !trigger || !heading || !caption) continue;
+    const drilled = trigger.classList.contains('visible') && document.documentElement.dataset.static !== 'true';
+    frame.classList.toggle('is-drilled', drilled);
+    if (!drillText.has(mount)) drillText.set(mount, { heading: heading.innerHTML, caption: caption.innerHTML });
+    const original = drillText.get(mount)!;
+    const iconMarkup = caption.querySelector('[data-icon]')?.outerHTML ?? '';
+    heading.innerHTML = drilled ? escape(mount.dataset.drillTitle ?? '') : original.heading;
+    caption.innerHTML = drilled ? `${iconMarkup} ${escape(mount.dataset.drillCaption ?? '')}` : original.caption;
   }
 }

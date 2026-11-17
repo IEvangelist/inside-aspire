@@ -1,7 +1,7 @@
 {
   "cliVersion": "13.6.4",
   "cliRelease": "https://github.com/microsoft/aspire/releases/tag/v13.6.4",
-  "behavior": "The default output is the Markdown content, ready for an assistant to read. In a redirected capture the CLI renders it as text. Add --format Json for the structured record with the same content.",
+  "behavior": "The default output is the Markdown content, ready for a model to read. In a redirected capture the CLI renders it as text. Add --format Json for the structured record with the same content.",
   "formatting": "Complete default CLI stdout/stderr; ANSI CSI/BEL removed, CRLF normalized to LF and trailing console padding removed. No content invented or omitted.",
   "interpretation": "Recorded CLI execution, not a browser command runner or benchmark.",
   "originalAndComposeCaptureFilesUnchanged": true,

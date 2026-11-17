@@ -9,7 +9,6 @@ export const transitionSettings: Settings = {
   chapters: {
     'AI loops': { speed: 'fast' },
     'Aspire dashboard': { speed: 'default', background: 'fade' },
-    'Aspire deployment': { speed: 'fast', background: 'fade' },
   },
 };
 

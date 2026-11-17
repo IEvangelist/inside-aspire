@@ -155,7 +155,7 @@ test('three-area audience surfaces render coherently in one desktop/mobile visua
     await page.goto(`?theme=${layout.theme}&mode=${layout.mode}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await page.evaluate(() => document.fonts.ready);
-    for (const id of ['thesis', 'ai-loops', 'live-cli', 'api-code', 'act-precisely', 'weather',
+    for (const id of ['drift', 'ai-loops', 'live-cli', 'api-code', 'act-precisely', 'weather',
       'skills-vs-tools', 'stay-current', 'docs-supply', 'dashboard', 'dashboard-integrated',
       'dashboard-standalone', 'deployment', 'deployment-model', 'deployment-publish', 'deployment-deploy', 'close']) {
       await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);

@@ -10,17 +10,10 @@ async function open(page: Page, id: string) {
 test('chapter openers show complete loops and the three requested takeaways', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit chapter-content check runs once.');
   await open(page, 'ai-loops');
-  const tracks = page.locator('#ai-loops .chapter-track');
-  await expect(tracks.locator('h3')).toHaveText(['Product', 'Aspire docs', 'Your app']);
-  const steps = await tracks.locator('.chapter-flow').evaluateAll((flows) =>
-    flows.map((flow) => [...flow.querySelectorAll('strong')].map((step) => step.textContent)));
-  expect(steps).toEqual([
-    ['Feature', 'AI change', 'Test + review', 'Merge'],
-    ['Feature PR', 'AI draft', 'Human edit', 'Publish'],
-    ['Inspect', 'AI edit', 'Run', 'Verify'],
+  await expect(page.locator('#ai-loops .loop-node strong')).toHaveText([
+    'A feature ships', 'A bot drafts docs.People review.', 'The CLI serves them', 'Skills guideyour AI',
   ]);
-  await expect(tracks.locator('.chapter-repeat svg')).toHaveCount(3);
-  await expect(page.locator('#ai-loops > .chapter-payoff')).toHaveCount(0);
+  await expect(page.locator('#ai-loops .loop-arc')).toHaveCount(4);
   await open(page, 'takeaways');
   await expect(page.locator('#takeaways [data-takeaway]')).toHaveText([
     'Aspire makes AI more efficient.',
@@ -34,7 +27,7 @@ test('default and chapter transitions visibly animate both outgoing and incoming
   test.setTimeout(60_000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   for (const [from, to] of [
-    ['intro', 'setup'], ['setup', 'thesis'], ['the-loop', 'dashboard'], ['deployment', 'deployment-model'],
+    ['intro', 'setup'], ['setup', 'drift'], ['the-loop', 'dashboard'], ['deployment', 'deployment-model'],
   ]) {
     await open(page, from);
     await page.waitForFunction(() => document.querySelector('.slides > section.present')!

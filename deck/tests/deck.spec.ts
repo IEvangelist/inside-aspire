@@ -47,7 +47,7 @@ test('loads local assets, actual slide content, and readable mobile text',async 
     expect(title?.y).toBeGreaterThanOrEqual((toolbar?.y??0)+(toolbar?.height??0));
     expect(await page.evaluate(() => document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
   }
-  await expect(page.locator('#thesis')).toContainText('Aspire makes AI');
+  await expect(page.locator('#setup')).toContainText('Ask AI about Aspire');
   await expect(page.locator('#close')).toContainText('more efficient.');
   await expect.poll(() => page.locator('.speaker-portrait').evaluate((image) =>
     image instanceof HTMLImageElement&&image.naturalWidth===300&&image.naturalHeight===300)).toBe(true);

@@ -15,7 +15,7 @@ const chapterProof = JSON.parse(readFileSync(resolve('..', 'docs', 'evidence', '
 test('plural loops connect real reviewed publication to current narrative and separate versioned API context', async ({ page }) => {
   await page.goto('?mode=present#/stay-current');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('#ai-loops .chapter-track h3')).toHaveText(['Product', 'Aspire docs', 'Your app']);
+  await expect(page.locator('#ai-loops .loop-node')).toHaveCount(4);
   await expect(page.locator('#stay-current')).toContainText('Narrative docs');
   await expect(page.locator('#stay-current')).toContainText('per package version');
   await expect(page.locator('#stay-current .notes')).toContainText("don't show the CLI matching docs to its own version");

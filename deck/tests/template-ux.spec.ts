@@ -353,7 +353,7 @@ test('one bounded desktop projector and narrow visual batch retains actual rich 
     await page.setViewportSize(layout);
     await page.emulateMedia({ colorScheme: layout.theme, reducedMotion: 'reduce' });
     await ready(page, `?theme=${layout.theme}&mode=${layout.mode}`);
-    for (const id of ['intro', 'thesis', 'api-code', 'parser', 'api-member', 'the-loop', 'workflow']) {
+    for (const id of ['intro', 'drift', 'api-code', 'parser', 'api-member', 'the-loop', 'workflow']) {
       await page.evaluate((id) => { location.hash = `/${id}`; }, id);
       await expect(page.locator(`#${id} h1,#${id} h2`).first()).toBeInViewport();
       const path = testInfo.outputPath(`${id}-${layout.width}x${layout.height}-${layout.theme}.png`);

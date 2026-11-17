@@ -9,7 +9,8 @@ import '@fontsource/fira-code/latin-400.css';
 import '@fontsource/fira-code/latin-500.css';
 import '@fontsource/fira-code/latin-600.css';
 import { renderIcons } from './icons';
-import { renderDiagrams } from './diagrams';
+import { renderDiagrams, syncDrills } from './diagrams';
+import { renderLoopMaps } from './loopmap';
 import { focusCode, highlightCode } from './syntax';
 import { createReplayController } from './replay';
 import { prepareWindows } from './windows';
@@ -81,6 +82,7 @@ function dimensions() {
   };
 }
 
+renderLoopMaps();
 renderIcons();
 renderDiagrams();
 prepareWindows(root, (message) => { (detailsDialog.open ? detailsStatus : status).textContent = message; },
@@ -222,6 +224,7 @@ function syncControls(animateReplay = false, animateCode = false) {
     link.setAttribute('aria-current', current ? 'step' : 'false');
   });
   if (slide) focusCode(slide, walkingCode ? false : staticContent(), animateCode);
+  syncDrills();
   replay.sync(slide ?? undefined, staticContent(), animateReplay && !speakerReceiver,
     !reading && !printMode && !printPreference.matches && !deck.isOverview());
   if (!reading) {

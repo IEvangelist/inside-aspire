@@ -8,7 +8,22 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import plaintext from 'highlight.js/lib/languages/plaintext';
 import go from 'highlight.js/lib/languages/go';
 
-const languages = { csharp, powershell, bash, yaml, json, typescript, plaintext, go };
+// Stock PowerShell treats any "-word" as a parameter, so "browser-logs" lit up; require a word boundary before the dash.
+const powershellCli: typeof powershell = (api) => {
+  const definition = powershell(api);
+  const seen = new Set<object>();
+  const visit = (node: unknown) => {
+    if (!node || typeof node !== 'object' || seen.has(node)) return;
+    seen.add(node);
+    const mode = node as { begin?: unknown };
+    if (mode.begin instanceof RegExp && mode.begin.source === '(-){1,2}[\\w\\d-]+') mode.begin = /(?<![\w-])-{1,2}[\w-]+/;
+    Object.values(node).forEach(visit);
+  };
+  visit(definition);
+  return definition;
+};
+
+const languages = { csharp, powershell: powershellCli, bash, yaml, json, typescript, plaintext, go };
 const codeWalkStages = [
   'CLI command',
   'Search service',
@@ -33,6 +48,39 @@ hljs.registerLanguage('terminal-output', () => ({
     { scope: 'comment', match: /[│┬]/ },
   ],
 }));
+
+// highlight.js leaves C#/TS call sites, types, and locals unscoped; tint them like VS Code does.
+const semanticLanguages = new Set(['csharp', 'typescript']);
+const identifier = /\b([A-Za-z_]\w*)\b/g;
+const callSuffix = /^\s*(?:<[^()<>]*(?:<[^()<>]*>)?[^()<>]*>)?\s*\(/;
+
+function semanticMarkup(markup: string): string {
+  const root = document.createElement('div');
+  root.innerHTML = markup;
+  for (const node of [...root.childNodes]) {
+    if (node.nodeType !== Node.TEXT_NODE) continue;
+    const text = node.textContent ?? '';
+    const lookahead = text + (node.nextSibling?.textContent ?? '');
+    const fragment = document.createDocumentFragment();
+    let last = 0;
+    for (const match of lookahead.matchAll(identifier)) {
+      const [, name] = match;
+      const end = match.index! + name.length;
+      if (end > text.length) break;
+      const call = callSuffix.test(lookahead.slice(end));
+      const scope = call ? 'title function_' : /^[A-Z]/.test(name) ? 'title class_' : 'variable';
+      fragment.append(text.slice(last, match.index));
+      const span = document.createElement('span');
+      span.className = scope.split(' ').map((part, index) => index ? part : `hljs-${part}`).join(' ');
+      span.textContent = name;
+      fragment.append(span);
+      last = match.index! + name.length;
+    }
+    fragment.append(text.slice(last));
+    node.replaceWith(fragment);
+  }
+  return root.innerHTML;
+}
 
 function lineMarkup(markup: string, terminal = false): DocumentFragment {
   const highlighted = document.createElement('div');
@@ -94,7 +142,7 @@ export function highlightCode() {
     const source = code.textContent ?? '';
     const result = hljs.highlight(source, { language: terminal ? 'terminal-output' : language, ignoreIllegals: false });
     if (result.illegal) throw new Error(`Code excerpt is invalid for its explicit language: ${language}`);
-    code.replaceChildren(lineMarkup(result.value, terminal));
+    code.replaceChildren(lineMarkup(semanticLanguages.has(language) && !terminal ? semanticMarkup(result.value) : result.value, terminal));
     code.classList.add('hljs');
     code.dataset.language = language;
     code.dataset.highlighted = 'true';
@@ -134,8 +182,9 @@ function prepareCodeWalk(walk: HTMLElement) {
   summary.setAttribute('aria-live', 'polite');
   status.append(step, summary);
 
-  guide.append(route, status);
+  guide.append(route);
   walk.prepend(guide);
+  walk.append(status);
   return guide;
 }
 
@@ -195,9 +244,9 @@ export function focusCode(section: HTMLElement, staticMode: boolean, animateStep
       ]);
     }
 
-    const status = guide.querySelector<HTMLElement>('.code-walk-status')!;
-    const current = guide.querySelector<HTMLElement>('.code-walk-current')!;
-    const summary = guide.querySelector<HTMLElement>('.code-walk-summary')!;
+    const status = walk.querySelector<HTMLElement>(':scope > .code-walk-status')!;
+    const current = status.querySelector<HTMLElement>('.code-walk-current')!;
+    const summary = status.querySelector<HTMLElement>('.code-walk-summary')!;
     status.hidden = !currentStep;
     current.textContent = currentStep ? `${stageNumber} / ${codeWalkStages.length}  ${codeWalkStages[stageNumber - 1]}` : '';
     summary.textContent = currentStep?.dataset.summary ?? '';

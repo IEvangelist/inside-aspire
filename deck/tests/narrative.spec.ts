@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 
 const points = ['AI loops', 'Aspire dashboard', 'Aspire deployment'];
 const order = [
-  'intro', 'setup', 'thesis', 'ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section',
+  'intro', 'setup', 'drift', 'ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section',
   'api-search', 'api-member', 'api-code', 'evidence', 'writer', 'docs-supply', 'workflow',
   'stay-current', 'act-precisely',
   'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills', 'api-index', 'docs-command', 'index', 'cache', 'parser', 'lexical',
@@ -14,7 +14,7 @@ const order = [
   'history', 'historical-evidence', 'sources',
 ];
 const chapters = [
-  { point: points[0], why: 'AI loops turn results into decisions.',
+  { point: points[0], why: 'So we built loops.',
     slides: ['ai-loops', 'weather', 'browser-evidence', 'live-cli', 'docs-section', 'api-search', 'api-member', 'api-code',
       'evidence', 'writer', 'docs-supply', 'workflow', 'stay-current',
       'act-precisely', 'runtime-wait', 'runtime-state', 'runtime-traces', 'skills-vs-tools', 'skills',
@@ -37,14 +37,13 @@ test('exactly the user-directed three areas drive roadmap, chapter entries, and 
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const actualOrder = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
   expect(actualOrder).toEqual(order);
-  expect(await page.locator('#thesis [data-takeaway]').allTextContents()).toEqual(points);
   expect(await page.locator('section[data-purpose="why"] [data-takeaway]').allTextContents()).toEqual([
-    'AI loops turn results into decisions.', 'Follow one request through your app.', 'Deploy the model you already run.',
+    'So we built loops.', 'Follow one request through your app.', 'Deploy the model you already run.',
   ]);
   expect(await page.locator('#close [data-takeaway]').allTextContents()).toEqual(points);
-  await expect(page.locator('[data-takeaway]')).toHaveCount(12);
+  await expect(page.locator('[data-takeaway]')).toHaveCount(9);
   await expect(page.locator('[data-core-chapter]')).toHaveCount(3);
-  await expect(page.locator('#thesis h2')).toContainText('Aspire makes AI');
+  await expect(page.locator('#setup h2')).toContainText('Ask AI about Aspire');
   await expect(page.locator('#close h2')).toContainText('more efficient.');
 });
 
@@ -58,7 +57,7 @@ test('each chapter shows why and concrete proof before its supporting machinery'
     expect(slides.map((slide) => slide.id)).toEqual(chapter.slides);
     expect(slides.map((slide) => slide.purpose)).toEqual(chapter.purposes);
     await expect(page.locator(`#${chapter.slides[0]} [data-why]`)).toHaveText(chapter.why);
-    await expect(page.locator(`#${chapter.slides[0]} .chapter-map, #${chapter.slides[0]} .chapter-split`)).not.toBeEmpty();
+    await expect(page.locator(`#${chapter.slides[0]} .chapter-map, #${chapter.slides[0]} .chapter-split, #${chapter.slides[0]} .loop-ring`)).not.toBeEmpty();
   }
   expect(order.indexOf('live-cli')).toBeLessThan(order.indexOf('api-index'));
   expect(order.indexOf('api-code')).toBeLessThan(order.indexOf('parser'));
@@ -162,7 +161,7 @@ for (const mode of ['present', 'read'] as const) {
         await link.focus();
         await page.keyboard.press('Enter');
         const first = chapter.slides[0];
-        await expect(page).toHaveURL(new RegExp(`#/${first}$`));
+        await expect(page).toHaveURL(new RegExp(`#/${first}(?:/\\d+)?$`));
         await expect(page.locator(`#${first} h2`)).toBeInViewport();
         await expect(page.locator(`#${first} [data-why]`)).toBeVisible();
         await expect(page.locator('#chapter-label')).toHaveText(chapter.point);
@@ -178,7 +177,7 @@ for (const mode of ['present', 'read'] as const) {
       }
       if (mode === 'read') {
         for (const [id, selector] of [
-          ['thesis', '.large-copy'], ['api-code', '> p'], ['skills-vs-tools', '.contrast > div:last-child p'],
+          ['drift', '.drift-punch'], ['api-code', '> p'], ['skills-vs-tools', '.contrast > div:last-child p'],
         ]) {
           await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
           const ending = page.locator(`#${id} ${selector}`).last();

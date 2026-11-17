@@ -21,20 +21,33 @@ export function prepareWindows(root: HTMLElement, announce: (message: string) =>
       button.className = 'copy-code';
       const name = panel.matches('.cli-terminal')
         ? pre.matches('.replay-output') ? 'Copy output' : 'Copy command' : 'Copy';
-      button.innerHTML = icon('copy');
+      button.innerHTML = icon('copy') + icon('check');
       const text = document.createElement('span');
-      text.textContent = name;
+      text.className = 'copy-labels';
+      const idle = document.createElement('span');
+      idle.textContent = name;
+      const done = document.createElement('span');
+      done.textContent = 'Copied…';
+      done.className = 'copy-done';
+      text.append(idle, done);
       button.append(text);
       button.setAttribute('aria-label', `Copy ${label}`);
       if (pre.matches('.replay-output')) {
         button.dataset.copyOutput = '';
         button.disabled = true;
       }
+      let reset: number | undefined;
       button.addEventListener('click', async (event) => {
         try {
           if (!navigator.clipboard) throw new Error('Clipboard access requires HTTPS or localhost.');
           await navigator.clipboard.writeText(source);
-          announce(`${label} copied.`);
+          button.classList.add('is-copied');
+          button.setAttribute('aria-label', `${label} copied`);
+          window.clearTimeout(reset);
+          reset = window.setTimeout(() => {
+            button.classList.remove('is-copied');
+            button.setAttribute('aria-label', `Copy ${label}`);
+          }, 2000);
         } catch (error) {
           console.error('Code copy failed.', error);
           announce(`Could not copy ${label}. Allow clipboard access, or select and copy the code directly.`);

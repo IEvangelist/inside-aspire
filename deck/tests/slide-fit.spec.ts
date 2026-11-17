@@ -38,11 +38,11 @@ for (const theme of ['light', 'dark'] as const) {
     { width: 768, height: 1024, mode: 'read' },
     { width: 790, height: 900, mode: 'read' },
   ] as const) {
-    test(`all 46 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
+    test(`all 45 slides fit ${theme} ${viewport.width}x${viewport.height} ${viewport.mode}`, async ({ page }, testInfo) => {
       test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit all-slide/theme matrix runs once.');
       await openDeck(page, theme, viewport.width, viewport.height, viewport.mode);
       const ids = await page.locator('section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
-      expect(ids).toHaveLength(46);
+      expect(ids).toHaveLength(45);
       const results = [];
       for (const id of ids) {
         await page.evaluate((slideId) => { window.location.hash = `/${slideId}`; }, id);
@@ -252,7 +252,7 @@ test('every graph edge waits for both rendered endpoints through all forward and
   test.setTimeout(60_000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   const states = [];
-  for (const id of ['the-loop', 'compiler', 'docs-supply', 'api-index']) {
+  for (const id of ['the-loop', 'compiler', 'docs-supply']) {
     await page.goto(`?mode=present#/${id}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await page.evaluate(() => document.fonts.ready);
@@ -330,7 +330,7 @@ for (const mode of ['reduced-motion', 'read', 'print'] as const) {
     await page.goto(mode === 'print' ? '?print-pdf' : `?mode=${mode === 'read' ? 'read' : 'present'}`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await page.evaluate(() => document.fonts.ready);
-    for (const id of ['the-loop', 'compiler', 'docs-supply', 'api-index']) {
+    for (const id of ['the-loop', 'compiler', 'docs-supply']) {
       if (mode !== 'print') await page.evaluate((slideId) => { location.hash = `/${slideId}`; }, id);
       const result = await page.locator(`#${id} .architecture-svg`).evaluate((svg) =>
         [...svg.querySelectorAll('.graph-node rect, .graph-edge .edge-path, .graph-edge text')].map((element) => {
