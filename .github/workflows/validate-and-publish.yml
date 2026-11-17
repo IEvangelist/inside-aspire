@@ -36,6 +36,7 @@ jobs:
       - name: Exercise navigation, mobile, accessibility, print, and asset gates
         # Temporarily non-blocking: specs pin exact slide order/content and lag the reworked deck.
         continue-on-error: true
+        timeout-minutes: 8
         run: npm test --prefix deck
       - name: Check manual notification input safeguards
         run: node --test scripts/notify-links.test.mjs
