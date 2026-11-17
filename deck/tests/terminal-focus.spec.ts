@@ -291,7 +291,7 @@ test('reading, print and no-JavaScript retain titles, provenance links and every
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   await expect(page.locator('.pdf-page')).toHaveCount(46);
-  await expect(page.locator('pre code')).toHaveCount(40);
+  await expect(page.locator('pre code')).toHaveCount(55);
   for (const id of focusedIds) {
     await expect(page.locator(`#${id} h2`)).toBeVisible();
     const support = page.locator(`#${id} > .terminal-support`);

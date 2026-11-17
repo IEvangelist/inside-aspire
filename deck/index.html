@@ -24,7 +24,7 @@
     <meta name="twitter:url" content="https://ievangelist.github.io/inside-aspire/" />
     <meta name="twitter:image" content="https://ievangelist.github.io/inside-aspire/social/inside-aspire-og.png" />
     <meta name="twitter:image:alt" content="Inside Aspire: The Architecture Behind the AI Loop, presented by David Pine, with his actual portrait and official Aspire branding." />
-    <link rel="icon" type="image/svg+xml" href="/inside-aspire/brand/aspire-icon-32.svg" />
+    <link rel="icon" type="image/svg+xml" href="/brand/aspire-icon-32.svg" />
     <link rel="canonical" href="https://ievangelist.github.io/inside-aspire/" />
     <title>Inside Aspire: The Architecture Behind the AI Loop</title>
   </head>
@@ -39,7 +39,7 @@
     <a class="skip-link" href="#presentation">Skip to presentation</a>
     <header class="toolbar" aria-label="Presentation controls">
       <a class="brand-link" href="https://aspire.dev" aria-label="Aspire documentation">
-        <img src="/inside-aspire/brand/aspire-icon-32.svg" width="32" height="32" alt="Aspire" />
+        <img src="/brand/aspire-icon-32.svg" width="32" height="32" alt="Aspire" />
       </a>
       <button id="chapter-toggle" class="chapter-toggle" type="button" aria-haspopup="dialog" aria-controls="deck-menu" aria-expanded="false">
         <span id="chapter-label">Inside Aspire</span><span data-icon="book"></span>
@@ -91,11 +91,11 @@
             <a class="primary-link" href="#/setup">Start presentation <span data-icon="arrowRight"></span></a>
           </div>
           <figure class="speaker">
-            <img class="speaker-portrait" src="/inside-aspire/speaker/david-pine.webp" width="300" height="300" alt="David Pine's actual public profile portrait" fetchpriority="high" decoding="async" />
+            <img class="speaker-portrait" src="/speaker/david-pine.webp" width="300" height="300" alt="David Pine's actual public profile portrait" fetchpriority="high" decoding="async" />
             <figcaption>
               <div class="speaker-bio"><strong>David Pine</strong><span>Microsoft's Aspire team</span></div>
               <nav class="speaker-socials" aria-label="David Pine's social profiles">
-                <a href="https://github.com/IEvangelist" data-social="github" title="GitHub" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><img class="image-for-light" src="/inside-aspire/github/invertocat-black.svg" width="24" height="24" alt="" /><img class="image-for-dark" src="/inside-aspire/github/invertocat-white.svg" width="24" height="24" alt="" /></span><span class="social-url">github.com/IEvangelist</span></a>
+                <a href="https://github.com/IEvangelist" data-social="github" title="GitHub" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><img class="image-for-light" src="/github/invertocat-black.svg" width="24" height="24" alt="" /><img class="image-for-dark" src="/github/invertocat-white.svg" width="24" height="24" alt="" /></span><span class="social-url">github.com/IEvangelist</span></a>
                 <a href="https://x.com/davidpine7" data-social="x" title="X" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialX"></span></span><span class="social-url">x.com/davidpine7</span></a>
                 <a href="https://bsky.app/profile/davidpine.dev" data-social="bluesky" title="Bluesky" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialBluesky"></span></span><span class="social-url">bsky.app/profile/<wbr />davidpine.dev</span></a>
                 <a href="https://www.linkedin.com/in/dpine/" data-social="linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true"><span data-icon="socialLinkedIn"></span></span><span class="social-url">www.linkedin.com/in/dpine</span></a>
@@ -170,8 +170,8 @@
         <section id="weather" class="image-slide" data-chapter="AI loops" data-purpose="proof" data-transition="fade-in slide-out">
           <h2>Our demo: a NativeAOT weather API.</h2>
           <figure>
-            <img class="proof-image image-for-dark" src="/inside-aspire/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
-            <img class="proof-image image-for-light" src="/inside-aspire/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
+            <img class="proof-image image-for-dark" src="/proof/native-map-dark.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in dark mode." />
+            <img class="proof-image image-for-light" src="/proof/native-map-light.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="The actual NativeAOT weather app showing Madison, Wisconsin, live weather, five forecast days, and a loaded map with provider attribution in light mode." />
             <figcaption>Madison, Wisconsin, from the running app. Rehearsal capture; conditions change. Data providers credited in the app. <a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Original MIT sample</a>.</figcaption>
           </figure>
           <aside class="notes"><p>0:07-0:08. <strong>Meet the weather app</strong></p><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Switch to the prepared app, VS Code, and the terminal.</li><li>Search Madison; show the forecast and the map. Keep the data credits visible.</li></ul><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>A weather app with a NativeAOT API, a React front end, and a C# AppHost.</li><li>All three demos in this talk use this app: the assistant adds to it, the dashboard explains it, and Compose runs it.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; only if the app is not already running; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$apphost = Join-Path $PWD &#x27;demo\host\apphost.cs&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire start --apphost $apphost --isolated --non-interactive --launch-profile http</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire wait api --apphost $apphost --status healthy --timeout 120 --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire describe --apphost $apphost --format Json --non-interactive</code><p><strong style="color:#c2410c">OPEN</strong> <em>(only if asked)</em> <code>demo/host/apphost.cs</code>, <code>demo/Weather.Api/Program.cs</code>, <code>demo/frontend/src</code>. Use the URLs <code>describe</code> returns; never guess a port.</p><p><strong style="color:#b91c1c">DON&rsquo;T</strong> compile or add browser logs during the demo. The slide image is a rehearsal capture.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Say you want browser logs.&rdquo;</p></aside>
@@ -390,8 +390,8 @@ ATS export
         </section>
 
         <section id="evidence" data-chapter="AI loops" data-purpose="proof">
-          <div class="heading-with-brand"><h2>That page started as a pull request.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
-          <figure class="pr-image"><img src="/inside-aspire/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>The feature PR, merged April 29, 2026.</figcaption></figure>
+          <div class="heading-with-brand"><h2>That page started as a pull request.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/pull/16531" aria-label="GitHub product PR source"><img class="image-for-light" src="/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/github/github-white.svg" alt="GitHub" /></a></div>
+          <figure class="pr-image"><img src="/proof/product-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged microsoft/aspire PR 16531: Add BrowserLogs configuration command." /><figcaption>The feature PR, merged April 29, 2026.</figcaption></figure>
           <ol class="evidence-chain">
             <li><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a><span>The feature merges.</span></li>
             <li><a href="https://github.com/microsoft/aspire/actions/runs/25092695241">pr-docs-check run 25092695241</a><span>3 seconds later, the docs workflow starts.</span></li>
@@ -403,7 +403,7 @@ ATS export
 
         <section id="writer" data-chapter="AI loops" data-purpose="proof">
           <h2>The feature's author refined the bot's draft.</h2>
-          <figure class="pr-image"><img src="/inside-aspire/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>microsoft/aspire.dev#775: drafted by a bot, refined by <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">David Fowler</a>, then merged.</figcaption></figure>
+          <figure class="pr-image"><img src="/proof/docs-pr.webp" width="1268" height="235" loading="lazy" decoding="async" alt="Actual GitHub header for merged docs PR 775: Add browser logs documentation." /><figcaption>microsoft/aspire.dev#775: drafted by a bot, refined by <a href="https://github.com/microsoft/aspire.dev/commit/49371cfd913e1c3eec5a058eca745c21679b848d">David Fowler</a>, then merged.</figcaption></figure>
           <div class="code-and-copy">
             <figure class="code-panel"><figcaption><span data-icon="workflow"></span>Inspect an existing workflow <span>Shell</span></figcaption><pre data-label="Read-only gh-aw workflow status"><code class="language-bash">gh aw status "pr-docs-check" \
   --repo "microsoft/aspire" --json</code></pre></figure>
@@ -420,7 +420,7 @@ ATS export
         </section>
 
         <section id="workflow" data-chapter="AI loops" data-purpose="machinery">
-          <div class="heading-with-brand"><h2>The workflow drafts. People merge.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/inside-aspire/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/inside-aspire/github/github-white.svg" alt="GitHub" /></a></div>
+          <div class="heading-with-brand"><h2>The workflow drafts. People merge.</h2><a class="github-brand" href="https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md" aria-label="GitHub agentic workflow source"><img class="image-for-light" src="/github/github-black.svg" alt="GitHub" /><img class="image-for-dark" src="/github/github-white.svg" alt="GitHub" /></a></div>
           <div class="workflow-path">
             <code>pr-docs-check.md</code><span data-icon="arrowRight" aria-hidden="true"></span><code>gh aw compile</code><span data-icon="arrowRight" aria-hidden="true"></span><code>pr-docs-check.lock.yml</code>
           </div>
@@ -914,89 +914,189 @@ safe-outputs:
           <aside class="notes"><p>0:28-0:29. <strong>Inside: the API reference</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>The generator reads the compiled assembly, its XML docs, and the PDB when there is one.</li><li>Roslyn builds a model, we render reference Markdown, and the CLI's API lookup indexes it.</li><li>Three inputs, one model. This is the path that produced the member ID we just used.</li></ul><p><strong style="color:#0e7490">CLICK</strong> to step through: DLL/XML/PDB inputs, Roslyn model, Markdown, CLI API lookup.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Narrative docs take a different path.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a/src/tools/PackageJsonGenerator">Pinned Roslyn ingestion source</a></p></div></aside>
         </section>
 
-        <section id="docs-command" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Every docs command shares one index.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>DocsSearchCommand.cs <span>C# excerpt</span></figcaption><pre data-label="docs search command handler" data-line-numbers><code class="language-csharp">var limit = Math.Clamp(
-    parseResult.GetValue(s_limitOption)
-        ?? 5, 1, 10);
-var response = await InteractionService
-    .ShowStatusAsync(
+        <section id="docs-command" class="code-walk-slide" data-chapter="AI loops" data-purpose="machinery" data-transition="none">
+          <h2>Trace one search from command to result.</h2>
+          <div class="code-walk">
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>DocsSearchCommand.cs <span>Receive the command</span></figcaption><pre data-label="Receive docs search arguments and dispatch" data-line-numbers><code id="docs-command-code" class="language-csharp">var query = parseResult.GetValue(s_queryArgument)!;
+var format = parseResult.GetValue(s_formatOption);
+var limit = Math.Clamp(parseResult.GetValue(s_limitOption) ?? 5, 1, 10);
+
+var response = await InteractionService.ShowStatusAsync(
     DocsCommandStrings.LoadingDocumentation,
-    async () => await _docsSearchService
-        .SearchAsync(query, limit,
-            cancellationToken));</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>C# excerpt</span></figcaption><pre data-label="Build the docs index once per process" data-line-numbers><code class="language-csharp">if (_indexedDocuments is not null)
+    async () => await _docsSearchService.SearchAsync(query, limit, cancellationToken));</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="code"></span>DocsSearchService.cs <span>Delegate to the index</span></figcaption><pre data-label="Search service delegates to the shared index" data-line-numbers><code id="docs-search-code" class="language-csharp">var searchResults = await _docsIndexService.SearchAsync(query, topK, cancellationToken)
+    .ConfigureAwait(false);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Prepare before searching</span></figcaption><pre data-label="Search ensures the index is ready before tokenizing" data-line-numbers><code id="docs-ensure-code" class="language-csharp">await EnsureIndexedAsync(cancellationToken).ConfigureAwait(false);
+
+if (_indexedDocuments is null or { Count: 0 }
+    || string.IsNullOrWhiteSpace(query))
+{
+    return [];
+}
+
+var queryTokens = Tokenize(query);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>One index per process</span></figcaption><pre data-label="Double-checked index lock" data-line-numbers><code id="docs-lock-code" class="language-csharp">if (_indexedDocuments is not null)
 {
     return;
 }
 
-await _indexLock.WaitAsync(
-    cancellationToken).ConfigureAwait(false);
-try
+await _indexLock.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+// Inside try; finally releases the lock.
+if (_indexedDocuments is not null)
 {
-    if (_indexedDocuments is not null)</code></pre></figure>
+    return;
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Read local state, then refresh</span></figcaption><pre data-label="Load the cached index and fingerprint before fetching source" data-line-numbers><code id="docs-load-code" class="language-csharp">var cachedDocuments = await _docsCache.GetIndexAsync(cancellationToken)
+    .ConfigureAwait(false);
+var cachedFingerprint = await _docsCache.GetIndexSourceFingerprintAsync(cancellationToken)
+    .ConfigureAwait(false);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsCache.cs <span>Persistent parsed index</span></figcaption><pre data-label="Docs cache delegates JSON and fingerprint reads to the file-backed cache" data-line-numbers><code id="docs-index-cache-code" class="language-csharp">// GetIndexAsync:
+var documents = await _contentCache.GetJsonAsync(
+    _indexCacheKey, JsonSourceGenerationContext.Default.LlmsDocumentArray,
+    cancellationToken: cancellationToken).ConfigureAwait(false);
+
+// GetIndexSourceFingerprintAsync:
+var fingerprint = await _contentCache.GetAsync(
+    _indexSourceFingerprintCacheKey, cancellationToken).ConfigureAwait(false);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>DocsFetcher.cs <span>Hand off to HTTP</span></figcaption><pre data-label="Docs fetcher migrates legacy source cache then delegates to conditional HTTP" data-line-numbers><code id="docs-fetch-code" class="language-csharp">public async Task&lt;string?&gt; FetchDocsAsync(CancellationToken cancellationToken = default)
+{
+    await MigrateLegacyCacheAsync(cancellationToken).ConfigureAwait(false);
+    return await CachedHttpDocumentFetcher.FetchAsync(
+        _httpClient, _cache, _llmsTxtUrl, _cacheKey, _logger, cancellationToken)
+        .ConfigureAwait(false);
+}</code></pre></figure>
           </div>
-          <p><code>search</code>, <code>get</code>, <code>list</code>: one index per process.</p>
+          <span class="fragment code-step" data-code="docs-command-code" data-lines="1-3" data-fragment-index="0" data-stage="1" data-summary="The CLI reads the query and clamps the requested result count to 1–10." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-command-code" data-lines="5-7" data-fragment-index="1" data-stage="1" data-summary="It shows a loading status while it calls the documentation search service." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-search-code" data-lines="1-2" data-fragment-index="2" data-stage="2" data-summary="DocsSearchService forwards the query and limit to the shared index." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-ensure-code" data-lines="1" data-fragment-index="3" data-stage="3" data-summary="Before searching, the index makes sure its documents are ready." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-lock-code" data-lines="6,9-12" data-fragment-index="4" data-stage="3" data-summary="A process-wide lock prevents two commands from building the same index at once." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-load-code" data-lines="1-4" data-fragment-index="5" data-stage="4" data-summary="The index loads its saved documents and their source fingerprint." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-index-cache-code" data-lines="2-4,7-8" data-fragment-index="6" data-stage="4" data-summary="DocsCache reads the parsed index and fingerprint from its file-backed cache." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-fetch-code" data-lines="4-6" data-fragment-index="7" data-stage="5" data-summary="DocsFetcher hands the source request to the conditional HTTP fetcher." aria-hidden="true"></span>
+          <p class="code-walk-command"><code>aspire docs search "browser logs" --format Json</code></p>
           <aside class="notes"><p>0:29-0:30. <strong>One call path</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Every docs command, search, get and list, lands in the same service.</li><li>The command clamps the limit to 1 through 10, shows a spinner, and calls SearchAsync.</li><li>SearchAsync calls EnsureIndexedAsync first. A double-checked lock builds the index once per process, even if two calls race.</li></ul><p><strong style="color:#c2410c">OPEN</strong> <em>(optional)</em> <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Commands/DocsSearchCommand.cs">DocsSearchCommand.cs</a> on GitHub, pinned to the commit on the slide.</p><p><strong style="color:#4b5563">IF ASKED</strong> JSON output uses a source-generated serializer context because the CLI is NativeAOT.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;The first thing EnsureIndexedAsync does is ask the server a question.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Commands/DocsSearchCommand.cs#L59-L66">Command source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L151-L220">EnsureIndexedAsync source</a>. Selected lines, wrapped for display.</p></div></aside>
         </section>
 
-        <section id="index" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Ask the server: did anything change?</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>Request</span></figcaption><pre data-label="Conditional document HTTP request" data-line-numbers><code class="language-csharp">using var request = new HttpRequestMessage(
-    HttpMethod.Get, url);
+        <section id="index" class="code-walk-slide" data-chapter="AI loops" data-purpose="machinery" data-transition="none">
+          <h2>Check for fresh docs without downloading them again.</h2>
+          <div class="code-walk">
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsCache.cs <span>Read the saved ETag</span></figcaption><pre data-label="Docs cache reads the saved ETag from the file-backed cache" data-line-numbers><code id="docs-etag-cache-code" class="language-csharp">public Task&lt;string?&gt; GetETagAsync(string url, CancellationToken cancellationToken = default)
+    =&gt; _contentCache.GetETagAsync(url, cancellationToken);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsCache.cs <span>Return cached source text</span></figcaption><pre data-label="Docs cache delegates source-text lookup to the file-backed content cache" data-line-numbers><code id="docs-text-cache-code" class="language-csharp">public Task&lt;string?&gt; GetAsync(string key, CancellationToken cancellationToken = default)
+    =&gt; _contentCache.GetAsync(key, cancellationToken);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>Conditional request</span></figcaption><pre data-label="Read the saved ETag and send the conditional HTTP request" data-line-numbers><code id="docs-request-code" class="language-csharp">var cachedETag = await cache.GetETagAsync(storageKey, cancellationToken)
+    .ConfigureAwait(false);
+
+using var request = new HttpRequestMessage(HttpMethod.Get, url);
 if (!string.IsNullOrEmpty(cachedETag))
 {
-    request.Headers.IfNoneMatch.Add(
-        new EntityTagHeaderValue(cachedETag));
-}</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>Response</span></figcaption><pre data-label="304 Not Modified reuses the cached copy" data-line-numbers><code class="language-csharp">if (response is { StatusCode:
-    HttpStatusCode.NotModified })
+    request.Headers.IfNoneMatch.Add(new EntityTagHeaderValue(cachedETag));
+}
+using var response = await httpClient.SendAsync(request, cancellationToken)
+    .ConfigureAwait(false);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>304: reuse the source</span></figcaption><pre data-label="304 Not Modified reuses the cached source text" data-line-numbers><code id="docs-not-modified-code" class="language-csharp">if (response is { StatusCode: HttpStatusCode.NotModified })
 {
-    var cached = await cache.GetAsync(
-        storageKey, cancellationToken)
-        .ConfigureAwait(false);
+    var cached = await cache.GetAsync(storageKey, cancellationToken).ConfigureAwait(false);
     if (cached is not null)
     {
         return cached;
-    }</code></pre></figure>
-          </div>
-          <p><strong>304</strong>: reuse the copy on disk. <strong>200</strong>: store the new ETag and text. <strong>Offline</strong>: fall back to the cached copy. Default corpus: <code>llms-full.txt</code>.</p>
-          <aside class="notes"><p>0:30-0:31. <strong>Conditional GET</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Narrative docs come from llms-full.txt, about 7.7 MB.</li><li>The CLI sends the ETag it saved last time in If-None-Match.</li><li>304 means nothing changed: serve the copy on disk. 200 means new docs: store the new ETag and text.</li><li>If the network fails, it falls back to the cached copy, so docs search works offline.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; proves the server honors the ETag. Keep --compressed, the ETag varies by encoding; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$etag = (Get-Content &quot;$HOME\.aspire\cache\docs\llms-full.etag.txt&quot;).Trim()</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">curl.exe -s --compressed -o NUL -w &quot;%{http_code} %{size_download} bytes`n&quot; -H &quot;If-None-Match: $etag&quot; https://aspire.dev/llms-full.txt</code><p><strong style="color:#4b5563">IF ASKED</strong> If a 304 arrives but the cached text is missing, it clears the ETag and retries a plain GET.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;So where does that cached copy live?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">          <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L39-L43">Request source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L48-L86">304, 200 and offline fallback</a>. Selected lines, wrapped for display.</p></div></aside>
-                  </section>
-
-                  <section id="cache" data-chapter="AI loops" data-purpose="machinery">
-          <h2>Two caches. One fingerprint.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>FileBackedDocumentContentCache.cs <span>C# excerpt</span></figcaption><pre data-label="Memory first, then disk" data-line-numbers><code class="language-csharp">if (_memoryCache.TryGetValue(cacheKey,
-    out string? content))
+    }
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>FileBackedDocumentContentCache.cs <span>Memory, then disk</span></figcaption><pre data-label="Source text read checks memory then promotes a disk hit" data-line-numbers><code id="docs-content-cache-code" class="language-csharp">if (_memoryCache.TryGetValue(cacheKey, out string? content))
 {
     return content;
 }
 
-var diskContent = await ReadTextFileAsync(
-    GetTextFilePath(key), cancellationToken)
-    .ConfigureAwait(false);</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="code"></span>SourceContentFingerprint.cs <span>C# excerpt</span></figcaption><pre data-label="Schema-salted XxHash3 fingerprint" data-line-numbers><code class="language-csharp">var xxHash = new XxHash3();
-Span&lt;byte&gt; versionBytes =
-    stackalloc byte[sizeof(int)];
-BinaryPrimitives.WriteInt32LittleEndian(
-    versionBytes, schemaVersion);
-xxHash.Append(versionBytes);
-xxHash.Append(
-    Encoding.UTF8.GetBytes(content));
-return Convert.ToHexString(
-    xxHash.GetCurrentHash())
-    .ToLowerInvariant();</code></pre></figure>
+var diskContent = await ReadTextFileAsync(GetTextFilePath(key), cancellationToken)
+    .ConfigureAwait(false);
+if (diskContent is not null)
+{
+    _memoryCache.Set(cacheKey, diskContent);
+    return diskContent;
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>200: save fresh text</span></figcaption><pre data-label="Successful refresh saves the new ETag and source text" data-line-numbers><code id="docs-refresh-code" class="language-csharp">var newETag = response.Headers.ETag?.Tag;
+if (!string.IsNullOrEmpty(newETag))
+{
+    await cache.SetETagAsync(storageKey, newETag, cancellationToken).ConfigureAwait(false);
+}
+await cache.SetAsync(storageKey, content, cancellationToken).ConfigureAwait(false);
+return content;</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="cloud"></span>CachedHttpDocumentFetcher.cs <span>Offline: use local text</span></figcaption><pre data-label="Fetch failure is logged and falls back to cached source text" data-line-numbers><code id="docs-offline-code" class="language-csharp">catch (Exception ex)
+{
+    logger.LogWarning(ex, "Failed to fetch content from {Url}", url);
+    var cached = await cache.GetAsync(storageKey, cancellationToken).ConfigureAwait(false);
+    if (cached is not null)
+    {
+        return cached;
+    }
+    return null;
+}</code></pre></figure>
           </div>
-          <p>Both live in <code>~/.aspire/cache/docs</code>. Same text and schema: skip the parse.</p>
+          <span class="fragment code-step" data-code="docs-etag-cache-code" data-lines="2" data-fragment-index="0" data-stage="5" data-summary="DocsCache reads the last ETag before making a network request." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-request-code" data-lines="5-10" data-fragment-index="1" data-stage="5" data-summary="If an ETag exists, the fetcher sends it as If-None-Match with the GET." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-not-modified-code" data-lines="1,3,6" data-fragment-index="2" data-stage="6" data-summary="A 304 means the source is unchanged, so the fetcher returns cached text." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-text-cache-code" data-lines="2" data-fragment-index="3" data-stage="6" data-summary="DocsCache passes that source-text lookup to the file-backed cache." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-content-cache-code" data-lines="1-4" data-fragment-index="4" data-stage="6" data-summary="Source-text lookup checks memory first; a hit returns immediately." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-content-cache-code" data-lines="6-12" data-fragment-index="5" data-stage="6" data-summary="On a memory miss, the cache reads disk and warms memory with that copy." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-refresh-code" data-lines="2-6" data-fragment-index="6" data-stage="6" data-summary="A 200 response replaces both the saved ETag and source text." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-offline-code" data-lines="4-9" data-fragment-index="7" data-stage="6" data-summary="If the request fails, cached text is returned; without it, the fetch returns null." aria-hidden="true"></span>
+          <p class="code-walk-command">304 reuses text · 200 replaces it · offline falls back to cache</p>
+          <aside class="notes"><p>0:30-0:31. <strong>Conditional GET</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Narrative docs come from llms-full.txt, about 7.7 MB.</li><li>The CLI sends the ETag it saved last time in If-None-Match.</li><li>304 means nothing changed: serve the copy on disk. 200 means new docs: store the new ETag and text.</li><li>If the network fails, it falls back to the cached copy, so docs search works offline.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; proves the server honors the ETag. Keep --compressed, the ETag varies by encoding; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$etag = (Get-Content &quot;$HOME\.aspire\cache\docs\llms-full.etag.txt&quot;).Trim()</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">curl.exe -s --compressed -o NUL -w &quot;%{http_code} %{size_download} bytes`n&quot; -H &quot;If-None-Match: $etag&quot; https://aspire.dev/llms-full.txt</code><p><strong style="color:#4b5563">IF ASKED</strong> If a 304 arrives but the cached text is missing, it clears the ETag and retries a plain GET.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;So where does that cached copy live?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">          <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L39-L43">Request source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L48-L86">304, 200 and offline fallback</a>. Selected lines, wrapped for display.</p></div></aside>
+                  </section>
+
+                  <section id="cache" class="code-walk-slide" data-chapter="AI loops" data-purpose="machinery" data-transition="none">
+          <h2>Same source? Reuse the index. Changed source? Rebuild it.</h2>
+          <div class="code-walk">
+            <figure class="code-panel"><figcaption><span data-icon="code"></span>SourceContentFingerprint.cs <span>Text + schema version</span></figcaption><pre data-label="Schema-salted XxHash3 fingerprint" data-line-numbers><code id="docs-fingerprint-code" class="language-csharp">var xxHash = new XxHash3();
+Span&lt;byte&gt; versionBytes = stackalloc byte[sizeof(int)];
+BinaryPrimitives.WriteInt32LittleEndian(versionBytes, schemaVersion);
+xxHash.Append(versionBytes);
+xxHash.Append(Encoding.UTF8.GetBytes(content));
+return Convert.ToHexString(xxHash.GetCurrentHash()).ToLowerInvariant();</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Reuse the parsed index</span></figcaption><pre data-label="Compare the fetched source fingerprint with the cached index" data-line-numbers><code id="docs-reuse-code" class="language-csharp">var currentFingerprint = SourceContentFingerprint.Compute(content, IndexSchemaVersion);
+if (cachedDocuments is not null
+    &amp;&amp; string.Equals(cachedFingerprint, currentFingerprint, StringComparison.Ordinal))
+{
+    var indexedDocuments = SetIndexedDocuments(cachedDocuments);
+    // Logs the cache hit and elapsed time.
+    return;
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Parse and persist when changed</span></figcaption><pre data-label="Changed source is parsed, indexed and persisted with its fingerprint" data-line-numbers><code id="docs-rebuild-code" class="language-csharp">var documents = await LlmsTxtParser.ParseAsync(content, cancellationToken)
+    .ConfigureAwait(false);
+var indexedDocumentsFromSource = SetIndexedDocuments(documents);
+
+await _docsCache.SetIndexAsync([.. documents], cancellationToken).ConfigureAwait(false);
+await _docsCache.SetIndexSourceFingerprintAsync(currentFingerprint, cancellationToken)
+    .ConfigureAwait(false);</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>No source: try the saved index</span></figcaption><pre data-label="When no source text is available use the saved parsed index with a warning" data-line-numbers><code id="docs-index-offline-code" class="language-csharp">if (content is null)
+{
+    if (cachedDocuments is not null)
+    {
+        SetIndexedDocuments(cachedDocuments);
+        _logger.LogWarning(
+            "Failed to refresh Aspire documentation. "
+            + "Using cached index with {Count} documents.",
+            cachedDocuments.Length);
+        return;
+    }
+    // No saved index: log the failure and leave it unbuilt.
+}</code></pre></figure>
+          </div>
+          <span class="fragment code-step" data-code="docs-fingerprint-code" data-lines="3-5" data-fragment-index="0" data-stage="7" data-summary="XxHash3 fingerprints the source text together with the parser schema version." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-reuse-code" data-lines="2-8" data-fragment-index="1" data-stage="7" data-summary="Matching fingerprints mean the saved parsed index can be reused without parsing." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-rebuild-code" data-lines="1-3" data-fragment-index="2" data-stage="7" data-summary="Changed source text is split into documents, sections and code-aware spans." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-rebuild-code" data-lines="5-7" data-fragment-index="3" data-stage="7" data-summary="The rebuilt index and its fingerprint are saved for the next CLI process." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-index-offline-code" data-lines="3-11" data-fragment-index="4" data-stage="7" data-summary="Without fresh source, the index can still use a previously saved parsed copy." aria-hidden="true"></span>
+          <p class="code-walk-command">Source text + schema version → fingerprint → reuse or rebuild</p>
           <aside class="notes"><p>0:31-0:32. <strong>Two caches, one fingerprint</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Each read checks memory first, then disk. A disk hit gets promoted into memory.</li><li>Files are written to a temp file, then moved into place, so a crash never leaves half a cache.</li><li>The parsed index is saved with a fingerprint: XxHash3 of the schema version plus the text.</li><li>Same docs and same schema: skip the parse. Change the parser, bump the schema version, and every machine re-parses on its next run.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; shows the real cache files; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">Get-ChildItem &quot;$HOME\.aspire\cache\docs&quot; | Format-Table Name, Length</code><p><strong style="color:#4b5563">IF ASKED</strong> The schema version is 2. Version 2 added slug disambiguation and fixed bash comments being read as headings.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Parsing is where the trap lives.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/FileBackedDocumentContentCache.cs#L30-L51">Content cache source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/SourceContentFingerprint.cs#L32-L46">Fingerprint source</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L193-L210">fingerprint comparison</a>. Selected lines, wrapped for display.</p></div></aside>
         </section>
 
-        <section id="parser" data-chapter="AI loops" data-purpose="machinery">
-          <h2>A # inside a code block isn't a heading.</h2>
-          <figure class="code-panel"><figcaption><span data-icon="code"></span>LlmsTxtParser.cs <span>C# source excerpt</span></figcaption><pre data-label="Fence-aware document and section parser" data-line-numbers><code id="parser-code" class="language-csharp">var span = content.AsSpan();
+        <section id="parser" class="code-walk-slide" data-chapter="AI loops" data-purpose="machinery" data-transition="none">
+          <h2>Parse the source without mistaking code for headings.</h2>
+          <div class="code-walk">
+          <figure class="code-panel"><figcaption><span data-icon="code"></span>LlmsTxtParser.cs <span>Find code fences first</span></figcaption><pre data-label="Fence-aware document and section parser" data-line-numbers><code id="parser-code" class="language-csharp">var span = content.AsSpan();
 var codeBlocks = FindCodeBlockRegions(span);
 
 // Find all document boundaries (line indices where H1 headers start)
@@ -1005,60 +1105,81 @@ var docBoundaries = FindDocumentBoundaries(span, codeBlocks);
 // Find all section headings (H2+) using the pre-computed fence regions
 // passed down from ParseAsync.
 var sectionStarts = FindSectionHeadings(docSpan, codeBlocks);</code></pre></figure>
-          <span class="fragment code-step" data-code="parser-code" data-lines="1-5" data-fragment-index="0" aria-hidden="true"></span>
-          <span class="fragment code-step" data-code="parser-code" data-lines="7-9" data-fragment-index="1" aria-hidden="true"></span>
+          </div>
+          <span class="fragment code-step" data-code="parser-code" data-lines="1-2" data-fragment-index="0" data-stage="7" data-summary="The parser marks fenced code blocks before scanning for Markdown headings." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="parser-code" data-lines="5,9" data-fragment-index="1" data-stage="7" data-summary="Document and section boundaries inside those fences are ignored." aria-hidden="true"></span>
           <p>The parser tracks code fences, so a # line inside one never splits a document or a section.</p>
           <aside class="notes"><p>0:32-0:33. <strong>The parsing trap</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>A line that starts with # inside a code block looks like a heading.</li><li>The parser tracks code fences, so it can't split a document or a section there.</li><li>This is Aspire's own parser, verbatim at a pinned commit.</li></ul><p><strong style="color:#0e7490">CLICK</strong> to highlight fence regions, then document splits, then section splits. Back restores the previous highlight.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Once it's parsed, how does search rank?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Verbatim from Aspire's parser at a pinned commit; full excerpt in <a href="https://github.com/IEvangelist/inside-aspire/tree/main/docs/code">docs/code</a>.</p></div></aside>
         </section>
 
-        <section id="lexical" data-chapter="AI loops" data-purpose="machinery">
+        <section id="lexical" class="code-walk-slide" data-chapter="AI loops" data-purpose="machinery" data-transition="none">
           <h2>Where a word matched. How rare it is.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Narrative-doc weights</span></figcaption><pre data-label="Weighted narrative documentation ranking"><code class="language-csharp">private const float TitleWeight = 10.0f;
+          <div class="code-walk">
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Narrative-doc weights</span></figcaption><pre data-label="Weighted narrative documentation ranking" data-line-numbers><code id="docs-weights-code" class="language-csharp">private const float TitleWeight = 10.0f;
 private const float SummaryWeight = 8.0f;
 private const float HeadingWeight = 6.0f;
 private const float CodeWeight = 5.0f;
 private const float BodyWeight = 1.0f;</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Rarity (IDF)</span></figcaption><pre data-label="BM25-style inverse document frequency"><code class="language-csharp">var documentCount = documents.Count;
-foreach (var (token, count)
-    in documentFrequency)
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Rarity (IDF)</span></figcaption><pre data-label="BM25-style inverse document frequency" data-line-numbers><code id="docs-idf-code" class="language-csharp">var documentCount = documents.Count;
+foreach (var (token, count) in documentFrequency)
 {
     idf[token] = MathF.Log(1.0f +
-        (documentCount - count + 0.5f) /
-        (count + 0.5f));
+        (documentCount - count + 0.5f) / (count + 0.5f));
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="database"></span>DocsIndexService.cs <span>Keep the best matches</span></figcaption><pre data-label="Score matching documents and maintain the bounded top results" data-line-numbers><code id="docs-rank-code" class="language-csharp">var (score, matchedSection) = ScoreDocument(
+    doc, queryTokens, queryTokenWeights, queryAsSlug, queryAsPhrase);
+
+if (score &gt; 0)
+{
+    AddTopResult(results, new SearchCandidate(
+        doc, matchedSection, score, documentIndex), topK);
+}</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="code"></span>DocsSearchService.cs <span>Return the response shape</span></figcaption><pre data-label="Map index results into the search response" data-line-numbers><code id="docs-map-code" class="language-csharp">var results = searchResults.Select(r =&gt; new SearchResult
+{
+    Title = r.Title,
+    Slug = r.Slug,
+    Content = r.Summary ?? r.Title,
+    Section = r.MatchedSection,
+    Score = r.Score
+}).ToList();
+return new DocsSearchResponse
+{
+    Query = query,
+    Results = results
+};</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>DocsSearchCommand.cs <span>Back to stdout</span></figcaption><pre data-label="The command serializes JSON results to standard output" data-line-numbers><code id="docs-output-code" class="language-csharp">if (format is OutputFormat.Json)
+{
+    var json = JsonSerializer.Serialize(
+        response.Results.ToArray(),
+        JsonSourceGenerationContext.RelaxedEscaping.SearchResultArray);
+    InteractionService.DisplayRawText(json, ConsoleOutput.Standard);
 }</code></pre></figure>
           </div>
+          <span class="fragment code-step" data-code="docs-weights-code" data-lines="" data-fragment-index="0" data-stage="8" data-summary="Matches in titles and headings count more than matches in body text." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-idf-code" data-lines="4-5" data-fragment-index="1" data-stage="8" data-summary="Rare query terms contribute more than terms found on nearly every page." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-rank-code" data-lines="1-2,6-7" data-fragment-index="2" data-stage="8" data-summary="Each matching document is scored; only the best requested results are kept." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-map-code" data-lines="1-8" data-fragment-index="3" data-stage="9" data-summary="The search service maps ranked documents into title, slug, section, content and score." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-output-code" data-lines="3-6" data-fragment-index="4" data-stage="9" data-summary="The command serializes the result array to stdout when JSON was requested." aria-hidden="true"></span>
           <p>A title hit outweighs body text. A rare term like <code>addredis</code> outweighs <code>azure</code>, which is on nearly every page. No embeddings, no model training.</p>
-          <aside class="notes"><p>0:33-0:34. <strong>How search ranks</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Two numbers decide the rank: where a word matched, and how rare it is.</li><li>Titles, summaries, headings and code carry more weight than body text.</li><li>Rarity is an IDF multiplier: azure is on almost every page, addredis is not.</li><li>BM25-style, not full BM25. No embeddings, no model training: when you ask for a method, you mean that method.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Let's watch all of this happen live.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">          <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned narrative weights</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L266-L284">IDF source</a>. Selected lines, wrapped for display. No embeddings, no model training.</p></div></aside>
+          <aside class="notes"><p>0:33-0:34. <strong>How search ranks</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Two numbers decide the rank: where a word matched, and how rare it is.</li><li>Titles, summaries, headings and code carry more weight than body text.</li><li>IDF means inverse document frequency: it counts how many documents contain a token, not how often it repeats on one page. This BM25-style formula gives rare terms a larger multiplier; it is one ingredient in the ranking, not full BM25.</li><li>Rarity is an IDF multiplier: azure is on almost every page, addredis is not.</li><li>No embeddings, no model training: when you ask for a method, you mean that method.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Let's watch all of this happen live.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">          <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L102-L106">Pinned narrative weights</a> / <a href="https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/Docs/DocsIndexService.cs#L266-L284">IDF source</a>. Selected lines, wrapped for display. No embeddings, no model training.</p></div></aside>
                   </section>
 
-                  <section id="docs-cache-demo" data-chapter="AI loops" data-purpose="proof">
+                  <section id="docs-cache-demo" class="code-walk-slide" data-chapter="AI loops" data-purpose="proof" data-transition="none">
           <h2>Turn on Debug. Watch the cache work.</h2>
-          <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Docs changed <span>200 OK</span></figcaption><pre data-terminal-output data-label="Debug log when aspire.dev changed"><code class="language-plaintext">[dbug] DocsFetcher: Fetching content
-  from https://aspire.dev/llms-full.txt,
-  cached ETag: "Dbk3…"
-[dbug] DocsFetcher: Stored new ETag
-  for …/llms-full.txt: "KLdZ…"
-[info] DocsFetcher: Fetched content
-  from …/llms-full.txt,
-  length: 7658674 chars
-[info] DocsIndexService: Indexed 602
-  documents from aspire.dev
-  in 01.901 seconds.</code></pre></figure>
-            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Nothing changed <span>304 Not Modified</span></figcaption><pre data-terminal-output data-label="Debug log when nothing changed"><code class="language-plaintext">[dbug] DocsCache: ETag cache disk hit
-  for key: llms-full
-[dbug] DocsFetcher: Fetching content
-  from https://aspire.dev/llms-full.txt,
-  cached ETag: "KLdZ…"
-[dbug] DocsFetcher: Server returned
-  304 Not Modified for
-  https://aspire.dev/llms-full.txt
-[info] DocsIndexService: Loaded 602
-  documents from cache in 01.219 seconds.</code></pre></figure>
+          <div class="code-walk">
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Docs changed <span>200 OK</span></figcaption><pre data-terminal-output data-label="Debug log when aspire.dev changed"><code id="docs-changed-log" class="language-plaintext">[dbug] DocsFetcher: Fetching content from https://aspire.dev/llms-full.txt, cached ETag: "Dbk3…"
+[dbug] DocsFetcher: Stored new ETag for …/llms-full.txt: "KLdZ…"
+[info] DocsFetcher: Fetched content from …/llms-full.txt, length: 7658674 chars
+[info] DocsIndexService: Indexed 602 documents from aspire.dev in 01.901 seconds.</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="terminal"></span>Nothing changed <span>304 Not Modified</span></figcaption><pre data-terminal-output data-label="Debug log when nothing changed"><code id="docs-unchanged-log" class="language-plaintext">[dbug] DocsCache: ETag cache disk hit for key: llms-full
+[dbug] DocsFetcher: Fetching content from https://aspire.dev/llms-full.txt, cached ETag: "KLdZ…"
+[dbug] DocsFetcher: Server returned 304 Not Modified for https://aspire.dev/llms-full.txt
+[info] DocsIndexService: Loaded 602 documents from cache in 01.219 seconds.</code></pre></figure>
           </div>
+          <span class="fragment code-step" data-code="docs-changed-log" data-lines="2,4" data-fragment-index="0" data-stage="6" data-summary="200 OK replaces cached source text, then the index parses and saves it." aria-hidden="true"></span>
+          <span class="fragment code-step" data-code="docs-unchanged-log" data-lines="1,3-4" data-fragment-index="1" data-stage="6" data-summary="304 reuses cached text, then the saved index loads without another parse." aria-hidden="true"></span>
           <p>Same search with <code>--log-level Debug</code>. The 304 skips the 7.7 MB download and the parse.</p>
-          <aside class="notes"><p>0:34-0:36. <strong>Live: watch the cache</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same search, with Debug logging on. Watch for the ETag and the 304.</li><li>Left is the run after aspire.dev changed: download, new ETag, parse 602 documents.</li><li>Right is every run after that: one request, 304, load the saved index.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; the filter hides unrelated cache-key lines; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs search &quot;browser logs&quot; --log-level Debug --non-interactive --nologo 2&gt;&amp;1 | Select-String &#x27;DocsFetcher|DocsIndexService|Found&#x27;</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Point at <code>304 Not Modified</code> and <code>Loaded 602 documents from cache</code>.</li><li>If the docs changed since rehearsal, you get the left panel live. Either outcome proves the point.</li></ul><p><strong style="color:#b91c1c">DON&rsquo;T</strong> show the CLI version line.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;One more insider detail: what runs native.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Captured from <code>aspire docs search "browser logs" --log-level Debug --non-interactive --nologo</code> on the presenter machine. Selected log lines, timestamps removed, ETags shortened, wrapped for display. The message text is the pinned source's log templates.</p></div></aside>
+          <aside class="notes"><p>0:34-0:36. <strong>Live: watch the cache</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same search, with Debug logging on. Watch for the ETag and the 304.</li><li>The first panel is the run after aspire.dev changed: download, new ETag, parse 602 documents.</li><li>The second is every run after that: one request, 304, load the saved index.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; the filter hides unrelated cache-key lines; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs search &quot;browser logs&quot; --log-level Debug --non-interactive --nologo 2&gt;&amp;1 | Select-String &#x27;DocsFetcher|DocsIndexService|Found&#x27;</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Point at <code>304 Not Modified</code> and <code>Loaded 602 documents from cache</code>.</li><li>If the docs changed since rehearsal, you get the first panel's outcome live. Either outcome proves the point.</li></ul><p><strong style="color:#b91c1c">DON&rsquo;T</strong> show the CLI version line.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;One more insider detail: what runs native.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Captured from <code>aspire docs search "browser logs" --log-level Debug --non-interactive --nologo</code> on the presenter machine. Selected log lines, timestamps removed, URLs abbreviated, ETags shortened. The message text is the pinned source's log templates.</p></div></aside>
         </section>
 
         <section id="compiler" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
@@ -1115,8 +1236,8 @@ builder.AddViteApp("frontend", "../frontend")
         <section id="dashboard-integrated" data-chapter="Aspire dashboard" data-purpose="proof">
           <h2>An AppHost starts its dashboard.</h2>
           <figure class="dashboard-image">
-            <img class="image-for-dark" src="/inside-aspire/dashboard/projects-dark.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in dark theme." />
-            <img class="image-for-light" src="/inside-aspire/dashboard/projects-light.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in light theme." />
+            <img class="image-for-dark" src="/dashboard/projects-dark.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in dark theme." />
+            <img class="image-for-light" src="/dashboard/projects-light.webp" width="2560" height="800" loading="lazy" decoding="async" alt="Official Aspire documentation screenshot of the integrated dashboard Resources page in light theme." />
             <figcaption>Official Aspire docs screenshot, not this weather run.</figcaption>
           </figure>
           <p>The AppHost reports state, health, console, configuration, and commands. <a class="term-link" href="https://aspire.dev/fundamentals/telemetry/" target="_blank" rel="noopener noreferrer" title="OpenTelemetry Protocol (OTLP): carries logs, traces, and metrics to the dashboard. Open Aspire docs in a new tab.">OTLP</a> adds logs, traces, and metrics.</p>

@@ -22,6 +22,23 @@ SVG model remain talk-specific. Do not replace them with the template's syntax
 helper, source-only arrow staging, generic Steps list styles or starter slides.
 Only explicitly opted-in components should gain new semantic layout behavior.
 
+The docs command walkthrough opts into `.code-walk`: one full-width source
+panel at a time, driven by the existing `.code-step` fragments. A persistent
+nine-stage route and plain-language handoff explain where the request is and
+what the current code does, including before the first step. Highlights pick
+out the relevant statements rather than coloring every line. Next animates the
+focused source lines and, when
+the file changes, moves the source panel into view. Walkthrough slides switch
+without a full-slide transition so the request path stays continuous. Back and explicit fragment
+URLs restore the matching route stage, explanation, panel and lines. This
+follows command arguments, search/index services, saved-index reads, conditional
+HTTP with ETag, memory/disk source cache, fingerprint reuse, parsing, ranking
+and JSON stdout. The 304, 200 and offline excerpts are identified as alternate
+outcomes, not extra commands. Reduced-motion presentation retains deliberate
+manual steps without animation; reading, print and no-JavaScript expose every
+excerpt in order without presenter instructions. Copy remains scoped to the
+visible file and source text.
+
 Natural reading uses a dedicated `slide-viewport`, with Reveal layout disabled
 instead of its delayed scroll-wrapper reset. Source code remains left-aligned;
 desktop pairs retain their columns and narrow pairs retain DOM order.

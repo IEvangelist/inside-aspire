@@ -141,7 +141,7 @@ test('plain backward chapter hashes reset steps while explicit fragments and Bac
   await page.goto('?mode=present#/parser');
   await expect(page.locator('#parser .fragment.visible')).toHaveCount(0);
   await page.locator('#next').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(5);
+  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
   await page.goto('?mode=present#/the-loop/2');
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(3);
   await page.locator('#previous').click();

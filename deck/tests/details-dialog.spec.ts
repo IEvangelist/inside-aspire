@@ -141,7 +141,7 @@ for (const theme of ['light', 'dark'] as const) {
       const scroller = dialog.locator('.details-scroll');
       await expect(dialog).toBeVisible();
       expect(await nodes.evaluate((nodes) => nodes.every((node) => node.isConnected && !!node.closest('#slide-details')))).toBe(true);
-      await expect(page.locator('pre code')).toHaveCount(40);
+      await expect(page.locator('pre code')).toHaveCount(55);
       await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(38);
       const geometry = await dialog.evaluate((element) => {
         const box = element.getBoundingClientRect();
@@ -270,7 +270,7 @@ test('reading disclosures stay native, print restores all original code, and no-
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   await expect(page.locator('.pdf-page')).toHaveCount(46);
-  await expect(page.locator('pre code')).toHaveCount(40);
+  await expect(page.locator('pre code')).toHaveCount(55);
   await expect(page.locator('#history #go-apphost-code')).toBeVisible();
   await expect(page.locator('#history #go-service-code')).toBeVisible();
   const context = await browser.newContext({ javaScriptEnabled: false });
