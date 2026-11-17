@@ -22,7 +22,7 @@ request traces, correlated logs and aggregate metrics. Deployment uses
 one application model for local processes and a target's deployment
 pipeline. The practical tasks in the table follow those definitions.
 
-The 43-slide deck has 40 timed main slides and three untimed appendices.
+The 46-slide deck has 43 timed main slides and three untimed appendices.
 Opening/setup/roadmap use 0:00-0:05; AI loops 0:05-0:40; dashboard 0:40-0:48;
 deployment 0:48-0:58; takeaways 0:58-0:59; close 0:59-1:00. NativeAOT, C#, Roslyn, DCP and
 gh-aw support these areas, not extra chapters. The former benefit phrases
@@ -161,9 +161,9 @@ aspire docs search "browser logs" --log-level Debug --non-interactive --nologo 2
 
 Expect a 304 and `Loaded ... documents from cache`. If the network is down, stay on the slide's captured 200/304 panels.
 
-### Audience docs question (promised in the event listing)
+### Audience docs question
 
-The listing asks attendees to bring a question they'd normally open the Aspire docs to answer. The intro notes ask them to hold it; at `live-cli` (0:09), before Next, take one question and answer it in the prepared terminal:
+The listing invites attendees to bring their questions. The intro notes ask them to hold one about the Aspire docs; at `live-cli` (0:09), before Next, take one question and answer it in the prepared terminal:
 
 ```powershell
 aspire docs search "<their words>" --non-interactive
@@ -454,7 +454,7 @@ The CLI remains the main inner-loop enabler: current docs/API/state -> precise a
 | 0:58-0:59 | `takeaways`: Aspire makes AI more efficient; improves the dev inner loop; carries one app model into deployment |
 | 0:59-1:00 | `close`: try the commands and get the code |
 
-The speaker notes have 40 contiguous, nonoverlapping ranges covering exactly 60 minutes. Every note uses the same labels: **SAY** (key points to make in your own words, not a script), **DO** (on-screen actions), **RUN** (exact commands; click a box in the speaker view to select it), **PROMPT** (text to paste into Copilot Chat), **CLICK** (what Next does on that slide), **NEXT SLIDE** (a one-line lead-in), **DON'T** (guardrails) and **IF ASKED** (only if someone asks). David's **YOUR STORY** 20-second example on `setup` remains for him to fill in. Stop at the main close. The 43-slide deck has 40 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
+The speaker notes have 43 contiguous, nonoverlapping ranges covering exactly 60 minutes. Every note uses the same labels: **SAY** (key points to make in your own words, not a script), **DO** (on-screen actions), **RUN** (exact commands; click a box in the speaker view to select it), **PROMPT** (text to paste into Copilot Chat), **CLICK** (what Next does on that slide), **NEXT SLIDE** (a one-line lead-in), **DON'T** (guardrails) and **IF ASKED** (only if someone asks). David's **YOUR STORY** 20-second example on `setup` remains for him to fill in. Stop at the main close. The 46-slide deck has 43 main slides and three optional, untimed appendices (`history`, `historical-evidence`, `sources`) after it; Q&A and networking take place separately.
 
 The shell's manual [template 719 UX sync](evidence/template-ux.json) is unchanged;
 the current story changes the opening, order and talk track. Existing line-highlight fragments, the remaining paired
@@ -519,7 +519,7 @@ presentation layout, even though they are narrow. A blocked popup reports an
 actionable error instead of claiming success.
 
 Speaker notes are public source, not confidential presenter-only storage. The
-39 draft main-slide note ranges cover exactly 60 minutes; optional
+43 main-slide note ranges cover exactly 60 minutes; optional
 language references do not extend the timed talk.
 
 After walking a code block forward and leaving its slide, **Previous** and
@@ -632,14 +632,14 @@ The blog's 82 PRs/44.8-hour median is explicitly historical May 3-June 2, 2026 d
 
 [Windows/Linux native CI 38025689486](https://github.com/IEvangelist/inside-aspire/actions/runs/38025689486) passed: 50 parity tests, warning-as-error native compilation, Windows 280/Linux 273 native assertions, OpenAPI 3.1.1, rendered Scalar/native/Vite browsers, and actual traces/logs/metrics. The native format and runtime flags prove AOT; they do not establish a startup or memory benchmark.
 
-The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The 43-slide draft retains David's actual portrait, unchanged branding/PR/native images and exact four social destinations. The intro presents those links vertically, with left-aligned 44px icon tiles and visible scheme-free URLs; each whole row is a link. The dashboard images are attributed official documentation screenshots. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
+The separate live-provider rehearsal returned actual Madison weather/geocoding and loaded maps. The deck's native screenshots are labeled captures, not forecasts or fake UI. The published 46-slide deck retains David's actual portrait, unchanged branding/PR/native images and exact four social destinations. The intro presents those links vertically, with left-aligned 44px icon tiles and visible scheme-free URLs; each whole row is a link. The dashboard images are attributed official documentation screenshots. [Presentation assets and source excerpts](PRESENTATION-ASSETS.md) have explicit provenance.
 
 The build/native-proof/operational-result slides are removed from the audience deck. Their real source and verified evidence stay in this repository and in pre-talk preparation. Old `#/aot` and `#/native-proof` links resolve to `#/compiler`; `#/commands` resolves to `#/live-cli`.
 
 The weather image displays the entire original 1440x1000 capture at a larger proportional footprint, not in a letterboxed wide box. Reading uses the available width. PR images also use their actual aspect ratio. The former `#/timeout` audience link resolves to the browser-evidence explanation at `#/browser-evidence`.
 
 The browser gate checks actual syntax tokens for six source/JSON languages and
-honest plain-text stdout across the draft's 33 command/output/source blocks, rounded inline
+honest plain-text stdout across 40 command/output/source blocks, rounded inline
 code, graph/code fragments, and static modes. Replay tests verify fixture
 hashes/semantics/privacy, one-command initial state, real expanding geometry,
 matched output, rewind/interruption/hash restoration, exact copy, accessible

@@ -46,7 +46,7 @@ core APIs remain neutral. [Pinned source mappings](evidence/package-accents.json
 cover JavaScript/Docker and the two explicitly illustrative C#/Go reference
 blocks. The optional example is specifically a C# AppHost running a Go
 workload, distinct from the AppHost's authoring language. Its code was not
-run or used to produce the weather rehearsal. Current draft source/output
+run or used to produce the weather rehearsal. Current source/output
 changes are explicitly identified below; original capture files are immutable.
 
 The navigation uses the unchanged official Aspire compact mark. GitHub branding is secondary and identifies the GitHub-hosted workflow, PRs, and repository lineage; it does not replace Aspire or imply sponsorship.
@@ -112,13 +112,13 @@ Rendered connector checks measure all 32 routes across both themes, projector/as
 
 ## Sequential opening and actual image area
 
-In the local story draft, **Start presentation** goes to the second slide, `setup`; `thesis` follows as slide 3. Chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
+**Start presentation** goes to the second slide, `setup`; `thesis` follows as slide 3. Chapter links still jump directly to their named sections. The removed timeout story aliases to `browser-evidence`.
 
 The original 1440x1000 native captures are unchanged. Presentation uses a larger 580px proportional image footprint instead of a 500px contain box; reading uses full available width. The image's box matches its actual painted aspect, so increasing layout space increases real map/weather content rather than blank side bands. PR header captures also retain their intrinsic aspect and full available width. Rendered tests measure painted area, not a CSS size string, and preserve attribution and viewport containment.
 
 ## Three benefits, proof before internals
 
-The roadmap, primary entries and close repeat **AI loops**, **Aspire dashboard**, **Aspire deployment**. The draft introduces the older guidance assistants learned, reads the CLI response, then follows the page back to its PR and human refinement. The selected CLI member JSON keeps its `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
+The roadmap, primary entries and close repeat **AI loops**, **Aspire dashboard**, **Aspire deployment**. The deck introduces the older guidance assistants learned, reads the CLI response, then follows the page back to its PR and human refinement. The selected CLI member JSON keeps its `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
 
 The three operations use the existing exact `demo\host\apphost.cs` target for
 `wait`, `describe`, and `otel traces`. Public CLI 13.6.1 was executed against
@@ -130,7 +130,7 @@ records hashes, privacy redactions, native format, and safe runtime cleanup.
 AppHost/parser/workflow excerpts, native/PR imagery, and connector
 geometry remain intact.
 
-The local 43-slide draft has 40 timed main slides and three optional appendices after
+The published 46-slide deck has 43 timed main slides and three optional appendices after
 the close. Notes cover exactly 60 presentation minutes with Q&A/networking
 separate. Approved abstract, service source, official skill trees, brand assets
 and verified PR chain are unchanged. The AppHost is explicitly updated to

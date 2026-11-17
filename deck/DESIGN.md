@@ -14,9 +14,9 @@ thin body scrollbars come from the pinned shell.
 
 The published baseline's 41 authored slides, notes, code strings, media,
 citations, order, public IDs, aliases and ten paired layouts are recorded in the
-[pre-port contract](../docs/evidence/template-ux-baseline.json). The local
-43-slide story draft adds `setup` and `takeaways`, changes copy/order/notes, and leaves that
-frozen test contract untouched pending approval. The original
+[pre-port contract](../docs/evidence/template-ux-baseline.json). The published
+46-slide deck adds `setup` and `takeaways`, changes copy/order/notes, and leaves that
+frozen test contract untouched. The original
 `syntax.ts` line focus, complete recorded replay controller and endpoint-gated
 SVG model remain talk-specific. Do not replace them with the template's syntax
 helper, source-only arrow staging, generic Steps list styles or starter slides.
@@ -121,7 +121,7 @@ SVG edges reveal with the speaker's advance and restore on back/deep-link naviga
 
 Images are actual portrait/PR/native captures plus unchanged, attributed official dashboard documentation screenshots, not reconstructed UI. Their aspect/theme behavior, GitHub marks and Octicons family remain unchanged. Standalone startup syntax remains reference material; Compose publish/deploy now have complete genuine current recordings. Historical reference provenance and [new executed-rehearsal proof](../docs/evidence/chapter-demos.json) remain separate.
 
-The draft pacing is 43 slides: 40 timed main slides plus three optional appendices. Opening/setup/roadmap take five minutes, AI loops 32, dashboard nine, deployment 12, takeaways one and close one, totaling 60 with separate Q&A/networking. Each chapter has a task/action/result/return: propose browser logging, follow a Madison request, then deploy that app with local Compose. The takeaways state AI efficiency, the dev inner loop and carrying one app model into deployment. Presenter instructions stay in notes. Nine **Recorded CLI run** surfaces support the handoffs. The original and Compose capture files stay immutable; two November 6 get recordings use default output. All four graphs retain their geometry, and the native image keeps its larger proportional area. Native compilation stays offstage. There is no cloud provisioning, backend bridge, new skill generation or animation dependency.
+The pacing is 46 slides: 43 timed main slides plus three optional appendices. Opening/setup/roadmap take five minutes, AI loops 35, dashboard eight, deployment 10, takeaways one and close one, totaling 60 with separate Q&A/networking. Each chapter has a task/action/result/return: propose browser logging, follow a Madison request, then deploy that app with local Compose. The takeaways state AI efficiency, the dev inner loop and carrying one app model into deployment. Presenter instructions stay in notes. Nine **Recorded CLI run** surfaces support the handoffs. The original and Compose capture files stay immutable; two November 6 get recordings use default output. All four graphs retain their geometry, and the native image keeps its larger proportional area. Native compilation stays offstage. There is no cloud provisioning, backend bridge, new skill generation or animation dependency.
 
 The portrait's four social links form a vertical list with left-aligned 44px icon tiles and visible 20px URL text. Every URL starts at the same text edge, omits its scheme and trailing slash, and remains fully readable. Each whole row is a safe new-tab link with visible keyboard focus and a label containing its URL. GitHub/X/Bluesky/LinkedIn use the same maintained glyphs. The semantic operation/resource icon family remains Octicons.
 
@@ -148,17 +148,17 @@ The hidden replay announcement stays anchored inside the page. A modal reserves
 an existing page scrollbar gutter before locking root scrolling, then restores
 it; it does not permanently narrow reading slides or shift right-hand badges.
 
-The frozen suite still encodes the earlier block/replay/copy/version counts;
-the local impact report lists required updates instead of editing tests or
-hashes. The guide/member recordings contain the complete default output of
+The current tests cover the updated block/replay/copy counts;
+the original capture files and their hashes remain unchanged.
+The guide/member recordings contain the complete default output of
 their plain get commands: Markdown content rendered as text in a redirected
 capture, including its Loading line. Strict geometry/copy/branding/route
 contracts remain the target. Service
 source, approved title/abstract/event, official skill trees and the real PR
 chain remain unchanged; the AppHost's upstream package update and publish-only
-packaging are explicit local-draft changes.
+packaging are explicit changes.
 
-The existing all-slide text-range/container audits encode the 41-slide published baseline. The draft uses a temporary 42-count copy for fit and lists copy/count/order test updates without changing the original tests. All 31 graph nodes/66 labels retain padded SVG checks after fonts load, icon/title and subtitle clearance, 22px titles and 20px details without truncation or compression. Copy and official imagery inherit the existing identity and spacing, rather than introducing a new visual world.
+The all-slide text-range/container audits cover all 46 slides. The current tests reflect the published copy, counts and order. All 31 graph nodes/66 labels retain padded SVG checks after fonts load, icon/title and subtitle clearance, 22px titles and 20px details without truncation or compression. Copy and official imagery inherit the existing identity and spacing, rather than introducing a new visual world.
 
 There are no faint pre-revealed graph guide paths. Each edge, arrowhead, and label shares a stage no earlier than either endpoint node. Forward/back state checks inspect actual rendered visibility, while reading, reduced motion, and print show complete connected graphs. The workflow filename/compile/lockfile strip is a centered intrinsic group with consistent gaps and vertical narrow-screen ordering; this does not center source code.
 

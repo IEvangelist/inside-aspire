@@ -469,6 +469,11 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
 .thesis-path strong { display: block; font-size: 32px; font-weight: 500; line-height: 1.3; margin-top: 20px; }
 .thesis-path .octicon { width: 36px; height: 36px; color: var(--accent); }
 .thesis-path p { font-size: 26px; color: var(--secondary); }
+:root:not([data-reading='true']) #close .thesis-path { margin: 24px 0 8px; }
+@media (max-aspect-ratio: 37/25) {
+  :root:not([data-reading='true']) #docs-command h2 { margin-bottom: 4px; }
+  :root:not([data-reading='true']) #docs-command > p { margin: 0; }
+}
 .reveal .try-it > p { margin: 0 0 8px; }
 .reveal .try-it-commands { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; list-style: none; padding: 0; margin: 0 0 24px; }
 .try-it-commands li { min-width: 0; }

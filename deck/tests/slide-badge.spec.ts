@@ -5,6 +5,35 @@ const defaults = 'data-position="bottom-left" data-visible="true"';
 const documentUrl = (url: URL) => url.pathname === '/inside-aspire/';
 let configurationCase = 0;
 
+test('closing resources and docs command caption stay above the slide badge', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit geometry matrix runs once.');
+  for (const [width, height] of [[1440, 900], [1280, 800], [1680, 1050], [1024, 768], [1280, 960], [1440, 810], [1920, 1080]]) {
+    await page.setViewportSize({ width, height });
+    for (const id of ['close', 'docs-command']) {
+      await ready(page, `?mode=present#/${id}`);
+      const content = page.locator(id === 'close' ? '#close .take-home-terminal' : '#docs-command > p');
+      await expect.poll(async () => {
+        const panel = (await content.boundingBox())!;
+        const badge = (await page.locator('#slide-position').boundingBox())!;
+        return badge.y - panel.y - panel.height;
+      }, { message: `${id} at ${width}x${height} overlaps the slide badge` }).toBeGreaterThanOrEqual(8);
+    }
+  }
+});
+
+test('docs command caption keeps its original gap below the code panels on wide screens', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit geometry matrix runs once.');
+  for (const [width, height] of [[1440, 900], [1920, 1080]]) {
+    await page.setViewportSize({ width, height });
+    await ready(page, '?mode=present#/docs-command');
+    await expect.poll(() => page.evaluate(() => {
+      const caption = document.querySelector('#docs-command > p')!.getBoundingClientRect();
+      const panels = [...document.querySelectorAll('#docs-command .code-panel')].map((panel) => panel.getBoundingClientRect().bottom);
+      return caption.top - Math.max(...panels);
+    }), { message: `docs-command caption touches the code panels at ${width}x${height}` }).toBeGreaterThanOrEqual(16);
+  }
+});
+
 async function configure(page: Page, attributes: string) {
   await page.unroute(documentUrl);
   await page.route(documentUrl, async (route) => {
