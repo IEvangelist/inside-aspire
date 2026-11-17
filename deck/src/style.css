@@ -773,7 +773,7 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
 @container (max-width: 1000px) {
   .reveal .architecture-svg, .reveal .drill-svg { display: none; }
   .reveal .architecture-mobile { display: grid !important; list-style: none; padding: 0; margin: 0; width: 100%; gap: 12px; }
-  .architecture-mobile li { position: relative; display: grid; grid-template-columns: 38px 1fr; gap: 14px; padding: 10px 0; }
+  .architecture-mobile li { position: relative; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 10px 0; overflow-wrap: anywhere; }
   .architecture-mobile .stage-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 8px; color: var(--accent); background: var(--surface); }
   .architecture-mobile li:not(:last-child)::after { content: ''; position: absolute; left: 18px; top: 47px; bottom: -17px; border-left: 1px solid var(--line); }
   .architecture-mobile strong { font-size: 22px; font-weight: 500; }
