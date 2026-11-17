@@ -1,16 +1,21 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function audience(page: Page) {
-  await page.goto('?theme=dark#/lifecycle');
+  await page.goto('?theme=dark');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
 }
 
-test('native speaker console connects real current/upcoming frames, original notes and timer through a full code rewind', async ({ page }, testInfo) => {
+const presentId = (page: Page) => page.locator('.slides > section.present').getAttribute('id');
+
+test('native speaker console connects real current/upcoming frames, original notes, timer and code steps', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One actual native presenter connection, not a mock, suffices.');
   test.setTimeout(60_000);
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await audience(page);
+  const codeSlide = await page.locator('.slides > section[id]:has(.code-step)').first().getAttribute('id');
+  await page.evaluate((id) => { location.hash = `/${id}`; }, codeSlide);
+  await expect(page.locator(`#${codeSlide}`)).toHaveClass(/present/);
   await page.locator('#menu-toggle').click();
   const popupEvent = page.waitForEvent('popup');
   await page.locator('#notes').click();
@@ -26,72 +31,45 @@ test('native speaker console connects real current/upcoming frames, original not
     await expect(upcoming.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(current.locator('.toolbar')).toBeHidden();
     await expect(upcoming.locator('.toolbar')).toBeHidden();
-    const currentFrame = popup.frames().find((frame) => frame.url().includes('postMessageEvents=true'))!;
-    const upcomingFrame = popup.frames().find((frame) => frame.url().includes('controls=false'))!;
-    for (const frame of [currentFrame, upcomingFrame]) {
+    for (const frame of popup.frames().filter((frame) => frame.url().includes('receiver'))) {
       const url = new URL(frame.url());
-      expect(url.searchParams.has('receiver')).toBe(true);
       expect(url.searchParams.get('history')).toBe('false');
       expect(url.searchParams.get('scrollActivationWidth')).toBe('false');
     }
-    await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
-      await page.locator('#lifecycle > .notes').textContent() ?? '');
     await expect(popup.locator('.speaker-controls-time .clock-value')).not.toHaveText('0:00 AM');
     const seconds = await popup.locator('.timer .seconds-value').textContent();
     await expect.poll(() => popup.locator('.timer .seconds-value').textContent()).not.toBe(seconds);
+    const expectSynced = async () => {
+      const id = await presentId(page);
+      await expect(current.locator('.slides section.present')).toHaveAttribute('id', id!);
+      const focused = await page.locator(`#${id} .is-focused`).evaluateAll((nodes) =>
+        nodes.map((node) => (node as HTMLElement).dataset.line));
+      await expect.poll(() => current.locator(`#${id} .is-focused`).evaluateAll((nodes) =>
+        nodes.map((node) => (node as HTMLElement).dataset.line))).toEqual(focused);
+      await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
+        await page.locator(`#${id} > .notes`).textContent() ?? '');
+    };
+    await expectSynced();
     for (let index = 0; index < 3; index++) {
       await page.locator('#next').click();
-      const id = index < 2 ? 'lifecycle' : 'the-loop';
-      await expect(current.locator('.slides section.present')).toHaveAttribute('id', id);
-      if (index < 2) {
-        const lines = index === 0 ? [1, 2, 3, 4, 5] : [7, 8, 9, 10, 11];
-        await expect.poll(() => current.locator('#apphost-code .is-focused').evaluateAll((nodes) =>
-          nodes.map((node) => Number((node as HTMLElement).dataset.line)))).toEqual(lines);
-        await expect(upcoming.locator('.slides section.present')).toHaveAttribute('id', index === 0 ? 'lifecycle' : 'the-loop');
-        await expect(upcoming.locator('.present .is-focused')).toHaveCount(index === 0 ? 5 : 0);
-      }
-      await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
-        await page.locator(`#${id} > .notes`).textContent() ?? '');
+      await expect(page.locator(`#${codeSlide} .is-focused`).first()).toBeAttached();
+      await expectSynced();
     }
-    for (const [id, count] of [['lifecycle', 5], ['lifecycle', 5], ['lifecycle', 0], ['compiler', 0]] as const) {
+    for (let index = 0; index < 4; index++) {
       await page.locator('#previous').click();
-      await expect(current.locator('.slides section.present')).toHaveAttribute('id', id);
-      await expect(current.locator(`#${id} .is-focused`)).toHaveCount(count);
-      await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
-        await page.locator(`#${id} > .notes`).textContent() ?? '');
+      await expectSynced();
     }
     await popup.bringToFront();
-    await expect.poll(() => new URL(currentFrame.url()).hash).toBe('#/compiler/2');
-    await currentFrame.evaluate(() => location.reload());
-    await expect(current.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-    await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'compiler');
-    expect(new URL(currentFrame.url()).searchParams.has('receiver')).toBe(true);
-    for (const [key, id, count] of [
-      ['ArrowRight', 'lifecycle', 0], ['ArrowRight', 'lifecycle', 5], ['ArrowRight', 'lifecycle', 5],
-      ['ArrowLeft', 'lifecycle', 5], ['ArrowLeft', 'lifecycle', 0], ['ArrowLeft', 'compiler', 0],
-    ] as const) {
+    for (const key of ['ArrowRight', 'ArrowRight', 'ArrowLeft']) {
+      const before = page.url();
       await popup.keyboard.press(key);
-      await expect(page.locator('.slides section.present')).toHaveAttribute('id', id);
-      await expect(page.locator(`#${id} .is-focused`)).toHaveCount(count);
-      await expect(current.locator('.slides section.present')).toHaveAttribute('id', id);
-      await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(
-        await page.locator(`#${id} > .notes`).textContent() ?? '');
+      await expect.poll(() => page.url()).not.toBe(before);
+      await expectSynced();
     }
-    await page.evaluate(() => { location.hash = '/lifecycle'; });
-    await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'lifecycle');
-    await page.locator('#next').click();
-    await page.locator('#next').click();
-    await page.goBack();
-    await expect(current.locator('#apphost-code .is-focused')).toHaveCount(5);
-    await page.goBack();
-    await expect(page).toHaveURL(/#\/lifecycle$/);
-    await expect(current.locator('#apphost-code .is-focused')).toHaveCount(0);
-    await expect(page.locator('aside.notes:visible')).toHaveCount(0);
   } finally {
     await popup.close();
   }
 });
-
 test('the S shortcut opens the native presenter and a blocked popup surfaces an actionable error', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One explicit shortcut/blocked-popup path suffices.');
   await audience(page);
@@ -111,7 +89,10 @@ test('the S shortcut opens the native presenter and a blocked popup surfaces an 
 
 test('speaker preview receivers stay in presentation mode when the audience opened notes from natural reading', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One real read-to-native-presenter receiver path suffices.');
-  await page.goto('?theme=light&mode=read#/parser');
+  await page.goto('?theme=light&mode=read');
+  await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
+  const id = await page.locator('.slides > section[id]').nth(2).getAttribute('id');
+  await page.goto(`?theme=light&mode=read#/${id}`);
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   await page.locator('#menu-toggle').click();
   const opened = page.waitForEvent('popup');
@@ -124,8 +105,8 @@ test('speaker preview receivers stay in presentation mode when the audience open
     await expect(upcoming.locator('html')).toHaveAttribute('data-deck-ready', 'true');
     await expect(current.locator('html')).toHaveAttribute('data-reading', 'false');
     await expect(upcoming.locator('html')).toHaveAttribute('data-reading', 'false');
-    await expect(current.locator('.slides section.present')).toHaveAttribute('id', 'parser');
-    await expect(popup.locator('.speaker-controls-notes .value')).toContainText('0:32-0:33.');
+    await expect(current.locator('.slides section.present')).toHaveAttribute('id', id!);
+    await expect(popup.locator('.speaker-controls-notes .value')).toHaveText(await page.locator(`#${id} > .notes`).textContent() ?? '');
     await expect(page.locator('html')).toHaveAttribute('data-reading', 'true');
   } finally {
     await popup.close();

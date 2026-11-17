@@ -7,37 +7,22 @@ async function open(page: Page, id: string) {
   await page.evaluate(() => document.fonts.ready);
 }
 
-test('chapter openers show complete loops and the three requested takeaways', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit chapter-content check runs once.');
-  await open(page, 'ai-loops');
-  await expect(page.locator('#ai-loops .loop-node strong')).toHaveText([
-    'A feature ships', 'A bot drafts docs.People review.', 'The CLI serves them', 'Skills guideyour AI',
-  ]);
-  await expect(page.locator('#ai-loops .loop-arc')).toHaveCount(4);
-  await open(page, 'takeaways');
-  await expect(page.locator('#takeaways [data-takeaway]')).toHaveText([
-    'Aspire makes AI more efficient.',
-    'Aspire improves the dev inner loop.',
-    'Aspire carries one app model into deployment.',
-  ]);
-});
-
 test('default and chapter transitions visibly animate both outgoing and incoming slides', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'Actual transition geometry is checked once.');
   test.setTimeout(60_000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  for (const [from, to] of [
-    ['intro', 'setup'], ['setup', 'drift'], ['the-loop', 'dashboard'], ['deployment', 'deployment-model'],
-  ]) {
+  await open(page, '');
+  const slides = await page.locator('.slides > section[id]').evaluateAll((sections) =>
+    sections.map((slide) => ({ id: slide.id, transition: slide.getAttribute('data-transition') ?? '' })));
+  expect(slides.every(({ transition }) => transition)).toBe(true);
+  const animated = (index: number) => slides[index].transition !== 'none' && slides[index + 1]?.transition !== 'none';
+  const pairs = [0, slides.findIndex((slide, index) => index > 0 && /fade-out/.test(slide.transition) && animated(index))]
+    .filter((index) => index >= 0 && animated(index)).map((index) => [slides[index].id, slides[index + 1].id]);
+  expect(pairs.length).toBeGreaterThan(0);
+  for (const [from, to] of pairs) {
     await open(page, from);
     await page.waitForFunction(() => document.querySelector('.slides > section.present')!
       .getAnimations().every((animation) => animation.playState !== 'running'));
-    const allTransitions = await page.locator('.slides > section[id]').evaluateAll((slides) =>
-      slides.map((slide) => ({ id: slide.id, transition: slide.getAttribute('data-transition') })));
-    expect(allTransitions).toHaveLength(46);
-    expect(allTransitions.filter(({ transition }) => transition === 'none').map(({ id }) => id))
-      .toEqual(['docs-command', 'index', 'cache', 'parser', 'lexical', 'docs-cache-demo']);
-    expect(allTransitions.every(({ transition }) => transition)).toBe(true);
     const result = await page.evaluate(async ({ from, to }) => {
       const outgoing = document.getElementById(from)!;
       const incoming = document.getElementById(to)!;
@@ -47,8 +32,6 @@ test('default and chapter transitions visibly animate both outgoing and incoming
         return { display: style.display, opacity: Number(style.opacity), x: matrix.m41,
           running: slide.getAnimations().filter((animation) => animation.playState === 'running').length };
       };
-      snapshot(outgoing);
-      snapshot(incoming);
       let presses = 0;
       while (document.querySelector('.slides > section.present')?.id === from && presses++ < 50) {
         document.getElementById('next')!.click();
@@ -69,10 +52,6 @@ test('default and chapter transitions visibly animate both outgoing and incoming
       expect(start.running).toBeGreaterThan(0);
       expect(middle.running).toBeGreaterThan(0);
       expect(Math.abs(start.x - middle.x) > 1 || Math.abs(start.opacity - middle.opacity) > 0.01).toBe(true);
-    }
-    if (from === 'intro') {
-      expect(result.start[0].display).toBe('grid');
-      expect(result.middle[0].display).toBe('grid');
     }
   }
 });

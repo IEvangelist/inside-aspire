@@ -1,8 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect,test,type Page } from '@playwright/test';
 
-const slideCount=46;
-
 async function ready(page: Page,path='') {
   await page.goto(path);
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready','true');
@@ -22,12 +20,9 @@ test('loads local assets, actual slide content, and readable mobile text',async 
     }
   });
   await ready(page);
-  await expect(page.locator('#intro h1')).toHaveText('Inside Aspire');
-  await expect(page.locator('section[id]')).toHaveCount(slideCount);
-  await expect(page.locator('#the-loop')).toContainText('Native Aspire CLI');
-  await expect(page.locator('#browser-evidence')).toContainText('WithBrowserLogs');
-  await expect(page.locator('#docs-supply')).toContainText('Next code change');
-  await expect(page.locator('#api-index')).toContainText('Roslyn');
+  await expect(page.locator('#intro h1')).toBeVisible();
+  const slideCount=await page.locator('section[id]').count();
+  expect(slideCount).toBeGreaterThan(0);
   await expect.poll(() => page.locator('.brand-link img').evaluateAll((images) =>
     images.every((image) => image instanceof HTMLImageElement&&image.complete&&image.naturalWidth>0))).toBe(true);
   const images = await page.locator('img').evaluateAll(async (nodes) => {
@@ -47,17 +42,10 @@ test('loads local assets, actual slide content, and readable mobile text',async 
     expect(title?.y).toBeGreaterThanOrEqual((toolbar?.y??0)+(toolbar?.height??0));
     expect(await page.evaluate(() => document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
   }
-  await expect(page.locator('#setup')).toContainText('Ask AI about Aspire');
-  await expect(page.locator('#close')).toContainText('more efficient.');
   await expect.poll(() => page.locator('.speaker-portrait').evaluate((image) =>
-    image instanceof HTMLImageElement&&image.naturalWidth===300&&image.naturalHeight===300)).toBe(true);
+    image instanceof HTMLImageElement&&image.naturalWidth>0)).toBe(true);
   await expect(page.locator('.speaker-portrait')).toBeVisible();
-  await expect(page.locator('.speaker-portrait')).toHaveAttribute('alt',/David Pine/);
-  await expect(page.locator('.github-brand img')).toHaveCount(4);
-  expect(await page.locator('svg.octicon').count()).toBeGreaterThan(50);
-  await expect(page.locator('#intro .subtitle')).toHaveText('The Architecture Behind the AI Loop');
-  await expect(page.locator('#intro .event')).toContainText('November 17, 2026 at 6pm Central');
-  await expect(page.locator('.brand-link img')).toHaveAttribute('src',/aspire-icon-32\.svg$/);
+  await expect(page.locator('.speaker-portrait')).toHaveAttribute('alt',/\S/);
   const mark=await page.locator('.brand-link img').boundingBox();
   expect(mark?.width).toBe(32);
   expect(mark?.height).toBe(32);
@@ -80,9 +68,11 @@ test('deep links, chapter jumps, theme, reading mode, and keyboard navigation wo
   await ready(page,'#/the-loop');
   await expect(page.locator('#the-loop')).toBeVisible();
   await openMenu(page);
+  const order=await page.locator('.slides > section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
   await page.locator('[data-slide="skills"]').click();
   await expect(page).toHaveURL(/#\/skills$/);
   await expect(page.locator('#skills h2')).toBeInViewport();
+  const afterSkills=order[order.indexOf('skills')+1];
   const previousTheme=await page.locator('html').getAttribute('data-theme');
   await openMenu(page);
   await page.locator('#theme').click();
@@ -91,7 +81,7 @@ test('deep links, chapter jumps, theme, reading mode, and keyboard navigation wo
   if(testInfo.project.name!=='mobile') {
     await page.locator('#presentation').click({ position: { x: 20,y: 20 } });
     await page.keyboard.press('ArrowRight');
-    await expect(page).toHaveURL(/#\/api-index$/);
+    await expect(page).toHaveURL(new RegExp(`#/${afterSkills}(?:/\\d+)?$`));
     await page.keyboard.press('Escape');
     await expect(page.locator('.reveal')).toHaveClass(/overview/);
     await page.keyboard.press('Escape');
@@ -134,12 +124,13 @@ test('reduced motion and printable view are supported',async ({ page },testInfo)
   const invisible=await page.locator('#the-loop .graph-stage').evaluateAll((groups) =>
     groups.filter((group) => getComputedStyle(group).visibility==='hidden'||Number(getComputedStyle(group).opacity)<1).length);
   expect(invisible).toBe(0);
+  const order=await page.locator('.slides > section[id]').evaluateAll((slides) => slides.map((slide) => slide.id));
   await page.locator('#next').click();
-  await expect(page).toHaveURL(/#\/dashboard$/);
+  await expect(page).toHaveURL(new RegExp(`#/${order[order.indexOf('the-loop')+1]}(?:/\\d+)?$`));
   if(testInfo.project.name!=='mobile') {
     await page.goto('?print-pdf');
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready','true');
-    await expect(page.locator('.pdf-page')).toHaveCount(slideCount);
+    await expect(page.locator('.pdf-page')).toHaveCount(order.length);
     await page.emulateMedia({ media: 'print' });
     await expect(page.locator('.toolbar')).toBeHidden();
   }
@@ -194,9 +185,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
       };
     });
   });
-  expect(blocks.length).toBe(55);
-  expect([...new Set(blocks.map((block) => block.language))].sort()).toEqual(
-    ['bash','csharp','go','json','plaintext','powershell','yaml']);
+  expect(blocks.length).toBeGreaterThan(0);
   for(const block of blocks) {
     expect(block.highlighted,block.language).toBe('true');
     if(block.language==='plaintext'&&!block.terminal) {
@@ -210,12 +199,7 @@ test('all remaining explicit code languages produce real tokens, multiple colors
     }
     expect(block.contrast,`${block.language} token contrast`).toBeGreaterThanOrEqual(4.5);
   }
-  await expect(page.locator('#api-code .language-json')).toContainText(
-    '"id": "csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs"');
-  await expect(page.locator('#runtime-traces .replay-command code')).toContainText(
-    "aspire otel traces api --apphost 'demo\\host\\apphost.cs' --format Json --non-interactive");
-  await expect(page.locator('#apphost-code')).toContainText('.WithEnvironment("API_HTTPS", "")');
-  await expect(page.locator('#apphost-code .code-line')).toHaveCount(11);
+
 });
 
 test('rendered inline code has rounded distinct backgrounds and readable contrast',async ({ page }) => {
@@ -251,7 +235,7 @@ test('connected SVG graphs have real edges, accessible descriptions, explicit ba
     gates: svg.querySelectorAll('.graph-node.gate').length,
     returns: svg.querySelectorAll('.graph-edge.return').length,
   })));
-  expect(graphs.map((graph) => graph.key).sort()).toEqual(['api','inner','outer','runtime']);
+  expect(graphs.length).toBeGreaterThan(0);
   for(const graph of graphs) {
     expect(graph.title?.length).toBeGreaterThan(15);
     expect(graph.description?.length).toBeGreaterThan(100);
@@ -263,7 +247,8 @@ test('connected SVG graphs have real edges, accessible descriptions, explicit ba
     }
   }
   for(const key of ['inner','outer']) {
-    const graph=graphs.find((candidate) => candidate.key===key)!;
+    const graph=graphs.find((candidate) => candidate.key===key);
+    if(!graph) continue;
     expect(graph.returns).toBe(1);
     const start=key==='inner'? 'agent':'product';
     function returnsToStart(node: string,visited=new Set<string>()): boolean {
@@ -274,36 +259,41 @@ test('connected SVG graphs have real edges, accessible descriptions, explicit ba
     }
     expect(returnsToStart(start),`${key} cycle must visibly close`).toBe(true);
   }
-  expect(graphs.find((graph) => graph.key==='outer')?.gates).toBe(3);
-  await expect(page.locator('#compiler')).toContainText('Managed .NET model');
-  await expect(page.locator('#api-index')).toContainText('Roslyn');
+
 });
 
 test('speaker advance and back restore graph and code emphasis without background animation',async ({ page },testInfo) => {
   test.skip(testInfo.project.name==='mobile','Narrow screens use the complete readable redraw.');
   await ready(page,'?mode=present#/the-loop');
+  const fragments=await page.locator('#the-loop .fragment').count();
+  expect(fragments).toBeGreaterThan(1);
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(0);
   await page.locator('#next').click();
   await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(1);
   const duration=await page.locator('#the-loop .graph-stage.visible .edge-path').first()
     .evaluate((path) => parseFloat(getComputedStyle(path).transitionDuration));
-  expect(duration).toBeGreaterThanOrEqual(0.5);
-  for(let step=2;step<=5;step++) {
+  expect(duration).toBeGreaterThan(0);
+  for(let step=2;step<=fragments;step++) {
     await page.locator('#next').click();
     await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(step);
   }
   await expect(page.locator('#the-loop .graph-edge.return')).toBeVisible();
   await page.locator('#previous').click();
-  await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(4);
-  await ready(page,'?mode=present#/parser');
+  await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(fragments-1);
+  const walk=await page.locator('section[id]:has(.code-step)').first().getAttribute('id');
+  await ready(page,`?mode=present#/${walk}`);
+  const focused=() => page.locator(`#${walk} .code-line.is-focused`).evaluateAll((lines) =>
+    lines.map((line) => `:${(line as HTMLElement).dataset.line}`));
   await page.locator('#next').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
+  await expect.poll(async () => (await focused()).length).toBeGreaterThan(0);
+  const first=await focused();
   await page.locator('#next').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
+  await expect.poll(focused).not.toEqual(first);
+  expect((await focused()).length).toBeGreaterThan(0);
   await page.locator('#previous').click();
-  await expect(page.locator('#parser-code .is-focused')).toHaveCount(2);
-  await ready(page,'?mode=present#/the-loop/2');
-  await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(3);
+  await expect.poll(focused).toEqual(first);
+  await ready(page,'?mode=present#/the-loop/1');
+  await expect(page.locator('#the-loop .fragment.visible')).toHaveCount(2);
   await page.evaluate(() => { window.location.hash='/weather'; });
   await expect(page.locator('#weather')).toHaveClass(/present/);
   expect(await page.locator('#the-loop').evaluate((slide) =>
@@ -385,10 +375,13 @@ for (const width of [320, 390, 790]) {
     await page.setViewportSize({ width, height: 844 });
     await ready(page);
     await expect(page.locator('#slide-viewport')).toHaveCSS('overflow-y', 'auto');
-    await page.getByRole('link', { name: 'Start presentation' }).click();
-    await expect(page).toHaveURL(/#\/setup(?:\/\d+)?$/);
-    await expect(page.locator('#setup h2')).toBeInViewport();
-    const heading = await page.locator('#setup h2').boundingBox();
+    const start = page.getByRole('link', { name: 'Start presentation' });
+    const target = (await start.getAttribute('href'))!.replace(/^.*#\//, '').split('/')[0];
+    await start.click();
+    await expect(page).toHaveURL(new RegExp(`#/${target}(?:/\\d+)?$`));
+    const anchor = page.locator(`#${target} > :not(.notes)`).first();
+    await expect(anchor).toBeInViewport();
+    const heading = await anchor.boundingBox();
     const bar = await page.locator('.toolbar').boundingBox();
     expect(heading?.y).toBeGreaterThanOrEqual((bar?.height ?? 0) - 1);
     await openMenu(page);

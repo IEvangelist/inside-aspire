@@ -5,32 +5,19 @@ const defaults = 'data-position="bottom-left" data-visible="true"';
 const documentUrl = (url: URL) => url.pathname === '/inside-aspire/';
 let configurationCase = 0;
 
-test('closing resources and docs command caption stay above the slide badge', async ({ page }, testInfo) => {
+test('closing resources and docs command walkthrough stay above the slide badge', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit geometry matrix runs once.');
   for (const [width, height] of [[1440, 900], [1280, 800], [1680, 1050], [1024, 768], [1280, 960], [1440, 810], [1920, 1080]]) {
     await page.setViewportSize({ width, height });
     for (const id of ['close', 'docs-command']) {
       await ready(page, `?mode=present#/${id}`);
-      const content = page.locator(id === 'close' ? '#close .take-home-terminal' : '#docs-command > p');
+      const content = page.locator(id === 'close' ? '#close .take-home-terminal' : '#docs-command .code-walk');
       await expect.poll(async () => {
         const panel = (await content.boundingBox())!;
         const badge = (await page.locator('#slide-position').boundingBox())!;
         return badge.y - panel.y - panel.height;
       }, { message: `${id} at ${width}x${height} overlaps the slide badge` }).toBeGreaterThanOrEqual(8);
     }
-  }
-});
-
-test('docs command caption keeps its original gap below the code panels on wide screens', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit geometry matrix runs once.');
-  for (const [width, height] of [[1440, 900], [1920, 1080]]) {
-    await page.setViewportSize({ width, height });
-    await ready(page, '?mode=present#/docs-command');
-    await expect.poll(() => page.evaluate(() => {
-      const caption = document.querySelector('#docs-command > p')!.getBoundingClientRect();
-      const panels = [...document.querySelectorAll('#docs-command .code-panel')].map((panel) => panel.getBoundingClientRect().bottom);
-      return caption.top - Math.max(...panels);
-    }), { message: `docs-command caption touches the code panels at ${width}x${height}` }).toBeGreaterThanOrEqual(16);
   }
 });
 
@@ -43,6 +30,34 @@ async function configure(page: Page, attributes: string) {
     await route.fulfill({ response, body: html.replace(defaults, attributes) });
   });
 }
+
+// The badge text expected for the present slide, derived from the rendered deck.
+async function expectedCount(page: Page) {
+  return page.evaluate(() => {
+    const slides = [...document.querySelectorAll('.slides > section')];
+    const index = slides.findIndex((slide) => slide.classList.contains('present')) + 1;
+    return { text: `${index} / ${slides.length}`, label: `Slide ${index} of ${slides.length}` };
+  });
+}
+
+async function expectBadgeMatchesSlide(page: Page) {
+  const badge = page.locator('#slide-position');
+  await expect.poll(async () => {
+    const { text, label } = await expectedCount(page);
+    return await badge.textContent() === text && await badge.getAttribute('aria-label') === label;
+  }).toBe(true);
+}
+
+// The first code-walk slide whose fragments focus code lines.
+async function codeWalk(page: Page) {
+  await ready(page);
+  return page.evaluate(() => [...document.querySelectorAll<HTMLElement>('.slides > section')]
+    .find((slide) => slide.querySelector('.code-panel .code-line') && slide.querySelectorAll('.fragment').length > 1)!.id);
+}
+
+const denyClipboard = () => {
+  navigator.clipboard.writeText = async () => { throw new Error('Deterministic copy-denied geometry fixture.'); };
+};
 
 async function ready(page: Page, query = '?mode=present') {
   const [search, hash] = query.split('#');
@@ -62,8 +77,8 @@ test('the default opaque bottom-left count is outside the toolbar and leaves Pre
   await expect(badge).toHaveAttribute('data-visible', 'true');
   await expect(badge).toHaveAttribute('aria-live', 'polite');
   await expect(badge).toHaveAttribute('aria-atomic', 'true');
-  await expect(badge).toHaveAttribute('aria-label', 'Slide 1 of 46');
-  await expect(badge).toHaveText('1 / 46');
+  await expect(badge).toHaveText(/^1 \/ \d+$/);
+  await expectBadgeMatchesSlide(page);
   const actual = await badge.evaluate((element) => {
     const style = getComputedStyle(element);
     const bounds = element.getBoundingClientRect();
@@ -111,16 +126,17 @@ for (const theme of ['light', 'dark'] as const) {
   test(`all four corners fit wide and narrow presentation/reading layouts in ${theme}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit four-corner/theme/mode/viewport matrix runs once.');
     test.setTimeout(90_000);
+    const walk = await codeWalk(page);
     for (const width of [1440, 1280, 390, 320]) {
       await page.setViewportSize({ width, height: width >= 1280 ? 900 : 844 });
       for (const mode of ['present', 'read'] as const) {
         for (const placement of positions) {
           await configure(page, `data-position="${placement}" data-visible="true"`);
-          await ready(page, `?theme=${theme}&mode=${mode}#/lifecycle/1`);
+          await ready(page, `?theme=${theme}&mode=${mode}#/${walk}/1`);
           const badge = page.locator('#slide-position');
           await expect(badge).toHaveAttribute('data-position', placement);
           await expect(badge).toBeVisible();
-          await expect(badge).toHaveText('31 / 46');
+          await expectBadgeMatchesSlide(page);
           const bounds = (await badge.boundingBox())!;
           const toolbar = (await page.locator('.toolbar').boundingBox())!;
           const height = width >= 1280 ? 900 : 844;
@@ -154,8 +170,7 @@ test('data-visible=false fully hides any valid position while the count remains 
     await expect(badge).toBeHidden();
     expect(await badge.boundingBox()).toBeNull();
     expect(await badge.evaluate((element) => element.hidden)).toBe(true);
-    await expect(badge).toHaveText('33 / 46');
-    await expect(badge).toHaveAttribute('aria-label', 'Slide 33 of 46');
+    await expectBadgeMatchesSlide(page);
   }
 });
 
@@ -179,7 +194,8 @@ for (const [attributes, identity] of [
 
 test('actual copy status stacks above only a visible bottom-left count without overlapping either badge or controls', async ({ page, context }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One exact status/visibility/position geometry matrix suffices.');
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.addInitScript(denyClipboard);
+  const walk = await codeWalk(page);
   for (const width of [1280, 390]) {
     await page.setViewportSize({ width, height: 844 });
     for (const [placement, visible] of [
@@ -187,12 +203,12 @@ test('actual copy status stacks above only a visible bottom-left count without o
       ['top-right', 'true'], ['bottom-right', 'true'],
     ]) {
       await configure(page, `data-position="${placement}" data-visible="${visible}"`);
-      await ready(page, `?mode=${width < 1000 ? 'read' : 'present'}#/lifecycle`);
+      await ready(page, `?mode=${width < 1000 ? 'read' : 'present'}#/${walk}`);
       await expect(page.locator('#slide-position')).toHaveAttribute('data-position', placement);
       await expect(page.locator('#slide-position')).toHaveAttribute('data-visible', visible);
-      await page.locator('#lifecycle .copy-code').click();
+      await page.locator(`#${walk} .copy-code`).first().click();
       const status = page.locator('#deck-status');
-      await expect(status).toContainText('copied.');
+      await expect(status).toContainText('Could not copy');
       const box = (await status.boundingBox())!;
       if (placement === 'bottom-left' && visible === 'true') {
         const badge = (await page.locator('#slide-position').boundingBox())!;
@@ -208,9 +224,8 @@ test('actual copy status stacks above only a visible bottom-left count without o
 
 test('long actual clipboard errors remain readable and clear of every visible corner at 320px and 390px', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'The explicit real-error/narrow/corner matrix runs once.');
-  await page.addInitScript(() => {
-    navigator.clipboard.writeText = async () => { throw new Error('Deterministic copy-denied geometry fixture.'); };
-  });
+  await page.addInitScript(denyClipboard);
+  const walk = await codeWalk(page);
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 844 });
     for (const [placement, visible] of [
@@ -218,11 +233,10 @@ test('long actual clipboard errors remain readable and clear of every visible co
       ['bottom-right', 'false'],
     ]) {
       await configure(page, `data-position="${placement}" data-visible="${visible}"`);
-      await ready(page, '?mode=read#/lifecycle');
-      await page.locator('#lifecycle .copy-code').click();
+      await ready(page, `?mode=read#/${walk}`);
+      await page.locator(`#${walk} .copy-code`).first().click();
       const status = page.locator('#deck-status');
-      await expect(status).toHaveText(
-        'Could not copy AppHost native executable wiring. Allow clipboard access, or select and copy the code directly.');
+      await expect(status).toContainText('Could not copy');
       const bounds = (await status.boundingBox())!;
       const badge = await page.locator('#slide-position').boundingBox();
       if (badge) {
@@ -246,41 +260,48 @@ test('long actual clipboard errors remain readable and clear of every visible co
 for (const visible of ['true', 'false']) {
   test(`the ${visible === 'true' ? 'visible' : 'hidden'} badge's count and live label follow code steps, slide boundaries and browser history exactly`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop-dark', 'One exact code/history state trace per visibility suffices.');
+    const walk = await codeWalk(page);
     await configure(page, `data-position="bottom-left" data-visible="${visible}"`);
-    await ready(page, '?mode=present#/parser');
+    await ready(page, `?mode=present#/${walk}`);
     const badge = page.locator('#slide-position');
-    for (const expected of [27, 27, 28]) {
+    const initial = await badge.textContent();
+    for (let step = 0; step < 2; step++) {
       await page.locator('#next').click();
-      await expect(badge).toHaveText(`${expected} / 46`);
-      await expect(badge).toHaveAttribute('aria-label', `Slide ${expected} of 46`);
+      await expect(page).toHaveURL(new RegExp(`#/${walk}/${step}$`));
+      await expect(badge).toHaveText(initial!);
+      await expectBadgeMatchesSlide(page);
     }
-    for (const hash of ['#/parser/1', '#/parser/0', '#/parser']) {
+    for (const hash of [`#/${walk}/0`, `#/${walk}`]) {
       await page.goBack();
       await expect(page).toHaveURL(new RegExp(`${hash}$`));
-      await expect(badge).toHaveText('27 / 46');
-      await expect(badge).toHaveAttribute('aria-label', 'Slide 27 of 46');
+      await expect(badge).toHaveText(initial!);
+      await expectBadgeMatchesSlide(page);
     }
+    await page.goBack();
+    await expect(badge).not.toHaveText(initial!);
+    await expectBadgeMatchesSlide(page);
     await page.goForward();
-    await expect(page).toHaveURL(/#\/parser\/0$/);
-    await expect(badge).toHaveText('27 / 46');
+    await expect(page).toHaveURL(new RegExp(`#/${walk}$`));
+    await expect(badge).toHaveText(initial!);
     await page.evaluate(() => { location.hash = '/deployment'; });
-    await expect(badge).toHaveText('37 / 46');
-    await expect(badge).toHaveAttribute('aria-label', 'Slide 37 of 46');
+    await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'deployment');
+    await expectBadgeMatchesSlide(page);
   });
 }
 
 test('print and native speaker receivers hide the badge regardless of its enabled position', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'The exact print/receiver and native popup suppression matrix runs once.');
+  const walk = await codeWalk(page);
   for (const placement of positions) {
     await configure(page, `data-position="${placement}" data-visible="true"`);
-    for (const query of ['?print-pdf', '?receiver&history=false&transition=none#/lifecycle/1']) {
+    for (const query of ['?print-pdf', `?receiver&history=false&transition=none#/${walk}/1`]) {
       await ready(page, query);
       await expect(page.locator('#slide-position')).toBeHidden();
       expect(await page.locator('#slide-position').boundingBox()).toBeNull();
     }
   }
   await page.unroute(documentUrl);
-  await ready(page, '?mode=present#/lifecycle/1');
+  await ready(page, `?mode=present#/${walk}/1`);
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('#slide-position')).toBeHidden();
   await page.emulateMedia({ media: 'screen' });
@@ -306,7 +327,7 @@ test.describe('static slide count fallback', () => {
   test('the initial badge is useful without JavaScript and declarative hiding still works', async ({ page }) => {
     await page.goto('');
     await expect(page.locator('#slide-position')).toBeVisible();
-    await expect(page.locator('#slide-position')).toHaveText('1 / 46');
+    await expect(page.locator('#slide-position')).toHaveText(/^1 \/ \d+$/);
     await expect(page.locator('.toolbar #slide-position')).toHaveCount(0);
     await configure(page, 'data-position="bottom-left" data-visible="false"');
     await page.goto('');

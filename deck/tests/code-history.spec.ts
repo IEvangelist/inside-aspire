@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-type State = { slide: string; counter: string; hash: string; lines: number[] };
+type State = { slide: string; counter: string; hash: string; lines: string[] };
 
 async function state(page: Page): Promise<State> {
   return page.evaluate(() => ({
@@ -8,8 +8,23 @@ async function state(page: Page): Promise<State> {
     counter: document.querySelector('#slide-position')!.textContent!,
     hash: location.hash,
     lines: [...document.querySelectorAll<HTMLElement>('.present .code-line.is-focused')]
-      .map((line) => Number(line.dataset.line)),
+      .map((line) => `${line.closest('code')!.id}:${line.dataset.line}`),
   }));
+}
+
+// The first code-walk slide whose fragments focus code lines, with its neighbours.
+async function codeWalk(page: Page) {
+  await page.goto('?mode=present');
+  await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
+  return page.evaluate(() => {
+    const slides = [...document.querySelectorAll<HTMLElement>('.slides > section')];
+    const index = slides.findIndex((slide) => slide.querySelector('.code-panel .code-line')
+      && slide.querySelectorAll('.fragment').length > 1);
+    return {
+      previous: slides[index - 1].id, id: slides[index].id, next: slides[index + 1].id,
+      steps: slides[index].querySelectorAll('.fragment').length,
+    };
+  });
 }
 
 for (const method of ['toolbar', 'keyboard', 'history'] as const) {
@@ -17,50 +32,49 @@ for (const method of ['toolbar', 'keyboard', 'history'] as const) {
     test.skip(testInfo.project.name === 'mobile', 'Actual two desktop themes exercise presentation controls; mobile retains natural reading.');
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    for (const [previous, id, next, counter, second, first] of [
-      ['cache', 'parser', 'lexical', '27 / 46', [5, 9], [1, 2]],
-      ['compiler', 'lifecycle', 'the-loop', '31 / 46', [7, 8, 9, 10, 11], [1, 2, 3, 4, 5]],
-    ] as const) {
-      await page.goto(`?mode=present#/${previous}`);
-      await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-      await page.evaluate((id) => { location.hash = `/${id}`; }, id);
-      await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}`, lines: [] });
-      const trace = [];
-      for (let index = 0; index < 3; index++) {
-        if (method === 'keyboard') {
-          await page.locator('#presentation').focus();
-          await page.keyboard.press('ArrowRight');
-        } else await page.locator('#next').click();
-        await expect(page.locator('.slides section.present')).toHaveAttribute('id', index < 2 ? id : next);
-        trace.push(await state(page));
+    const { previous, id, next, steps } = await codeWalk(page);
+    await page.goto(`?mode=present#/${previous}`);
+    await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
+    await page.evaluate((id) => { location.hash = `/${id}`; }, id);
+    await expect.poll(async () => (await state(page)).slide).toBe(id);
+    const initial = await state(page);
+    expect(initial.lines).toEqual([]);
+    const forward: State[] = [];
+    for (let index = 0; index <= steps; index++) {
+      if (method === 'keyboard') {
+        await page.locator('#presentation').focus();
+        await page.keyboard.press('ArrowRight');
+      } else await page.locator('#next').click();
+      await expect(page.locator('.slides section.present')).toHaveAttribute('id', index < steps ? id : next);
+      if (index < steps) {
+        await expect.poll(async () => (await state(page)).hash).toBe(`#/${id}/${index}`);
+        const current = await state(page);
+        expect(current.lines.length).toBeGreaterThan(0);
+        expect(current.counter).toBe(initial.counter);
+        forward.push(current);
       }
-      for (const [index, lines] of [[0, [...second]], [1, [...first]], [2, []]] as const) {
-        if (method === 'history') await page.goBack();
-        else if (method === 'keyboard') await page.keyboard.press('ArrowLeft');
-        else await page.locator('#previous').click();
-        await expect.poll(() => state(page)).toEqual({
-          slide: id, counter, hash: index === 2 ? `#/${id}` : `#/${id}/${1 - index}`, lines: [...lines],
-        });
-        trace.push(await state(page));
-      }
+    }
+    for (let index = steps - 1; index >= -1; index--) {
       if (method === 'history') await page.goBack();
       else if (method === 'keyboard') await page.keyboard.press('ArrowLeft');
       else await page.locator('#previous').click();
-      await expect(page.locator('.slides section.present')).toHaveAttribute('id', previous);
-      expect((await state(page)).lines).toEqual(previous === 'cache' && method !== 'history'
-        ? [3, 4, 5, 6, 7, 8, 9, 10, 11] : []);
-      trace.push(await state(page));
-      await testInfo.attach(`${id}-${method}-complete-back-navigation`, {
-        body: JSON.stringify(trace, null, 2), contentType: 'application/json',
-      });
-      if (method === 'history') {
-        await page.goForward();
-        await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}`, lines: [] });
-        await page.goForward();
-        await expect.poll(() => state(page)).toEqual({ slide: id, counter, hash: `#/${id}/0`, lines: [...first] });
-      }
+      await expect.poll(() => state(page)).toEqual(index >= 0 ? forward[index] : initial);
+    }
+    if (method === 'history') await page.goBack();
+    else if (method === 'keyboard') await page.keyboard.press('ArrowLeft');
+    else await page.locator('#previous').click();
+    await expect(page.locator('.slides section.present')).toHaveAttribute('id', previous);
+    if (method === 'history') {
+      await page.goForward();
+      await expect.poll(() => state(page)).toEqual(initial);
+      await page.goForward();
+      await expect.poll(() => state(page)).toEqual(forward[0]);
     }
   });
+}
+
+async function activeCopy(page: Page) {
+  return page.locator('.present .code-panel.is-active .copy-code');
 }
 
 for (const interaction of ['pointer copy', 'non-scrolling code body'] as const) {
@@ -68,42 +82,41 @@ for (const interaction of ['pointer copy', 'non-scrolling code body'] as const) 
     test.skip(testInfo.project.name !== 'desktop-dark', 'One real pointer/focus regression per interaction suffices.');
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('?mode=present#/lifecycle/1');
+    const { previous, id } = await codeWalk(page);
+    await page.goto(`?mode=present#/${id}/1`);
     await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-    await expect(page.locator('#apphost-code .is-focused')).toHaveCount(5);
+    await expect(page.locator('.present .code-line.is-focused').first()).toBeVisible();
     if (interaction === 'pointer copy') {
-      await page.locator('#lifecycle .copy-code').click();
-      await expect(page.locator('#deck-status')).toContainText('copied');
+      const copy = await activeCopy(page);
+      await copy.click();
+      await expect(copy).toHaveClass(/is-copied/);
     } else {
-      const pre = page.locator('#apphost-code').locator('..');
+      const pre = page.locator('.present .code-panel.is-active pre');
       expect(await pre.evaluate((node) => node.scrollHeight > node.clientHeight || node.scrollWidth > node.clientWidth)).toBe(false);
       await pre.click();
     }
     await page.keyboard.press('ArrowLeft');
-    await expect.poll(() => state(page)).toEqual({
-      slide: 'lifecycle', counter: '31 / 46', hash: '#/lifecycle/0', lines: [1, 2, 3, 4, 5],
-    });
+    await expect(page).toHaveURL(new RegExp(`#/${id}/0$`));
     await page.keyboard.press('ArrowLeft');
-    await expect.poll(() => state(page)).toEqual({
-      slide: 'lifecycle', counter: '31 / 46', hash: '#/lifecycle', lines: [],
-    });
+    await expect(page).toHaveURL(new RegExp(`#/${id}$`));
     await page.keyboard.press('ArrowLeft');
-    await expect(page.locator('.slides section.present')).toHaveAttribute('id', 'compiler');
+    await expect(page.locator('.slides section.present')).toHaveAttribute('id', previous);
   });
 }
 
 test('keyboard copy keeps accessible control focus and a genuinely scrollable code body keeps its navigation keys', async ({ page, context }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-dark', 'One actual keyboard-control and scroll ownership regression suffices.');
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.goto('?mode=present#/lifecycle/1');
+  const { id } = await codeWalk(page);
+  await page.goto(`?mode=present#/${id}/1`);
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  const copy = page.locator('#lifecycle .copy-code');
+  const copy = await activeCopy(page);
   await copy.focus();
   await page.keyboard.press('Enter');
-  await expect(page.locator('#deck-status')).toContainText('copied');
+  await expect(copy).toHaveClass(/is-copied/);
   await expect(copy).toBeFocused();
   await page.keyboard.press('ArrowLeft');
-  await expect(page).toHaveURL(/#\/lifecycle\/1$/);
+  await expect(page).toHaveURL(new RegExp(`#/${id}/1$`));
   await page.goto('?mode=present#/api-member/0');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
   const output = page.locator('#api-member .replay-output');

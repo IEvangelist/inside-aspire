@@ -16,7 +16,7 @@ concurrency:
 jobs:
   deck:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
       contents: read
       pages: read
@@ -34,9 +34,6 @@ jobs:
       - name: Prepare browser
         run: node deck/node_modules/playwright/cli.js install --with-deps chromium
       - name: Exercise navigation, mobile, accessibility, print, and asset gates
-        # Temporarily non-blocking: specs pin exact slide order/content and lag the reworked deck.
-        continue-on-error: true
-        timeout-minutes: 8
         run: npm test --prefix deck
       - name: Check manual notification input safeguards
         run: node --test scripts/notify-links.test.mjs

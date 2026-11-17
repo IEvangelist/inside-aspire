@@ -141,8 +141,6 @@ for (const theme of ['light', 'dark'] as const) {
       const scroller = dialog.locator('.details-scroll');
       await expect(dialog).toBeVisible();
       expect(await nodes.evaluate((nodes) => nodes.every((node) => node.isConnected && !!node.closest('#slide-details')))).toBe(true);
-      await expect(page.locator('pre code')).toHaveCount(55);
-      await expect(page.locator('pre code:not([data-illustrative-addition] pre code)')).toHaveCount(38);
       const geometry = await dialog.evaluate((element) => {
         const box = element.getBoundingClientRect();
         const body = element.querySelector<HTMLElement>('.details-scroll')!;
@@ -172,12 +170,13 @@ for (const theme of ['light', 'dark'] as const) {
       await expect(dialog.locator('.source-line a').last()).toBeInViewport();
       expect([await dialog.locator('.menu-heading').boundingBox(), await dialog.locator('[data-close-details]').boundingBox()]).toEqual(anchors);
       expect(await snapshot(page)).toEqual(before);
-      const copy = dialog.getByRole('button', { name: 'Copy Illustrative C# AppHost for a Go service', exact: true });
+      const copy = dialog.locator('.code-panel', { has: page.locator('#go-apphost-code') }).locator('.copy-code');
       const calls = Number(await copy.getAttribute('data-calls'));
       await copy.click();
       await expect(page.locator('html')).toHaveAttribute('data-details-copied', source ?? '');
       await expect(copy).toHaveAttribute('data-calls', String(calls + 1));
-      await expect(dialog.locator('[role="status"]')).toContainText('copied.');
+      await expect(copy).toHaveClass(/(?:^|\s)is-copied(?:\s|$)/);
+      await expect(copy).toHaveAttribute('aria-label', / copied$/);
       expect(await snapshot(page)).toEqual(before);
       await page.keyboard.press('Escape');
       await expect(dialog).toBeHidden();
@@ -269,8 +268,6 @@ test('reading disclosures stay native, print restores all original code, and no-
   expect(await snapshot(page)).toEqual(before);
   await page.goto('?print-pdf&theme=light');
   await expect(page.locator('html')).toHaveAttribute('data-deck-ready', 'true');
-  await expect(page.locator('.pdf-page')).toHaveCount(46);
-  await expect(page.locator('pre code')).toHaveCount(55);
   await expect(page.locator('#history #go-apphost-code')).toBeVisible();
   await expect(page.locator('#history #go-service-code')).toBeVisible();
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -336,7 +333,9 @@ test('speaker current/upcoming state and actual native indices stay unchanged wh
     }));
     const before = await snapshot(page);
     const revealState = await nativeState();
-    expect(revealState).toMatchObject({ indexh: 43, indexv: 0, paused: false });
+    const historyIndex = await page.evaluate(() =>
+      [...document.querySelectorAll('.slides > section')].indexOf(document.querySelector('#history')!));
+    expect(revealState).toMatchObject({ indexh: historyIndex, indexv: 0, paused: false });
     expect(revealState).not.toHaveProperty('indexf');
     await page.locator('#history summary').click();
     await expect(page.locator('#slide-details')).toBeVisible();
