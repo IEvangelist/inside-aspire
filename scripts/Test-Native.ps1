@@ -63,7 +63,8 @@ function Get-Resource([string] $Name) {
 
 function Get-Endpoint($Resource) {
     $endpoints = if ($Resource.endpoints) { @($Resource.endpoints) } else { @($Resource.urls) }
-    $endpoint = @($endpoints | Where-Object { $_.name -eq 'http' -and $_.url })
+    # Display links such as the Scalar reference share the endpoint name; keep only the root URL.
+    $endpoint = @($endpoints | Where-Object { $_.name -eq 'http' -and $_.url -and ([uri]$_.url).AbsolutePath -eq '/' })
     if ($endpoint.Count -ne 1) { throw "No unique HTTP endpoint in describe for $($Resource.name)." }
     return $endpoint[0].url.TrimEnd('/')
 }
