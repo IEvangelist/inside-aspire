@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $demo = Join-Path $root 'demo'
 $cliName = if ($IsWindows) { 'aspire.exe' } else { 'aspire' }
-$cli = Join-Path $root ".tools\aspire-13.6.4\$cliName"
+$cli = Join-Path $root ".tools\aspire-17.0.0\$cliName"
 $apphost = Join-Path $demo 'host\apphost.cs'
 $artifacts = Join-Path $demo ".artifacts\native\$RuntimeIdentifier"
 $verification = Join-Path $demo '.artifacts\verification'
@@ -85,9 +85,9 @@ function Error-Envelope([string] $Url, [int] $Status, [string] $Expected) {
     Assert-That ($body.error -ceq $Expected -and @($body.PSObject.Properties).Count -eq 1) 'Original {error} envelope was not preserved.'
 }
 
-Assert-That (Test-Path $cli) 'Install the private public Aspire CLI with scripts\Install-Aspire.ps1 -Version 13.6.4.'
+Assert-That (Test-Path $cli) 'Install the private public Aspire CLI with scripts\Install-Aspire.ps1 -Version 17.0.0.'
 $version = (& $cli --version | Out-String).Trim()
-Assert-That ($LASTEXITCODE -eq 0 -and $version -match '^13\.6\.4(?:\+.*)?$') 'Only public private CLI 13.6.4 is supported.'
+Assert-That ($LASTEXITCODE -eq 0 -and $version -match '^17\.0\.0(?:\+.*)?$') 'Only public private CLI 17.0.0 is supported.'
 Assert-Native (Join-Path $artifacts "Weather.Api$extension")
 Assert-Native (Join-Path $artifacts "fixtures\Weather.Fixtures$extension")
 foreach ($managed in 'Weather.Api.dll', 'Weather.Api.deps.json', 'Weather.Api.runtimeconfig.json') {
@@ -329,7 +329,7 @@ try {
         traceCount = $traces.Count
         providerClientSpanCount = $clientSpans.Count
         correlatedReverseLogCount = $reverseLogs.Count
-        aspireCli = '13.6.4'
+        aspireCli = '17.0.0'
     }
     $summary | ConvertTo-Json -Depth 10 | Set-Content (Join-Path $verification "$RuntimeIdentifier-summary.json")
     Write-Host "PASS: $($script:checks) native assertions; OpenAPI, Scalar, React/Vite, provider parity and OTLP traces/logs/metrics verified."

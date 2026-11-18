@@ -755,8 +755,17 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
 .historical-metrics p { margin: 0; }
 .historical-metrics strong { display: block; font-size: 92px; line-height: 1.2; font-weight: 600; color: var(--accent); }
 .historical-metrics span { font-size: 25px; color: var(--secondary); }
-.source-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-.source-columns p { font-size: 24px; line-height: 1.5; margin-top: 26px; }
+.source-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; margin-top: 36px; }
+.reveal .source-group h3 { margin: 0 0 18px; font-size: 22px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary); }
+.source-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.reveal .source-list li { margin: 0; }
+.reveal .source-list a { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 16px; padding: 10px 14px 10px 10px; border: 1px solid transparent; border-radius: 14px; color: var(--ink); text-decoration: none; transition: background-color .15s, border-color .15s; }
+.reveal .source-list a:hover, .reveal .source-list a:focus-visible { border-color: var(--accent-line); background: var(--accent-soft); }
+.source-icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 1px solid var(--accent-line); border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+.source-icon svg { width: 24px; height: 24px; }
+.source-text { display: grid; gap: 4px; min-width: 0; text-align: left; }
+.source-text strong { overflow: hidden; font-size: 24px; font-weight: 600; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.source-text small { overflow: hidden; font: 500 18px/1.3 var(--font-code); color: var(--accent); text-overflow: ellipsis; white-space: nowrap; }
 .reveal .controls { color: var(--accent); }
 .reveal .progress { color: var(--brand-primary); height: 4px; }
 .deck-status { position: fixed; bottom: 8px; left: 20px; font-size: 12px; margin: 0; color: var(--secondary); pointer-events: none; z-index: 30; }
@@ -861,7 +870,8 @@ pre[data-terminal-output] .code-line:not(.terminal-row) { white-space: break-spa
   :root[data-reading='true'] .evidence-chain li span { font-size: 16px; }
   :root[data-reading='true'] .historical-metrics { flex-direction: column; gap: 26px; }
   :root[data-reading='true'] .historical-metrics strong { font-size: 58px; }
-  :root[data-reading='true'] .source-columns p { font-size: 19px; }
+  :root[data-reading='true'] .source-text strong { font-size: 20px; white-space: normal; }
+  :root[data-reading='true'] .source-text small { overflow: visible; white-space: normal; overflow-wrap: anywhere; }
   :root[data-reading='true'] .reveal table { font-size: 16px; }
   :root[data-reading='true'] .reveal table th, :root[data-reading='true'] .reveal table td { padding: 16px 8px; }
   :root[data-reading='true'] .reveal table thead th { font-size: 16px; }

@@ -29,7 +29,7 @@ Product PR 16531 adds the **Configure tracked browser** dashboard command with r
 | Current returned browser API source | [`BrowserLogsBuilderExtensions.cs@f4c27f2d`](https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289): exact member source returned by API get |
 | Docs implementation | [`microsoft/aspire.dev@1a61517655b4fd7811ef63fb5913f6fb623d9d6a`](https://github.com/microsoft/aspire.dev/tree/1a61517655b4fd7811ef63fb5913f6fb623d9d6a): published docs-source context |
 | Official brand | [`microsoft/aspire-brand@f9eb464dec47870de23d55dd7b3c00d39122813d`](https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d): unchanged logos, brand palette, Poppins guidance, CC0/trademark notice |
-| Public CLI/tool baseline | [Aspire 13.6.1 release](https://github.com/microsoft/aspire/releases/tag/v13.6.1): checksum-pinned Windows/Linux installers, not the presenter's global CLI |
+| Public CLI/tool baseline | [Aspire 17.0.0 release](https://github.com/microsoft/aspire/releases/tag/v17.0.0): checksum-pinned Windows/Linux installers used for the demo and recorded CLI runs, not the presenter's global CLI; skills retain the [13.6.1 release](https://github.com/microsoft/aspire/releases/tag/v13.6.1) provenance |
 | Complete skill bundle | [Source, generation run, artifact digest, and file hashes](SKILLS.md) |
 
 The public source snapshot and the released CLI baseline are distinct provenance records. The live rehearsal queries the currently published corpus; it does not pretend the corpus is frozen at the source snapshot.

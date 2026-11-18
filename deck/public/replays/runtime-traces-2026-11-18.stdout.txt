@@ -1,0 +1,113 @@
+[
+  {
+    "traceId": "a2e39721df4efd59c4bff6acc0aa6d96",
+    "durationMs": 9,
+    "title": "GET /health",
+    "spans": [
+      {
+        "traceId": "a2e39721df4efd59c4bff6acc0aa6d96",
+        "spanId": "bdc6f31cedce2dd9",
+        "kind": "Server",
+        "name": "GET /health",
+        "source": "api",
+        "destination": "localhost:55888",
+        "durationMs": 9,
+        "timestamp": "2026-11-18T15:29:45.4251131Z",
+        "attributes": {
+          "http.request.method": "GET",
+          "server.address": "localhost",
+          "server.port": "55888",
+          "url.scheme": "http",
+          "url.path": "/health",
+          "network.protocol.version": "1.1",
+          "http.route": "/health",
+          "http.response.status_code": "200 OK"
+        }
+      }
+    ],
+    "hasError": false,
+    "timestamp": "2026-11-18T15:29:45.4251131Z",
+    "dashboardUrl": "[redacted dashboardUrl]"
+  },
+  {
+    "traceId": "331f7bb404df5dd41816778988eef7ec",
+    "durationMs": 211,
+    "title": "GET /api/weather",
+    "spans": [
+      {
+        "traceId": "331f7bb404df5dd41816778988eef7ec",
+        "spanId": "ef598225b74d9f5b",
+        "kind": "Server",
+        "name": "GET /api/weather",
+        "source": "api",
+        "destination": "localhost:55888",
+        "durationMs": 211,
+        "timestamp": "2026-11-18T15:29:46.3507821Z",
+        "attributes": {
+          "http.request.method": "GET",
+          "server.address": "localhost",
+          "server.port": "55888",
+          "user_agent.original": "node",
+          "url.scheme": "http",
+          "url.path": "/api/weather",
+          "url.query": "?lat=Redacted&lon=Redacted",
+          "network.protocol.version": "1.1",
+          "http.route": "/api/weather",
+          "http.response.status_code": "200 OK"
+        }
+      },
+      {
+        "traceId": "331f7bb404df5dd41816778988eef7ec",
+        "spanId": "9597c5bf064882fc",
+        "parentSpanId": "ef598225b74d9f5b",
+        "kind": "Internal",
+        "name": "weather.forecast",
+        "source": "api",
+        "durationMs": 209,
+        "timestamp": "2026-11-18T15:29:46.3517062Z",
+        "attributes": {}
+      },
+      {
+        "traceId": "331f7bb404df5dd41816778988eef7ec",
+        "spanId": "69798b4fbeb06463",
+        "parentSpanId": "9597c5bf064882fc",
+        "kind": "Client",
+        "name": "GET",
+        "source": "api",
+        "destination": "api.open-meteo.com:443",
+        "durationMs": 187,
+        "timestamp": "2026-11-18T15:29:46.3528827Z",
+        "attributes": {
+          "http.request.method": "GET",
+          "server.address": "api.open-meteo.com",
+          "server.port": "443",
+          "url.full": "https://api.open-meteo.com/v1/forecast?*",
+          "http.response.status_code": "200 OK",
+          "network.protocol.version": "1.1"
+        }
+      },
+      {
+        "traceId": "331f7bb404df5dd41816778988eef7ec",
+        "spanId": "7513b7e8a5facb90",
+        "parentSpanId": "9597c5bf064882fc",
+        "kind": "Client",
+        "name": "GET",
+        "source": "api",
+        "destination": "api.bigdatacloud.net:443",
+        "durationMs": 208,
+        "timestamp": "2026-11-18T15:29:46.3528905Z",
+        "attributes": {
+          "http.request.method": "GET",
+          "server.address": "api.bigdatacloud.net",
+          "server.port": "443",
+          "url.full": "https://api.bigdatacloud.net/data/reverse-geocode-client?*",
+          "http.response.status_code": "200 OK",
+          "network.protocol.version": "1.1"
+        }
+      }
+    ],
+    "hasError": false,
+    "timestamp": "2026-11-18T15:29:46.3507821Z",
+    "dashboardUrl": "[redacted dashboardUrl]"
+  }
+]

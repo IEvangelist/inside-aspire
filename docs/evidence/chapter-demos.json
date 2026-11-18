@@ -1,19 +1,18 @@
 {
-  "recorded": "2026-11-05",
-  "cliVersion": "13.6.4",
-  "cliRelease": "https://github.com/microsoft/aspire/releases/tag/v13.6.4",
-  "cliArchiveSha512": "c0d27be56b4aa58a39ad3c5ab0b0d3c845cdd907571705b8cd13760202c0ab36d324521512ec1942d3233cdf8ecb7fe3520be1e41e0566873612bba1d276b857",
-  "appHostSdkAndHostingPackages": "13.6.4",
-  "upgradeReason": "The unchanged 13.6.1 AppHost fails NU1902 for MessagePack 2.5.302. The upstream 13.6.4 package graph pins patched MessagePack 2.5.307; no audit suppression or direct dependency override.",
-  "originalCapturesUnchanged": true,
+  "recorded": "2026-11-18",
+  "cliVersion": "17.0.0",
+  "cliRelease": "https://github.com/microsoft/aspire/releases/tag/v17.0.0",
+  "cliArchiveSha512": "b14f2a32196f6255af8e908f6c322d197666c20ad22cf7c3720e855675e38bb07d9cab9516ce8be9bd62bbb3f7aac83f22cdda08cfdd69c838c39c8dfec17639",
+  "appHostAndHostingPackages": "17.0.0",
+  "upgradeReason": "Aspire 17.0.0 is the current public release. In 17.0 the Aspire.AppHost.Sdk directive is obsolete (ASPIRE012), so the file-based AppHost references the Aspire.Hosting.AppHost 17.0.0 package instead; it builds with no warnings under TreatWarningsAsErrors.",
   "originalEvidence": "docs/evidence/cli-replay.json",
-  "formatting": "ANSI CSI/BEL removed, CRLF normalized to LF, absolute worktree/profile paths replaced with explicit placeholders. Trailing console padding removed from Compose captures. No command outcome or content invented. captureFileWrittenAt is the actual local capture-file write time, not an asserted command start.",
+  "formatting": "ANSI CSI/BEL removed, CRLF normalized to LF, absolute worktree/profile paths replaced with explicit placeholders. Trailing console padding removed from Compose captures. No command outcome or content invented. capturedAt is the local capture start time.",
   "runs": [
     {
       "id": "compose-publish",
       "slideId": "deployment-publish",
       "replayId": "compose-publish",
-      "cliVersion": "13.6.4",
+      "cliVersion": "17.0.0",
       "arguments": [
         "publish",
         "--apphost",
@@ -27,11 +26,11 @@
       ],
       "exitCode": 0,
       "outputLanguage": "plaintext",
-      "stdout": "/inside-aspire/replays/compose-publish-2026-11-05.stdout.txt",
-      "rawStdoutSha256": "6f68947fb55159ebdbb0ddff1d42e5762c3650f39bbe0999f1fd12b451c2719a",
-      "publicStdoutSha256": "b0814f2130f5db22c9de507ea260b029f6bbd3b772839707bdd6a6dc8c828e50",
-      "captureFileWrittenAt": "2026-11-05T18:40:16.776Z",
-      "stderr": "/inside-aspire/replays/compose-publish-2026-11-05.stderr.txt",
+      "capturedAt": "2026-11-18T15:30:33.934Z",
+      "stdout": "/inside-aspire/replays/compose-publish-2026-11-18.stdout.txt",
+      "rawStdoutSha256": "4d68895ae68430ac3c7b1a7883a0e2778f0934ce6244ed8b04d4653eaf11d0dd",
+      "publicStdoutSha256": "c4f33a1e829eaa8499274e9f43bf054638f4a8e5748a447a61560d22d6c6ad2f",
+      "stderr": "/inside-aspire/replays/compose-publish-2026-11-18.stderr.txt",
       "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -39,7 +38,7 @@
       "id": "compose-deploy",
       "slideId": "deployment-deploy",
       "replayId": "compose-deploy",
-      "cliVersion": "13.6.4",
+      "cliVersion": "17.0.0",
       "arguments": [
         "deploy",
         "--apphost",
@@ -53,33 +52,31 @@
       ],
       "exitCode": 0,
       "outputLanguage": "plaintext",
-      "stdout": "/inside-aspire/replays/compose-deploy-2026-11-05.stdout.txt",
-      "rawStdoutSha256": "e855c8f8d6c483760ec927e1e114f6ef54f42d9a6fd9c26f3b15094603cd01e1",
-      "publicStdoutSha256": "4d59daa1c7f807f59acd60ac6bd82bbd073b80d5dfce3bc87aedcdb207d8c3b2",
-      "captureFileWrittenAt": "2026-11-05T18:43:52.193Z",
-      "stderr": "/inside-aspire/replays/compose-deploy-2026-11-05.stderr.txt",
+      "capturedAt": "2026-11-18T15:30:40.358Z",
+      "stdout": "/inside-aspire/replays/compose-deploy-2026-11-18.stdout.txt",
+      "rawStdoutSha256": "6fe568e31c163315a5884a2a97159de1aa7ef72deb3a46ed745ef20f1207e4c4",
+      "publicStdoutSha256": "1f81d2cded27e7edd39a15a9ca9e2e36f98cc51370ff0a688b6bdc51ac5a163b",
+      "stderr": "/inside-aspire/replays/compose-deploy-2026-11-18.stderr.txt",
       "rawStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "publicStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ],
   "compose": {
-    "project": "aspire-talk-compose-5ea99390",
+    "project": "aspire-talk-compose-d7ae2d39",
     "environment": "Talk",
-    "apiImage": "api:aspire-deploy-20261105184219",
-    "apiImageId": "sha256:7fd9bda0d826e19aea4a00701edd5bb225eed0a6db4d5c417df630a30b938b58",
-    "apiNativeSha256": "0971f3648e3c9880746a1483fe2d016963c64073fa5fb36c37189b384af47188",
+    "apiImage": "api:aspire-deploy-20261118153044",
+    "apiImageId": "sha256:a2905bdc999ba2c815953e18e94fbe8cf2307ed27c017225aa4fe623c93dbbda",
+    "apiNativeSha256": "c7be298f06d5f180507f48ddeb9141887aaa11171f09bf72cdf293bd630a4529",
     "apiNativeBytes": 21916728,
     "nativeFormat": "ELF64",
     "managedApiDllPresent": false,
-    "runtimeNativeAot": true,
-    "jsonReflectionEnabled": false,
-    "dashboardImage": "mcr.microsoft.com/aspire/dashboard:13.6.2",
+    "dashboardImage": "mcr.microsoft.com/aspire/dashboard:13.6.5",
     "dashboardRepoDigests": [
-      "mcr.microsoft.com/aspire/dashboard@sha256:e4220c55fa3c3e40ad2d733ef07973392299b420e9bde6924e8f6a1e71ff01a8"
+      "mcr.microsoft.com/aspire/dashboard@sha256:e2b7cf9a4ead932de46c6fa2a289c7d6159cfcf06a51aa65f38253a8fae75407"
     ],
-    "dashboardTagReason": "13.6.4 does not publish an aspire/dashboard image tag; concrete public 13.6.2 is pinned.",
+    "dashboardTagReason": "On 2026-11-18 the public MCR registry listed no 17.x aspire/dashboard tag (docker manifest inspect :17.0.0 returned no such manifest); the newest public tag, 13.6.5, is pinned.",
     "hostPorts": "Random, bound only to 127.0.0.1; OTLP stays inside the Compose network.",
-    "browserAuthentication": "Retained; login credentials are private and are not in public captures.",
+    "browserAuthentication": "Retained (the dashboard root redirects to login); login credentials are private and are not in public captures.",
     "endpointChecks": {
       "/health": {
         "status": 200,
@@ -104,39 +101,27 @@
       "/api/weather?lat=43.0731&lon=-89.4012": {
         "status": 200,
         "contentType": "application/json; charset=utf-8",
-        "bytes": 1566
+        "bytes": 1577
       }
     },
     "liveProviders": true,
-    "reactMapAndScalarRendered": true,
-    "weatherSpanCount": 4,
-    "providerDestinations": [
-      "api.open-meteo.com:443",
-      "api.bigdatacloud.net:443"
-    ],
-    "correlatedLogCount": 15,
-    "metrics": "Weather.Native/weather.requests received with actual forecast/geocode and success tag values. No metric value or timing is presented as a benchmark.",
     "destroyedAfterRehearsal": true,
-    "ownedBuildCacheAndImagesRemoved": true,
+    "ownedImagesRemoved": true,
     "cleanup": {
       "containers": 0,
       "images": 2,
-      "volumes": 13,
-      "networks": 3,
+      "volumes": 0,
+      "networks": 0,
       "matchesOriginalBaseline": true
     }
   },
   "development": {
-    "cliVersion": "13.6.4",
-    "sdkAndIntegrations": "13.6.4",
+    "cliVersion": "17.0.0",
+    "sdkAndIntegrations": "17.0.0",
     "apphost": "demo/host/apphost.cs",
     "isolation": true,
-    "nativeAndViteHealthy": true,
+    "nativeHealthy": true,
     "actualPublicProviders": true,
-    "renderedReactAndScalar": true,
-    "traceAndCorrelatedLogs": true,
-    "nativeAotRuntime": true,
-    "jsonReflectionEnabled": false,
     "stoppedAfterRehearsal": true,
     "serviceSourceChanged": false,
     "browserLogsApplied": false

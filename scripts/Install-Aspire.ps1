@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('13.6.1', '13.6.4')]
+    [ValidateSet('13.6.1', '13.6.4', '17.0.0')]
     [string] $Version = '13.6.1'
 )
 
@@ -19,6 +19,8 @@ $expected = switch ("$Version-$platform") {
     '13.6.1-linux' { 'b512ae977c62f3b83f59636b4d03660d96284dba491bd7f9f070006a8840e4f1ba8addc5b4acb11eadd01fab431002703f1655c10c6fd913f77baa580c6fa2a1' }
     '13.6.4-win' { 'c0d27be56b4aa58a39ad3c5ab0b0d3c845cdd907571705b8cd13760202c0ab36d324521512ec1942d3233cdf8ecb7fe3520be1e41e0566873612bba1d276b857' }
     '13.6.4-linux' { '6070e2e4aef237aea8d472a918d6ff419d3c2dfe883bc23549cf1d505a7e517dc483c48e9aa7991030243971955cda5e81b0b66f4df64f1f8a0cf8279c7cca56' }
+    '17.0.0-win' { 'b14f2a32196f6255af8e908f6c322d197666c20ad22cf7c3720e855675e38bb07d9cab9516ce8be9bd62bbb3f7aac83f22cdda08cfdd69c838c39c8dfec17639' }
+    '17.0.0-linux' { 'f9208b531cc324a8612d1ef57bca9914901493b4086af8eb4a18282c4a5b6b31246cb1ce5bad51f08a91fb1658d614362875766aaf0311d83e1362f7d44f253b' }
 }
 $directory = Join-Path $root $(if ($Version -eq '13.6.1') { '.tools\aspire' } else { ".tools\aspire-$Version" })
 $archive = Join-Path $root ".tools\$name"

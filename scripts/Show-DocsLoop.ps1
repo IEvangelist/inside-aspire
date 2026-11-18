@@ -295,7 +295,7 @@ function Invoke-DocsLoopRehearsal {
     param([string]$AspirePath = '', [switch]$SkipGitHub, [string]$OutputDirectory = '')
     if (-not $AspirePath) {
         $binary = if ($IsWindows) { 'aspire.exe' } else { 'aspire' }
-        $AspirePath = Join-Path $script:DocsLoopRoot ".tools\aspire\$binary"
+        $AspirePath = Join-Path $script:DocsLoopRoot ".tools\aspire-17.0.0\$binary"
     }
     $cli = if ([IO.Path]::IsPathRooted($AspirePath)) {
         [IO.Path]::GetFullPath($AspirePath)
@@ -313,10 +313,10 @@ function Invoke-DocsLoopRehearsal {
     if (-not $OutputDirectory) { $OutputDirectory = '.artifacts\rehearsal\docs-loop' }
     $capture = New-DocsLoopOutputDirectory $OutputDirectory
     $version = Invoke-DocsLoopCommand $cli @('--version', '--non-interactive', '--nologo') 'aspire-version' $capture
-    if ($version.stdout.Trim() -notmatch '^13\.6\.1(?:\+[0-9a-f]+)?$') {
-        throw 'This rehearsal requires the public Aspire CLI 13.6.1. Unexpected version text is retained only locally.'
+    if ($version.stdout.Trim() -notmatch '^17\.0\.0(?:\+[0-9a-f]+)?$') {
+        throw 'This rehearsal requires the public Aspire CLI 17.0.0. Unexpected version text is retained only locally.'
     }
-    Write-Host 'Read-only docs loop | repository-local public Aspire CLI 13.6.1'
+    Write-Host 'Read-only docs loop | repository-local public Aspire CLI 17.0.0'
     Write-Host "Local captures: $([IO.Path]::GetRelativePath($script:DocsLoopRoot, $capture))"
 
     $history = [ordered]@{ checked = $false; reason = 'SkipGitHub' }
@@ -417,7 +417,7 @@ function Invoke-DocsLoopRehearsal {
     $proof = [ordered]@{
         schemaVersion = 1
         recordedAtUtc = [DateTime]::UtcNow.ToString('o')
-        cliVersion = '13.6.1'
+        cliVersion = '17.0.0'
         github = $history
         docs = [ordered]@{
             query = 'startup timeout'

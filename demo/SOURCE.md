@@ -15,7 +15,8 @@ at the approved public commit `5fb269526842727ff6cb945c27398b093895a758`.
   APIs and NativeAOT. `upstream/api/src/index.ts`, `openapi.ts` and
   `instrumentation.ts` remain the parity reference, not a runtime dependency.
 - `host/` is a public Aspire 13.6.1 C# scaffold, subsequently wired to the actual
-  native executable and preserved React frontend.
+  native executable and preserved React frontend, and now updated to Aspire
+  17.0.0 packages.
 
 The copied sample and its adaptation retain the source MIT terms in
 [`upstream/LICENSE`](upstream/LICENSE). Map tiles and radar continue to use the

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export type CapturedRun = {
@@ -17,11 +17,17 @@ export type CapturedRun = {
   omitFinalNewline?: boolean;
 };
 
+function defaultMarkdownEvidence(): string {
+  const files = readdirSync(resolve('..', 'docs', 'evidence')).filter((name) => /^default-markdown-.+\.json$/.test(name));
+  if (files.length !== 1) throw new Error(`Expected one default-markdown evidence file, found ${files.length}`);
+  return files[0];
+}
+
 type NewRun = Omit<CapturedRun, 'id' | 'command'> & { id: string; replayId: string };
 const historical: { runs: CapturedRun[] } = JSON.parse(
   readFileSync(resolve('..', 'docs', 'evidence', 'cli-replay.json'), 'utf8'));
 const defaults: { runs: NewRun[] } = JSON.parse(
-  readFileSync(resolve('..', 'docs', 'evidence', 'default-markdown-2026-11-06.json'), 'utf8'));
+  readFileSync(resolve('..', 'docs', 'evidence', defaultMarkdownEvidence()), 'utf8'));
 const compose: { runs: NewRun[] } = JSON.parse(
   readFileSync(resolve('..', 'docs', 'evidence', 'chapter-demos.json'), 'utf8'));
 

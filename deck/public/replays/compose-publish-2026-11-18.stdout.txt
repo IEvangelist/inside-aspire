@@ -1,0 +1,42 @@
+🛠️ Executing step publish
+🛠️ Building AppHost... demo\host\apphost.cs
+09:30:40 (validate-compute-environments) → Starting validate-compute-environments...
+09:30:40 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+09:30:40 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+09:30:40 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+09:30:40 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+09:30:40 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+09:30:40 (validate-docker-compose) → Starting validate-docker-compose...
+09:30:40 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+09:30:40 (before-start) → Starting before-start...
+09:30:40 (before-start) ✓ before-start completed successfully
+09:30:40 (pipeline-execution) → Starting pipeline-execution...
+09:30:40 (publish-talk-compose) → Starting publish-talk-compose...
+09:30:40 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+09:30:40 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+09:30:40 (publish-talk-compose) i [INF] Generating Compose output
+09:30:40 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+09:30:40 (publish-talk-compose) ✓ Docker Compose file written successfully to
+<WORKTREE>\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
+09:30:40 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+09:30:40 (publish) → Starting publish...
+09:30:40 (publish) ✓ publish completed successfully
+09:30:40 (pipeline-execution) ✓ Completed successfully
+------------------------------------------------------------
+✓ 8/8 steps succeeded • Total time: 36.09ms
+
+Steps Summary:
+                Step timeline:                                      0ms                    10.99ms
+                                                                    │───────┬──────┬─────┬───────│
+      0.99ms  ✓ validate-compute-environments                       │╶──╴                        │
+      2.25ms  ✓   prepare-deployment-targets-talk-compose           │   ╶──────╴                 │
+      0.38ms  ✓     before-start                                    │              ╴             │
+      0.40ms  ✓ validate-docker-compose                             │            ╴               │
+      4.77ms  ✓ pipeline-execution                                  │               ╶───────────╴│
+      2.67ms  ✓ publish-talk-compose                                │                ╶──────╴    │
+      0.51ms  ✓   publish                                           │                        ╶─╴ │
+      0.55ms  ✓ validate-javascript-dockerfile-run-script-frontend  │                 ╶─╴        │
+
+✓ Pipeline succeeded
+------------------------------------------------------------
+

@@ -166,10 +166,10 @@ builder.Build().Run();</code></pre></figure>
 
         <section id="drift" class="drift-slide" data-chapter="Where this started">
           <h2>Models learned the <span class="accent">old</span> Aspire.</h2>
-          <div class="drift-track" aria-label="Release history: .NET Aspire 8.0 to 9.5, then renamed Aspire at 13.0, shipping to today">
+          <div class="drift-track" aria-label="Release history: .NET Aspire 8.0 to 9.5, then renamed Aspire at 13.0, through 13.6, to 17.0 today">
             <div class="drift-era drift-old"><small>What models read</small><strong>.NET Aspire</strong><span>8.0 &middot; 9.0 &middot; 9.1 &middot; 9.2 &middot; 9.3 &middot; 9.4 &middot; 9.5</span></div>
             <div class="drift-rename fragment" data-fragment-index="1"><span data-icon="arrowRight"></span><small>renamed</small></div>
-            <div class="drift-era drift-new fragment" data-fragment-index="1"><small>What's true now</small><strong>Aspire</strong><span>13.0 &middot; 13.1 &middot; &hellip; &middot; today</span></div>
+            <div class="drift-era drift-new fragment" data-fragment-index="1"><small>What's true now</small><strong>Aspire</strong><span>13.0 &middot; 13.1 &middot; &hellip; &middot; 13.6 &middot; 17.0</span></div>
           </div>
           <p class="drift-punch fragment" data-fragment-index="2">Anything newer than the training data is a <span class="accent">guess.</span></p>
           <aside class="notes"><p>0:04-0:05. <strong>Why it keeps happening</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>We were ".NET Aspire" much longer than we've been Aspire. Models learned from those years.</li><li>Aspire ships every few weeks. A model's knowledge stops at its training cutoff.</li><li>So the model isn't dumb. It's out of date, and it fills the gap with guesses.</li></ul><p><strong style="color:#0e7490">CLICK</strong> First click shows the rename and today. Second click shows the punchline.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;We can't retrain the model. So we built loops.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> Models have improved since; the point is that anything newer than a model's training data is a guess, and Aspire keeps shipping.</p></aside>
@@ -294,7 +294,7 @@ safe-outputs:
             <article><span data-icon="code" aria-hidden="true"></span><h3>API reference</h3><p>Generated from every shipped package, per version.</p><ul class="docs-chips"><li>C#</li><li>TypeScript</li><li>Go</li></ul></article>
             <article><span data-icon="workflow" aria-hidden="true"></span><h3>What&rsquo;s new</h3><p>Release notes now run through one skill: research, draft, critique, validate.</p><ul class="docs-chips"><li>whatsnew</li></ul></article>
           </div>
-          <aside class="notes"><p>0:21-0:22. <strong>Docs have to stay current</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Aspire shipped ten public releases, 13.5.0 through 13.6.4, in under ten weeks.</li><li>Docs that were right in August can be wrong by October.</li><li>Guides are MDX, written with skills that live in the aspire.dev repo: doc-writer drafts, doc-tester runs the steps like a new user, doc-pr-reviewer checks every claim against the product source, twoslash-validator type-checks the TypeScript samples.</li><li>The API reference is generated from the shipped packages, per version, for C#, TypeScript, and, as of Aspire 17, Go AppHosts.</li><li>Release notes now go through the whatsnew skill, added in August: research, draft, critique, validate.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Back to the map. How does AI find these docs?&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> These captures used CLI 13.6.1 with the docs that were live on October 12. They don't show the CLI choosing docs by its own version.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Two separate sources. These captures used CLI 13.6.1 with the docs live on 2026-10-12; they don't show the CLI matching docs to its own version. <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md">API generator</a> / <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs">corpus boundaries</a> / <a href="https://github.com/microsoft/aspire.dev/tree/main/.agents/skills">docs skills</a>.</p></div></aside>
+          <aside class="notes"><p>0:21-0:22. <strong>Docs have to stay current</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Aspire shipped twelve public releases, 13.5.0 through 17.0.0, in three months.</li><li>Docs that were right in August can be wrong by October.</li><li>Guides are MDX, written with skills that live in the aspire.dev repo: doc-writer drafts, doc-tester runs the steps like a new user, doc-pr-reviewer checks every claim against the product source, twoslash-validator type-checks the TypeScript samples.</li><li>The API reference is generated from the shipped packages, per version, for C#, TypeScript, and, as of Aspire 17, Go AppHosts.</li><li>Release notes now go through the whatsnew skill, added in August: research, draft, critique, validate.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Back to the map. How does AI find these docs?&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> These captures used CLI 17.0.0 with the docs that were live on November 18. They don't show the CLI choosing docs by its own version.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Two separate sources. These captures used CLI 17.0.0 with the docs live on 2026-11-18; they don't show the CLI matching docs to its own version. <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/tools/PackageJsonGenerator/README.md">API generator</a> / <a href="https://github.com/microsoft/aspire.dev/blob/ce6d2424abb1414a581837605d8c793cfc869fb2/src/frontend/astro.config.mjs">corpus boundaries</a> / <a href="https://github.com/microsoft/aspire.dev/tree/main/.agents/skills">docs skills</a>.</p></div></aside>
         </section>
 
         <section id="map-cli" class="map-slide" data-chapter="AI loops" data-purpose="why">
@@ -315,41 +315,41 @@ safe-outputs:
     &quot;slug&quot;: &quot;browser-logs&quot;,
     &quot;content&quot;: &quot;Learn how to capture and configure browser console logs in Aspire using the BrowserLogs resource.&quot;,
     &quot;section&quot;: &quot;Add browser logs to a resource&quot;,
-    &quot;score&quot;: 172.43004
+    &quot;score&quot;: 169.45993
   },
   {
     &quot;title&quot;: &quot;Browser app configuration&quot;,
     &quot;slug&quot;: &quot;browser-app-configuration&quot;,
     &quot;content&quot;: &quot;Configure generic JavaScript browser apps to send OpenTelemetry data to the Aspire dashboard with OTLP HTTP exporters.&quot;,
     &quot;section&quot;: &quot;Example browser telemetry code&quot;,
-    &quot;score&quot;: 119.291626
+    &quot;score&quot;: 118.11427
   },
   {
     &quot;title&quot;: &quot;Enable browser telemetry&quot;,
     &quot;slug&quot;: &quot;enable-browser-telemetry&quot;,
     &quot;content&quot;: &quot;Enable browser telemetry in the Aspire dashboard to capture client-side OpenTelemetry logs, traces, and metrics from front-end JavaScript apps.&quot;,
     &quot;section&quot;: &quot;Dashboard configuration&quot;,
-    &quot;score&quot;: 101.06361
+    &quot;score&quot;: 99.629425
   },
   {
     &quot;title&quot;: &quot;Set up Grafana k6 in the Aspire AppHost&quot;,
     &quot;slug&quot;: &quot;set-up-grafana-k6-in-the-aspire-apphost&quot;,
     &quot;content&quot;: &quot;Configure the Community Toolkit k6 resource in Aspire, including scripts, browser testing, endpoints, health checks, and OpenTelemetry.&quot;,
     &quot;section&quot;: &quot;Use a fixed port or browser-enabled image&quot;,
-    &quot;score&quot;: 73.46021
+    &quot;score&quot;: 72.44202
   },
   {
     &quot;title&quot;: &quot;Compiler Error ASPIREBROWSERLOGS001&quot;,
     &quot;slug&quot;: &quot;compiler-error-aspirebrowserlogs001&quot;,
     &quot;content&quot;: &quot;Learn what causes the Aspire compiler error ASPIREBROWSERLOGS001 and how to fix it so your AppHost builds cleanly.&quot;,
     &quot;section&quot;: &quot;To correct this error&quot;,
-    &quot;score&quot;: 71.18428
+    &quot;score&quot;: 70.917694
   }
 ]</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:09-0:10. <strong>aspire docs search</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>This is a recorded run of the public CLI, version 13.6.1.</li><li>The AI, or you, runs <code>aspire docs search</code> with the feature name.</li><li>The output: five ranked sections with titles, slugs, and scores.</li></ul><p><strong style="color:#be185d">AUDIENCE QUESTION</strong> <em>(before you click Next; about 90 seconds)</em> Ask the room for one docs question, then:</p><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs search &quot;&lt;their words&gt;&quot; --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs get &lt;top-slug&gt; --non-interactive</code><p>Land it with: &ldquo;That's the same command the skills use.&rdquo; No question or no network? Skip it and stay on the recording. Recover the time on the next slide.</p><p><strong style="color:#0e7490">CLICK</strong> once: expands the recorded output. Scroll only the output; Back restores the command and title.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now read the best section.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> The pause and expansion are illustrative. Full stdout, stderr, and capture proof are linked below.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/docs-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:09-0:10. <strong>aspire docs search</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>This is a recorded run of the public CLI, version 17.0.0.</li><li>The AI, or you, runs <code>aspire docs search</code> with the feature name.</li><li>The output: five ranked sections with titles, slugs, and scores.</li></ul><p><strong style="color:#be185d">AUDIENCE QUESTION</strong> <em>(before you click Next; about 90 seconds)</em> Ask the room for one docs question, then:</p><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs search &quot;&lt;their words&gt;&quot; --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs get &lt;top-slug&gt; --non-interactive</code><p>Land it with: &ldquo;That's the same command the skills use.&rdquo; No question or no network? Skip it and stay on the recording. Recover the time on the next slide.</p><p><strong style="color:#0e7490">CLICK</strong> once: expands the recorded output. Scroll only the output; Back restores the command and title.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now read the best section.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> The pause and expansion are illustrative. Full stdout, stderr, and capture proof are linked below.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18. Replay speed is illustrative. <a href="/inside-aspire/replays/docs-search-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/docs-search-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="docs-section" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
@@ -381,7 +381,7 @@ After confirming the dialog, the new configuration takes effect immediately: the
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:10-0:11. <strong>aspire docs get</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>The guide explains how to configure browser logs while the AppHost runs.</li><li>We asked for that section by name.</li><li>Default output is the Markdown content, ready for a model to read.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs get browser-logs --section &quot;Configure browser logs&quot; --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the complete response. Back returns to the command.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;For code, it also needs the exact member.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> Add <code>--format Json</code> for the structured record with the same content.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-06; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/docs-section-default-2026-11-06.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/docs-section-default-2026-11-06.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-06.json" target="_blank" rel="noopener">proof</a>. Earlier <a href="/inside-aspire/replays/docs-section.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/docs-section.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 13.6.4.</p></div></aside>
+          <aside class="notes"><p>0:10-0:11. <strong>aspire docs get</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>The guide explains how to configure browser logs while the AppHost runs.</li><li>We asked for that section by name.</li><li>Default output is the Markdown content, ready for a model to read.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs get browser-logs --section &quot;Configure browser logs&quot; --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the complete response. Back returns to the command.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;For code, it also needs the exact member.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> Add <code>--format Json</code> for the structured record with the same content.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/docs-section-default-2026-11-18.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/docs-section-default-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-18.json" target="_blank" rel="noopener">proof</a>. Same-day <a href="/inside-aspire/replays/docs-section-2026-11-18.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/docs-section-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 17.0.0.</p></div></aside>
         </section>
 
         <section id="api-search" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
@@ -405,7 +405,7 @@ After confirming the dialog, the new configuration takes effect immediately: the
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:11-0:12. <strong>aspire docs api search</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>AI shouldn't guess a method name.</li><li>aspire docs api search takes the name and a language, C# here, and returns one record: the experimental WithBrowserLogs member, with its ID and signature.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs api search WithBrowserLogs --language csharp --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the one-record JSON array. The next click goes to the member.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Take that ID and ask for the member.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/api-search.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-search.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:11-0:12. <strong>aspire docs api search</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>AI shouldn't guess a method name.</li><li>aspire docs api search takes the name and a language, C# here, and returns one record: the experimental WithBrowserLogs member, with its ID and signature.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs api search WithBrowserLogs --language csharp --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the one-record JSON array. The next click goes to the member.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Take that ID and ask for the member.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-11-18. Replay speed is illustrative. <a href="/inside-aspire/replays/api-search-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/api-search-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="api-member" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
@@ -431,7 +431,7 @@ WithBrowserLogs(IResourceBuilder, string?, string?, BrowserUserDataMode?)
 • Name: WithBrowserLogs(IResourceBuilder&lt;T&gt;, string?, string?, BrowserUserDataMode?)
 • Modifiers: extension
 • Returns: IResourceBuilder&lt;T&gt;
-• Source: GitHub (https://github.com/microsoft/aspire/blob/c89352703f78ae46de90fbf751ed8b52b77b89bf/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
+• Source: GitHub (https://github.com/microsoft/aspire/blob/b33d222049f1ecc3bc7257ec07b622fe550b2580/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
 
 Adds a child resource that can open the application's primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.
 
@@ -492,7 +492,7 @@ ATS export
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:12-0:13. <strong>aspire docs api get</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same default output: Markdown, ready for a model to read.</li><li>This ID returns the member's signature, parameters and remarks, including ASPIREBROWSERLOGS001.</li><li>Now the AI can propose Aspire.Hosting.Browsers and WithBrowserLogs on our frontend, with the experimental diagnostic called out.</li><li>That's a proposal I can review. Browser logging hasn't been installed or enabled.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs api get &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot; --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: expands the full reference.</p><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Switch to VS Code and show Copilot's answer to the ai-loops prompt: the package and the frontend call. Do not apply them.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Look at what that ID is.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> Add <code>--format Json</code> for the structured record. <code>api get</code> follows the returned ID and has no language flag. The JSON fields on the next slide come from the unchanged earlier JSON recording.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-06; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/api-member-default-2026-11-06.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/api-member-default-2026-11-06.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-06.json" target="_blank" rel="noopener">proof</a>. Earlier <a href="/inside-aspire/replays/api-member.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/api-member.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 13.6.4.</p></div></aside>
+          <aside class="notes"><p>0:12-0:13. <strong>aspire docs api get</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same default output: Markdown, ready for a model to read.</li><li>This ID returns the member's signature, parameters and remarks, including ASPIREBROWSERLOGS001.</li><li>Now the AI can propose Aspire.Hosting.Browsers and WithBrowserLogs on our frontend, with the experimental diagnostic called out.</li><li>That's a proposal I can review. Browser logging hasn't been installed or enabled.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire docs api get &quot;csharp/aspire.hosting.browsers/browserlogsbuilderextensions/methods#withbrowserlogs&quot; --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: expands the full reference.</p><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Switch to VS Code and show Copilot's answer to the ai-loops prompt: the package and the frontend call. Do not apply them.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Look at what that ID is.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> Add <code>--format Json</code> for the structured record. <code>api get</code> follows the returned ID and has no language flag. The JSON fields on the next slide come from the same-day --format Json recording.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18; exit 0. Markdown content, rendered as text. <a href="/inside-aspire/replays/api-member-default-2026-11-18.stdout.txt" target="_blank" rel="noopener">stdout</a> / <a href="/inside-aspire/replays/api-member-default-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/default-markdown-2026-11-18.json" target="_blank" rel="noopener">proof</a>. Same-day <a href="/inside-aspire/replays/api-member-2026-11-18.stdout.txt" target="_blank" rel="noopener">JSON</a> / <a href="/inside-aspire/replays/api-member-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Default output / Public 17.0.0.</p></div></aside>
         </section>
 
         <section id="api-code" data-chapter="AI loops" data-purpose="proof">
@@ -517,7 +517,7 @@ ATS export
             <div role="row"><span role="cell" class="skill-map-ask">&ldquo;Why was that request slow?&rdquo;</span><span data-icon="arrowRight" aria-hidden="true"></span><span role="cell"><code class="skill-map-skill">aspire-monitoring</code></span><span data-icon="arrowRight" aria-hidden="true"></span><span role="cell"><code class="skill-map-cmd">aspire otel traces api</code></span></div>
           </div>
           <p class="skill-map-close">The model still reasons. <strong>The skill decides what it runs.</strong></p>
-          <aside class="notes"><p>0:26-0:27. <strong>Skills add determinism</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Models are nondeterministic. Ask the same question twice and you can get two different approaches.</li><li>A skill is a file of instructions that maps intent to a known command. Same question, same command, every time.</li><li>It's the same idea as an MCP server registering tools: the AI picks from a fixed, named set instead of improvising.</li><li>The CLI then returns current evidence from your running app, so the answer is grounded in fact.</li></ul><p><strong style="color:#7e22ce">PROMPT</strong> <em>(paste into Copilot Chat in VS Code; optional, shows a named skill picking the command; click the box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">Use the aspire-monitoring skill to show the latest trace for the api resource in demo/host/apphost.cs. Do not change anything.</code><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;So where do these skills come from?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Commands from the public CLI, 13.6.1. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p></div></aside>
+          <aside class="notes"><p>0:26-0:27. <strong>Skills add determinism</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Models are nondeterministic. Ask the same question twice and you can get two different approaches.</li><li>A skill is a file of instructions that maps intent to a known command. Same question, same command, every time.</li><li>It's the same idea as an MCP server registering tools: the AI picks from a fixed, named set instead of improvising.</li><li>The CLI then returns current evidence from your running app, so the answer is grounded in fact.</li></ul><p><strong style="color:#7e22ce">PROMPT</strong> <em>(paste into Copilot Chat in VS Code; optional, shows a named skill picking the command; click the box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">Use the aspire-monitoring skill to show the latest trace for the api resource in demo/host/apphost.cs. Do not change anything.</code><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;So where do these skills come from?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Commands from the public CLI, 17.0.0. <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/RUNBOOK.md">Exact operations and evidence</a>.</p></div></aside>
         </section>
 
         <section id="skills" data-chapter="AI loops" data-purpose="machinery">
@@ -691,11 +691,11 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded runtime-wait stdout"><code class="language-plaintext">Waiting for resource &#39;api&#39; to be healthy...
 
-✅ Resource &#39;api&#39; is healthy. (0.0s)</code></pre>
+✅ Resource &#39;api&#39; is healthy. (0.2s)</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:23-0:24. <strong>aspire wait</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire wait api blocks until the resource is healthy.</li><li>The API was already healthy right after start, so the 0.0 seconds is just what it printed. It isn't a benchmark.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$apphost = Join-Path $PWD &#x27;demo\host\apphost.cs&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire wait api --apphost $apphost --status healthy --timeout 120 --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the recorded response. Back returns to the command.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now, what's running?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-wait.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-wait.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:23-0:24. <strong>aspire wait</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire wait api blocks until the resource is healthy.</li><li>The API was already healthy right after start, so the 0.2 seconds is just what it printed. It isn't a benchmark.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$apphost = Join-Path $PWD &#x27;demo\host\apphost.cs&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire wait api --apphost $apphost --status healthy --timeout 120 --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals the recorded response. Back returns to the command.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now, what's running?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Recorded 2026-11-18. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-wait-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-wait-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="runtime-state" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
@@ -707,12 +707,13 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
               <pre class="replay-output" data-label="Complete recorded runtime-describe stdout"><code class="language-json">{
   &quot;resources&quot;: [
     {
-      &quot;name&quot;: &quot;api-kewwzmak&quot;,
+      &quot;name&quot;: &quot;api-zwbdwzwy&quot;,
       &quot;displayName&quot;: &quot;api&quot;,
       &quot;resourceType&quot;: &quot;Executable&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;Executable&quot;,
       &quot;state&quot;: &quot;Running&quot;,
-      &quot;creationTimestamp&quot;: &quot;2026-10-12T11:24:41+00:00&quot;,
-      &quot;startTimestamp&quot;: &quot;2026-10-12T11:24:41.8+00:00&quot;,
+      &quot;creationTimestamp&quot;: &quot;2026-11-18T15:29:44+00:00&quot;,
+      &quot;startTimestamp&quot;: &quot;2026-11-18T15:29:44.918+00:00&quot;,
       &quot;source&quot;: &quot;Weather.Api.exe&quot;,
       &quot;healthStatus&quot;: &quot;Healthy&quot;,
       &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;,
@@ -745,14 +746,14 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       &quot;urls&quot;: [
         {
           &quot;name&quot;: &quot;http&quot;,
-          &quot;url&quot;: &quot;http://localhost:62869&quot;
+          &quot;url&quot;: &quot;http://localhost:55888&quot;
         }
       ],
       &quot;volumes&quot;: [],
       &quot;properties&quot;: {
         &quot;executable.args&quot;: null,
         &quot;executable.path&quot;: &quot;[redacted local filesystem path]&quot;,
-        &quot;executable.pid&quot;: 40208,
+        &quot;executable.pid&quot;: 110600,
         &quot;executable.workDir&quot;: &quot;[redacted local filesystem path]&quot;,
         &quot;resource.appArgs&quot;: [],
         &quot;resource.appArgsSensitivity&quot;: []
@@ -779,86 +780,52 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       }
     },
     {
-      &quot;name&quot;: &quot;frontend-installer-trmtsfbm&quot;,
-      &quot;displayName&quot;: &quot;frontend-installer&quot;,
-      &quot;resourceType&quot;: &quot;Executable&quot;,
-      &quot;state&quot;: &quot;NotStarted&quot;,
-      &quot;source&quot;: &quot;npm&quot;,
-      &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;,
-      &quot;relationships&quot;: [
-        {
-          &quot;type&quot;: &quot;Parent&quot;,
-          &quot;resourceName&quot;: &quot;frontend-quwryuxr&quot;
-        }
-      ],
-      &quot;urls&quot;: [],
-      &quot;volumes&quot;: [],
-      &quot;properties&quot;: {
-        &quot;executable.args&quot;: null,
-        &quot;executable.path&quot;: &quot;npm&quot;,
-        &quot;executable.pid&quot;: null,
-        &quot;executable.workDir&quot;: &quot;[redacted local filesystem path]&quot;,
-        &quot;resource.appArgs&quot;: null,
-        &quot;resource.appArgsSensitivity&quot;: null,
-        &quot;resource.parentName&quot;: &quot;frontend-quwryuxr&quot;
-      },
-      &quot;environment&quot;: &quot;[redacted environment]&quot;,
-      &quot;healthReports&quot;: {},
-      &quot;commands&quot;: {
-        &quot;start&quot;: {
-          &quot;displayName&quot;: &quot;Start&quot;,
-          &quot;description&quot;: &quot;Start resource&quot;,
-          &quot;state&quot;: &quot;Enabled&quot;,
-          &quot;sortOrder&quot;: 0
-        }
-      }
-    },
-    {
-      &quot;name&quot;: &quot;frontend-quwryuxr&quot;,
+      &quot;name&quot;: &quot;frontend-fkhdbyem&quot;,
       &quot;displayName&quot;: &quot;frontend&quot;,
       &quot;resourceType&quot;: &quot;Executable&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;Vite&quot;,
       &quot;state&quot;: &quot;Running&quot;,
-      &quot;creationTimestamp&quot;: &quot;2026-10-12T11:24:42+00:00&quot;,
-      &quot;startTimestamp&quot;: &quot;2026-10-12T11:24:42.205+00:00&quot;,
+      &quot;creationTimestamp&quot;: &quot;2026-11-18T15:29:45+00:00&quot;,
+      &quot;startTimestamp&quot;: &quot;2026-11-18T15:29:45.551+00:00&quot;,
       &quot;source&quot;: &quot;npm&quot;,
       &quot;healthStatus&quot;: &quot;Unhealthy&quot;,
       &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;,
       &quot;relationships&quot;: [
         {
           &quot;type&quot;: &quot;WaitFor&quot;,
-          &quot;resourceName&quot;: &quot;frontend-installer-trmtsfbm&quot;
+          &quot;resourceName&quot;: &quot;frontend-installer-snkrzwjp&quot;
         },
         {
           &quot;type&quot;: &quot;Reference&quot;,
-          &quot;resourceName&quot;: &quot;api-kewwzmak&quot;
+          &quot;resourceName&quot;: &quot;api-zwbdwzwy&quot;
         },
         {
           &quot;type&quot;: &quot;WaitFor&quot;,
-          &quot;resourceName&quot;: &quot;api-kewwzmak&quot;
+          &quot;resourceName&quot;: &quot;api-zwbdwzwy&quot;
         },
         {
           &quot;type&quot;: &quot;Reference&quot;,
-          &quot;resourceName&quot;: &quot;api-kewwzmak&quot;
+          &quot;resourceName&quot;: &quot;api-zwbdwzwy&quot;
         }
       ],
       &quot;urls&quot;: [
         {
           &quot;name&quot;: &quot;http&quot;,
-          &quot;url&quot;: &quot;http://localhost:62871&quot;
+          &quot;url&quot;: &quot;http://localhost:55887&quot;
         }
       ],
       &quot;volumes&quot;: [],
       &quot;properties&quot;: {
         &quot;executable.args&quot;: null,
         &quot;executable.path&quot;: &quot;npm&quot;,
-        &quot;executable.pid&quot;: 14900,
+        &quot;executable.pid&quot;: 121312,
         &quot;executable.workDir&quot;: &quot;[redacted local filesystem path]&quot;,
         &quot;resource.appArgs&quot;: [
           &quot;run&quot;,
           &quot;dev&quot;,
           &quot;--&quot;,
           &quot;--port&quot;,
-          &quot;11338&quot;
+          &quot;20616&quot;
         ],
         &quot;resource.appArgsSensitivity&quot;: [
           0,
@@ -889,9 +856,46 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       }
     },
     {
+      &quot;name&quot;: &quot;frontend-installer-snkrzwjp&quot;,
+      &quot;displayName&quot;: &quot;frontend-installer&quot;,
+      &quot;resourceType&quot;: &quot;Executable&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;Executable&quot;,
+      &quot;state&quot;: &quot;NotStarted&quot;,
+      &quot;source&quot;: &quot;npm&quot;,
+      &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;,
+      &quot;relationships&quot;: [
+        {
+          &quot;type&quot;: &quot;Parent&quot;,
+          &quot;resourceName&quot;: &quot;frontend-fkhdbyem&quot;
+        }
+      ],
+      &quot;urls&quot;: [],
+      &quot;volumes&quot;: [],
+      &quot;properties&quot;: {
+        &quot;executable.args&quot;: null,
+        &quot;executable.path&quot;: &quot;npm&quot;,
+        &quot;executable.pid&quot;: null,
+        &quot;executable.workDir&quot;: &quot;[redacted local filesystem path]&quot;,
+        &quot;resource.appArgs&quot;: null,
+        &quot;resource.appArgsSensitivity&quot;: null,
+        &quot;resource.parentName&quot;: &quot;frontend-fkhdbyem&quot;
+      },
+      &quot;environment&quot;: &quot;[redacted environment]&quot;,
+      &quot;healthReports&quot;: {},
+      &quot;commands&quot;: {
+        &quot;start&quot;: {
+          &quot;displayName&quot;: &quot;Start&quot;,
+          &quot;description&quot;: &quot;Start resource&quot;,
+          &quot;state&quot;: &quot;Enabled&quot;,
+          &quot;sortOrder&quot;: 0
+        }
+      }
+    },
+    {
       &quot;name&quot;: &quot;geocoding&quot;,
       &quot;displayName&quot;: &quot;geocoding&quot;,
       &quot;resourceType&quot;: &quot;ExternalService&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;ExternalService&quot;,
       &quot;state&quot;: &quot;Running&quot;,
       &quot;source&quot;: &quot;geocoding-api.open-meteo.com&quot;,
       &quot;healthStatus&quot;: &quot;Healthy&quot;,
@@ -919,6 +923,7 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       &quot;name&quot;: &quot;open-meteo&quot;,
       &quot;displayName&quot;: &quot;open-meteo&quot;,
       &quot;resourceType&quot;: &quot;ExternalService&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;ExternalService&quot;,
       &quot;state&quot;: &quot;Running&quot;,
       &quot;source&quot;: &quot;api.open-meteo.com&quot;,
       &quot;healthStatus&quot;: &quot;Healthy&quot;,
@@ -946,6 +951,7 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       &quot;name&quot;: &quot;reverse-geocoding&quot;,
       &quot;displayName&quot;: &quot;reverse-geocoding&quot;,
       &quot;resourceType&quot;: &quot;ExternalService&quot;,
+      &quot;resourceTypeDisplayName&quot;: &quot;ExternalService&quot;,
       &quot;state&quot;: &quot;Running&quot;,
       &quot;source&quot;: &quot;api.bigdatacloud.net&quot;,
       &quot;healthStatus&quot;: &quot;Healthy&quot;,
@@ -974,7 +980,7 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:24-0:25. <strong>aspire describe</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire describe lists the app's resources with their state and health.</li><li>The API is running and healthy. The front end is unhealthy, and its installer hasn't started.</li><li>That's the capture as recorded, and it's exactly what a model needs to see.</li><li>Local paths and environment values are redacted in the public capture.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire describe --apphost $apphost --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: shows all six resources. Scroll the output body to the final record; the command and header stay pinned.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;And what happened to a request?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-describe.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-describe.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:24-0:25. <strong>aspire describe</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire describe lists the app's resources with their state and health.</li><li>The API is running and healthy. The front end is unhealthy, and its installer hasn't started.</li><li>That's the capture as recorded, and it's exactly what a model needs to see.</li><li>Local paths and environment values are redacted in the public capture.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire describe --apphost $apphost --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: shows all six resources. Scroll the output body to the final record; the command and header stay pinned.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;And what happened to a request?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-describe-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-describe-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="runtime-traces" class="live-slide" data-chapter="AI loops" data-purpose="proof" data-terminal-focus="true">
@@ -985,23 +991,23 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
             <div class="replay-response">
               <pre class="replay-output" data-label="Complete recorded runtime-traces stdout"><code class="language-json">[
   {
-    &quot;traceId&quot;: &quot;7030bd343ae293c5941aec96764b60a5&quot;,
-    &quot;durationMs&quot;: 13,
+    &quot;traceId&quot;: &quot;a2e39721df4efd59c4bff6acc0aa6d96&quot;,
+    &quot;durationMs&quot;: 9,
     &quot;title&quot;: &quot;GET /health&quot;,
     &quot;spans&quot;: [
       {
-        &quot;traceId&quot;: &quot;7030bd343ae293c5941aec96764b60a5&quot;,
-        &quot;spanId&quot;: &quot;049b066236a5e0d2&quot;,
+        &quot;traceId&quot;: &quot;a2e39721df4efd59c4bff6acc0aa6d96&quot;,
+        &quot;spanId&quot;: &quot;bdc6f31cedce2dd9&quot;,
         &quot;kind&quot;: &quot;Server&quot;,
         &quot;name&quot;: &quot;GET /health&quot;,
         &quot;source&quot;: &quot;api&quot;,
-        &quot;destination&quot;: &quot;localhost:62869&quot;,
-        &quot;durationMs&quot;: 13,
-        &quot;timestamp&quot;: &quot;2026-10-12T11:24:42.1521661Z&quot;,
+        &quot;destination&quot;: &quot;localhost:55888&quot;,
+        &quot;durationMs&quot;: 9,
+        &quot;timestamp&quot;: &quot;2026-11-18T15:29:45.4251131Z&quot;,
         &quot;attributes&quot;: {
           &quot;http.request.method&quot;: &quot;GET&quot;,
           &quot;server.address&quot;: &quot;localhost&quot;,
-          &quot;server.port&quot;: &quot;62869&quot;,
+          &quot;server.port&quot;: &quot;55888&quot;,
           &quot;url.scheme&quot;: &quot;http&quot;,
           &quot;url.path&quot;: &quot;/health&quot;,
           &quot;network.protocol.version&quot;: &quot;1.1&quot;,
@@ -1011,28 +1017,28 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
       }
     ],
     &quot;hasError&quot;: false,
-    &quot;timestamp&quot;: &quot;2026-10-12T11:24:42.1521661Z&quot;,
+    &quot;timestamp&quot;: &quot;2026-11-18T15:29:45.4251131Z&quot;,
     &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;
   },
   {
-    &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
-    &quot;durationMs&quot;: 523,
+    &quot;traceId&quot;: &quot;331f7bb404df5dd41816778988eef7ec&quot;,
+    &quot;durationMs&quot;: 211,
     &quot;title&quot;: &quot;GET /api/weather&quot;,
     &quot;spans&quot;: [
       {
-        &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
-        &quot;spanId&quot;: &quot;d5cdad39eba8b8fe&quot;,
+        &quot;traceId&quot;: &quot;331f7bb404df5dd41816778988eef7ec&quot;,
+        &quot;spanId&quot;: &quot;ef598225b74d9f5b&quot;,
         &quot;kind&quot;: &quot;Server&quot;,
         &quot;name&quot;: &quot;GET /api/weather&quot;,
         &quot;source&quot;: &quot;api&quot;,
-        &quot;destination&quot;: &quot;localhost:62869&quot;,
-        &quot;durationMs&quot;: 523,
-        &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6316734Z&quot;,
+        &quot;destination&quot;: &quot;localhost:55888&quot;,
+        &quot;durationMs&quot;: 211,
+        &quot;timestamp&quot;: &quot;2026-11-18T15:29:46.3507821Z&quot;,
         &quot;attributes&quot;: {
           &quot;http.request.method&quot;: &quot;GET&quot;,
           &quot;server.address&quot;: &quot;localhost&quot;,
-          &quot;server.port&quot;: &quot;62869&quot;,
-          &quot;user_agent.original&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; en-US) PowerShell/7.6.6&quot;,
+          &quot;server.port&quot;: &quot;55888&quot;,
+          &quot;user_agent.original&quot;: &quot;node&quot;,
           &quot;url.scheme&quot;: &quot;http&quot;,
           &quot;url.path&quot;: &quot;/api/weather&quot;,
           &quot;url.query&quot;: &quot;?lat=Redacted&amp;lon=Redacted&quot;,
@@ -1042,45 +1048,26 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
         }
       },
       {
-        &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
-        &quot;spanId&quot;: &quot;e2d52233242d655c&quot;,
-        &quot;parentSpanId&quot;: &quot;d5cdad39eba8b8fe&quot;,
+        &quot;traceId&quot;: &quot;331f7bb404df5dd41816778988eef7ec&quot;,
+        &quot;spanId&quot;: &quot;9597c5bf064882fc&quot;,
+        &quot;parentSpanId&quot;: &quot;ef598225b74d9f5b&quot;,
         &quot;kind&quot;: &quot;Internal&quot;,
         &quot;name&quot;: &quot;weather.forecast&quot;,
         &quot;source&quot;: &quot;api&quot;,
-        &quot;durationMs&quot;: 521,
-        &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6323495Z&quot;,
+        &quot;durationMs&quot;: 209,
+        &quot;timestamp&quot;: &quot;2026-11-18T15:29:46.3517062Z&quot;,
         &quot;attributes&quot;: {}
       },
       {
-        &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
-        &quot;spanId&quot;: &quot;2ebb083081915206&quot;,
-        &quot;parentSpanId&quot;: &quot;e2d52233242d655c&quot;,
-        &quot;kind&quot;: &quot;Client&quot;,
-        &quot;name&quot;: &quot;GET&quot;,
-        &quot;source&quot;: &quot;api&quot;,
-        &quot;destination&quot;: &quot;api.bigdatacloud.net:443&quot;,
-        &quot;durationMs&quot;: 209,
-        &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6331319Z&quot;,
-        &quot;attributes&quot;: {
-          &quot;http.request.method&quot;: &quot;GET&quot;,
-          &quot;server.address&quot;: &quot;api.bigdatacloud.net&quot;,
-          &quot;server.port&quot;: &quot;443&quot;,
-          &quot;url.full&quot;: &quot;https://api.bigdatacloud.net/data/reverse-geocode-client?*&quot;,
-          &quot;http.response.status_code&quot;: &quot;200 OK&quot;,
-          &quot;network.protocol.version&quot;: &quot;1.1&quot;
-        }
-      },
-      {
-        &quot;traceId&quot;: &quot;7e37e007d193c9d60fa813ee5f4df1ca&quot;,
-        &quot;spanId&quot;: &quot;5da9f92c5b2662bb&quot;,
-        &quot;parentSpanId&quot;: &quot;e2d52233242d655c&quot;,
+        &quot;traceId&quot;: &quot;331f7bb404df5dd41816778988eef7ec&quot;,
+        &quot;spanId&quot;: &quot;69798b4fbeb06463&quot;,
+        &quot;parentSpanId&quot;: &quot;9597c5bf064882fc&quot;,
         &quot;kind&quot;: &quot;Client&quot;,
         &quot;name&quot;: &quot;GET&quot;,
         &quot;source&quot;: &quot;api&quot;,
         &quot;destination&quot;: &quot;api.open-meteo.com:443&quot;,
-        &quot;durationMs&quot;: 520,
-        &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6331352Z&quot;,
+        &quot;durationMs&quot;: 187,
+        &quot;timestamp&quot;: &quot;2026-11-18T15:29:46.3528827Z&quot;,
         &quot;attributes&quot;: {
           &quot;http.request.method&quot;: &quot;GET&quot;,
           &quot;server.address&quot;: &quot;api.open-meteo.com&quot;,
@@ -1089,17 +1076,36 @@ return new DocsSearchResponse { Query = query, Results = results };</code></pre>
           &quot;http.response.status_code&quot;: &quot;200 OK&quot;,
           &quot;network.protocol.version&quot;: &quot;1.1&quot;
         }
+      },
+      {
+        &quot;traceId&quot;: &quot;331f7bb404df5dd41816778988eef7ec&quot;,
+        &quot;spanId&quot;: &quot;7513b7e8a5facb90&quot;,
+        &quot;parentSpanId&quot;: &quot;9597c5bf064882fc&quot;,
+        &quot;kind&quot;: &quot;Client&quot;,
+        &quot;name&quot;: &quot;GET&quot;,
+        &quot;source&quot;: &quot;api&quot;,
+        &quot;destination&quot;: &quot;api.bigdatacloud.net:443&quot;,
+        &quot;durationMs&quot;: 208,
+        &quot;timestamp&quot;: &quot;2026-11-18T15:29:46.3528905Z&quot;,
+        &quot;attributes&quot;: {
+          &quot;http.request.method&quot;: &quot;GET&quot;,
+          &quot;server.address&quot;: &quot;api.bigdatacloud.net&quot;,
+          &quot;server.port&quot;: &quot;443&quot;,
+          &quot;url.full&quot;: &quot;https://api.bigdatacloud.net/data/reverse-geocode-client?*&quot;,
+          &quot;http.response.status_code&quot;: &quot;200 OK&quot;,
+          &quot;network.protocol.version&quot;: &quot;1.1&quot;
+        }
       }
     ],
     &quot;hasError&quot;: false,
-    &quot;timestamp&quot;: &quot;2026-10-12T11:24:44.6316734Z&quot;,
+    &quot;timestamp&quot;: &quot;2026-11-18T15:29:46.3507821Z&quot;,
     &quot;dashboardUrl&quot;: &quot;[redacted dashboardUrl]&quot;
   }
 ]</code></pre>
             </div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
-          <aside class="notes"><p>0:25-0:26. <strong>aspire otel traces</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire otel traces returns the trace for a Madison weather request, span by span, with trace IDs and durations.</li><li>The response also includes the health trace.</li><li>Durations come from one run; they aren't a performance claim.</li><li>Now the AI can look things up, run them, and check the result.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire otel traces api --apphost $apphost --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals both traces. Scroll to the last span and closing bracket.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Let's put the loop together.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-10-12. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-traces.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-traces.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 13.6.1 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:25-0:26. <strong>aspire otel traces</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>aspire otel traces returns the trace for a Madison weather request, span by span, with trace IDs and durations.</li><li>The response also includes the health trace.</li><li>Durations come from one run; they aren't a performance claim.</li><li>Now the AI can look things up, run them, and check the result.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(optional, to show it live; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire otel traces api --apphost $apphost --format Json --non-interactive</code><p><strong style="color:#0e7490">CLICK</strong> once: reveals both traces. Scroll to the last span and closing bracket.</p><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Let's put the loop together.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18. Replay speed is illustrative. <a href="/inside-aspire/replays/runtime-traces-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete public stdout</a> / <a href="/inside-aspire/replays/runtime-traces-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/CLI-REPLAY.md">capture proof</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="the-loop" class="diagram-slide" data-chapter="AI loops" data-purpose="machinery">
@@ -1265,14 +1271,14 @@ func main() {
             <code>AppHost model</code><span data-icon="arrowRight" aria-hidden="true"></span><code>Target integration</code><span data-icon="arrowRight" aria-hidden="true"></span><code>Environment resource</code>
           </div>
           <div class="code-pair">
-            <figure class="code-panel"><figcaption><span data-icon="package"></span>Docker integration</figcaption><pre data-label="Docker integration installation command"><code class="language-powershell">aspire add docker --version 13.6.4 --non-interactive</code></pre></figure>
+            <figure class="code-panel"><figcaption><span data-icon="package"></span>Docker integration</figcaption><pre data-label="Docker integration installation command"><code class="language-powershell">aspire add docker --version 17.0.0 --non-interactive</code></pre></figure>
             <figure class="code-panel"><figcaption><span data-icon="code"></span>Compose environment</figcaption><pre data-label="Weather demo Compose environment excerpt" data-pkg-purple="Aspire.Hosting.Docker" data-apis-purple="AddDockerComposeEnvironment WithDashboard"><code id="compose-environment-code" class="language-csharp">builder.AddDockerComposeEnvironment("talk-compose")
     .WithDashboard(dashboard => dashboard
-        .WithImage("aspire/dashboard", "13.6.2")
+        .WithImage("aspire/dashboard", "13.6.5")
         .WithImageRegistry("mcr.microsoft.com"));</code></pre></figure>
           </div>
           <p>The native API serves the bundled React app.</p>
-          <aside class="notes"><p>0:50-0:52. <strong>What the target adds</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>The target is in the same AppHost.</li><li>PublishAsDockerFile changes the API's packaging only when publishing; it is a no-op in a normal run.</li><li>The Dockerfile builds React, then publishes the API with NativeAOT on Linux. That image serves both.</li><li>Vite stays for development and is excluded from publication.</li><li>The dashboard image is pinned to 13.6.2 because there's no 13.6.4 image tag, even though the CLI and hosting packages are 13.6.4.</li></ul><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Show the publish-only callback, the frontend exclusion, and the Dockerfile.</li><li>The generated Compose file is output, not a second hand-written app model.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;First inspect what publication produces.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Local target: <a href="https://aspire.dev/deployment/docker-compose/">Docker Compose</a>. <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101">AddDockerComposeEnvironment</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180">WithDashboard</a>. Rehearsal ports are random and loopback-only.</p></div></aside>
+          <aside class="notes"><p>0:50-0:52. <strong>What the target adds</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>The target is in the same AppHost.</li><li>PublishAsDockerFile changes the API's packaging only when publishing; it is a no-op in a normal run.</li><li>The Dockerfile builds React, then publishes the API with NativeAOT on Linux. That image serves both.</li><li>Vite stays for development and is excluded from publication.</li><li>The dashboard image is pinned to 13.6.5 because the public registry has no 17.0 dashboard image tag yet, even though the CLI and hosting packages are 17.0.0.</li></ul><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Show the publish-only callback, the frontend exclusion, and the Dockerfile.</li><li>The generated Compose file is output, not a second hand-written app model.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;First inspect what publication produces.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line">Local target: <a href="https://aspire.dev/deployment/docker-compose/">Docker Compose</a>. <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L78-L101">AddDockerComposeEnvironment</a> / <a href="https://github.com/microsoft/aspire/blob/f4c27f2d43ddc1cacd0dd083b30d1fea1cee7a62/src/Aspire.Hosting.Docker/DockerComposeEnvironmentExtensions.cs#L176-L180">WithDashboard</a>. Rehearsal ports are random and loopback-only.</p></div></aside>
         </section>
 
         <section id="deployment-publish" data-appendix="true" class="live-slide" data-chapter="Optional appendix" data-purpose="proof" data-terminal-focus="true">
@@ -1284,42 +1290,42 @@ func main() {
   --non-interactive</code></pre></div>
             <div class="replay-response"><pre class="replay-output" data-preserve-layout data-terminal-output data-label="Complete recorded Compose publish stdout"><code class="language-plaintext">🛠️ Executing step publish
 🛠️ Building AppHost... demo\host\apphost.cs
-12:40:16 (validate-compute-environments) → Starting validate-compute-environments...
-12:40:16 (validate-compute-environments) ✓ validate-compute-environments completed successfully
-12:40:16 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
-12:40:16 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
-12:40:16 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
-12:40:16 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
-12:40:16 (validate-docker-compose) → Starting validate-docker-compose...
-12:40:16 (validate-docker-compose) ✓ validate-docker-compose completed successfully
-12:40:16 (before-start) → Starting before-start...
-12:40:16 (before-start) ✓ before-start completed successfully
-12:40:16 (pipeline-execution) → Starting pipeline-execution...
-12:40:16 (publish-talk-compose) → Starting publish-talk-compose...
-12:40:16 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
-12:40:16 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
-12:40:16 (publish-talk-compose) i [INF] Generating Compose output
-12:40:16 (publish-talk-compose) → Writing the Docker Compose file to the output path.
-12:40:16 (publish-talk-compose) ✓ Docker Compose file written successfully to
+09:30:40 (validate-compute-environments) → Starting validate-compute-environments...
+09:30:40 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+09:30:40 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+09:30:40 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+09:30:40 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+09:30:40 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+09:30:40 (validate-docker-compose) → Starting validate-docker-compose...
+09:30:40 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+09:30:40 (before-start) → Starting before-start...
+09:30:40 (before-start) ✓ before-start completed successfully
+09:30:40 (pipeline-execution) → Starting pipeline-execution...
+09:30:40 (publish-talk-compose) → Starting publish-talk-compose...
+09:30:40 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+09:30:40 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+09:30:40 (publish-talk-compose) i [INF] Generating Compose output
+09:30:40 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+09:30:40 (publish-talk-compose) ✓ Docker Compose file written successfully to
 &lt;WORKTREE&gt;\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
-12:40:16 (publish-talk-compose) ✓ publish-talk-compose completed successfully
-12:40:16 (publish) → Starting publish...
-12:40:16 (publish) ✓ publish completed successfully
-12:40:16 (pipeline-execution) ✓ Completed successfully
+09:30:40 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+09:30:40 (publish) → Starting publish...
+09:30:40 (publish) ✓ publish completed successfully
+09:30:40 (pipeline-execution) ✓ Completed successfully
 ------------------------------------------------------------
-✓ 8/8 steps succeeded • Total time: 36.98ms
+✓ 8/8 steps succeeded • Total time: 36.09ms
 
 Steps Summary:
-                Step timeline:                                      0ms                    10.82ms
+                Step timeline:                                      0ms                    10.99ms
                                                                     │───────┬──────┬─────┬───────│
-      1.11ms  ✓ validate-compute-environments                       │╶──╴                        │
-      2.72ms  ✓   prepare-deployment-targets-talk-compose           │   ╶───────╴                │
-      0.40ms  ✓     before-start                                    │                ╴           │
-      0.40ms  ✓ validate-docker-compose                             │              ╴             │
-      3.80ms  ✓ pipeline-execution                                  │                 ╶─────────╴│
-      2.44ms  ✓ publish-talk-compose                                │                  ╶──────╴  │
-      0.32ms  ✓   publish                                           │                          ╴ │
-      0.35ms  ✓ validate-javascript-dockerfile-run-script-frontend  │                    ╴       │
+      0.99ms  ✓ validate-compute-environments                       │╶──╴                        │
+      2.25ms  ✓   prepare-deployment-targets-talk-compose           │   ╶──────╴                 │
+      0.38ms  ✓     before-start                                    │              ╴             │
+      0.40ms  ✓ validate-docker-compose                             │            ╴               │
+      4.77ms  ✓ pipeline-execution                                  │               ╶───────────╴│
+      2.67ms  ✓ publish-talk-compose                                │                ╶──────╴    │
+      0.51ms  ✓   publish                                           │                        ╶─╴ │
+      0.55ms  ✓ validate-javascript-dockerfile-run-script-frontend  │                 ╶─╴        │
 
 ✓ Pipeline succeeded
 ------------------------------------------------------------
@@ -1328,7 +1334,7 @@ Steps Summary:
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
           <p class="terminal-support">The output is <code>docker-compose.yaml</code> and <code>.env</code> placeholders. No images build and no containers start.</p>
-          <aside class="notes"><p>0:52-0:54. <strong>aspire publish</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Two services: our API and the dashboard.</li><li>The API image is a placeholder until deployment prepares it.</li><li>No images were built and nothing started. We can inspect ports, provider URLs and OTLP wiring before touching Docker.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; or click Next to expand the recorded run instead; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$apphost = Join-Path $PWD &#x27;demo\host\apphost.cs&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire publish --apphost $apphost --environment Talk --output-path .artifacts\chapter-demos\compose --non-interactive</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Open <code>.artifacts\chapter-demos\compose\docker-compose.yaml</code> and <code>.env</code>. Never show resolved secrets. Return to the deck.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now apply the model.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-05. <a href="/inside-aspire/replays/compose-publish-2026-11-05.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-publish-2026-11-05.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">publish pipeline</a>.</p><p><strong>Recording:</strong> Public 13.6.4 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:52-0:54. <strong>aspire publish</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Two services: our API and the dashboard.</li><li>The API image is a placeholder until deployment prepares it.</li><li>No images were built and nothing started. We can inspect ports, provider URLs and OTLP wiring before touching Docker.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; or click Next to expand the recorded run instead; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$apphost = Join-Path $PWD &#x27;demo\host\apphost.cs&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire publish --apphost $apphost --environment Talk --output-path .artifacts\chapter-demos\compose --non-interactive</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Open <code>.artifacts\chapter-demos\compose\docker-compose.yaml</code> and <code>.env</code>. Never show resolved secrets. Return to the deck.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;Now apply the model.&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18. <a href="/inside-aspire/replays/compose-publish-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-publish-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">publish pipeline</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="deployment-deploy" data-appendix="true" class="live-slide" data-chapter="Optional appendix" data-purpose="proof" data-terminal-focus="true">
@@ -1340,113 +1346,113 @@ Steps Summary:
   --non-interactive</code></pre></div>
             <div class="replay-response"><pre class="replay-output" data-preserve-layout data-terminal-output data-label="Complete recorded Compose deploy stdout"><code class="language-plaintext">🛠️ Executing step deploy
 🛠️ Building AppHost... demo\host\apphost.cs
-12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
-12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
-12:42:19 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
-12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
-12:42:19 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
-12:42:19 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
-12:42:19 (validate-docker-compose) → Starting validate-docker-compose...
-12:42:19 (validate-docker-compose) ✓ validate-docker-compose completed successfully
-12:42:19 (before-start) → Starting before-start...
-12:42:19 (before-start) ✓ before-start completed successfully
-12:42:19 (pipeline-execution) → Starting pipeline-execution...
-12:42:19 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
-12:42:19 (process-parameters) → Starting process-parameters...
-12:42:19 (validate-compute-environments) → Starting validate-compute-environments...
-12:42:19 (publish-talk-compose) → Starting publish-talk-compose...
-12:42:19 (validate-compute-environments) ✓ validate-compute-environments completed successfully
-12:42:19 (check-container-runtime) → Starting check-container-runtime...
-12:42:19 (validate-build-only-container-references) → Starting validate-build-only-container-references...
-12:42:19 (push-prereq) → Starting push-prereq...
-12:42:19 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
-12:42:19 (validate-build-only-container-references) ✓ validate-build-only-container-references completed successfully
-12:42:19 (push-prereq) ✓ push-prereq completed successfully
-12:42:19 (publish-talk-compose) i [INF] Generating Compose output
-12:42:19 (process-parameters) ✓ process-parameters completed successfully
-12:42:19 (build-prereq) → Starting build-prereq...
-12:42:19 (deploy-prereq) → Starting deploy-prereq...
-12:42:19 (build-prereq) ✓ build-prereq completed successfully
-12:42:19 (deploy-prereq) i [INF] Initializing deployment for environment 'Talk'
-12:42:19 (deploy-prereq) i [INF] Setting default deploy tag 'aspire-deploy-20261105184219' for compute resource(s).
-12:42:19 (deploy-prereq) ✓ deploy-prereq completed successfully
-12:42:19 (publish-talk-compose) → Writing the Docker Compose file to the output path.
-12:42:19 (publish-talk-compose) ✓ Docker Compose file written successfully to
+09:30:44 (validate-compute-environments) → Starting validate-compute-environments...
+09:30:44 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+09:30:44 (prepare-deployment-targets-talk-compose) → Starting prepare-deployment-targets-talk-compose...
+09:30:44 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for talk-compose-dashboard
+09:30:44 (prepare-deployment-targets-talk-compose) i [INF] Creating Docker Compose resource for api
+09:30:44 (prepare-deployment-targets-talk-compose) ✓ prepare-deployment-targets-talk-compose completed successfully
+09:30:44 (validate-docker-compose) → Starting validate-docker-compose...
+09:30:44 (validate-docker-compose) ✓ validate-docker-compose completed successfully
+09:30:44 (before-start) → Starting before-start...
+09:30:44 (before-start) ✓ before-start completed successfully
+09:30:44 (pipeline-execution) → Starting pipeline-execution...
+09:30:44 (validate-build-only-container-references) → Starting validate-build-only-container-references...
+09:30:44 (validate-compute-environments) → Starting validate-compute-environments...
+09:30:44 (validate-javascript-dockerfile-run-script-frontend) → Starting validate-javascript-dockerfile-run-script-frontend...
+09:30:44 (validate-compute-environments) ✓ validate-compute-environments completed successfully
+09:30:44 (publish-talk-compose) → Starting publish-talk-compose...
+09:30:44 (process-parameters) → Starting process-parameters...
+09:30:44 (check-container-runtime) → Starting check-container-runtime...
+09:30:44 (validate-javascript-dockerfile-run-script-frontend) ✓ validate-javascript-dockerfile-run-script-frontend completed successfully
+09:30:44 (validate-build-only-container-references) ✓ validate-build-only-container-references completed successfully
+09:30:44 (push-prereq) → Starting push-prereq...
+09:30:44 (push-prereq) ✓ push-prereq completed successfully
+09:30:44 (publish-talk-compose) i [INF] Generating Compose output
+09:30:44 (process-parameters) ✓ process-parameters completed successfully
+09:30:44 (deploy-prereq) → Starting deploy-prereq...
+09:30:44 (build-prereq) → Starting build-prereq...
+09:30:44 (build-prereq) ✓ build-prereq completed successfully
+09:30:44 (deploy-prereq) i [INF] Initializing deployment for environment 'Talk'
+09:30:44 (deploy-prereq) i [INF] Setting default deploy tag 'aspire-deploy-20261118153044' for compute resource(s).
+09:30:44 (deploy-prereq) ✓ deploy-prereq completed successfully
+09:30:44 (publish-talk-compose) → Writing the Docker Compose file to the output path.
+09:30:44 (publish-talk-compose) ✓ Docker Compose file written successfully to
 &lt;WORKTREE&gt;\.artifacts\chapter-demos\compose\docker-compose.yaml. (0.0s)
-12:42:19 (publish-talk-compose) ✓ publish-talk-compose completed successfully
-12:42:19 (publish) → Starting publish...
-12:42:19 (publish) ✓ publish completed successfully
-12:42:19 (check-container-runtime) i [INF] Container runtime auto-detected: Docker (docker).
-12:42:19 (check-container-runtime) ✓ check-container-runtime completed successfully
-12:42:19 (build-api) → Starting build-api...
-12:42:19 (build-api) i [INF] Building container image for resource api
-12:42:19 (build-api) i [INF] Building image: api
-12:43:43 (build-api) i [INF] Building image for api completed
-12:43:43 (build-api) ✓ build-api completed successfully
-12:43:43 (build) → Starting build...
-12:43:43 (build) ✓ build completed successfully
-12:43:43 (prepare-talk-compose) → Starting prepare-talk-compose...
-12:43:43 (push-api) → Starting push-api...
-12:43:43 (prepare-talk-compose) ✓ prepare-talk-compose completed successfully
-12:43:43 (push-api) → Tagging api for local use
-12:43:43 (push-api) i [INF] Docker tag for api:a213d6d515beca1dc295332bb130df5e4f913d22 -&gt; api:aspire-deploy-20261105184219 succeeded.
-12:43:43 (push-api) ✓ Successfully tagged api as api:aspire-deploy-20261105184219 (0.2s)
-12:43:43 (push-api) ✓ push-api completed successfully
-12:43:43 (docker-compose-up-talk-compose) → Starting docker-compose-up-talk-compose...
-12:43:43 (docker-compose-up-talk-compose) → Running compose up for talk-compose using Docker
-12:43:43 (docker-compose-up-talk-compose) i [INF] Using container runtime 'docker' for compose operations.
-12:43:51 (docker-compose-up-talk-compose) ✓ Service talk-compose is now running with Docker Compose locally (runtime: Docker) (7.9s)
-12:43:51 (docker-compose-up-talk-compose) ✓ docker-compose-up-talk-compose completed successfully
-12:43:51 (print-api-summary) → Starting print-api-summary...
-12:43:51 (print-talk-compose-dashboard-summary) → Starting print-talk-compose-dashboard-summary...
-12:43:51 (print-talk-compose-dashboard-summary) i [INF] Successfully deployed talk-compose-dashboard to http://localhost:62881.
-12:43:51 (print-talk-compose-dashboard-summary) ✓ print-talk-compose-dashboard-summary completed successfully
-12:43:51 (print-api-summary) i [INF] Successfully deployed api to http://localhost:62880.
-12:43:51 (print-api-summary) ✓ print-api-summary completed successfully
-12:43:51 (deploy) → Starting deploy...
-12:43:51 (deploy) ✓ deploy completed successfully
-12:43:51 (pipeline-execution) ✓ Completed successfully
+09:30:44 (publish-talk-compose) ✓ publish-talk-compose completed successfully
+09:30:44 (publish) → Starting publish...
+09:30:44 (publish) ✓ publish completed successfully
+09:30:44 (check-container-runtime) i [INF] Container runtime auto-detected: Docker (docker).
+09:30:44 (check-container-runtime) ✓ check-container-runtime completed successfully
+09:30:44 (build-api) → Starting build-api...
+09:30:44 (build-api) i [INF] Building container image for resource api
+09:30:45 (build-api) i [INF] Building image: api
+09:32:43 (build-api) i [INF] Building image for api completed
+09:32:43 (build-api) ✓ build-api completed successfully
+09:32:43 (build) → Starting build...
+09:32:43 (build) ✓ build completed successfully
+09:32:43 (prepare-talk-compose) → Starting prepare-talk-compose...
+09:32:43 (push-api) → Starting push-api...
+09:32:43 (push-api) → Tagging api for local use
+09:32:43 (prepare-talk-compose) ✓ prepare-talk-compose completed successfully
+09:32:44 (push-api) i [INF] Docker tag for api:0a7b4204b22b0fb84ca4af3f8b3b582e5f080b98 -&gt; api:aspire-deploy-20261118153044 succeeded.
+09:32:44 (push-api) ✓ Successfully tagged api as api:aspire-deploy-20261118153044 (0.3s)
+09:32:44 (push-api) ✓ push-api completed successfully
+09:32:44 (docker-compose-up-talk-compose) → Starting docker-compose-up-talk-compose...
+09:32:44 (docker-compose-up-talk-compose) → Running compose up for talk-compose using Docker
+09:32:44 (docker-compose-up-talk-compose) i [INF] Using container runtime 'docker' for compose operations.
+09:33:10 (docker-compose-up-talk-compose) ✓ Service talk-compose is now running with Docker Compose locally (runtime: Docker) (26.5s)
+09:33:10 (docker-compose-up-talk-compose) ✓ docker-compose-up-talk-compose completed successfully
+09:33:10 (print-talk-compose-dashboard-summary) → Starting print-talk-compose-dashboard-summary...
+09:33:10 (print-api-summary) → Starting print-api-summary...
+09:33:11 (print-talk-compose-dashboard-summary) i [INF] Successfully deployed talk-compose-dashboard to http://localhost:52563.
+09:33:11 (print-talk-compose-dashboard-summary) ✓ print-talk-compose-dashboard-summary completed successfully
+09:33:11 (print-api-summary) i [INF] Successfully deployed api to http://localhost:52565.
+09:33:11 (print-api-summary) ✓ print-api-summary completed successfully
+09:33:11 (deploy) → Starting deploy...
+09:33:11 (deploy) ✓ deploy completed successfully
+09:33:11 (pipeline-execution) ✓ Completed successfully
 ------------------------------------------------------------
-✓ 23/23 steps succeeded • Total time: 1m 33s
+✓ 23/23 steps succeeded • Total time: 2m 27s
 
 Steps Summary:
-                Step timeline:                                      0s                      1m 33s
+                Step timeline:                                      0s                      2m 27s
                                                                     │───────┬──────┬─────┬───────│
-      1.35ms  ✓ validate-compute-environments                       │╴                           │
-      2.76ms  ✓   prepare-deployment-targets-talk-compose           │╴                           │
-      0.36ms  ✓     before-start                                    │╴                           │
-      0.41ms  ✓ validate-docker-compose                             │╴                           │
-      1m 33s  ✓ pipeline-execution                                  │╶──────────────────────────╴│
-      2.95ms  ✓ validate-javascript-dockerfile-run-script-frontend  │╴                           │
-      3.94ms  ✓ process-parameters                                  │╴                           │
-      0.73ms  ✓   build-prereq                                      │╴                           │
-      1m 23s  ✓     build-api                                       │╶────────────────────────╴  │
-      0.53ms  ✓       build                                         │                        ╴   │
-      3.99ms  ✓         prepare-talk-compose                        │                        ╴   │
-       7.91s  ✓           docker-compose-up-talk-compose            │                        ╶──╴│
-       0.63s  ✓             print-api-summary                       │                           ╴│
-      0.46ms  ✓               deploy                                │                           ╴│
-       0.63s  ✓             print-talk-compose-dashboard-summary    │                           ╴│
-       0.20s  ✓       push-api                                      │                        ╴   │
-      1.52ms  ✓   deploy-prereq                                     │╴                           │
-      0.74ms  ✓ validate-compute-environments                       │╴                           │
-      6.77ms  ✓ publish-talk-compose                                │╴                           │
-      0.39ms  ✓   publish                                           │╴                           │
-       0.43s  ✓ check-container-runtime                             │╴                           │
-      1.06ms  ✓ validate-build-only-container-references            │╴                           │
-      1.04ms  ✓ push-prereq                                         │╴                           │
+      1.30ms  ✓ validate-compute-environments                       │╴                           │
+      3.63ms  ✓   prepare-deployment-targets-talk-compose           │╴                           │
+      1.36ms  ✓     before-start                                    │╴                           │
+      0.91ms  ✓ validate-docker-compose                             │╴                           │
+      2m 27s  ✓ pipeline-execution                                  │╶──────────────────────────╴│
+      6.24ms  ✓ validate-build-only-container-references            │╴                           │
+      1.38ms  ✓ validate-compute-environments                       │╴                           │
+      3.59ms  ✓ validate-javascript-dockerfile-run-script-frontend  │╴                           │
+     11.40ms  ✓ publish-talk-compose                                │╴                           │
+      0.56ms  ✓   publish                                           │╴                           │
+      5.28ms  ✓ process-parameters                                  │╴                           │
+      2.92ms  ✓   deploy-prereq                                     │╴                           │
+      0.56ms  ✓   build-prereq                                      │╴                           │
+      1m 59s  ✓     build-api                                       │╶─────────────────────╴     │
+      1.17ms  ✓       build                                         │                      ╴     │
+      7.58ms  ✓         prepare-talk-compose                        │                      ╴     │
+      26.49s  ✓           docker-compose-up-talk-compose            │                     ╶─────╴│
+       0.69s  ✓             print-talk-compose-dashboard-summary    │                           ╴│
+       0.74s  ✓             print-api-summary                       │                           ╴│
+      0.84ms  ✓               deploy                                │                           ╴│
+       0.33s  ✓       push-api                                      │                      ╴     │
+       0.30s  ✓ check-container-runtime                             │╴                           │
+      0.57ms  ✓ push-prereq                                         │╴                           │
 
 ✓ Pipeline succeeded
 
-  talk-compose-dashboard: http://localhost:62881
-  api: http://localhost:62880
+  talk-compose-dashboard: http://localhost:52563
+  api: http://localhost:52565
 ------------------------------------------------------------
 
 </code></pre></div>
           </figure>
           <span class="fragment replay-step" data-fragment-index="0" aria-hidden="true"></span>
           <p class="terminal-support">The current model builds the native image, resolves parameters and starts Compose. The API still serves the React app.</p>
-          <aside class="notes"><p>0:54-0:56. <strong>aspire deploy</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Deploy evaluates the current model, not the files we just inspected.</li><li>It resolves parameters, builds the native image and runs Compose.</li><li>Same app, now running as containers. The build time isn't a benchmark.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; uses the warm image prepared offstage; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire stop --apphost $apphost --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire deploy --apphost $apphost --environment Talk --output-path .artifacts\chapter-demos\compose --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$compose = Join-Path $PWD &#x27;.artifacts\chapter-demos\compose\docker-compose.yaml&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$environment = Join-Path $PWD &#x27;.artifacts\chapter-demos\compose\.env.Talk&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$projectName = &#x27;&lt;project name from the deploy output&gt;&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">docker compose --file $compose --env-file $environment --project-name $projectName port api 8080</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">docker compose --file $compose --env-file $environment --project-name $projectName port talk-compose-dashboard 18888</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Open the API at the discovered port. Search Madison.</li><li>Check its provider trace in the deployed dashboard. Open the dashboard privately so no login token is shared.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;What did we have to decide?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-05: local deployment, then cleanup. <a href="/inside-aspire/replays/compose-deploy-2026-11-05.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-deploy-2026-11-05.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">deploy pipeline</a>.</p><p><strong>Recording:</strong> Public 13.6.4 / exit 0.</p></div></aside>
+          <aside class="notes"><p>0:54-0:56. <strong>aspire deploy</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Deploy evaluates the current model, not the files we just inspected.</li><li>It resolves parameters, builds the native image and runs Compose.</li><li>Same app, now running as containers. The build time isn't a benchmark.</li></ul><p><strong style="color:#15803d">RUN</strong> <em>(copy into the prepared terminal at the repo root; uses the warm image prepared offstage; click a box to select it)</em></p><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire stop --apphost $apphost --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">aspire deploy --apphost $apphost --environment Talk --output-path .artifacts\chapter-demos\compose --non-interactive</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$compose = Join-Path $PWD &#x27;.artifacts\chapter-demos\compose\docker-compose.yaml&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$environment = Join-Path $PWD &#x27;.artifacts\chapter-demos\compose\.env.Talk&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">$projectName = &#x27;&lt;project name from the deploy output&gt;&#x27;</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">docker compose --file $compose --env-file $environment --project-name $projectName port api 8080</code><code style="display:block;margin:4px 0;padding:6px 10px;border-radius:4px;background:#111827;color:#f9fafb;font-family:Consolas,Menlo,monospace;font-size:0.85em;white-space:pre-wrap;user-select:all;cursor:copy">docker compose --file $compose --env-file $environment --project-name $projectName port talk-compose-dashboard 18888</code><p><strong style="color:#c2410c">DO</strong> <em>(on screen, not aloud)</em></p><ul><li>Open the API at the discovered port. Search Madison.</li><li>Check its provider trace in the deployed dashboard. Open the dashboard privately so no login token is shared.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;What did we have to decide?&rdquo;</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line terminal-support">Recorded 2026-11-18: local deployment, then cleanup. <a href="/inside-aspire/replays/compose-deploy-2026-11-18.stdout.txt" target="_blank" rel="noopener">Complete stdout</a> / <a href="/inside-aspire/replays/compose-deploy-2026-11-18.stderr.txt" target="_blank" rel="noopener">stderr</a> / <a href="/inside-aspire/replays/chapter-demos.json" target="_blank" rel="noopener">proof</a> / <a href="https://aspire.dev/deployment/docker-compose/">deploy pipeline</a>.</p><p><strong>Recording:</strong> Public 17.0.0 / exit 0.</p></div></aside>
         </section>
 
         <section id="deployment-boundaries" data-appendix="true" data-chapter="Optional appendix" data-purpose="machinery">
@@ -1471,7 +1477,7 @@ Steps Summary:
   mcr.microsoft.com/aspire/dashboard:latest</code></pre></figure>
           </div>
           <p>Anything that exports OTLP can send telemetry here. The standalone dashboard shows it; it doesn't start or manage your processes.</p>
-          <aside class="notes"><p>Optional appendix, outside the 60-minute presentation. <strong>The standalone dashboard</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same viewer, no AppHost. These are alternative startup commands.</li><li>Our deployment demo uses the standalone image through Compose, pinned to 13.6.2 rather than latest.</li><li>It receives the API's OTLP, but it doesn't start or manage that API. The resource controls came from the AppHost, not from telemetry.</li><li>Browser authentication stays on.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;The evidence is still the same three signals.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> The rehearsal uses CLI 13.6.4; not every patch publishes a dashboard image. OTLP stays inside the Compose network, with random loopback-only UI ports. The reference commands shown here were not executed directly.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/dashboard/standalone/">Alternative startup commands</a>. Our Compose rehearsal pins image 13.6.2; browser authentication stays on. The CLI reference is foreground.</p></div></aside>
+          <aside class="notes"><p>Optional appendix, outside the 60-minute presentation. <strong>The standalone dashboard</strong></p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Same viewer, no AppHost. These are alternative startup commands.</li><li>Our deployment demo uses the standalone image through Compose, pinned to 13.6.5 rather than latest.</li><li>It receives the API's OTLP, but it doesn't start or manage that API. The resource controls came from the AppHost, not from telemetry.</li><li>Browser authentication stays on.</li></ul><p><strong style="color:#4b5563">NEXT SLIDE</strong> <em>(lead-in)</em> &ldquo;The evidence is still the same three signals.&rdquo;</p><p><strong style="color:#4b5563">IF ASKED</strong> The rehearsal uses CLI 17.0.0; the public registry has no 17.0 dashboard image tag yet, so the newest public tag, 13.6.5, is pinned. OTLP stays inside the Compose network, with random loopback-only UI ports. The reference commands shown here were not executed directly.</p><div class="note-sources"><p><strong>Sources and recording details</strong></p><p class="source-line"><a href="https://aspire.dev/dashboard/standalone/">Alternative startup commands</a>. Our Compose rehearsal pins image 13.6.5; browser authentication stays on. The CLI reference is foreground.</p></div></aside>
         </section>
 
         <section id="weather" class="image-slide" data-chapter="Optional appendix" data-appendix="true" data-purpose="proof" data-transition="fade-in slide-out">
@@ -1487,24 +1493,28 @@ Steps Summary:
         <section id="sources" class="sources-slide" data-chapter="Optional appendix" data-appendix="true">
           <h2>Sources and reuse</h2>
           <div class="source-columns">
-            <div><h3>The docs loop</h3>
-              <p><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/">GitHub: cross-repo docs automation</a></p>
-              <p><a href="https://github.github.com/gh-aw/">GitHub Agentic Workflows docs</a></p>
-              <p><a href="https://github.com/microsoft/aspire-skills">microsoft/aspire-skills plugin</a></p>
-
-              <p><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/">David Pine: C# docs architecture</a></p>
-              <p><a href="https://github.com/microsoft/aspire/pull/16531">microsoft/aspire#16531</a> / <a href="https://github.com/microsoft/aspire.dev/pull/775">microsoft/aspire.dev#775</a></p>
-              <p><a href="https://aspire.dev/llms-full.txt">Corpus</a> / <a href="https://aspire.dev/dashboard/overview/">dashboard</a> / <a href="https://aspire.dev/deployment/docker-compose/">deployment</a></p>
-              <p><a href="https://github.com/microsoft/aspire/pull/14028">microsoft/aspire#14028</a></p>
-              <p><a href="https://github.com/microsoft/aspire/releases">Public Aspire releases</a></p>
-            </div>
-            <div><h3>Application and brand</h3>
-              <p><a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node">Pinned MIT weather sample</a></p>
-              <p><a href="https://aka.ms/aspire/brand">Official Aspire brand</a> / <a href="https://github.com/microsoft/aspire-brand/tree/f9eb464dec47870de23d55dd7b3c00d39122813d">pinned assets</a></p>
-              <p><a href="https://github.com/IEvangelist/inside-aspire/blob/main/NOTICE.md">CC0 artwork, trademarks, fonts, and provider notices</a></p>
-              <p><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SOURCES.md">All source pins and compatibility citations</a></p>
-              <p><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md">Actual portrait, official GitHub artwork, Octicons, and code-excerpt provenance</a></p>
-            </div>
+            <div role="group" class="source-group" aria-labelledby="sources-read"><h3 id="sources-read">Read more</h3><ul class="source-list">
+              <li><a href="https://github.blog/ai-and-ml/github-copilot/automating-cross-repo-documentation-with-github-agentic-workflows/" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="book"></span><span class="source-text"><strong>Cross-repo docs</strong><small>github.blog</small></span></a></li>
+              <li><a href="https://github.github.com/gh-aw/" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="workflow"></span><span class="source-text"><strong>Agentic Workflows</strong><small>github.github.com/gh-aw</small></span></a></li>
+              <li><a href="https://github.com/microsoft/aspire-skills" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="package"></span><span class="source-text"><strong>Aspire skills plugin</strong><small>microsoft/aspire-skills</small></span></a></li>
+              <li><a href="https://davidpine.dev/posts/aspire-docs-mcp-tools/" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="file"></span><span class="source-text"><strong>Inside the docs tools</strong><small>davidpine.dev</small></span></a></li>
+              <li><a href="https://aspire.dev/llms-full.txt" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="database"></span><span class="source-text"><strong>The docs corpus</strong><small>aspire.dev/llms-full.txt</small></span></a></li>
+            </ul></div>
+            <div role="group" class="source-group" aria-labelledby="sources-talk"><h3 id="sources-talk">From the talk</h3><ul class="source-list">
+              <li><a href="https://github.com/microsoft/aspire/pull/16531" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="pr"></span><span class="source-text"><strong>The product PR</strong><small>microsoft/aspire#16531</small></span></a></li>
+              <li><a href="https://github.com/microsoft/aspire.dev/pull/775" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="pr"></span><span class="source-text"><strong>The docs PR it drafted</strong><small>microsoft/aspire.dev#775</small></span></a></li>
+              <li><a href="https://github.com/microsoft/aspire/pull/14028" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="terminal"></span><span class="source-text"><strong>The first docs tools</strong><small>microsoft/aspire#14028</small></span></a></li>
+              <li><a href="https://aspire.dev/dashboard/overview/" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="screen"></span><span class="source-text"><strong>Aspire dashboard</strong><small>aspire.dev/dashboard</small></span></a></li>
+              <li><a href="https://aspire.dev/deployment/docker-compose/" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="cloud"></span><span class="source-text"><strong>Compose deploy</strong><small>aspire.dev/deployment</small></span></a></li>
+              <li><a href="https://github.com/microsoft/aspire/releases" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="loop"></span><span class="source-text"><strong>Aspire releases</strong><small>microsoft/aspire/releases</small></span></a></li>
+            </ul></div>
+            <div role="group" class="source-group" aria-labelledby="sources-reuse"><h3 id="sources-reuse">Reuse this deck</h3><ul class="source-list">
+              <li><a href="https://github.com/microsoft/aspire-samples/tree/5fb269526842727ff6cb945c27398b093895a758/samples/aspire-with-node" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="code"></span><span class="source-text"><strong>Weather sample</strong><small>microsoft/aspire-samples</small></span></a></li>
+              <li><a href="https://aka.ms/aspire/brand" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="person"></span><span class="source-text"><strong>Aspire brand</strong><small>aka.ms/aspire/brand</small></span></a></li>
+              <li><a href="https://github.com/IEvangelist/inside-aspire/blob/main/NOTICE.md" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="shield"></span><span class="source-text"><strong>Notices and licenses</strong><small>NOTICE.md</small></span></a></li>
+              <li><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/SOURCES.md" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="check"></span><span class="source-text"><strong>Source pins</strong><small>SOURCES.md</small></span></a></li>
+              <li><a href="https://github.com/IEvangelist/inside-aspire/blob/main/docs/PRESENTATION-ASSETS.md" target="_blank" rel="noopener noreferrer"><span class="source-icon" data-icon="review"></span><span class="source-text"><strong>Asset provenance</strong><small>PRESENTATION-ASSETS.md</small></span></a></li>
+            </ul></div>
           </div>
           <aside class="notes"><p>Optional appendix, outside the 60-minute presentation.</p><p><strong style="color:#2563eb">SAY</strong> <em>(key points, in your own words)</em></p><ul><li>Public citations and notices remain accessible without interrupting the close.</li><li>Official logos are unchanged; CC0 does not grant trademark rights or imply endorsement.</li><li>The map UI retains Open-Meteo, OpenStreetMap, CARTO, Esri, BigDataCloud, and RainViewer attribution.</li></ul></aside>
         </section>

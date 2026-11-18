@@ -38,9 +38,9 @@ Back restores/collapses correctly. Use the [capture proof](CLI-REPLAY.md) and
 benchmark. Reading, print, and reduced motion show recorded commands/results
 immediately. The deck has nine recorded surfaces: four JSON discovery/runtime
 responses, two default-output responses, wait and two genuine Compose runs.
-The original seven 13.6.1 capture files remain unchanged. The displayed guide
-and member now use November 6 default-output captures; the November 5
-publish/deploy recordings are retained. There is no
+All nine surfaces were re-recorded on 2026-11-18 with the public 17.0.0 CLI;
+the displayed guide and member use default-output captures from the same run.
+There is no
 visible replay status row. [New capture and cleanup proof](evidence/chapter-demos.json)
 is separate from the historical inventory.
 
@@ -83,19 +83,21 @@ mirrors the fragment; source details remain in notes and the appendix. See
 
 Use PowerShell 7, a released .NET 10 SDK, and Node 22.12+ (or 20.19+) on Windows/Linux x64. Windows needs existing Visual Studio C++ x64 tools and a Windows SDK. Linux needs clang and zlib development headers. The publish script checks these and does not install global tools.
 
-### Public CLI 13.6.4
+### Public CLI 17.0.0
 
-The AppHost uses the public 13.6.4 CLI/SDK/integrations; its package graph
-includes patched MessagePack 2.5.307. No audit or warning policy is suppressed.
-Old recordings and official skill trees retain their original 13.6.1 provenance.
+The AppHost uses the public 17.0.0 CLI and `Aspire.Hosting.AppHost`/integration
+packages. In 17.0 the `#:sdk Aspire.AppHost.Sdk` directive is obsolete (ASPIRE012),
+so the file-based AppHost references the `Aspire.Hosting.AppHost` package instead.
+No audit or warning policy is suppressed. Official skill trees retain their
+original 13.6.1 provenance.
 
 Install the checksum-pinned CLI side-by-side with the historical 13.6.1 CLI:
 
 ```powershell
-$aspire = & .\scripts\Install-Aspire.ps1 -Version '13.6.4'
+$aspire = & .\scripts\Install-Aspire.ps1 -Version '17.0.0'
 & $aspire --version
 $env:PATH = (Split-Path $aspire) + [IO.Path]::PathSeparator + $env:PATH
-$env:ASPIRE_HOME = Join-Path $PWD '.artifacts\chapter-demos\aspire-home-13.6.4'
+$env:ASPIRE_HOME = Join-Path $PWD '.artifacts\chapter-demos\aspire-home-17.0.0'
 $apphost = Join-Path $PWD 'demo\host\apphost.cs'
 pwsh -NoProfile -File .\scripts\Publish-Native.ps1
 pwsh -NoProfile -File .\scripts\Verify-Skills.ps1
@@ -109,9 +111,9 @@ Publish mode instead compiles the Linux native image from source; neither path
 falls back to a managed API.
 
 PATH and `ASPIRE_HOME` above belong only to this terminal. Confirm public
-13.6.4 before screen sharing. No `.ps1` entry point is required on stage.
-The docs test retains its historical timeout regression and original
-13.6.1 gate; it is not the new audience feature story.
+17.0.0 before screen sharing. No `.ps1` entry point is required on stage.
+The docs test retains its historical timeout regression and now gates on
+17.0.0; it is not the new audience feature story.
 
 Native compilation is preparation, not AppHost lifecycle. The Windows script runs `vcvars64.bat` and the compiler in the same process. Keep the publish step off the presentation clock.
 
@@ -147,8 +149,9 @@ aspire docs api get "csharp/aspire.hosting.browsers/browserlogsbuilderextensions
 Use the plain get commands in the demo. Their default output is the Markdown
 content, ready for an assistant to read; add `--format Json` for the structured
 record with the same content. In these redirected captures the CLI renders
-the Markdown as text. The November 6 recordings contain the complete output,
-including the initial Loading message. Original JSON captures are unchanged.
+the Markdown as text. The 2026-11-18 recordings contain the complete output,
+including the initial Loading message. Same-day `--format Json` captures are linked
+in the speaker notes.
 
 **Visible result:** a reviewable proposal to add `Aspire.Hosting.Browsers` and
 `WithBrowserLogs()` on the frontend, with `ASPIREBROWSERLOGS001` explicitly
@@ -235,7 +238,7 @@ aspire wait frontend --apphost $apphost --status healthy --timeout 120 --non-int
 aspire describe --apphost $apphost --format Json --non-interactive
 ```
 
-Use the direct commands above, not the older 13.6.1-gated `Start-Demo.ps1`.
+Use the direct commands above; `Start-Demo.ps1` is an optional 17.0.0-gated rehearsal helper.
 In current discovery JSON, match a resource's stable `displayName` and read
 its `urls` array; its runtime `name` can have a generated suffix. Use those
 returned URLs, not a fixed port. `#/live-cli` remains a genuine recorded
@@ -244,8 +247,8 @@ command, not a browser shell.
 The weather demo and dedicated native command/result replays are the proof,
 before the process graph and wiring. At `#/skills-vs-tools`, define skill
 guidance versus CLI execution before listing names at `#/skills`; do not put
-an enormous animated terminal in that half-width definition. The earlier
-wait/describe/trace capture uses `demo\host\apphost.cs` and the public 13.6.1
+an enormous animated terminal in that half-width definition. The
+wait/describe/trace capture uses `demo\host\apphost.cs` and the public 17.0.0
 contracts. Then explain the native CLI/dashboard/API, managed AppHost, DCP,
 explicit resource wiring, and main inner loop at `#/the-loop`.
 
@@ -254,8 +257,8 @@ Then show `runtime-wait` (0:23-0:24),
 `runtime-state` (0:24-0:25), and `runtime-traces` (0:25-0:26)
 before the skill/tool definition. Their results
 come from the actual prepared native artifact and owned isolated AppHost, not
-fixture provider output or a managed API. The capture reused the native binary
-and stopped the exact AppHost afterward. The API was already healthy when wait
+fixture provider output or a managed API. The 2026-11-18 capture used the native binary built
+by `Publish-Native.ps1` and stopped the exact AppHost afterward. The API was already healthy when wait
 was captured; its reported timing is not the animation duration or a benchmark.
 The full describe response includes all six resource states and marked privacy
 redactions; do not imply all resources were healthy. Scroll its output body to
@@ -339,7 +342,7 @@ or start it on this chapter's clock.
    or memory claim.
 
 The assistant can read the same evidence with exact-target `aspire otel traces`
-and `aspire otel logs`. The 13.6.4 rehearsal used the original Windows native
+and `aspire otel logs`. The 17.0.0 rehearsal used the Windows native
 artifact and real providers, verified native/Vite React maps and Scalar, and
 stopped that exact AppHost afterward. **Visible result:** one request linked
 to its provider calls, logs and meter data. **Exit:** return at
@@ -351,8 +354,8 @@ health, console and commands are separate from instrumented OTLP signals.
 
 At `dashboard-standalone`, the CLI and `:latest` Docker commands remain
 **alternative reference commands**, not direct recordings. The deployment
-demo instead runs the canonical image pinned to `13.6.2`, with a recorded
-digest. Not every CLI patch publishes a dashboard image. Keep browser token
+demo instead runs the canonical image pinned to `13.6.5`, with a recorded
+digest. The public registry has no 17.0 dashboard image tag yet. Keep browser token
 authentication; never put the login URL in a public capture.
 
 Standalone receives OTLP without an AppHost, but does not automatically gain
@@ -368,10 +371,10 @@ unlimited production retention or remote AppHost orchestration.
 **Entry:** `deployment`. David selected real **local Docker Compose**; no cloud
 resources or production automation are involved. Invoke `aspire-deployment`.
 
-The current `demo\host\apphost.cs` pins SDK/JavaScript/Docker to 13.6.4 and adds
+The current `demo\host\apphost.cs` pins AppHost/JavaScript/Docker packages to 17.0.0 and adds
 `AddDockerComposeEnvironment("talk-compose")`. The dashboard uses the existing
-public `mcr.microsoft.com/aspire/dashboard:13.6.2` tag, not a nonexistent 13.6.4
-image. Its exact recorded digest is in [the new provenance](evidence/chapter-demos.json).
+public `mcr.microsoft.com/aspire/dashboard:13.6.5` tag, the newest public tag;
+the registry had no 17.x tag when this was recorded on 2026-11-18. Its exact recorded digest is in [the new provenance](evidence/chapter-demos.json).
 
 Show the publish-only changes before switching to the terminal:
 
@@ -578,7 +581,7 @@ simplified `AddViteApp("frontend", "../frontend")` resolves from the AppHost
 directory, matching the public integration's path-resolution behavior.
 Only `AddViteApp` and `WithNpm` receive cyan rails, now lines 7 and 8.
 The development wiring still has the same behavior; the local AppHost now
-adds publish-only packaging and the approved 13.6.4 update. Cyan identifies
+adds publish-only packaging and the 17.0.0 update. Cyan identifies
 JavaScript APIs; purple identifies the actual Docker environment; teal
 identifies the optional official `Aspire.Hosting.Go` / `aspire add go` API.
 AppHost authoring languages and workload languages are separate: an AppHost

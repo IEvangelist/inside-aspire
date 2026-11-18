@@ -1,12 +1,13 @@
 {
   "resources": [
     {
-      "name": "api-kewwzmak",
+      "name": "api-zwbdwzwy",
       "displayName": "api",
       "resourceType": "Executable",
+      "resourceTypeDisplayName": "Executable",
       "state": "Running",
-      "creationTimestamp": "2026-10-12T11:24:41+00:00",
-      "startTimestamp": "2026-10-12T11:24:41.8+00:00",
+      "creationTimestamp": "2026-11-18T15:29:44+00:00",
+      "startTimestamp": "2026-11-18T15:29:44.918+00:00",
       "source": "Weather.Api.exe",
       "healthStatus": "Healthy",
       "dashboardUrl": "[redacted dashboardUrl]",
@@ -39,14 +40,14 @@
       "urls": [
         {
           "name": "http",
-          "url": "http://localhost:62869"
+          "url": "http://localhost:55888"
         }
       ],
       "volumes": [],
       "properties": {
         "executable.args": null,
         "executable.path": "[redacted local filesystem path]",
-        "executable.pid": 40208,
+        "executable.pid": 110600,
         "executable.workDir": "[redacted local filesystem path]",
         "resource.appArgs": [],
         "resource.appArgsSensitivity": []
@@ -73,86 +74,52 @@
       }
     },
     {
-      "name": "frontend-installer-trmtsfbm",
-      "displayName": "frontend-installer",
-      "resourceType": "Executable",
-      "state": "NotStarted",
-      "source": "npm",
-      "dashboardUrl": "[redacted dashboardUrl]",
-      "relationships": [
-        {
-          "type": "Parent",
-          "resourceName": "frontend-quwryuxr"
-        }
-      ],
-      "urls": [],
-      "volumes": [],
-      "properties": {
-        "executable.args": null,
-        "executable.path": "npm",
-        "executable.pid": null,
-        "executable.workDir": "[redacted local filesystem path]",
-        "resource.appArgs": null,
-        "resource.appArgsSensitivity": null,
-        "resource.parentName": "frontend-quwryuxr"
-      },
-      "environment": "[redacted environment]",
-      "healthReports": {},
-      "commands": {
-        "start": {
-          "displayName": "Start",
-          "description": "Start resource",
-          "state": "Enabled",
-          "sortOrder": 0
-        }
-      }
-    },
-    {
-      "name": "frontend-quwryuxr",
+      "name": "frontend-fkhdbyem",
       "displayName": "frontend",
       "resourceType": "Executable",
+      "resourceTypeDisplayName": "Vite",
       "state": "Running",
-      "creationTimestamp": "2026-10-12T11:24:42+00:00",
-      "startTimestamp": "2026-10-12T11:24:42.205+00:00",
+      "creationTimestamp": "2026-11-18T15:29:45+00:00",
+      "startTimestamp": "2026-11-18T15:29:45.551+00:00",
       "source": "npm",
       "healthStatus": "Unhealthy",
       "dashboardUrl": "[redacted dashboardUrl]",
       "relationships": [
         {
           "type": "WaitFor",
-          "resourceName": "frontend-installer-trmtsfbm"
+          "resourceName": "frontend-installer-snkrzwjp"
         },
         {
           "type": "Reference",
-          "resourceName": "api-kewwzmak"
+          "resourceName": "api-zwbdwzwy"
         },
         {
           "type": "WaitFor",
-          "resourceName": "api-kewwzmak"
+          "resourceName": "api-zwbdwzwy"
         },
         {
           "type": "Reference",
-          "resourceName": "api-kewwzmak"
+          "resourceName": "api-zwbdwzwy"
         }
       ],
       "urls": [
         {
           "name": "http",
-          "url": "http://localhost:62871"
+          "url": "http://localhost:55887"
         }
       ],
       "volumes": [],
       "properties": {
         "executable.args": null,
         "executable.path": "npm",
-        "executable.pid": 14900,
+        "executable.pid": 121312,
         "executable.workDir": "[redacted local filesystem path]",
         "resource.appArgs": [
           "run",
           "dev",
           "--",
           "--port",
-          "11338"
+          "20616"
         ],
         "resource.appArgsSensitivity": [
           0,
@@ -183,9 +150,46 @@
       }
     },
     {
+      "name": "frontend-installer-snkrzwjp",
+      "displayName": "frontend-installer",
+      "resourceType": "Executable",
+      "resourceTypeDisplayName": "Executable",
+      "state": "NotStarted",
+      "source": "npm",
+      "dashboardUrl": "[redacted dashboardUrl]",
+      "relationships": [
+        {
+          "type": "Parent",
+          "resourceName": "frontend-fkhdbyem"
+        }
+      ],
+      "urls": [],
+      "volumes": [],
+      "properties": {
+        "executable.args": null,
+        "executable.path": "npm",
+        "executable.pid": null,
+        "executable.workDir": "[redacted local filesystem path]",
+        "resource.appArgs": null,
+        "resource.appArgsSensitivity": null,
+        "resource.parentName": "frontend-fkhdbyem"
+      },
+      "environment": "[redacted environment]",
+      "healthReports": {},
+      "commands": {
+        "start": {
+          "displayName": "Start",
+          "description": "Start resource",
+          "state": "Enabled",
+          "sortOrder": 0
+        }
+      }
+    },
+    {
       "name": "geocoding",
       "displayName": "geocoding",
       "resourceType": "ExternalService",
+      "resourceTypeDisplayName": "ExternalService",
       "state": "Running",
       "source": "geocoding-api.open-meteo.com",
       "healthStatus": "Healthy",
@@ -213,6 +217,7 @@
       "name": "open-meteo",
       "displayName": "open-meteo",
       "resourceType": "ExternalService",
+      "resourceTypeDisplayName": "ExternalService",
       "state": "Running",
       "source": "api.open-meteo.com",
       "healthStatus": "Healthy",
@@ -240,6 +245,7 @@
       "name": "reverse-geocoding",
       "displayName": "reverse-geocoding",
       "resourceType": "ExternalService",
+      "resourceTypeDisplayName": "ExternalService",
       "state": "Running",
       "source": "api.bigdatacloud.net",
       "healthStatus": "Healthy",

@@ -8,10 +8,17 @@ bridge, backend, new animation dependency, or command autoplay is used.
 
 ## Genuine evidence
 
-All seven displayed commands were executed with the repository-local public
-Aspire CLI **13.6.1**. stdout, stderr, exit status, arguments, capture time, and
+All seven commands in [the provenance file](evidence/cli-replay.json) were re-recorded on
+2026-11-18 with the repository-local, checksum-verified public Aspire CLI
+**17.0.0** ([release](https://github.com/microsoft/aspire/releases/tag/v17.0.0)). stdout, stderr, exit status, arguments, capture time, and
 SHA256 digests were retained in gitignored capture artifacts. Every displayed
 run exited zero and had its useful semantic output checked before publication.
+The two default-output captures the deck displays for `docs get` and
+`docs api get` ([provenance](evidence/default-markdown-2026-11-18.json)) and the
+Compose publish/deploy captures ([provenance](evidence/chapter-demos.json)) were
+recorded the same day with the same CLI. Compared with the earlier 13.6 runs, no
+flags changed; the docs search scores and the API member's GitHub source commit
+reflect the docs and reference live on 2026-11-18.
 
 [Public-safe capture provenance](evidence/cli-replay.json) links the complete
 public stdout/stderr files and records their hashes. Each panel renders the
@@ -28,19 +35,21 @@ The prompt decoration is outside the copyable command text.
 | `docs-section` | Get returned `Configure browser logs` and the actual runtime configuration dialog semantics |
 | `api-search` | The unique C# `WithBrowserLogs` member ID, signature, language, kind, parent, summary, and score |
 | `api-member` | Get followed that returned ID without `--language`, including the experimental diagnostic, parameters, source, and browser/CDP remarks |
-| `runtime-wait` | Actual `api` readiness on the exact `demo\host\apphost.cs` target; the resource was already healthy after start, so its reported `0.0s` is recorded output, not an animation/performance claim |
+| `runtime-wait` | Actual `api` readiness on the exact `demo\host\apphost.cs` target; the resource was already healthy after start, so its reported `0.2s` is recorded output, not an animation/performance claim |
 | `runtime-state` | All six safe resource records, including the Executable/Running/Healthy API, NotStarted installer, and Unhealthy frontend; the response does not claim every resource was healthy |
 | `runtime-traces` | Both actual traces after a successful Madison weather request through the native API: the health trace and successful `GET /api/weather` trace with all four spans |
 
-The runtime capture reused the prepared Windows x64 artifact. Its PE32+ x64
-format and absent CLR header were checked, and its SHA256 is recorded. No
-managed fallback, source change, or native rebuild was used. The public CLI
+The runtime capture used the Windows x64 artifact built beforehand with
+`scripts\Publish-Native.ps1 -RuntimeIdentifier win-x64` from unchanged service
+source. Its PE32+ x64 format and absent CLR header were checked, and its SHA256
+is recorded. No managed fallback or source change was used. The public CLI
 started one exact-target, isolated AppHost, used `aspire wait`, and discovered
 the request endpoint from `aspire describe`. A single actual weather request
 generated the telemetry; no HTTP readiness polling loop was used.
 
 The capture-owned AppHost was stopped with exact-target `aspire stop`, without
-`--force` or `--all`. Post-capture `aspire ps` returned no running AppHosts.
+`--force` or `--all`. Post-capture `aspire ps` no longer listed it; an unrelated AppHost owned by
+another session was left untouched. CLI state used a capture-only `ASPIRE_HOME`.
 No global CLI, agent skill tree, native app, or profile configuration was
 modified.
 

@@ -224,7 +224,7 @@ try {
     if ($proofFiles.Count -ne 1) { throw 'The real rehearsal did not persist exactly one completed proof.' }
     $proof = Get-Content -LiteralPath $proofFiles[0].FullName -Raw | ConvertFrom-Json
     Test-DocsLoopCase 'Full real baseline persists validated docs and API proof' {
-        if ($proof.cliVersion -cne '13.6.1' -or $proof.docs.listedPages -lt 1 -or
+        if ($proof.cliVersion -cne '17.0.0' -or $proof.docs.listedPages -lt 1 -or
             $proof.docs.searchResults -lt 1 -or $proof.api.language -cne 'csharp' -or
             $proof.api.kind -cne 'member' -or $proof.docs.publishedPage.statusCode -ne 200 -or
             $proof.docs.corpus.statusCode -ne 200 -or $proof.github.checked -eq ($liveArguments -contains '-SkipGitHub')) {

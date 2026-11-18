@@ -15,7 +15,7 @@ WithBrowserLogs(IResourceBuilder, string?, string?, BrowserUserDataMode?)
 • Name: WithBrowserLogs(IResourceBuilder<T>, string?, string?, BrowserUserDataMode?)
 • Modifiers: extension
 • Returns: IResourceBuilder<T>
-• Source: GitHub (https://github.com/microsoft/aspire/blob/c89352703f78ae46de90fbf751ed8b52b77b89bf/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
+• Source: GitHub (https://github.com/microsoft/aspire/blob/b33d222049f1ecc3bc7257ec07b622fe550b2580/src/Aspire.Hosting.Browsers/BrowserLogsBuilderExtensions.cs#L122-L289)
 
 Adds a child resource that can open the application's primary browser endpoint in a tracked browser session, surface browser diagnostics, and capture screenshots.
 

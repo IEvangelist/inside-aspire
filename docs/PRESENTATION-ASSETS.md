@@ -75,14 +75,14 @@ source expressions are line-wrapped and noncontiguous sections are labeled.
 Complete source links, capture versions/dates and verification context are
 preserved in speaker notes and the sources appendix, not repeated on stage.
 
-- `demo/host/apphost.cs`: the linked [published development baseline](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo) predates the 13.6.4 update and publish-only Compose packaging. Service source and development semantics remain unchanged.
+- `demo/host/apphost.cs`: the linked [published development baseline](https://github.com/IEvangelist/inside-aspire/tree/e6047c65c1898ba361149700c8ed4ac61af91fa8/demo) predates the 17.0.0 update and publish-only Compose packaging. Service source and development semantics remain unchanged.
 - `Weather.Api.csproj`, `WeatherJsonContext.cs`, native-summary evidence, and compile/compatibility probes remain in the repository and [pre-talk runbook](RUNBOOK.md), not build/proof cards in the audience deck.
 - CLI lifecycle/wait/describe/trace operations run directly in the prepared real terminal. The terminal's process-local PATH selects the public executable, and `$apphost` holds the exact target; no `.ps1` entry point is required on stage.
 - `pr-docs-check.md` YAML: trigger and safe-output fields from [the selected run's actual workflow head](https://github.com/microsoft/aspire/blob/42e77dc98549f9cbce290709172ab629a2d3f191/.github/workflows/pr-docs-check.md). The full source retains merged-event guards, deterministic target resolution, and additional policy.
 - Docs PR JSON: selected actual GitHub REST fields for merged PR 775, including merger `davidfowl`. Its old gh-aw artifacts are expired; no accepted/strong outcome or fabricated review count is shown. The explicit maintainer refinement commit is linked.
 - Conditional HTTP code: [CachedHttpDocumentFetcher.cs, lines 37-45](https://github.com/microsoft/aspire/blob/213aa53159663c6f3e4a29bf7df907179ae6e1c4/src/Aspire.Cli/Documentation/CachedHttpDocumentFetcher.cs#L37-L45).
 - Parser/cache/weights: the [existing pinned C# excerpts](code/) and [source citations](SOURCES.md).
-- The docs/API commands use the actual returned slug, section and experimental member ID. [Original 13.6.1 evidence](evidence/browser-logs.json) remains intact. Plain get commands return the Markdown content by default; the [November 6 captures](evidence/default-markdown-2026-11-06.json) contain that content rendered as text. JSON stays useful for discovery. Browser logging is still an unapplied proposal.
+- The docs/API commands use the actual returned slug, section and experimental member ID. [Original 13.6.1 evidence](evidence/browser-logs.json) remains intact. Plain get commands return the Markdown content by default; the [2026-11-18 captures](evidence/default-markdown-2026-11-18.json) contain that content rendered as text. JSON stays useful for discovery. Browser logging is still an unapplied proposal.
 
 The deck has 55 command/output/source blocks using [`highlight.js` 11.12.0](https://www.npmjs.com/package/highlight.js) core with explicit C#, PowerShell, shell, YAML, JSON, Go and plaintext, under [BSD-3-Clause](../deck/public/licenses/highlightjs-BSD.txt). The Markdown recordings show the CLI's default rendering. Publish/deploy have complete recordings; alternative standalone startup commands remain labeled references.
 
@@ -121,7 +121,7 @@ The original 1440x1000 native captures are unchanged. Presentation uses a larger
 The roadmap, primary entries and close repeat **AI loops**, **Aspire dashboard**, **Aspire deployment**. The deck introduces the older guidance assistants learned, reads the CLI response, then follows the page back to its PR and human refinement. The selected CLI member JSON keeps its `id`/`name`/`language`/`kind`, before the separate compiler/API graph. Narrative weights, release-published context and per-package-version API generation remain distinct.
 
 The three operations use the existing exact `demo\host\apphost.cs` target for
-`wait`, `describe`, and `otel traces`. Public CLI 13.6.1 was executed against
+`wait`, `describe`, and `otel traces`. Public CLI 17.0.0 was executed on 2026-11-18 against
 the prepared native artifact to collect real readiness/state and nonempty
 weather telemetry. Dedicated recorded replay surfaces follow the unchanged
 weather image before the skill/tool definition, not inside a half-width
@@ -134,12 +134,12 @@ The published 46-slide deck has 43 timed main slides and three optional appendic
 the close. Notes cover exactly 60 presentation minutes with Q&A/networking
 separate. Approved abstract, service source, official skill trees, brand assets
 and verified PR chain are unchanged. The AppHost is explicitly updated to
-public 13.6.4 and gains publish-only native packaging. Nine genuine recorded
+public 17.0.0 and gains publish-only native packaging. Nine genuine recorded
 surfaces retain one bounded output scroller; header and command stay anchored.
-Read/print/no-JS expose complete responses. All 14 original capture files and
-their frozen hashes remain intact. November 6 default-output captures replace
-the displayed get responses; the Compose captures remain unchanged.
-[Default-output provenance](evidence/default-markdown-2026-11-06.json) and
+Read/print/no-JS expose complete responses. All nine surfaces were re-recorded on 2026-11-18
+with the public 17.0.0 CLI, including the default-output get responses and
+the Compose publish/deploy runs.
+[Default-output provenance](evidence/default-markdown-2026-11-18.json) and
 [deployment provenance](evidence/chapter-demos.json) record exact commands, hashes,
 normalization, native format, image digest and scoped cleanup; it does not
 rewrite the historical inventory.
@@ -162,9 +162,10 @@ references; the actual rehearsal ran the dashboard through the Compose target.
 Compose is now David's selected local target. The same AppHost publishes a
 Linux NativeAOT API/React image and an authenticated standalone dashboard.
 The new environment snippet reflects the local source, with image tag
-13.6.2 distinct from CLI/SDK/integration 13.6.4. The real deploy used project
-`aspire-talk-compose-5ea99390`, random loopback ports and private OTLP.
-Actual map/Scalar/provider traces/correlated logs/weather metrics were observed.
-Exact target teardown and owned cache/image removal restored the original
-0 containers, 2 images, 13 volumes and 3 default networks. No cloud
+13.6.5 distinct from CLI/AppHost/integration 17.0.0; the public registry had no
+17.x dashboard tag on 2026-11-18. The real deploy used project
+`aspire-talk-compose-d7ae2d39`, random loopback ports and private OTLP. The
+health, React, OpenAPI, Scalar and weather endpoints returned 200 and the
+dashboard redirected to its login. `aspire destroy` and removal of the two
+images the run created left no new containers, volumes or networks. No cloud
 resources, anonymous public dashboard or production workflow were enabled.

@@ -57,15 +57,15 @@ jobs:
         run: ./scripts/Verify-Skills.ps1
       - name: Prepare public isolated CLI
         shell: pwsh
-        run: ./scripts/Install-Aspire.ps1
+        run: ./scripts/Install-Aspire.ps1 -Version '17.0.0'
       - name: Discover the published JavaScript API members
         shell: pwsh
         run: |
-          # CLI 13.6.1 cold unscoped member search can fan out and hit upstream 403 before JavaScript.
+          # Cold unscoped member search (first seen with CLI 13.6.1) can fan out and hit upstream 403 before JavaScript.
           # Public ListAsync(scope) prepares genuine members; remove when upstream cold search is fixed.
           . ./scripts/Show-DocsLoop.ps1
           $cliName = if ($IsWindows) { 'aspire.exe' } else { 'aspire' }
-          $cli = Join-Path (Join-Path $env:GITHUB_WORKSPACE '.tools/aspire') $cliName
+          $cli = Join-Path (Join-Path $env:GITHUB_WORKSPACE '.tools/aspire-17.0.0') $cliName
           $scope = 'csharp/aspire.hosting.javascript/javascripthostingextensions/methods'
           $capture = New-DocsLoopOutputDirectory '.artifacts/rehearsal/docs-loop-tests/api-discovery'
           $listing = Invoke-DocsLoopCommand $cli @('docs', 'api', 'list', $scope, '--format', 'Json', '--non-interactive', '--nologo') 'api-scope-list' $capture -Json

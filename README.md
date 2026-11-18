@@ -24,12 +24,12 @@ Use PowerShell 7 on Windows or Linux x64, a released .NET 10 SDK, and Node 22.12
 
 ```powershell
 # Install the checksum-verified CLI side-by-side, not over the global CLI.
-$aspire = & .\scripts\Install-Aspire.ps1 -Version '13.6.4'
-if ((& $aspire --version | Out-String).Trim() -notmatch '^13\.6\.4(?:\+.*)?$') {
+$aspire = & .\scripts\Install-Aspire.ps1 -Version '17.0.0'
+if ((& $aspire --version | Out-String).Trim() -notmatch '^17\.0\.0(?:\+.*)?$') {
     throw 'Unexpected CLI; do not fall back to the global installation.'
 }
 $env:PATH = (Split-Path $aspire) + [IO.Path]::PathSeparator + $env:PATH
-$env:ASPIRE_HOME = Join-Path $PWD '.artifacts\chapter-demos\aspire-home-13.6.4'
+$env:ASPIRE_HOME = Join-Path $PWD '.artifacts\chapter-demos\aspire-home-17.0.0'
 
 # Compile the browser bundle and the actual NativeAOT API before presenting.
 pwsh .\scripts\Publish-Native.ps1
@@ -44,9 +44,13 @@ aspire docs search "Configure tracked browser" --format Json
 aspire docs get browser-logs --section "Configure browser logs"
 ```
 
-The app and native verification use the public 13.6.4 CLI and AppHost SDK.
-The original docs regression and shipped skills retain their separate 13.6.1
-provenance; the installer defaults to that version for those workflows.
+The app, native verification and recorded CLI runs use the public 17.0.0 CLI and
+`Aspire.Hosting.AppHost` package (17.0 marks the `Aspire.AppHost.Sdk` directive
+obsolete). The Compose dashboard pins `aspire/dashboard:13.6.5` because the
+public registry has no 17.0 dashboard tag yet.
+The docs regression (`scripts\Test-DocsLoop.ps1`) also gates on 17.0.0. The
+shipped skills retain their separate 13.6.1 provenance; the installer defaults
+to that version for the skills workflow.
 
 The shipped skills are already prepared. **Do not run `aspire agent init` on the presenter's profile just to rehearse.** The released installer configures usage hooks even with MCP disabled; [the preparation workflow uses an ephemeral runner](docs/SKILLS.md).
 
@@ -100,7 +104,7 @@ For the separate GitHub repository setting, download
 Committing the PNG does not set that GitHub setting automatically. [Artwork
 hashes and setup boundary](docs/evidence/social-artwork.json).
 
-The deck has 46 slides: 43 in the full-hour presentation, then three untimed appendices. Start presentation opens `#/setup`; `#/thesis` follows with the three questions. `#/takeaways` recaps AI efficiency, the dev inner loop and deployment before the closing call to action. Nine **Recorded CLI run** pairs show four JSON discovery/runtime responses, two default-output responses, readiness and Compose publish/deploy output. The original seven 13.6.1 captures and the Compose recordings remain immutable. The two plain get commands now use [November 6 default-output captures](docs/evidence/default-markdown-2026-11-06.json); [capture controls](docs/CLI-REPLAY.md) and [native/deployment proof](docs/evidence/chapter-demos.json) keep the recordings distinct. Each complete response has one output-only scroller; read/print do not clip it.
+The deck has 46 slides: 43 in the full-hour presentation, then three untimed appendices. Start presentation opens `#/setup`; `#/thesis` follows with the three questions. `#/takeaways` recaps AI efficiency, the dev inner loop and deployment before the closing call to action. Nine **Recorded CLI run** pairs show four JSON discovery/runtime responses, two default-output responses, readiness and Compose publish/deploy output. All nine were re-recorded on 2026-11-18 with the public 17.0.0 CLI. The two plain get commands use [default-output captures](docs/evidence/default-markdown-2026-11-18.json); [capture controls](docs/CLI-REPLAY.md) and [native/deployment proof](docs/evidence/chapter-demos.json) keep the recordings distinct. Each complete response has one output-only scroller; read/print do not clip it.
 
 ## The actual AI loops
 

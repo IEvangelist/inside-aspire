@@ -1,8 +1,8 @@
-#:sdk Aspire.AppHost.Sdk@13.6.4
+#:package Aspire.Hosting.AppHost@17.0.0
 #:property AspireUseCliBundle=true
 #:property TreatWarningsAsErrors=true
-#:package Aspire.Hosting.JavaScript@13.6.4
-#:package Aspire.Hosting.Docker@13.6.4
+#:package Aspire.Hosting.JavaScript@17.0.0
+#:package Aspire.Hosting.Docker@17.0.0
 
 using System.Runtime.InteropServices;
 using Aspire.Hosting;
@@ -39,7 +39,7 @@ var api = builder.AddExecutable("api", executable, nativeDirectory)
 
 builder.AddDockerComposeEnvironment("talk-compose")
     .WithDashboard(dashboard => dashboard
-        .WithImage("aspire/dashboard", "13.6.2")
+        .WithImage("aspire/dashboard", "13.6.5")
         .WithImageRegistry("mcr.microsoft.com")
         .PublishAsDockerComposeService((_, service) =>
         {
